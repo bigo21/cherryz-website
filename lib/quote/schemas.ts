@@ -94,7 +94,7 @@ export const schemaIP: Step[] = [
     subtitle: "Encore quelques mots, puis on y est.",
     questions: [
       { id: "q22", label: "Des informations complémentaires à partager ?", type: "textarea", required: false, placeholder: "Votre message (facultatif)" },
-      { id: "q23", label: "Consentement", type: "consent", required: true },
+      { id: "q23", label: "On reste en contact ?", type: "consent", required: true },
     ],
   },
 ];
@@ -147,7 +147,7 @@ export const schemaWifi: Step[] = [
   {
     title: "Dernière étape",
     subtitle: "Un dernier accord, puis on y est.",
-    questions: [{ id: "q20", label: "Consentement", type: "consent", required: true }],
+    questions: [{ id: "q20", label: "On reste en contact ?", type: "consent", required: true }],
   },
 ];
 
