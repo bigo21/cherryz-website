@@ -366,7 +366,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="relative flex h-[240px] w-[240px] flex-none items-center justify-center">
+          <div className="relative hidden h-[240px] w-[240px] flex-none items-center justify-center lg:flex">
             <span className="absolute h-[120px] w-[120px] rounded-full border-2 border-white/45 animate-ripple" />
             <span className="absolute h-[120px] w-[120px] rounded-full border-2 border-white/45 animate-ripple [animation-delay:1.7s]" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
