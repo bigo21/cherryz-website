@@ -29,6 +29,13 @@ export default function MaintenanceScreen() {
         }}
       />
 
+      {/* Illustration — background layer, anchored right, does not affect the text width */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden items-center lg:flex">
+        <div className="w-[clamp(560px,62vw,980px)] animate-fade [animation-delay:0.3s]">
+          <MaintenanceIllustration />
+        </div>
+      </div>
+
       {/* Header */}
       <header className="relative z-[2] flex flex-wrap items-center gap-4 px-[6vw] pt-[34px]">
         <Image
@@ -42,8 +49,8 @@ export default function MaintenanceScreen() {
       </header>
 
       {/* Content */}
-      <div className="relative z-[2] flex w-full flex-1 flex-nowrap items-center justify-between gap-16 px-[6vw] py-10">
-        <div className="w-full min-w-0 max-w-none lg:max-w-[720px] lg:flex-1">
+      <div className="relative z-[2] flex w-full flex-1 items-center px-[6vw] py-10">
+        <div className="w-full max-w-none lg:max-w-[720px]">
           <h1 className="m-0 font-condensed text-[clamp(44px,6.4vw,84px)] font-bold uppercase leading-[0.98] tracking-[-0.5px] animate-fade [animation-delay:0.1s]">
             Site en
             <br />
@@ -119,9 +126,6 @@ export default function MaintenanceScreen() {
           </div>
         </div>
 
-        <div className="relative hidden items-center justify-center animate-fade [animation-delay:0.3s] lg:flex lg:flex-1 lg:basis-[480px]">
-          <MaintenanceIllustration />
-        </div>
       </div>
 
       {/* Footer */}
