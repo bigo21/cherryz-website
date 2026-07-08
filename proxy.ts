@@ -22,7 +22,14 @@ export function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  if (process.env.MAINTENANCE_MODE !== "on") {
+  // Fail-safe: default the gate ON in Vercel Production (so cherryz.tech never
+  // exposes the WIP site if the flag is forgotten), OFF everywhere else. An explicit
+  // MAINTENANCE_MODE ("on"/"off") always wins.
+  const flag = process.env.MAINTENANCE_MODE;
+  const maintenance = flag
+    ? flag === "on"
+    : process.env.VERCEL_ENV === "production";
+  if (!maintenance) {
     return NextResponse.next();
   }
 
