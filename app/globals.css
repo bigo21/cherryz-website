@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Cherryz design tokens.
+ * Source: design_handoff_site_cherryz/README.md (§ Système de design).
+ * Fonts (--font-barlow / --font-barlow-condensed) are injected by next/font in app/layout.tsx.
+ */
+@theme {
+  /* Brand — rouge cerise */
+  --color-cherry: #a2032d;
+  --color-cherry-alt: #a0042d;
+  --color-cherry-dark: #7c0530;
+  --color-cherry-deep: #6e0320;
+
+  /* Accents — rouge vif */
+  --color-accent: #c50c4f;
+  --color-accent-pink: #e11d63;
+  --color-accent-vivid: #ff254f;
+
+  /* Fonds sombres / marine */
+  --color-navy: #101b28;
+  --color-navy-alt: #101b2b;
+  --color-navy-deep: #0b131d;
+
+  /* Fonds clairs */
+  --color-surface: #f6f5f3;
+  --color-surface-alt: #e2e3e5;
+
+  /* États */
+  --color-positive: #1f8a5b;
+  --color-whatsapp: #25d366;
+
+  /* Typographie */
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+  --font-condensed: var(--font-barlow-condensed), system-ui, sans-serif;
+
+  /* Rayons */
+  --radius-btn: 10px;
+  --radius-card: 16px;
+  --radius-pill: 100px;
+
+  /* Ombres */
+  --shadow-card: 0 24px 50px -34px rgba(16, 27, 40, 0.4);
+  --shadow-cherry: 0 18px 40px -16px rgba(160, 4, 45, 0.95);
+  --shadow-modal: 0 40px 90px -30px rgba(0, 0, 0, 0.7);
+
+  /* Animations */
+  --animate-fade: chzFade 0.8s both;
+  --animate-ripple: chzRipple 3.2s ease-out infinite;
+  --animate-float: chzFloat 6s ease-in-out infinite;
+  --animate-step: chzStep 0.3s both;
+  --animate-overlay: chzOverlay 0.25s ease both;
+  --animate-modal: chzModal 0.32s cubic-bezier(0.16, 0.7, 0.3, 1) both;
+  --animate-pop: chzPop 0.4s both;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes chzFade {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
+@keyframes chzRipple {
+  0% {
+    transform: scale(0.45);
+    opacity: 0.85;
+  }
+  75% {
+    opacity: 0.12;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes chzFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes chzStep {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes chzOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes chzModal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes chzPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
