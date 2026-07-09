@@ -5,8 +5,7 @@ import type { CSSProperties } from "react";
 const svgStyle: CSSProperties = {
   ["--tblr-illustrations-primary" as string]: "#A2032D",
   ["--tblr-illustrations-skin" as string]: "#B87B52",
-  width: "clamp(380px, 44vw, 700px)",
-  maxWidth: "100%",
+  width: "100%",
   height: "auto",
   display: "block",
 };
