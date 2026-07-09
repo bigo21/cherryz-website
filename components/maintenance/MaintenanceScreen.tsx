@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
 import MaintenanceIllustration from "./MaintenanceIllustration";
-import QuoteCtas from "./QuoteCtas";
 
 export default function MaintenanceScreen() {
   return (
@@ -66,7 +66,20 @@ export default function MaintenanceScreen() {
             En attendant, vous pouvez déjà faire votre demande :
           </p>
 
-          <QuoteCtas />
+          <div className="flex flex-wrap gap-[14px] animate-fade [animation-delay:0.34s]">
+            <Link
+              href="/demandes/internet-b2b"
+              className="inline-flex items-center gap-[10px] rounded-[10px] border-none bg-cherry px-7 py-4 font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-cherry transition-transform hover:-translate-y-[2px] hover:bg-cherry-dark"
+            >
+              Demander une cotation IP Publique Dédiée
+            </Link>
+            <Link
+              href="/demandes/wifi-zone"
+              className="inline-flex items-center gap-[10px] rounded-[10px] border-[1.6px] border-cherry bg-transparent px-7 py-4 font-condensed text-[17px] font-bold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry hover:text-white"
+            >
+              Demander une cotation WiFi Zone
+            </Link>
+          </div>
 
           <div className="mt-[38px] border-t border-white/[0.12] pt-7 animate-fade [animation-delay:0.42s]">
             <p className="mb-[14px] font-condensed text-[15px] font-semibold uppercase tracking-[1px] text-white/55">
