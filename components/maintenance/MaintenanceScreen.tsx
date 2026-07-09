@@ -30,8 +30,8 @@ export default function MaintenanceScreen() {
       />
 
       {/* Illustration — background layer, anchored right, does not affect the text width */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden items-center lg:flex">
-        <div className="w-[clamp(720px,80vw,1250px)] animate-fade [animation-delay:0.3s]">
+      <div className="pointer-events-none absolute inset-y-0 -right-10 z-[1] hidden items-center lg:flex">
+        <div className="w-[clamp(560px,62vw,980px)] animate-fade [animation-delay:0.3s]">
           <MaintenanceIllustration />
         </div>
       </div>
