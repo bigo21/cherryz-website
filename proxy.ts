@@ -11,8 +11,14 @@ const PREVIEW_COOKIE = "chz_preview";
 export function proxy(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;
 
-  // Always allow the maintenance page itself + directly-served brand assets.
-  if (pathname === "/maintenance" || pathname.startsWith("/brand")) {
+  // Always reachable, even during maintenance: the maintenance page, the quote
+  // request flow (/demandes), and directly-served brand assets.
+  if (
+    pathname === "/maintenance" ||
+    pathname === "/demandes" ||
+    pathname.startsWith("/demandes/") ||
+    pathname.startsWith("/brand")
+  ) {
     return NextResponse.next();
   }
 
