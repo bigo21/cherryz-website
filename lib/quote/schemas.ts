@@ -105,7 +105,7 @@ export const schemaWifi: Step[] = [
     subtitle: "Parlez-nous de l'avancement de votre projet.",
     questions: [
       { id: "q1", label: "Où en êtes-vous dans votre projet ?", type: "single", required: true, options: ["Idée en cours de réflexion", "J'ai identifié un emplacement", "J'ai déjà un accord avec un bailleur", "Je suis prêt à démarrer", WIFI_ALREADY] },
-      { id: "q2", label: "Quel est votre budget de démarrage estimé ?", type: "single", required: true, options: ["Moins de 500 000 XAF", "500 000 – 1 000 000 XAF", "1 000 000 – 2 000 000 XAF", "À définir avec l'équipe Cherryz"] },
+      { id: "q2", label: "Quel est votre budget de démarrage estimé ?", type: "single", required: true, options: ["Moins de 1 000 000 XAF", "1 000 000 – 2 000 000 XAF", "2 000 000 – 3 000 000 XAF", "À définir avec l'équipe Cherryz"] },
       { id: "q3", label: "Avez-vous entendu parler des agréments ART requis ?", type: "single", required: true, options: ["Oui, je sais ce que c'est", "J'en ai entendu parler mais je ne connais pas les détails", "Non, c'est la première fois que j'en entends parler"] },
       { id: "q4", label: "Avez-vous suivi la formation gratuite Cherryz ?", type: "single", required: true, options: ["Oui, je l'ai suivie", "Je suis en train de la suivre", "Non, pas encore", "Je ne savais pas qu'elle existait"] },
     ],
