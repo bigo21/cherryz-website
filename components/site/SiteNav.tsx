@@ -33,7 +33,7 @@ export default function SiteNav() {
       }}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-[18px] md:px-12">
-        <Link href="/" className="flex items-center" aria-label="Cherryz — Accueil">
+        <Link href="/" className="flex items-center" aria-label="Cherryz, retour à l'accueil">
           <Image
             src="/brand/logo-white.png"
             alt="Cherryz"

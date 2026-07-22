@@ -4,9 +4,9 @@ import { CalendarIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon } from "@/compone
 import { CAL_IP, CAL_WIFI, CONTACT } from "@/lib/site/site";
 
 export const metadata: Metadata = {
-  title: "Contact — Cherryz",
+  title: "Contact | Cherryz",
   description:
-    "Parlons de votre projet : devis Internet B2B, WiFi Zone ou toute autre demande. Réponse sous 24h, déplacement gratuit partout au Cameroun. Quartier Fouda, Yaoundé.",
+    "Parlons de votre projet : devis Internet B2B, WiFi Zone ou toute autre demande. Réponse sous 24h, déplacement gratuit partout au Cameroun. Basés à Yaoundé.",
 };
 
 const coords = [

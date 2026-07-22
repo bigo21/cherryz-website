@@ -60,7 +60,7 @@ export async function submitQuoteRequest(
   const supabase = createSupabaseServerClient();
   if (!supabase) {
     console.warn(
-      "[quote] Supabase not configured (missing NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY) — submission not persisted.",
+      "[quote] Supabase not configured (missing NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY): submission not persisted.",
     );
     return { ok: false, error: "not_configured" };
   }

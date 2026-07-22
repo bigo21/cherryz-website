@@ -26,7 +26,7 @@ function teamHtml(p: ContactPayload): string {
     <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden">
       <div style="background:${NAVY};padding:20px 24px">
         <span style="display:inline-block;background:${CHERRY};color:#fff;font-size:12px;letter-spacing:1px;font-weight:700;padding:5px 12px;border-radius:100px">NOUVEAU MESSAGE</span>
-        <h1 style="margin:10px 0 0;color:#fff;font-size:20px">Contact — ${esc(p.besoin ?? "Général")}</h1>
+        <h1 style="margin:10px 0 0;color:#fff;font-size:20px">Contact : ${esc(p.besoin ?? "Général")}</h1>
       </div>
       <div style="padding:20px 24px">
         <table style="width:100%;border-collapse:collapse">
@@ -56,7 +56,7 @@ function prospectHtml(firstName: string): string {
 export async function sendContactEmails(p: ContactPayload): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.warn("[contact] RESEND_API_KEY not set — skipping emails.");
+    console.warn("[contact] RESEND_API_KEY not set: skipping emails.");
     return;
   }
   const resend = new Resend(apiKey);
@@ -67,7 +67,7 @@ export async function sendContactEmails(p: ContactPayload): Promise<void> {
       from: FROM,
       to: NOTIFY_TO,
       replyTo: p.email,
-      subject: `Nouveau message contact — ${p.besoin ?? "Général"} — ${p.full_name}`,
+      subject: `Nouveau message contact : ${p.besoin ?? "Général"} (${p.full_name})`,
       html: teamHtml(p),
     });
   } catch (e) {
@@ -77,7 +77,7 @@ export async function sendContactEmails(p: ContactPayload): Promise<void> {
     await resend.emails.send({
       from: FROM,
       to: p.email,
-      subject: "Nous avons bien reçu votre message — Cherryz",
+      subject: "Nous avons bien reçu votre message | Cherryz",
       html: prospectHtml(firstName),
     });
   } catch (e) {

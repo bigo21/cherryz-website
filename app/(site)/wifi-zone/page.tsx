@@ -9,7 +9,7 @@ import Image from "next/image";
 import { CAL_WIFI } from "@/lib/site/site";
 
 export const metadata: Metadata = {
-  title: "WiFi Zone monétisable clé en main — Cherryz",
+  title: "WiFi Zone monétisable clé en main | Cherryz",
   description:
     "Lancez votre business WiFi : immeuble, quartier, hôtel, campus, marché… Cherryz diagnostique, dimensionne, déploie et automatise la monétisation (vouchers, paiement mobile). Agrément ART, SAV de proximité.",
 };
@@ -60,16 +60,16 @@ const method: { Icon: Ic; step: string; d: string; obtain: string }[] = [
   { Icon: Search, step: "ÉTAPE 1 · DIAGNOSTIC", d: "On visite votre site, on analyse l'environnement, la densité, le potentiel.", obtain: "Une vision claire de la faisabilité et du marché." },
   { Icon: Ruler, step: "ÉTAPE 2 · DIMENSIONNEMENT", d: "On calcule la bande passante nécessaire, le nombre de points d'accès, la couverture.", obtain: "Un plan technique adapté à votre zone exacte." },
   { Icon: Router, step: "ÉTAPE 3 · MODÈLE ÉCONOMIQUE", d: "On structure vos tarifs, vos offres (vouchers, abonnements, forfaits) et vos marges.", obtain: "Un business plan concret avec projection de revenus." },
-  { Icon: Magic, step: "ÉTAPE 4 · DÉPLOIEMENT", d: "On installe l'infrastructure complète — antennes, routeurs, câblage, portail captif.", obtain: "Une WiFi Zone opérationnelle, prête à vendre." },
-  { Icon: Gear, step: "ÉTAPE 5 · AUTOMATISATION", d: "On configure la monétisation automatique — paiement mobile, vouchers, portail.", obtain: "Vos clients paient, vous encaissez — sans intervention manuelle." },
+  { Icon: Magic, step: "ÉTAPE 4 · DÉPLOIEMENT", d: "On installe l'infrastructure complète : antennes, routeurs, câblage, portail captif.", obtain: "Une WiFi Zone opérationnelle, prête à vendre." },
+  { Icon: Gear, step: "ÉTAPE 5 · AUTOMATISATION", d: "On configure la monétisation automatique : paiement mobile, vouchers, portail.", obtain: "Vos clients paient et vous encaissez, sans intervention manuelle." },
   { Icon: Shield, step: "ÉTAPE 6 · SUIVI & SAV", d: "Monitoring à distance, maintenance, optimisation continue.", obtain: "Un business qui tourne, même quand vous dormez." },
 ];
 
 const diffs: { Icon: Ic; t: string; d: string }[] = [
   { Icon: Star, t: "Accompagnement de A à Z", d: "Du diagnostic terrain jusqu'à l'automatisation de vos revenus." },
-  { Icon: Bars, t: "Business structuré", d: "On ne vous laisse pas avec du matériel — on vous livre un business modèle clé en main." },
-  { Icon: Legal, t: "100% légal", d: "Agrément installeur et revendeur ART — zéro risque juridique." },
-  { Icon: Trending, t: "Scalable", d: "Commencez avec 1 antenne, étendez à tout un quartier — on grandit avec vous." },
+  { Icon: Bars, t: "Business structuré", d: "On ne vous laisse pas avec du matériel, on vous livre un business modèle clé en main." },
+  { Icon: Legal, t: "100% légal", d: "Agrément installeur et revendeur ART : zéro risque juridique." },
+  { Icon: Trending, t: "Scalable", d: "Commencez avec 1 antenne, étendez à tout un quartier, on grandit avec vous." },
   { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive, monitoring continu, intervention rapide." },
 ];
 
@@ -97,7 +97,7 @@ export default function WifiZone() {
             On s&apos;occupe de <span className="text-accent-vivid">tout.</span>
           </>
         }
-        subtitle="Bâtiment, quartier, résidence, campus, marché, hôtel — quel que soit votre espace, Cherryz vous accompagne de l'idée à la rentabilité. On diagnostique, on dimensionne, on déploie, et on automatise l'infrastructure réseau de votre business."
+        subtitle="Bâtiment, quartier, résidence, campus, marché, hôtel : quel que soit votre espace, Cherryz vous accompagne de l'idée à la rentabilité. On diagnostique, on dimensionne, on déploie, et on automatise l'infrastructure réseau de votre business."
         actions={
           <>
             <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
@@ -235,7 +235,7 @@ export default function WifiZone() {
                 <p className="mt-[6px] font-sans text-[15.5px] leading-[1.55] text-navy/[0.66]">
                   Vous avez le choix : apportez votre propre solution de
                   connectivité, ou laissez Cherryz s&apos;en occuper. On agrège
-                  les meilleures offres Camtel, Orange et MTN — et votre marge est
+                  les meilleures offres Camtel, Orange et MTN, et votre marge est
                   maximisée dès le premier jour.
                 </p>
               </div>
@@ -302,7 +302,7 @@ export default function WifiZone() {
             Nous avons la méthode.
           </>
         }
-        subtitle="Dites-nous où, dites-nous votre ambition — on s'occupe du reste. Diagnostic gratuit. Déplacement sur site. Partout au Cameroun."
+        subtitle="Dites-nous où, dites-nous votre ambition, on s'occupe du reste. Diagnostic gratuit. Déplacement sur site. Partout au Cameroun."
         actions={
           <>
             <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnPrimary}>

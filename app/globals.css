@@ -6,13 +6,13 @@
  * Fonts (--font-barlow / --font-barlow-condensed) are injected by next/font in app/layout.tsx.
  */
 @theme {
-  /* Brand — rouge cerise */
+  /* Brand : rouge cerise */
   --color-cherry: #a2032d;
   --color-cherry-alt: #a0042d;
   --color-cherry-dark: #7c0530;
   --color-cherry-deep: #6e0320;
 
-  /* Accents — rouge vif */
+  /* Accents : rouge vif */
   --color-accent: #c50c4f;
   --color-accent-pink: #e11d63;
   --color-accent-vivid: #ff254f;

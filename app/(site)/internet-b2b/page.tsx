@@ -11,7 +11,7 @@ import { CalendarIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/i
 import { CAL_IP } from "@/lib/site/site";
 
 export const metadata: Metadata = {
-  title: "Internet B2B avec IP publique dédiée — Cherryz",
+  title: "Internet B2B avec IP publique dédiée | Cherryz",
   description:
     "Internet professionnel dédié avec IP fixe, à partir de 45 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement.",
 };
@@ -38,11 +38,11 @@ const usages = [
 ];
 
 const features = [
-  { Icon: Bolt, t: "Installation rapide", d: "Faisceaux hertziens — pas de génie civil, pas de tranchées." },
+  { Icon: Bolt, t: "Installation rapide", d: "Faisceaux hertziens : pas de génie civil, pas de tranchées." },
   { Icon: Lock, t: "IP dédiée incluse", d: "Votre adresse, rien qu'à vous." },
   { Icon: Flask, t: "Test en parallèle", d: "Testez sans quitter votre opérateur actuel*." },
   { Icon: GlobeIcon, t: "Couverture nationale", d: "Partout au Cameroun via nos partenaires." },
-  { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive — pas un call center distant." },
+  { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive, pas un call center distant." },
 ];
 
 const steps = [
@@ -69,7 +69,7 @@ export default function InternetB2B() {
             <span className="text-accent-vivid">meilleur prix.</span>
           </>
         }
-        subtitle="Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs — Camtel, Orange, MTN — et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption."
+        subtitle="Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption."
         actions={
           <>
             <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
@@ -169,7 +169,7 @@ export default function InternetB2B() {
               <div className="relative">
                 <h4 className="m-0 font-condensed text-[24px] font-bold">Multi-opérateurs</h4>
                 <p className="mt-[5px] max-w-[340px] font-sans text-[15.5px] leading-[1.5] text-white/75">
-                  On choisit le meilleur réseau pour <strong className="text-white">votre</strong> localisation — pas celui d&apos;un fournisseur unique.
+                  On choisit le meilleur réseau pour <strong className="text-white">votre</strong> localisation, pas celui d&apos;un fournisseur unique.
                 </p>
               </div>
             </div>

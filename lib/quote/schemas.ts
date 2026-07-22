@@ -1,4 +1,4 @@
-// Quote wizard schemas — ported from design_handoff_site_cherryz/Cherryz Maintenance.dc.html
+// Quote wizard schemas, ported from design_handoff_site_cherryz/Cherryz Maintenance.dc.html
 // (DCLogic.schemaIP / schemaWifi). The conditional logic (`cond`) must also be
 // enforced server-side before persisting.
 
@@ -63,7 +63,7 @@ export const schemaIP: Step[] = [
       { id: "q7", label: "Combien d'utilisateurs / postes sont connectés ?", type: "single", required: true, options: ["1 – 10 postes", "11 – 30 postes", "31 – 50 postes", "51 – 100 postes", "Plus de 100 postes", "Je ne sais pas encore"] },
       { id: "q8", label: "Quel type de site souhaitez-vous connecter ?", type: "single", required: true, hasOther: true, options: ["Bureau / Siège administratif", "Agence bancaire / Guichet", "Data center / Salle serveur", "Site industriel / Usine", "Call center", "Autre"] },
       { id: "q9", label: "Quels sont vos principaux usages Internet ?", type: "multi", required: false, hasOther: true, options: ["Navigation web & emails", "Téléphonie IP / VoIP / Call Center", "VPN entre agences ou sites distants", "Vidéoconférence (Teams, Zoom, Meet...)", "Hébergement de serveurs internes", "Caméras de surveillance à distance", "Transactions bancaires / ERP / Logiciels métier", "Cloud / Sauvegarde en ligne", "Autre"] },
-      { id: "q10", label: "Avez-vous besoin d'une adresse IP publique dédiée ?", type: "single", required: false, options: ["Oui, c'est indispensable pour nous", "Non, ce n'est pas notre priorité", "Je ne sais pas — j'aimerais en savoir plus"] },
+      { id: "q10", label: "Avez-vous besoin d'une adresse IP publique dédiée ?", type: "single", required: false, options: ["Oui, c'est indispensable pour nous", "Non, ce n'est pas notre priorité", "Je ne sais pas, j'aimerais en savoir plus"] },
       { id: "q11", label: "Des serveurs, caméras ou équipements à accéder à distance ?", type: "single", required: false, options: ["Oui", "Non", "Pas encore mais c'est prévu"] },
       { id: "q12", label: "Souhaitez-vous bénéficier du test du service ?", type: "single", required: false, options: ["Oui, je veux tester avant de décider", "Non, je suis prêt à migrer directement", "Je veux d'abord avoir plus d'informations"] },
     ],
@@ -140,7 +140,7 @@ export const schemaWifi: Step[] = [
       { id: "q16", label: "Votre prénom et nom complet", type: "text", required: true, placeholder: "Prénom Nom" },
       { id: "q17", label: "Numéro WhatsApp / Téléphone", type: "tel", required: true, placeholder: "+237 6 00 00 00 00" },
       { id: "q18", label: "Adresse email professionnelle", type: "email", required: true, placeholder: "vous@email.com" },
-      { id: "q19", label: "Nom de votre entreprise ou organisation", type: "text", required: false, placeholder: "Facultatif — laissez vide si vous êtes un particulier" },
+      { id: "q19", label: "Nom de votre entreprise ou organisation", type: "text", required: false, placeholder: "Facultatif, laissez vide si vous êtes un particulier" },
       { id: "q5", label: "Un message ou une question pour notre équipe ?", type: "textarea", required: false, placeholder: "Votre message (facultatif)" },
     ],
   },

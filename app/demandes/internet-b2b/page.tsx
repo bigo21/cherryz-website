@@ -4,7 +4,7 @@ import QuoteWizard from "@/components/quote/QuoteWizard";
 import { GlobeIcon } from "@/components/site/icons";
 
 export const metadata: Metadata = {
-  title: "Demande de cotation IP Publique Dédiée — Cherryz",
+  title: "Demande de cotation IP Publique Dédiée | Cherryz",
   description:
     "Formulaire de demande de devis Internet professionnel avec IP publique dédiée. ± 3 minutes, réponse sous 48h, sans engagement.",
 };

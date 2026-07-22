@@ -4,7 +4,7 @@ export const CAL_IP = "https://cal.com/vireel/cherryzip";
 export const CAL_WIFI = "https://cal.com/vireel/cherryz";
 
 export const CONTACT = {
-  address: "Quartier Fouda, Yaoundé, Cameroun",
+  address: "Yaoundé, Cameroun",
   phoneDisplay: "+237 242 01 46 64",
   phoneHref: "tel:+237242014664",
   whatsapp: "https://wa.me/237242014664",

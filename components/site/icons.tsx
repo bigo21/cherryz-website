@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-// Line icons (stroke: currentColor, 1.8) — size/color via className (text-* / w-/h-).
+// Line icons (stroke: currentColor, 1.8), size/color via className (text-* / w-/h-).
 const line = (props: SVGProps<SVGSVGElement>) => ({
   viewBox: "0 0 24 24",
   width: "1em",

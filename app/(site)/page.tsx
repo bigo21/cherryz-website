@@ -11,7 +11,7 @@ import { CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
 import { CAL_IP, CAL_WIFI } from "@/lib/site/site";
 
 export const metadata: Metadata = {
-  title: "Cherryz — L'Internet professionnel au meilleur prix, partout au Cameroun",
+  title: "Cherryz | L'Internet professionnel au meilleur prix, partout au Cameroun",
   description:
     "Cherryz agrège les solutions des grands opérateurs (Camtel, Orange, MTN) pour une connexion dédiée, stable et jusqu'à 50% moins chère. Internet B2B avec IP publique et WiFi Zone monétisable.",
 };
@@ -27,7 +27,7 @@ const comparatif: { label: string; alone: string; cherry: string; check?: boolea
 
 const approche = [
   { n: "01", t: "Écoute", d: "On comprend votre activité, vos usages, vos contraintes.", img: "/photos/approche-01-ecoute.jpg", alt: "Échange client en bureau" },
-  { n: "02", t: "Étude", d: "Descente gratuite sur site — analyse de faisabilité technique.", img: "/photos/approche-02-etude.jpg", alt: "Technicien en visite technique" },
+  { n: "02", t: "Étude", d: "Descente gratuite sur site : analyse de faisabilité technique.", img: "/photos/approche-02-etude.jpg", alt: "Technicien en visite technique" },
   { n: "03", t: "Solution", d: "On assemble la meilleure offre parmi nos partenaires opérateurs.", img: "/photos/approche-03-solution.jpg", alt: "Équipe devant schéma réseau" },
   { n: "04", t: "Cotation", d: "Prix transparent, adapté à votre budget réel.", img: "/photos/approche-04-cotation.jpg", alt: "Remise de devis" },
   { n: "05", t: "Déploiement", d: "Installation rapide, sans interruption de votre activité.", img: "/photos/approche-05-deploiement.jpg", alt: "Installation d'équipement réseau" },
@@ -69,7 +69,7 @@ export default function Home() {
       <PageHero
         eyebrow="AGRÉGATEUR DE CONNECTIVITÉ · CAMEROUN"
         image="/photos/accueil-hero.jpg"
-        imageAlt="Cherryz — réseau connecté"
+        imageAlt="Cherryz, réseau connecté"
         minHeight={780}
         contentMaxWidth={840}
         emphasis
@@ -81,7 +81,7 @@ export default function Home() {
             Partout au Cameroun.
           </>
         }
-        subtitle="Cherryz agrège les solutions des plus grands opérateurs — Camtel, Orange, MTN et bien d'autres — pour vous offrir une connexion dédiée, stable et jusqu'à 50% moins chère. Sans travaux. Sans coupure."
+        subtitle="Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d'autres) pour vous offrir une connexion dédiée, stable et jusqu'à 50% moins chère. Sans travaux. Sans coupure."
         actions={
           <>
             <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
@@ -134,13 +134,13 @@ export default function Home() {
                 Les entreprises camerounaises paient entre 90 000 et 180 000
                 XAF/Mbps/mois en allant directement chez un opérateur. Cherryz
                 négocie pour vous auprès de plusieurs fournisseurs et vous
-                propose la meilleure solution — à partir de 45 000 XAF/Mbps/mois.
+                propose la meilleure solution, à partir de 45 000 XAF/Mbps/mois.
               </p>
               <p className="mt-[14px] max-w-[560px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
                 Nous ne sommes pas un opérateur de plus. Nous sommes votre{" "}
                 <strong className="text-navy">courtier en connectivité</strong> :
                 nous analysons votre besoin, comparons les options, et vous
-                livrons la solution la plus adaptée — techniquement et
+                livrons la solution la plus adaptée, techniquement et
                 financièrement.
               </p>
             </div>
@@ -231,7 +231,7 @@ export default function Home() {
           <Reveal className="mt-11 text-center" delay={0.1}>
             <p className="mx-auto mb-[22px] max-w-[640px] font-sans text-[16px] leading-[1.6] text-navy/[0.62]">
               Chaque projet est unique. C&apos;est pourquoi nous ne publions pas
-              de grille tarifaire figée — nous construisons votre prix après
+              de grille tarifaire figée : nous construisons votre prix après
               avoir compris votre besoin.
             </p>
             <a
@@ -309,7 +309,7 @@ export default function Home() {
                 />
               ))}
             </div>
-            {/* Références clients — bandeaux défilants */}
+            {/* Références clients : bandeaux défilants */}
             <div className="flex flex-col gap-[22px]">
               <LogoMarquee logos={clientsRow1} direction="left" />
               <LogoMarquee logos={clientsRow2} direction="right" />

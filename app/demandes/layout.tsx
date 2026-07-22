@@ -10,7 +10,7 @@ export default function DemandesLayout({
     <div className="min-h-screen bg-surface">
       <nav className="fixed inset-x-0 top-0 z-[100] border-b border-white/[0.08] bg-navy shadow-[0_10px_30px_-18px_rgba(0,0,0,0.7)]">
         <div className="mx-auto flex max-w-[1280px] items-center justify-center px-6 py-[18px] md:px-12">
-          <Link href="/" aria-label="Cherryz — Accueil">
+          <Link href="/" aria-label="Cherryz, retour à l'accueil">
             <Image
               src="/brand/logo-white.png"
               alt="Cherryz"

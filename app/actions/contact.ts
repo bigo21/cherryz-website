@@ -43,7 +43,7 @@ export async function submitContactMessage(
 
   const supabase = createSupabaseServerClient();
   if (!supabase) {
-    console.warn("[contact] Supabase not configured — message not persisted.");
+    console.warn("[contact] Supabase not configured: message not persisted.");
     return { ok: false, error: "not_configured" };
   }
 

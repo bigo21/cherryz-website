@@ -4,7 +4,7 @@ import QuoteWizard from "@/components/quote/QuoteWizard";
 import { WifiIcon } from "@/components/site/icons";
 
 export const metadata: Metadata = {
-  title: "Demande de cotation WiFi Zone — Cherryz",
+  title: "Demande de cotation WiFi Zone | Cherryz",
   description:
     "Formulaire pour lancer votre WiFi Zone monétisable (immeuble, hôtel, quartier…). ± 3 minutes, réponse sous 48h, diagnostic gratuit.",
 };
