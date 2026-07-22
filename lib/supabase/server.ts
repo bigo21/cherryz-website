@@ -3,7 +3,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 /**
  * Server-side Supabase client.
  *
- * Uses the publishable anon key (safe to expose) — writes are constrained by
+ * Uses the publishable anon key (safe to expose): writes are constrained by
  * the row-level security policies defined in the migration
  * (`supabase/migrations/*_quote_requests.sql`): anonymous callers may INSERT a
  * quote request but cannot read any row back.

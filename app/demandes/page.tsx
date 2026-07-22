@@ -4,7 +4,7 @@ import { GlobeIcon, WifiIcon } from "@/components/site/icons";
 import { CONTACT } from "@/lib/site/site";
 
 export const metadata: Metadata = {
-  title: "Demande de cotation — Cherryz",
+  title: "Demande de cotation | Cherryz",
   description:
     "Choisissez votre demande : cotation Internet B2B avec IP publique dédiée, ou cotation WiFi Zone. Formulaire en 3 minutes, réponse sous 48h.",
 };

@@ -29,7 +29,7 @@ function formatValue(
       if (g?.ok && g.coords) parts.push(`Coordonnées : ${g.coords}`);
       const text = String(answers[`${q.id}__text`] ?? "").trim();
       if (text) parts.push(text);
-      base = parts.join(" — ");
+      base = parts.join(", ");
       break;
     }
     default:

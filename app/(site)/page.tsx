@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-navy px-6 text-center text-white">
       <h1 className="font-condensed text-4xl font-bold uppercase tracking-tight">
-        Accueil — en construction
+        Accueil : en construction
       </h1>
       <p className="max-w-md font-sans text-white/70">
         Cette page (et les autres pages du site) est en cours de développement.

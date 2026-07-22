@@ -104,7 +104,7 @@ export async function sendQuoteEmails(params: {
 }): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.warn("[quote] RESEND_API_KEY not set — skipping emails.");
+    console.warn("[quote] RESEND_API_KEY not set: skipping emails.");
     return;
   }
 
@@ -118,7 +118,7 @@ export async function sendQuoteEmails(params: {
       from: FROM,
       to: NOTIFY_TO,
       replyTo: contact.email ?? undefined,
-      subject: `Nouvelle demande — ${quoteTypeLabel(type)} — ${contact.full_name ?? "Prospect"}`,
+      subject: `Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
       html: teamEmailHtml(type, contact, answers, tracking),
     });
   } catch (e) {

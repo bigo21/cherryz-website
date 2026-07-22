@@ -94,7 +94,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     try {
       sessionStorage.setItem(storageKey(type), JSON.stringify({ step, answers, done }));
     } catch {
-      /* private mode — ignore */
+      /* private mode, ignore */
     }
   }, [type, step, answers, done]);
 
@@ -411,7 +411,7 @@ function GeoField({
   const hint = ok
     ? `Position détectée : ${value?.coords}. Vous pouvez préciser ci-dessous si besoin.`
     : value?.denied
-      ? "Localisation non disponible — décrivez-la manuellement ci-dessous."
+      ? "Localisation non disponible : décrivez-la manuellement ci-dessous."
       : "Ou décrivez votre localisation manuellement :";
   return (
     <div>
