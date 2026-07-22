@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { SVGProps } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import ReassuranceBar from "@/components/site/ReassuranceBar";
@@ -20,10 +21,6 @@ const l = (p: SVGProps<SVGSVGElement>) => ({
   stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const, ...p,
 });
-const Shield = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 2l7 4v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /></svg>);
-const Server = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></svg>);
-const Building = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" /></svg>);
-const Camera = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M15 8l6-3v14l-6-3z" /><rect x="3" y="6" width="12" height="12" rx="2" /></svg>);
 const Bolt = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M13 2L3 14h7l-1 8 10-12h-7z" /></svg>);
 const Lock = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="4" y="10" width="16" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>);
 const Flask = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M10 2h4v6l4 10a2 2 0 0 1-2 3H8a2 2 0 0 1-2-3l4-10z" /></svg>);
@@ -33,11 +30,11 @@ const Router = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="2" y="6"
 const Sparkle = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 3l1.7 4.5L18 9l-4.3 1.5L12 15l-1.7-4.5L6 9l4.3-1.5z" /><path d="M18.5 14.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" /></svg>);
 
 const usages = [
-  { Icon: Shield, t: "Sécuriser vos VPN inter-agences", d: "Reliez vos sites en toute confidentialité." },
-  { Icon: Server, t: "Héberger vos serveurs internes", d: "Accessibles à distance, en toute sécurité." },
-  { Icon: PhoneIcon, t: "Call centers & systèmes VoIP", d: "Une voix claire, sans coupure." },
-  { Icon: Building, t: "Conformité de vos transactions", d: "Indispensable pour vos flux financiers." },
-  { Icon: Camera, t: "Vidéosurveillance en temps réel", d: "Vos caméras accessibles où que vous soyez." },
+  { img: "/photos/fond-vpn.jpg", alt: "VPN inter-agences", t: "Sécuriser vos VPN inter-agences", d: "Reliez vos sites en toute confidentialité." },
+  { img: "/photos/fond-serveurs.jpg", alt: "Serveurs internes", t: "Héberger vos serveurs internes", d: "Accessibles à distance, en toute sécurité." },
+  { img: "/photos/fond-callcenter.jpg", alt: "Call center VoIP", t: "Call centers & systèmes VoIP", d: "Une voix claire, sans coupure." },
+  { img: "/photos/fond-conformite.jpg", alt: "Conformité des transactions", t: "Conformité de vos transactions", d: "Indispensable pour vos flux financiers." },
+  { img: "/photos/fond-video.jpg", alt: "Vidéosurveillance", t: "Vidéosurveillance en temps réel", d: "Vos caméras accessibles où que vous soyez." },
 ];
 
 const features = [
@@ -62,7 +59,8 @@ export default function InternetB2B() {
     <>
       <PageHero
         eyebrow="CONNEXION IP PUBLIQUE · B2B"
-        imageLabel="Photo — datacenter / salle serveurs / entreprise"
+        image="/photos/b2b-hero.jpg"
+        imageAlt="Datacenter Cherryz"
         title={
           <>
             Internet Dédié. IP Fixe.
@@ -115,10 +113,10 @@ export default function InternetB2B() {
             </div>
           </Reveal>
           <Reveal className="flex flex-col gap-[14px]" delay={0.08}>
-            {usages.map(({ Icon, t, d }) => (
+            {usages.map(({ img, alt, t, d }) => (
               <div key={t} className="flex items-start gap-4 rounded-[14px] border border-navy/[0.07] bg-surface px-[22px] py-5 transition-all hover:translate-x-1 hover:border-cherry-alt/30">
-                <div className="flex h-[46px] w-[46px] flex-none items-center justify-center rounded-xl border border-cherry-alt/[0.18] bg-white">
-                  <Icon className="text-[22px] text-cherry-alt" />
+                <div className="relative h-[46px] w-[46px] flex-none overflow-hidden rounded-xl">
+                  <Image src={img} alt={alt} fill sizes="46px" className="object-cover" />
                 </div>
                 <div>
                   <h4 className="m-0 font-condensed text-[20px] font-bold">{t}</h4>

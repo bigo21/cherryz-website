@@ -52,6 +52,26 @@
   --animate-overlay: chzOverlay 0.25s ease both;
   --animate-modal: chzModal 0.32s cubic-bezier(0.16, 0.7, 0.3, 1) both;
   --animate-pop: chzPop 0.4s both;
+  --animate-marquee-l: chzMarqueeL 32s linear infinite;
+  --animate-marquee-r: chzMarqueeR 32s linear infinite;
+}
+
+@keyframes chzMarqueeL {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes chzMarqueeR {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes chzFade {

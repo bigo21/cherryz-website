@@ -5,7 +5,7 @@ import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
-import ImageSlot from "@/components/site/ImageSlot";
+import Image from "next/image";
 import { CAL_WIFI } from "@/lib/site/site";
 
 export const metadata: Metadata = {
@@ -31,10 +31,6 @@ const S = (d: string): Ic => {
 const Building = S('<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M10 21v-3h4v3"/>');
 const District = S('<path d="M3 21V11l5-4 5 4v10z"/><path d="M13 21V9l4-3 4 3v12"/><path d="M6.5 21v-4h3v4"/>');
 const Hotel = S('<rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 8l9-5 9 5M8 21v-4h8v4M7 12h.01M12 12h.01M17 12h.01"/>');
-const Campus = S('<path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/>');
-const Market = S('<path d="M3 9l1.5-5h15L21 9M4 9v11h16V9M4 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0M9 20v-6h6v6"/>');
-const Industrial = S('<path d="M3 21V10l6 4V10l6 4V6l6 3v12z"/><path d="M7 21v-3M12 21v-3M17 21v-3"/>');
-const Clinic = S('<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M12 7v6M9 10h6"/>');
 const Bulb = S('<path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/>');
 const Search = S('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>');
 const Ruler = S('<path d="M3 17L17 3l4 4L7 21z"/><path d="M8 8l2 2M11 5l2 2M5 11l2 2"/>');
@@ -49,14 +45,14 @@ const Legal = S('<path d="M12 3v18M5 7l7-4 7 4M4 11h16M6 11v7M18 11v7"/>');
 const Trending = S('<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>');
 const ShieldCheck = S('<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>');
 
-const zones: { Icon: Ic; t: string; sub: string; d: string; red?: boolean }[] = [
-  { Icon: Building, t: "Bâtiment / Immeuble", sub: "Résidences, immeubles de bureaux, co-living", d: "Couverture intérieure multi-étages, portail captif par locataire." },
-  { Icon: District, t: "Quartier", sub: "Zone résidentielle, cité, lotissement", d: "Antennes extérieures longue portée, distribution multi-foyers." },
-  { Icon: Hotel, t: "Hôtel / Auberge", sub: "Hôtels, motels, maisons d'hôtes", d: "WiFi premium par chambre, gestion par vouchers." },
-  { Icon: Campus, t: "Campus / École", sub: "Universités, lycées, centres de formation", d: "Haute densité, gestion de bande passante par zone." },
-  { Icon: Market, t: "Marché / Zone commerciale", sub: "Marchés, galeries marchandes, gares", d: "Points d'accès robustes, monétisation par session." },
-  { Icon: Industrial, t: "Site industriel / Chantier", sub: "Usines, entrepôts, bases vie", d: "Couverture étendue, connexion stable pour opérations." },
-  { Icon: Clinic, t: "Clinique / Centre de santé", sub: "Hôpitaux, pharmacies, laboratoires", d: "Réseau sécurisé, séparation flux patients/staff." },
+const zones: { img?: string; alt?: string; Icon?: Ic; t: string; sub: string; d: string; red?: boolean }[] = [
+  { img: "/photos/zone-batiment.jpg", alt: "Immeuble résidentiel", t: "Bâtiment / Immeuble", sub: "Résidences, immeubles de bureaux, co-living", d: "Couverture intérieure multi-étages, portail captif par locataire." },
+  { img: "/photos/zone-quartier.jpg", alt: "Quartier résidentiel", t: "Quartier", sub: "Zone résidentielle, cité, lotissement", d: "Antennes extérieures longue portée, distribution multi-foyers." },
+  { img: "/photos/zone-hotel.jpg", alt: "Hôtel / Auberge", t: "Hôtel / Auberge", sub: "Hôtels, motels, maisons d'hôtes", d: "WiFi premium par chambre, gestion par vouchers." },
+  { img: "/photos/zone-campus.jpg", alt: "Campus / École", t: "Campus / École", sub: "Universités, lycées, centres de formation", d: "Haute densité, gestion de bande passante par zone." },
+  { img: "/photos/zone-marche.jpg", alt: "Marché / Zone commerciale", t: "Marché / Zone commerciale", sub: "Marchés, galeries marchandes, gares", d: "Points d'accès robustes, monétisation par session." },
+  { img: "/photos/zone-industriel.jpg", alt: "Site industriel / Chantier", t: "Site industriel / Chantier", sub: "Usines, entrepôts, bases vie", d: "Couverture étendue, connexion stable pour opérations." },
+  { img: "/photos/zone-clinique.jpg", alt: "Clinique / Centre de santé", t: "Clinique / Centre de santé", sub: "Hôpitaux, pharmacies, laboratoires", d: "Réseau sécurisé, séparation flux patients/staff." },
   { Icon: Bulb, t: "Votre idée", sub: "Tout autre espace", d: "On étudie, on propose, on déploie.", red: true },
 ];
 
@@ -77,10 +73,10 @@ const diffs: { Icon: Ic; t: string; d: string }[] = [
   { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive, monitoring continu, intervention rapide." },
 ];
 
-const cases: { Icon: Ic; badge: string; place: string; desc: string; stat: string; suffix: string; label: string }[] = [
-  { Icon: Building, badge: "Propriétaire d'immeuble", place: "24 appartements, Yaoundé", desc: "WiFi par étage + vouchers mensuels.", stat: "+150 000 XAF", suffix: " /mois de revenu passif", label: "Photo — immeuble Yaoundé" },
-  { Icon: District, badge: "Entrepreneur de quartier", place: "Zone résidentielle dense, Douala", desc: "3 antennes, couverture 500m.", stat: "+200 clients", suffix: " en 2 mois", label: "Photo — quartier Douala" },
-  { Icon: Hotel, badge: "Gérant d'hôtel", place: "Hôtel 30 chambres", desc: "WiFi premium inclus dans le tarif chambre.", stat: "+40%", suffix: " satisfaction client", label: "Photo — hôtel" },
+const cases: { Icon: Ic; badge: string; place: string; desc: string; stat: string; suffix: string; img: string; alt: string }[] = [
+  { Icon: Building, badge: "Propriétaire d'immeuble", place: "24 appartements, Yaoundé", desc: "WiFi par étage + vouchers mensuels.", stat: "+150 000 XAF", suffix: " /mois de revenu passif", img: "/photos/cas-immeuble.jpg", alt: "Immeuble à Yaoundé" },
+  { Icon: District, badge: "Entrepreneur de quartier", place: "Zone résidentielle dense, Douala", desc: "3 antennes, couverture 500m.", stat: "+200 clients", suffix: " en 2 mois", img: "/photos/cas-quartier.jpg", alt: "Quartier à Douala" },
+  { Icon: Hotel, badge: "Gérant d'hôtel", place: "Hôtel 30 chambres", desc: "WiFi premium inclus dans le tarif chambre.", stat: "+40%", suffix: " satisfaction client", img: "/photos/cas-hotel.jpg", alt: "Hôtel connecté" },
 ];
 
 const featureCard =
@@ -91,7 +87,8 @@ export default function WifiZone() {
     <>
       <PageHero
         eyebrow="WIFI ZONE · BUSINESS CLÉ EN MAIN"
-        imageLabel="Photo — immeuble / quartier / hôtel connecté"
+        image="/photos/wifi-hero.jpg"
+        imageAlt="Quartier camerounais connecté"
         minHeight={720}
         title={
           <>
@@ -123,28 +120,46 @@ export default function WifiZone() {
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
-            {zones.map((z) => (
-              <div
-                key={z.t}
-                className={
-                  z.red
-                    ? "relative overflow-hidden rounded-2xl bg-cherry-alt px-6 py-[26px] text-white transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-30px_rgba(160,4,45,.8)]"
-                    : "rounded-2xl border border-navy/[0.07] bg-surface px-6 py-[26px] transition-all hover:-translate-y-[5px] hover:bg-white hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]"
-                }
-              >
-                {z.red && <div className="absolute -right-8 -top-8 h-[120px] w-[120px] rounded-full bg-white/10" />}
-                <div className="relative">
-                  <z.Icon className="text-[30px]" style={{ color: z.red ? "#fff" : "#101b28" }} />
-                  <h4 className="mt-3 font-condensed text-[21px] font-bold">{z.t}</h4>
-                  <div className={`mt-1 font-sans text-[13px] font-semibold ${z.red ? "text-white/70" : "text-navy/50"}`}>
-                    {z.sub}
+            {zones.map((z) =>
+              z.red ? (
+                <div
+                  key={z.t}
+                  className="relative overflow-hidden rounded-2xl bg-cherry-alt px-6 py-[26px] text-white transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-30px_rgba(160,4,45,.8)]"
+                >
+                  <div className="absolute -right-8 -top-8 h-[120px] w-[120px] rounded-full bg-white/10" />
+                  <div className="relative">
+                    {z.Icon && <z.Icon className="text-[30px] text-white" />}
+                    <h4 className="mt-3 font-condensed text-[21px] font-bold">{z.t}</h4>
+                    <div className="mt-1 font-sans text-[13px] font-semibold text-white/70">{z.sub}</div>
+                    <p className="mt-[10px] border-t border-white/20 pt-[10px] font-sans text-[14.5px] leading-[1.5] text-white/90">
+                      {z.d}
+                    </p>
                   </div>
-                  <p className={`mt-[10px] border-t pt-[10px] font-sans text-[14.5px] leading-[1.5] ${z.red ? "border-white/20 text-white/90" : "border-navy/[0.08] text-navy/[0.66]"}`}>
-                    {z.d}
-                  </p>
                 </div>
-              </div>
-            ))}
+              ) : (
+                <div
+                  key={z.t}
+                  className="overflow-hidden rounded-2xl border border-navy/[0.07] bg-white transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]"
+                >
+                  <div className="relative h-[110px]">
+                    <Image
+                      src={z.img!}
+                      alt={z.alt ?? z.t}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="px-[22px] pb-6 pt-5">
+                    <h4 className="font-condensed text-[21px] font-bold">{z.t}</h4>
+                    <div className="mt-1 font-sans text-[13px] font-semibold text-navy/50">{z.sub}</div>
+                    <p className="mt-[10px] border-t border-navy/[0.08] pt-[10px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.66]">
+                      {z.d}
+                    </p>
+                  </div>
+                </div>
+              ),
+            )}
           </Reveal>
           <Reveal className="mx-auto mt-9 max-w-[620px] text-center" delay={0.1}>
             <p className="font-sans text-[18px] font-medium leading-[1.5] text-navy">
@@ -251,7 +266,13 @@ export default function WifiZone() {
             {cases.map((c) => (
               <div key={c.badge} className="overflow-hidden rounded-[18px] border border-navy/[0.07] bg-white shadow-[0_24px_50px_-36px_rgba(16,27,40,.45)]">
                 <div className="relative h-[180px]">
-                  <ImageSlot label={c.label} />
+                  <Image
+                    src={c.img}
+                    alt={c.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                   <div className="absolute left-[14px] top-[14px] inline-flex items-center gap-[6px] rounded-full bg-navy-deep/75 px-3 py-[6px] font-condensed text-[13px] font-semibold tracking-[0.5px] text-white">
                     <c.Icon className="align-[-0.14em]" /> {c.badge}
                   </div>
