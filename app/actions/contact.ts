@@ -47,7 +47,8 @@ export async function submitContactMessage(
     return { ok: false, error: "not_configured" };
   }
 
-  const { error } = await supabase.from("contact_messages").insert({
+  // La table contact_messages vit dans le schéma dédié "cherryz" (et non "public").
+  const { error } = await supabase.schema("cherryz").from("contact_messages").insert({
     ...record,
     tracking: input.tracking ?? {},
   });
