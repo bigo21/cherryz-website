@@ -66,7 +66,8 @@ export async function submitQuoteRequest(
   }
 
   const contact = extractContact(type, answers);
-  const { error } = await supabase.from("quote_requests").insert({
+  // La table quote_requests vit dans le schéma dédié "cherryz" (et non "public").
+  const { error } = await supabase.schema("cherryz").from("quote_requests").insert({
     type,
     answers,
     tracking: tracking ?? {},
