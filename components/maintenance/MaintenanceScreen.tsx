@@ -51,11 +51,11 @@ export default function MaintenanceScreen() {
       {/* Content */}
       <div className="relative z-[2] flex w-full flex-1 items-center px-[6vw] py-10">
         <div className="w-full max-w-none lg:max-w-[720px]">
-          <h1 className="m-0 font-condensed text-[clamp(44px,6.4vw,84px)] font-bold uppercase leading-[0.98] tracking-[-0.5px] animate-fade [animation-delay:0.1s]">
+          {/* <h1 className="m-0 font-condensed text-[clamp(44px,6.4vw,84px)] font-bold uppercase leading-[0.98] tracking-[-0.5px] animate-fade [animation-delay:0.1s]">
             Site en
             <br />
             maintenance
-          </h1>
+          </h1> */}
           <p className="mt-6 max-w-[600px] font-sans text-[clamp(17px,2vw,21px)] font-normal leading-[1.55] text-white/[0.76] animate-fade [animation-delay:0.2s]">
             Notre site est actuellement en cours d&apos;amélioration afin de
             vous offrir une expérience encore plus performante. Nous serons de
