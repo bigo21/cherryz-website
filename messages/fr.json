@@ -199,6 +199,78 @@
     "clients": {
       "title": "Ils nous font confiance",
       "note": "Entreprises, hôtels, institutions"
+    },
+    "wall": {
+      "caption": "Photos et mesures d'illustration : vos débits réels sont fixés après l'étude de votre site.",
+      "status": {
+        "online": "en ligne",
+        "negotiating": "négociation",
+        "offline": "hors ligne"
+      },
+      "aerial": "Yaoundé, vue du ciel",
+      "tiles": {
+        "datacenter": "Salle serveurs",
+        "patch": "Brassage",
+        "office": "Siège social",
+        "deploy": "Déploiement",
+        "antenna": "Antenne hertzienne",
+        "noc": "Supervision",
+        "study": "Étude de site",
+        "residence": "Résidence",
+        "market": "Marché",
+        "hotel": "Hôtel",
+        "campus": "Campus",
+        "neighbourhood": "Quartier",
+        "lodge": "Hôtel-lodge",
+        "building": "Immeuble",
+        "street": "Rue résidentielle"
+      },
+      "units": {
+        "latency": "ms",
+        "users": "connectés",
+        "range": "m de portée"
+      }
+    },
+    "flow": {
+      "title": "Un courtier, pas un opérateur de plus.",
+      "lead": "Camtel, Orange, MTN et d'autres nous soumettent leurs offres. Nous comparons, nous négocions, et une seule connexion arrive chez vous, avec un seul interlocuteur.",
+      "cherryz": "compare · négocie",
+      "site": "Votre site",
+      "siteSub": "1 contrat · 1 interlocuteur",
+      "photoAlt": "Technicien raccordant un équipement réseau dans une baie"
+    },
+    "console": {
+      "title": "Votre débit, votre prix.",
+      "lead": "Choisissez un débit : la barre montre ce que vous paieriez seul chez un opérateur, et avec Cherryz.",
+      "tabs": {
+        "ip": "Internet entreprise",
+        "wifi": "WiFi Zone"
+      },
+      "speed": "Débit souhaité",
+      "alone": "Seul, chez un opérateur",
+      "cherryz": "Avec Cherryz",
+      "perMonth": "par mois",
+      "saving": "Économie estimée",
+      "note": "Base : {cherryzMin, number} – {cherryzMax, number} XAF par Mbps et par mois via Cherryz, contre {aloneMin, number} – {aloneMax, number} XAF en direct. Estimation indicative : le prix exact est fixé après l'étude de votre site.",
+      "users": "Utilisateurs par jour",
+      "ticket": "Prix du ticket journée",
+      "revenue": "Recette brute estimée",
+      "wifiNote": "Simulation sur vos propres hypothèses, sur 30 jours, avant coûts de connexion et d'équipement. Cherryz les chiffre dans votre devis.",
+      "ctaIp": "Recevoir mon devis Internet",
+      "ctaWifi": "Recevoir mon devis WiFi Zone",
+      "compareTitle": "Seul, ou avec Cherryz"
+    },
+    "steps": {
+      "title": "Sur place, de l'étude à l'installation.",
+      "lead": "Chaque projet est unique : votre prix se construit après avoir compris votre besoin, sur place, partout au Cameroun.",
+      "progress": "Étape {current} sur {total}",
+      "cta": "Commencer par le questionnaire"
+    },
+    "usagesTitle": "Ce que l'IP fixe vous permet",
+    "coverage": {
+      "title": "Une zone couverte devient un revenu.",
+      "lead": "Immeuble, quartier, hôtel, campus, marché : on dimensionne la couverture pour votre espace, et vos clients paient par mobile money.",
+      "cta": "Voir la méthode WiFi Zone"
     }
   },
   "InternetB2B": {

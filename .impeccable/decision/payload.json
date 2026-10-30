@@ -1,0 +1,238 @@
+{
+ "title": "Choisir la direction visuelle",
+ "question": "Le tirage a désigné « Le mur de supervision ». Le garder, prendre une alternative, ou relancer.",
+ "options": [
+  {
+   "id": "assigned",
+   "kind": "assigned",
+   "label": "Le mur de supervision",
+   "kicker": "THE ROLL",
+   "lineage": "Murs d'écrans des centres de supervision réseau (NOC) des opérateurs",
+   "thesis": "Le site est un mur d'écrans où chaque photo est un site client qui passe en ligne sous vos yeux.",
+   "palette": [
+    "#101b28",
+    "#0a121c",
+    "#a2032d",
+    "#e9eef3",
+    "#3fd18b"
+   ],
+   "materials": [
+    "mosaïque de photos jointives (joints de 2 px)",
+    "bandeaux d'état en chiffres tabulaires",
+    "points de liaison et barres de signal"
+   ],
+   "viewport": "Un mur plein écran de 11 photos jointives (Yaoundé vue du ciel en grand écran, data center, hôtel, marché, campus, technicien) ; une dalle navy porte le titre, le choix Entreprise / WiFi Zone et le bouton devis ; les dalles s'allument une à une, Mbps et latence s'incrémentent.",
+   "risk": "Peut virer au tableau de bord froid si les photos de lieux camerounais ne dominent pas les chiffres.",
+   "raised": [
+    {
+     "from": "challenger-jackfield",
+     "raise": "L'état d'une liaison se lit au tracé du trait (plein = en ligne, pointillé = négociation, interrompu = hors ligne), jamais à la seule couleur."
+    },
+    {
+     "from": "challenger-oscilloscope",
+     "raise": "Chaque chiffre est posé sur la grille stricte du mur, à la même graduation partout."
+    },
+    {
+     "from": "challenger-tensegrity",
+     "raise": "Les légendes s'attachent à leur sujet dans la photo par un trait de rappel (l'antenne, la baie, le point d'accès)."
+    },
+    {
+     "from": "challenger-miura",
+     "raise": "Un seul contrôle, le choix Entreprise / WiFi Zone, re-règle le mur entier d'un coup."
+    },
+    {
+     "from": "challenger-annual",
+     "raise": "Chaque photo porte sa ligne de légende : lieu, ce qu'elle montre, « photo d'illustration »."
+    }
+   ],
+   "html": ".impeccable/decision/assigned.html"
+  },
+  {
+   "id": "model-pick",
+   "kind": "pick",
+   "label": "Faisceaux sur Yaoundé",
+   "kicker": "IMPECCABLE’S PICK",
+   "lineage": "Mâts et antennes hertziennes sur les toits de Yaoundé et Douala au crépuscule",
+   "thesis": "Le défilement trace un faisceau hertzien de toit en toit : la connexion arrive sans travaux, photo après photo.",
+   "palette": [
+    "#101b28",
+    "#1b2a44",
+    "#a2032d",
+    "#f2b880",
+    "#ffffff"
+   ],
+   "materials": [
+    "photographie plein cadre au crépuscule",
+    "faisceau dessiné en SVG de photo en photo",
+    "anneaux de couverture WiFi"
+   ],
+   "viewport": "Photo aérienne de Yaoundé au coucher du soleil en plein écran ; un faisceau cherry part d'un mât, traverse la ville et se pose sur un immeuble ; titre en grand sur le ciel, choix Entreprise / WiFi Zone et bouton devis en bas à gauche.",
+   "risk": "C'est la direction la plus familière de la catégorie connectivité (photo de ville et lignes de liaison) ; sa force dépend de la qualité du tracé.",
+   "html": ".impeccable/decision/pick.html"
+  },
+  {
+   "id": "challenger-zoo",
+   "kind": "challenger",
+   "catalogId": "aww2-zoo-gardens-guide-map",
+   "label": "Carte de couverture",
+   "verdict": "competitive",
+   "lineage": "Plans-guides en aplats, ici devenus cartes de couverture",
+   "thesis": "Chaque zone couverte est un lobe de couleur pleine qui gonfle sur la page ; les photos des lieux sont découpées dans ces lobes.",
+   "palette": [
+    "#101b28",
+    "#a2032d",
+    "#e9eef3",
+    "#f5e2c8"
+   ],
+   "materials": [
+    "aplats sans grain",
+    "photos découpées en lobes",
+    "littoral SVG qui se redessine au défilement"
+   ],
+   "viewport": "Un grand lobe cherry de couverture déborde du cadre sur deux côtés ; dedans, la photo du quartier ; titre posé sur le littoral, pastilles Entreprise / WiFi Zone.",
+   "case": "Rend la couverture WiFi immédiatement lisible et tient sur la clarté produit ; perd sur l'identification B2B, un DSI ne s'y reconnaît pas.",
+   "risk": "Ludique : peut sembler peu sérieux pour une banque ou un DG.",
+   "hero": "https://impeccable.style/worlds/cards/aww2-zoo-gardens-guide-map-hero.webp",
+   "html": ".impeccable/decision/zoo.html"
+  },
+  {
+   "id": "challenger-jackfield",
+   "kind": "challenger",
+   "catalogId": "operate-b-normalled-jackfield",
+   "label": "Tableau de jarretières",
+   "verdict": "declined",
+   "lineage": "Répartiteurs de salle machine",
+   "thesis": "Couloirs numérotés et traits de liaison ambre sur verre noir.",
+   "palette": [
+    "#0b0b0b",
+    "#ffb000"
+   ],
+   "materials": [
+    "verre noir",
+    "traits de liaison"
+   ],
+   "viewport": "Couloirs numérotés défilants.",
+   "case": "Trop interne : ni le DG ni l'entrepreneur ne s'y reconnaissent.",
+   "risk": "Illisible pour un non-technicien.",
+   "kept": "L'état lu au tracé du trait, pas à la couleur.",
+   "hero": "https://impeccable.style/worlds/cards/operate-b-normalled-jackfield-hero.webp"
+  },
+  {
+   "id": "challenger-oscilloscope",
+   "kind": "challenger",
+   "catalogId": "scientific-notation-oscilloscope-signal-bench",
+   "label": "Oscilloscope",
+   "verdict": "declined",
+   "lineage": "Bancs de mesure",
+   "thesis": "Une trace phosphore sur graticule.",
+   "palette": [
+    "#050805",
+    "#39ff6a"
+   ],
+   "materials": [
+    "verre",
+    "phosphore"
+   ],
+   "viewport": "Une trace verte sur graticule.",
+   "case": "Le vert phosphore efface le cherry ; peu de place pour les photos.",
+   "risk": "Costume de labo.",
+   "kept": "La grille de mesure stricte sous chaque chiffre.",
+   "hero": "https://impeccable.style/worlds/cards/scientific-notation-oscilloscope-signal-bench-hero.webp"
+  },
+  {
+   "id": "challenger-tensegrity",
+   "kind": "challenger",
+   "catalogId": "kinetic-sculpture-automata-tensegrity-breathing-column",
+   "label": "Colonne de tenségrité",
+   "verdict": "declined",
+   "lineage": "Sculpture cinétique",
+   "thesis": "Forces opposées, cordes rouges.",
+   "palette": [
+    "#d9d6d0",
+    "#111",
+    "#c0202a"
+   ],
+   "materials": [
+    "carbone",
+    "corde"
+   ],
+   "viewport": "Une colonne qui respire.",
+   "case": "Aucun lien avec la connexion Internet pour le visiteur.",
+   "risk": "Abstrait.",
+   "kept": "Les légendes reliées à leur sujet par un trait de rappel.",
+   "hero": "https://impeccable.style/worlds/cards/kinetic-sculpture-automata-tensegrity-breathing-column-hero.webp"
+  },
+  {
+   "id": "challenger-miura",
+   "kind": "challenger",
+   "catalogId": "paper-folds-pleats-deployable-miura-orbit-sheet",
+   "label": "Pliage Miura",
+   "verdict": "declined",
+   "lineage": "Structures déployables",
+   "thesis": "Un geste déplie toute la feuille.",
+   "palette": [
+    "#f7f7f5",
+    "#c9a227",
+    "#1a1a1a"
+   ],
+   "materials": [
+    "papier plié",
+    "feuille d'or"
+   ],
+   "viewport": "Une feuille qui se déplie.",
+   "case": "Ne parle ni de débit ni de couverture.",
+   "risk": "Décoratif.",
+   "kept": "Un seul contrôle qui re-règle toute la page."
+  },
+  {
+   "id": "challenger-annual",
+   "kind": "challenger",
+   "catalogId": "design-annual-s-plate-section",
+   "label": "Planches d'annuel",
+   "verdict": "declined",
+   "lineage": "Annuels de design",
+   "thesis": "Photos en planches avec ligne de crédits.",
+   "palette": [
+    "#f5f4f6",
+    "#16181a",
+    "#dcddf3"
+   ],
+   "materials": [
+    "papier non couché",
+    "filets"
+   ],
+   "viewport": "Planche photo et crédits.",
+   "case": "Riche en images mais évoque l'édition, pas la connexion.",
+   "risk": "Trop calme, tampon rond déjà rejeté.",
+   "kept": "Une ligne de légende honnête sous chaque photo.",
+   "hero": "https://impeccable.style/worlds/cards/design-annual-s-plate-section-hero.webp"
+  }
+ ],
+ "reroll": {
+  "registers": [
+   "safer",
+   "bolder"
+  ]
+ },
+ "canon": true,
+ "canonCard": {
+  "kind": "canon",
+  "label": "Le standard de la catégorie",
+  "thesis": "Un site d'opérateur classique : grande photo, titre, deux offres en cartes, bandeau chiffres.",
+  "palette": [
+   "#ffffff",
+   "#101b28",
+   "#a2032d"
+  ],
+  "materials": [
+   "grille propre",
+   "photographie produit"
+  ],
+  "viewport": "Photo plein écran avec titre centré, puis cartes des deux offres.",
+  "risk": "Indiscernable des sites d'opérateurs."
+ },
+ "steer": true,
+ "buildPath": {
+  "value": "code"
+ }
+}

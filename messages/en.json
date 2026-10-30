@@ -199,6 +199,78 @@
     "clients": {
       "title": "They trust us",
       "note": "Companies, hotels, institutions"
+    },
+    "wall": {
+      "caption": "Illustrative photos and readings: your real speeds are set after we survey your site.",
+      "status": {
+        "online": "online",
+        "negotiating": "negotiating",
+        "offline": "offline"
+      },
+      "aerial": "Yaoundé from the air",
+      "tiles": {
+        "datacenter": "Server room",
+        "patch": "Patching",
+        "office": "Head office",
+        "deploy": "Deployment",
+        "antenna": "Microwave antenna",
+        "noc": "Monitoring",
+        "study": "Site survey",
+        "residence": "Residence",
+        "market": "Market",
+        "hotel": "Hotel",
+        "campus": "Campus",
+        "neighbourhood": "Neighbourhood",
+        "lodge": "Lodge hotel",
+        "building": "Apartment block",
+        "street": "Residential street"
+      },
+      "units": {
+        "latency": "ms",
+        "users": "connected",
+        "range": "m range"
+      }
+    },
+    "flow": {
+      "title": "A broker, not one more operator.",
+      "lead": "Camtel, Orange, MTN and others submit their offers to us. We compare, we negotiate, and a single connection reaches your site, with a single contact.",
+      "cherryz": "compare · negotiate",
+      "site": "Your site",
+      "siteSub": "1 contract · 1 contact",
+      "photoAlt": "Technician connecting network equipment in a rack"
+    },
+    "console": {
+      "title": "Your bandwidth, your price.",
+      "lead": "Pick a speed: the bars show what you would pay on your own with an operator, and with Cherryz.",
+      "tabs": {
+        "ip": "Business Internet",
+        "wifi": "WiFi Zone"
+      },
+      "speed": "Bandwidth needed",
+      "alone": "On your own, with an operator",
+      "cherryz": "With Cherryz",
+      "perMonth": "per month",
+      "saving": "Estimated saving",
+      "note": "Basis: {cherryzMin, number} – {cherryzMax, number} XAF per Mbps per month through Cherryz, versus {aloneMin, number} – {aloneMax, number} XAF direct. Indicative estimate: the exact price is set after we survey your site.",
+      "users": "Users per day",
+      "ticket": "Day-pass price",
+      "revenue": "Estimated gross revenue",
+      "wifiNote": "A simulation based on your own assumptions, over 30 days, before connection and equipment costs. Cherryz prices those in your quote.",
+      "ctaIp": "Get my Internet quote",
+      "ctaWifi": "Get my WiFi Zone quote",
+      "compareTitle": "On your own, or with Cherryz"
+    },
+    "steps": {
+      "title": "On site, from survey to installation.",
+      "lead": "Every project is different: your price is built once we understand your needs, on site, anywhere in Cameroon.",
+      "progress": "Step {current} of {total}",
+      "cta": "Start with the questionnaire"
+    },
+    "usagesTitle": "What a fixed IP lets you do",
+    "coverage": {
+      "title": "A covered area becomes revenue.",
+      "lead": "Building, neighbourhood, hotel, campus, market: we size the coverage for your space, and your customers pay by mobile money.",
+      "cta": "See the WiFi Zone method"
     }
   },
   "InternetB2B": {

@@ -33,6 +33,14 @@
   --color-ink-soft: #4a5563;
   --color-stamp: #a2032d;
 
+  /* Refonte « mur de supervision » */
+  --color-seam: #0a121c;
+  --color-tile: #101b28;
+  --color-tile-up: #16243a;
+  --color-wash: #e9eef3;
+  --color-signal: #ff5a7e;
+  --color-readout: #dfe7f0;
+
   /* États */
   --color-positive: #1f8a5b;
   --color-whatsapp: #25d366;
@@ -40,6 +48,7 @@
   /* Typographie */
   --font-sans: var(--font-barlow), system-ui, sans-serif;
   --font-condensed: var(--font-barlow-condensed), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   /* Rayons */
   --radius-btn: 10px;
@@ -233,4 +242,41 @@ body {
 ::selection {
   background: rgba(162, 3, 45, 0.18);
   color: inherit;
+}
+
+/* ── Refonte « mur de supervision » ─────────────────────────────────────── */
+
+/* Link state by stroke pattern (components/wall/LinkLine.tsx). */
+.link-line .link-node {
+  fill: currentColor;
+}
+[data-link="negotiating"] .link-line .link-path {
+  stroke-dasharray: 3 3;
+  animation: chzDash 0.5s linear infinite;
+}
+[data-link="offline"] .link-line .link-path {
+  stroke-dasharray: 8 5 9;
+}
+[data-link="offline"] .link-line .link-node {
+  fill: transparent;
+}
+@keyframes chzDash {
+  to {
+    stroke-dashoffset: -6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-link="negotiating"] .link-line .link-path {
+    animation: none;
+  }
+}
+
+/* Wall seams and browser surfaces in the wall's palette. */
+.wall-page ::selection {
+  background: #a2032d;
+  color: #fff;
+}
+.wall-page :focus-visible {
+  outline: 2px solid #ff5a7e;
+  outline-offset: 2px;
 }
