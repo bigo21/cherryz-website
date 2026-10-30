@@ -3,28 +3,18 @@ import Link from "next/link";
 import LegalPage, { Fact, Section } from "@/components/site/LegalPage";
 import { HOST, LEGAL } from "@/lib/site/legal";
 import { CONTACT } from "@/lib/site/site";
-import { getLang, pageMetadata } from "@/lib/i18n/server";
-
-const META = {
-  fr: {
-    title: "Mentions légales | Cherryz",
-    description: "Identification de l'éditeur du site cherryz.tech, hébergement, propriété intellectuelle et droit applicable.",
-  },
-  en: {
-    title: "Legal notice | Cherryz",
-    description: "Identification of the publisher of cherryz.tech, hosting, intellectual property and governing law.",
-  },
-};
+import { getLocale, getTranslations } from "next-intl/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = await getLang();
-  return pageMetadata(lang, "/mentions-legales", META[lang]);
+  const t = await getTranslations("Legal.notice.meta");
+  return pageMetadata("/mentions-legales", { title: t("title"), description: t("description") });
 }
 
 const link = "font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy";
 
 export default async function MentionsLegales() {
-  return (await getLang()) === "en" ? <MentionsLegalesEn /> : <MentionsLegalesFr />;
+  return (await getLocale()) === "en" ? <MentionsLegalesEn /> : <MentionsLegalesFr />;
 }
 
 function MentionsLegalesFr() {

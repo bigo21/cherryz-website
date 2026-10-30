@@ -7,13 +7,13 @@ import ContactClose from "@/components/site/ContactClose";
 import Reveal from "@/components/site/Reveal";
 import { ArrowRightIcon, ClipboardIcon } from "@/components/site/icons";
 import { CAL_WIFI, QUOTE } from "@/lib/site/site";
-import { wifiZone } from "@/content/wifi-zone";
+import { getLocale, getTranslations } from "next-intl/server";
 import { localize } from "@/lib/i18n/config";
-import { getLang, pageMetadata } from "@/lib/i18n/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = await getLang();
-  return pageMetadata(lang, "/wifi-zone", wifiZone[lang].meta);
+  const t = await getTranslations("WifiZone.meta");
+  return pageMetadata("/wifi-zone", { title: t("title"), description: t("description") });
 }
 
 type Ic = ComponentType<SVGProps<SVGSVGElement>>;
@@ -37,10 +37,32 @@ const Legal = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 3v18M
 const Trending = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M3 17l6-6 4 4 8-8M15 7h6v6" /></svg>);
 const ShieldCheck = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" /><path d="M9 12l2 2 4-4" /></svg>);
 
-// Icons, in the order of the items in content/wifi-zone.ts.
-const zoneIcons: Ic[] = [Building, District, Hotel, Campus, Market, Factory, Clinic, Bulb];
-const diffIcons: Ic[] = [Coins, Star, Bars, Legal, Trending, ShieldCheck];
-const caseIcons: Ic[] = [Building, District, Hotel];
+// Listed entries of messages/*.json (WifiZone), in display order, with their icons.
+const FACTS = ["art", "survey", "mobileMoney"] as const;
+const ZONES: { key: "building" | "neighbourhood" | "hotel" | "campus" | "market" | "industrial" | "clinic" | "idea"; Icon: Ic }[] = [
+  { key: "building", Icon: Building },
+  { key: "neighbourhood", Icon: District },
+  { key: "hotel", Icon: Hotel },
+  { key: "campus", Icon: Campus },
+  { key: "market", Icon: Market },
+  { key: "industrial", Icon: Factory },
+  { key: "clinic", Icon: Clinic },
+  { key: "idea", Icon: Bulb },
+];
+const METHOD = ["survey", "sizing", "model", "deployment", "automation", "support"] as const;
+const DIFFS: { key: "bandwidth" | "endToEnd" | "business" | "legal" | "scalable" | "support"; Icon: Ic }[] = [
+  { key: "bandwidth", Icon: Coins },
+  { key: "endToEnd", Icon: Star },
+  { key: "business", Icon: Bars },
+  { key: "legal", Icon: Legal },
+  { key: "scalable", Icon: Trending },
+  { key: "support", Icon: ShieldCheck },
+];
+const CASES: { key: "building" | "neighbourhood" | "hotel"; Icon: Ic }[] = [
+  { key: "building", Icon: Building },
+  { key: "neighbourhood", Icon: District },
+  { key: "hotel", Icon: Hotel },
+];
 
 const h2 = "m-0 font-condensed text-[clamp(34px,4.2vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]";
 const h3 = "m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]";
@@ -49,19 +71,19 @@ const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
 const legend = "font-condensed text-[15px] font-semibold tracking-[0.06em] text-ink-soft";
 
 export default async function WifiZone() {
-  const lang = await getLang();
-  const t = wifiZone[lang];
+  const lang = await getLocale();
+  const t = await getTranslations("WifiZone");
   return (
     <>
       <InkHero
-        title={t.hero.title}
-        lead={t.hero.lead}
+        title={t("hero.title")}
+        lead={t("hero.lead")}
         actions={
           <a href="#methode" className={inkLink}>
-            {t.hero.method}
+            {t("hero.method")}
           </a>
         }
-        facts={t.hero.facts}
+        facts={FACTS.map((k) => t(`hero.facts.${k}`))}
       >
         <QuoteSheet path="wifi" />
       </InkHero>
@@ -70,30 +92,27 @@ export default async function WifiZone() {
       <section className="bg-ground py-20 md:py-28">
         <div className={`${wrap} grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14`}>
           <Reveal className="lg:col-span-4">
-            <h2 className={h2}>{t.zones.title}</h2>
+            <h2 className={h2}>{t("zones.title")}</h2>
             <p className="mt-6 max-w-[44ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
-              {t.zones.lead}
+              {t("zones.lead")}
             </p>
             <p className="mt-6 max-w-[44ch] border-l-2 border-navy pl-5 font-sans text-[17.5px] font-semibold leading-[1.55] text-navy">
-              {t.zones.point}
+              {t("zones.point")}
             </p>
           </Reveal>
           <Reveal className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-8`} delay={0.05}>
-            <h3 className={h3}>{t.zones.sheet}</h3>
+            <h3 className={h3}>{t("zones.sheet")}</h3>
             <ul className="m-0 grid list-none grid-cols-1 gap-x-10 p-0 md:grid-cols-2">
-              {t.zones.items.map(({ t, sub, d }, i) => {
-                const Icon = zoneIcons[i];
-                return (
-                <li key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
+              {ZONES.map(({ key, Icon }) => (
+                <li key={key} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
-                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{t}</div>
-                    <div className="mt-[2px] font-sans text-[14px] font-medium text-ink-soft">{sub}</div>
-                    <p className="m-0 mt-2 font-sans text-[16px] leading-[1.5] text-navy">{d}</p>
+                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{t(`zones.items.${key}.title`)}</div>
+                    <div className="mt-[2px] font-sans text-[14px] font-medium text-ink-soft">{t(`zones.items.${key}.sub`)}</div>
+                    <p className="m-0 mt-2 font-sans text-[16px] leading-[1.5] text-navy">{t(`zones.items.${key}.text`)}</p>
                   </div>
                 </li>
-                );
-              })}
+              ))}
             </ul>
           </Reveal>
         </div>
@@ -103,37 +122,37 @@ export default async function WifiZone() {
       <section id="methode" className="scroll-mt-24 bg-navy-deep py-20 text-white md:py-28">
         <div className={wrap}>
           <Reveal className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
-            <h2 className={`${h2} lg:col-span-7`}>{t.method.title}</h2>
+            <h2 className={`${h2} lg:col-span-7`}>{t("method.title")}</h2>
             <p className="m-0 max-w-[48ch] font-sans text-[17.5px] leading-[1.6] text-white/75 lg:col-span-5">
-              {t.method.lead}
+              {t("method.lead")}
             </p>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-7 pt-9 text-navy sm:px-9`} delay={0.05}>
             <div aria-hidden className={`hidden grid-cols-[56px_1.15fr_1fr] gap-x-8 border-b-2 border-navy pb-3 md:grid ${legend}`}>
-              <span>{t.method.cols.step}</span>
-              <span>{t.method.cols.do}</span>
-              <span>{t.method.cols.get}</span>
+              <span>{t("method.cols.step")}</span>
+              <span>{t("method.cols.do")}</span>
+              <span>{t("method.cols.get")}</span>
             </div>
             <ol className="m-0 list-none border-t-2 border-navy p-0 md:border-t-0">
-              {t.method.items.map((m, i) => (
-                <li key={m.t} className="grid grid-cols-[44px_1fr] gap-x-3 border-b border-rule py-5 md:grid-cols-[56px_1.15fr_1fr] md:gap-x-8">
+              {METHOD.map((m, i) => (
+                <li key={m} className="grid grid-cols-[44px_1fr] gap-x-3 border-b border-rule py-5 md:grid-cols-[56px_1.15fr_1fr] md:gap-x-8">
                   <span className="font-condensed text-[22px] font-bold tabular-nums text-ink-soft md:row-span-1">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <div className="font-condensed text-[21px] font-bold leading-tight">{m.t}</div>
-                    <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{m.d}</p>
+                    <div className="font-condensed text-[21px] font-bold leading-tight">{t(`method.items.${m}.title`)}</div>
+                    <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{t(`method.items.${m}.text`)}</p>
                   </div>
                   <p className="col-start-2 m-0 mt-3 font-sans text-[16px] font-semibold leading-[1.45] md:col-start-auto md:mt-0">
-                    <span className="mr-2 font-condensed text-[14px] font-semibold tracking-[0.06em] text-ink-soft md:hidden">{t.method.getShort}</span>
-                    {m.obtain}
+                    <span className="mr-2 font-condensed text-[14px] font-semibold tracking-[0.06em] text-ink-soft md:hidden">{t("method.getShort")}</span>
+                    {t(`method.items.${m}.outcome`)}
                   </p>
                 </li>
               ))}
             </ol>
             <Link href={localize(lang, QUOTE.wifi)} className={`${btnCherry} mt-7`}>
               <ClipboardIcon aria-hidden className="text-[20px]" />
-              {t.method.cta}
+              {t("method.cta")}
               <ArrowRightIcon aria-hidden className="text-[19px]" />
             </Link>
           </Reveal>
@@ -144,22 +163,19 @@ export default async function WifiZone() {
       <section className="bg-paper py-20 md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={`${h2} max-w-[20ch]`}>{t.diffs.title}</h2>
+            <h2 className={`${h2} max-w-[20ch]`}>{t("diffs.title")}</h2>
           </Reveal>
           <Reveal className="mt-12" delay={0.05}>
             <dl className="m-0 grid grid-cols-1 gap-x-12 border-t-2 border-navy md:grid-cols-2">
-              {t.diffs.items.map(({ t, d }, i) => {
-                const Icon = diffIcons[i];
-                return (
-                <div key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
+              {DIFFS.map(({ key, Icon }) => (
+                <div key={key} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
-                    <dt className="font-condensed text-[21px] font-bold leading-tight text-navy">{t}</dt>
-                    <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</dd>
+                    <dt className="font-condensed text-[21px] font-bold leading-tight text-navy">{t(`diffs.items.${key}.title`)}</dt>
+                    <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{t(`diffs.items.${key}.text`)}</dd>
                   </div>
                 </div>
-                );
-              })}
+              ))}
             </dl>
           </Reveal>
         </div>
@@ -169,34 +185,31 @@ export default async function WifiZone() {
       <section id="cas" className="scroll-mt-24 bg-ground py-20 md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={h2}>{t.cases.title}</h2>
+            <h2 className={h2}>{t("cases.title")}</h2>
             <p className="mt-6 max-w-[56ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
-              {t.cases.lead}
+              {t("cases.lead")}
             </p>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-6 pt-9 sm:px-9`} delay={0.05}>
-            <h3 className={h3}>{t.cases.sheet}</h3>
+            <h3 className={h3}>{t("cases.sheet")}</h3>
             <ul className="m-0 list-none p-0">
-              {t.cases.items.map(({ who, place, setup, stat, unit }, i) => {
-                const Icon = caseIcons[i];
-                return (
-                <li key={who} className="grid grid-cols-[32px_1fr] items-start gap-x-3 gap-y-3 border-b border-rule py-5 md:grid-cols-[32px_1fr_1fr_auto] md:items-baseline md:gap-x-8">
+              {CASES.map(({ key, Icon }) => (
+                <li key={key} className="grid grid-cols-[32px_1fr] items-start gap-x-3 gap-y-3 border-b border-rule py-5 md:grid-cols-[32px_1fr_1fr_auto] md:items-baseline md:gap-x-8">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy md:self-start" />
                   <div>
-                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{who}</div>
-                    <div className="mt-[2px] font-sans text-[15px] text-ink-soft">{place}</div>
+                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{t(`cases.items.${key}.who`)}</div>
+                    <div className="mt-[2px] font-sans text-[15px] text-ink-soft">{t(`cases.items.${key}.place`)}</div>
                   </div>
-                  <p className="col-start-2 m-0 font-sans text-[16px] leading-[1.5] text-navy md:col-start-auto">{setup}</p>
+                  <p className="col-start-2 m-0 font-sans text-[16px] leading-[1.5] text-navy md:col-start-auto">{t(`cases.items.${key}.setup`)}</p>
                   <div className="col-start-2 md:col-start-auto md:text-right">
-                    <div className="font-condensed text-[clamp(26px,3vw,32px)] font-bold leading-none tabular-nums text-navy">{stat}</div>
-                    <div className="mt-1 font-sans text-[14px] text-ink-soft">{unit}</div>
+                    <div className="font-condensed text-[clamp(26px,3vw,32px)] font-bold leading-none tabular-nums text-navy">{t(`cases.items.${key}.stat`)}</div>
+                    <div className="mt-1 font-sans text-[14px] text-ink-soft">{t(`cases.items.${key}.unit`)}</div>
                   </div>
                 </li>
-                );
-              })}
+              ))}
             </ul>
             <p className="mb-0 mt-4 font-sans text-[13.5px] text-ink-soft">
-              {t.cases.footnote}
+              {t("cases.footnote")}
             </p>
           </Reveal>
         </div>
@@ -205,8 +218,8 @@ export default async function WifiZone() {
       <ContactClose
         quoteHref={QUOTE.wifi}
         callHref={CAL_WIFI}
-        title={t.close.title}
-        lead={t.close.lead}
+        title={t("close.title")}
+        lead={t("close.lead")}
       />
     </>
   );

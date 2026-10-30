@@ -1,23 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import LangSwitch from "@/components/site/LangSwitch";
-import { chrome } from "@/content/chrome";
-import { quote } from "@/content/quote";
+import { getLocale, getTranslations } from "next-intl/server";
 import { localize } from "@/lib/i18n/config";
-import { getLang } from "@/lib/i18n/server";
 
 // Standalone "mini-site" chrome for the quote request flow (/demandes).
 // Independent from the marketing nav/footer so it works even during maintenance.
 export default async function DemandesLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const lang = await getLang();
-  const t = chrome[lang];
+  const lang = await getLocale();
+  const t = await getTranslations("Chrome");
+  const tq = await getTranslations("Quote");
   return (
     <div className="min-h-screen bg-ground">
       <nav className="fixed inset-x-0 top-0 z-[100] border-b border-white/10 bg-navy">
         <div className="relative mx-auto flex max-w-[1280px] items-center justify-center px-4 py-[18px] sm:px-6 md:px-12">
-          <Link href={localize(lang, "/")} aria-label={quote[lang].homeLabel}>
+          <Link href={localize(lang, "/")} aria-label={tq("homeLabel")}>
             <Image
               src="/brand/logo-white.png"
               alt="Cherryz"
@@ -35,14 +34,14 @@ export default async function DemandesLayout({
 
       <footer className="bg-navy px-4 py-9 text-center">
         <span className="font-condensed text-[16px] font-semibold tracking-[0.02em] text-white">
-          {t.footer.slogan}
+          {t("footer.slogan")}
         </span>
         <div className="mt-2 font-sans text-[13px] text-white/60">
-          {t.footer.rights}
+          {t("footer.rights")}
           <span aria-hidden> · </span>
-          <Link href={localize(lang, "/mentions-legales")} className="hover:text-white">{t.footer.legal}</Link>
+          <Link href={localize(lang, "/mentions-legales")} className="hover:text-white">{t("footer.legal")}</Link>
           <span aria-hidden> · </span>
-          <Link href={localize(lang, "/confidentialite")} className="hover:text-white">{t.footer.privacyShort}</Link>
+          <Link href={localize(lang, "/confidentialite")} className="hover:text-white">{t("footer.privacyShort")}</Link>
         </div>
       </footer>
     </div>

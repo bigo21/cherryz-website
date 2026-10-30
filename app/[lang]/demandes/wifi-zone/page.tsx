@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import QuoteWizard from "@/components/quote/QuoteWizard";
 import DemandeHeader from "@/components/quote/DemandeHeader";
-import { quote } from "@/content/quote";
-import { getLang, pageMetadata } from "@/lib/i18n/server";
+import { getTranslations } from "next-intl/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = await getLang();
-  return pageMetadata(lang, "/demandes/wifi-zone", quote[lang].wifi.meta);
+  const t = await getTranslations("Quote.wifi.meta");
+  return pageMetadata("/demandes/wifi-zone", { title: t("title"), description: t("description") });
 }
 
 export default async function DemandeWifiZone() {
-  const t = quote[await getLang()].wifi;
+  const t = await getTranslations("Quote.wifi");
   return (
     <>
-      <DemandeHeader title={t.title} facts={t.facts} />
+      <DemandeHeader title={t("title")} facts={(["duration", "reply", "survey"] as const).map((k) => t(`facts.${k}`))} />
       <section className="pb-24">
         <div className="mx-auto -mt-16 max-w-[760px] px-4 sm:px-6">
           <QuoteWizard type="wifi" />

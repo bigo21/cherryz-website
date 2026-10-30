@@ -1,27 +1,19 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { lang as rootLang } from "next/root-params";
-import { hasLocale, localize, type Locale } from "./config";
+import { getLocale } from "next-intl/server";
+import { localize } from "./config";
 
-/** The current locale, read from the [lang] root segment. */
-export async function getLang(): Promise<Locale> {
-  const l = await rootLang();
-  if (!hasLocale(l)) notFound();
-  return l;
-}
-
-/** Page metadata with canonical URL and fr/en alternates. */
-export function pageMetadata(
-  lang: Locale,
+/** Page metadata with the canonical URL and fr/en alternates. */
+export async function pageMetadata(
   path: string,
   meta: { title: string; description: string },
-): Metadata {
+): Promise<Metadata> {
+  const locale = await getLocale();
   return {
     ...meta,
     alternates: {
-      canonical: localize(lang, path),
+      canonical: localize(locale, path),
       languages: { fr: localize("fr", path), en: localize("en", path), "x-default": path },
     },
-    openGraph: { ...meta, locale: lang === "en" ? "en_GB" : "fr_FR", url: localize(lang, path) },
+    openGraph: { ...meta, locale: locale === "en" ? "en_GB" : "fr_FR", url: localize(locale, path) },
   };
 }

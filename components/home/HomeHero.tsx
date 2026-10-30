@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import QuoteSheet, { type SheetPath } from "@/components/site/QuoteSheet";
-import type { home } from "@/content/home";
+import { useTranslations } from "next-intl";
 
-export type HomeHeroCopy = (typeof home)["fr"]["hero"];
-
-export default function HomeHero({ t: COPY }: { t: HomeHeroCopy }) {
+export default function HomeHero() {
+  const t = useTranslations("Home.hero");
   const [path, setPath] = useState<SheetPath>("ip");
   const [stampKey, setStampKey] = useState(0);
 
@@ -21,15 +20,15 @@ export default function HomeHero({ t: COPY }: { t: HomeHeroCopy }) {
       <div className="relative mx-auto grid max-w-[1280px] grid-cols-1 gap-12 px-4 sm:px-6 md:px-12 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5 lg:pt-6">
           <h1 className="m-0 max-w-[12ch] font-condensed text-[clamp(44px,6vw,80px)] font-bold leading-[0.95] tracking-[-0.02em] [text-wrap:balance]">
-            {COPY.title}
+            {t("title")}
           </h1>
           <p className="mt-6 max-w-[46ch] font-sans text-[18px] leading-[1.55] text-white/80">
-            {COPY.lead}
+            {t("lead")}
           </p>
 
           <fieldset className="mt-9 border-0 p-0">
             <legend className="mb-3 p-0 font-condensed text-[15px] font-semibold tracking-[0.06em] text-white/70 uppercase">
-              {COPY.pathLabel}
+              {t("pathLabel")}
             </legend>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {(["ip", "wifi"] as const).map((p) => {
@@ -48,7 +47,7 @@ export default function HomeHero({ t: COPY }: { t: HomeHeroCopy }) {
                         : "border-white/25 bg-transparent text-white hover:border-white/60",
                     ].join(" ")}
                   >
-                    {COPY.tabs[p]}
+                    {t(`tabs.${p}`)}
                     <span
                       aria-hidden
                       className={[
@@ -65,10 +64,10 @@ export default function HomeHero({ t: COPY }: { t: HomeHeroCopy }) {
           </fieldset>
 
           <ul className="m-0 mt-8 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 font-sans text-[14.5px] text-white/70">
-            {COPY.trust.map((t) => (
-              <li key={t} className="flex items-center gap-2">
+            {(["art", "partners", "survey"] as const).map((item) => (
+              <li key={item} className="flex items-center gap-2">
                 <span aria-hidden className="h-[5px] w-[5px] rounded-full bg-white/45" />
-                {t}
+                {t(`trust.${item}`)}
               </li>
             ))}
           </ul>

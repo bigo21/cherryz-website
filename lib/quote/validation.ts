@@ -1,6 +1,5 @@
 import type { Answers, Question, Step } from "./schemas";
 import { getSchema, type QuoteType } from "./schemas";
-import type { Locale } from "@/lib/i18n/config";
 
 export interface GeoValue {
   ok: boolean;
@@ -32,69 +31,49 @@ export function present(q: Question, answers: Answers): boolean {
   return String(v ?? "").trim() !== "";
 }
 
-const MESSAGES = {
-  fr: {
-    single: "Choisissez une réponse.",
-    multi: "Choisissez au moins une réponse.",
-    consent: "Cochez la case pour que nous puissions vous recontacter.",
-    email: "Indiquez votre adresse email.",
-    tel: "Indiquez un numéro de téléphone.",
-    geo: "Indiquez où se trouve le site (position ou description).",
-    other: "Ce champ est obligatoire.",
-    emailFormat: "Adresse email incomplète, par ex. nom@entreprise.cm.",
-    telFormat: "Numéro incomplet : 9 chiffres attendus, par ex. 6 77 12 34 56.",
-    otherText: "Merci de préciser « Autre ».",
-  },
-  en: {
-    single: "Choose an answer.",
-    multi: "Choose at least one answer.",
-    consent: "Tick the box so that we can get back to you.",
-    email: "Enter your email address.",
-    tel: "Enter a phone number.",
-    geo: "Tell us where the site is (location or description).",
-    other: "This field is required.",
-    emailFormat: "Incomplete email address, e.g. name@company.cm.",
-    telFormat: "Incomplete number: 9 digits expected, e.g. 6 77 12 34 56.",
-    otherText: "Please specify \"Other\".",
-  },
-} satisfies Record<Locale, Record<string, string>>;
+/** Why an answer is rejected; the text lives in the catalogs, under `Validation`. */
+export type ValidationError =
+  | "single"
+  | "multi"
+  | "consent"
+  | "email"
+  | "tel"
+  | "geo"
+  | "other"
+  | "emailFormat"
+  | "telFormat"
+  | "otherText";
 
-function requiredMessage(q: Question, m: (typeof MESSAGES)[Locale]): string {
+function requiredError(q: Question): ValidationError {
   switch (q.type) {
     case "single":
     case "scale":
-      return m.single;
+      return "single";
     case "multi":
-      return m.multi;
     case "consent":
-      return m.consent;
     case "email":
-      return m.email;
     case "tel":
-      return m.tel;
     case "geo":
-      return m.geo;
+      return q.type;
     default:
-      return m.other;
+      return "other";
   }
 }
 
-/** Validate a set of questions; returns { questionId: errorMessage }. */
+/** Validate a set of questions; returns { questionId: error }. */
 export function validateQuestions(
   questions: Question[],
   answers: Answers,
-  lang: Locale = "fr",
-): Record<string, string> {
-  const m = MESSAGES[lang];
-  const errs: Record<string, string> = {};
+): Record<string, ValidationError> {
+  const errs: Record<string, ValidationError> = {};
   for (const q of questions) {
     if (q.required && !present(q, answers)) {
-      errs[q.id] = requiredMessage(q, m);
+      errs[q.id] = requiredError(q);
       continue;
     }
     const raw = String(answers[q.id] ?? "").trim();
     if (q.type === "email" && raw && !EMAIL_RE.test(raw)) {
-      errs[q.id] = m.emailFormat;
+      errs[q.id] = "emailFormat";
     }
     if (q.type === "tel" && raw) {
       const digits = raw.replace(/\D/g, "");
@@ -106,14 +85,14 @@ export function validateQuestions(
       const ok = foreign
         ? digits.length >= 8 && digits.length <= 15
         : digits.replace(/^(00)?237/, "").length === 9;
-      if (!ok) errs[q.id] = m.telFormat;
+      if (!ok) errs[q.id] = "telFormat";
     }
     if (
       q.hasOther &&
       otherSelected(q, answers) &&
       !String(answers[`${q.id}__autre`] ?? "").trim()
     ) {
-      errs[q.id] = m.otherText;
+      errs[q.id] = "otherText";
     }
   }
   return errs;
@@ -123,7 +102,7 @@ export function validateQuestions(
 export function validateSubmission(
   type: QuoteType,
   answers: Answers,
-): Record<string, string> {
+): Record<string, ValidationError> {
   const all = getSchema(type).flatMap((step) => visibleQuestions(step, answers));
   return validateQuestions(all, answers);
 }

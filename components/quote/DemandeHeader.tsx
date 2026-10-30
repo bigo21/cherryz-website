@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@/components/site/icons";
-import { quote } from "@/content/quote";
+import { getLocale, getTranslations } from "next-intl/server";
 import { localize } from "@/lib/i18n/config";
-import { getLang } from "@/lib/i18n/server";
 
 /** Navy title band of a questionnaire page; the wizard sheet overlaps its lower edge. */
 export default async function DemandeHeader({ title, facts }: { title: string; facts: string[] }) {
-  const lang = await getLang();
+  const lang = await getLocale();
+  const t = await getTranslations("Quote");
   return (
     <header className="bg-navy pb-24 pt-[118px] text-white md:pt-[132px]">
       <div className="mx-auto max-w-[760px] px-4 sm:px-6">
@@ -15,7 +15,7 @@ export default async function DemandeHeader({ title, facts }: { title: string; f
           className="inline-flex items-center gap-2 font-sans text-[15px] font-semibold text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <ArrowRightIcon aria-hidden className="rotate-180 text-[16px]" />
-          {quote[lang].back}
+          {t("back")}
         </Link>
         <h1 className="m-0 mt-5 font-condensed text-[clamp(34px,5vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]">
           {title}

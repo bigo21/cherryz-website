@@ -7,13 +7,13 @@ import ContactClose from "@/components/site/ContactClose";
 import Reveal from "@/components/site/Reveal";
 import { ArrowRightIcon, ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
 import { CAL_IP, QUOTE } from "@/lib/site/site";
-import { internetB2B } from "@/content/internet-b2b";
+import { getLocale, getTranslations } from "next-intl/server";
 import { localize } from "@/lib/i18n/config";
-import { getLang, pageMetadata } from "@/lib/i18n/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = await getLang();
-  return pageMetadata(lang, "/internet-b2b", internetB2B[lang].meta);
+  const t = await getTranslations("InternetB2B.meta");
+  return pageMetadata("/internet-b2b", { title: t("title"), description: t("description") });
 }
 
 const l = (p: SVGProps<SVGSVGElement>) => ({
@@ -31,29 +31,50 @@ const Server = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="3" y="4"
 const Camera = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M3 8l12-3 2 6-12 3z" /><path d="M17 11l4 1-1 4M5 14v6M3 20h4" /></svg>);
 const Check = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M5 13l4 4L19 7" /></svg>);
 
-// Icons, in the order of the items in content/internet-b2b.ts.
-const usageIcons = [Lock, Server, PhoneIcon, ShieldCheck, Camera];
-const featureIcons = [Users, Bolt, Lock, Flask, GlobeIcon, ShieldCheck];
-const stepIcons = [ClipboardIcon, PhoneIcon, PinIcon, Router, Bolt, Check];
+// Listed entries of messages/*.json (InternetB2B), in display order, with their icons.
+const FACTS = ["art", "ip", "works"] as const;
+const USAGES = [
+  { key: "vpn", Icon: Lock },
+  { key: "servers", Icon: Server },
+  { key: "voip", Icon: PhoneIcon },
+  { key: "compliance", Icon: ShieldCheck },
+  { key: "cctv", Icon: Camera },
+] as const;
+const FEATURES = [
+  { key: "multiOperator", Icon: Users },
+  { key: "fastInstall", Icon: Bolt },
+  { key: "dedicatedIp", Icon: Lock },
+  { key: "trial", Icon: Flask },
+  { key: "coverage", Icon: GlobeIcon },
+  { key: "support", Icon: ShieldCheck },
+] as const;
+const STEPS = [
+  { key: "request", Icon: ClipboardIcon },
+  { key: "callback", Icon: PhoneIcon },
+  { key: "visit", Icon: PinIcon },
+  { key: "quote", Icon: Router },
+  { key: "install", Icon: Bolt },
+  { key: "connected", Icon: Check },
+] as const;
 
 const h2 = "m-0 font-condensed text-[clamp(34px,4.2vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]";
 const wrap = "mx-auto max-w-[1280px] px-4 sm:px-6 md:px-12";
 const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
 
 export default async function InternetB2B() {
-  const lang = await getLang();
-  const t = internetB2B[lang];
+  const lang = await getLocale();
+  const t = await getTranslations("InternetB2B");
   return (
     <>
       <InkHero
-        title={t.hero.title}
-        lead={t.hero.lead}
+        title={t("hero.title")}
+        lead={t("hero.lead")}
         actions={
           <a href="#comment" className={inkLink}>
-            {t.hero.how}
+            {t("hero.how")}
           </a>
         }
-        facts={t.hero.facts}
+        facts={FACTS.map((k) => t(`hero.facts.${k}`))}
       >
         <QuoteSheet path="ip" />
       </InkHero>
@@ -62,31 +83,28 @@ export default async function InternetB2B() {
       <section className="bg-ground py-20 md:py-28">
         <div className={`${wrap} grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14`}>
           <Reveal className="lg:col-span-5">
-            <h2 className={h2}>{t.ip.title}</h2>
+            <h2 className={h2}>{t("ip.title")}</h2>
             <p className="mt-6 max-w-[52ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
-              {t.ip.lead}
+              {t("ip.lead")}
             </p>
             <p className="mt-6 max-w-[52ch] border-l-2 border-navy pl-5 font-sans text-[17.5px] font-semibold leading-[1.55] text-navy">
-              {t.ip.point}
+              {t("ip.point")}
             </p>
           </Reveal>
           <Reveal className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-7`} delay={0.05}>
             <h3 className="m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]">
-              {t.ip.sheet}
+              {t("ip.sheet")}
             </h3>
             <ul className="m-0 list-none p-0">
-              {t.ip.usages.map(({ t, d }, i) => {
-                const Icon = usageIcons[i];
-                return (
-                <li key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
+              {USAGES.map(({ key, Icon }) => (
+                <li key={key} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
-                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{t}</div>
-                    <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</p>
+                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{t(`ip.usages.${key}.title`)}</div>
+                    <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{t(`ip.usages.${key}.text`)}</p>
                   </div>
                 </li>
-                );
-              })}
+              ))}
             </ul>
           </Reveal>
         </div>
@@ -96,25 +114,22 @@ export default async function InternetB2B() {
       <section className="bg-navy-deep py-20 text-white md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={`${h2} max-w-[22ch]`}>{t.features.title}</h2>
+            <h2 className={`${h2} max-w-[22ch]`}>{t("features.title")}</h2>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-6 pt-9 text-navy sm:px-9`} delay={0.05}>
             <dl className="m-0 grid grid-cols-1 gap-x-12 border-t-2 border-navy md:grid-cols-2">
-              {t.features.items.map(({ t, d }, i) => {
-                const Icon = featureIcons[i];
-                return (
-                <div key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
+              {FEATURES.map(({ key, Icon }) => (
+                <div key={key} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
-                    <dt className="font-condensed text-[21px] font-bold leading-tight">{t}</dt>
-                    <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</dd>
+                    <dt className="font-condensed text-[21px] font-bold leading-tight">{t(`features.items.${key}.title`)}</dt>
+                    <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{t(`features.items.${key}.text`)}</dd>
                   </div>
                 </div>
-                );
-              })}
+              ))}
             </dl>
             <p className="mb-0 mt-4 font-sans text-[13.5px] text-ink-soft">
-              {t.features.footnote}
+              {t("features.footnote")}
             </p>
           </Reveal>
         </div>
@@ -124,24 +139,21 @@ export default async function InternetB2B() {
       <section id="comment" className="scroll-mt-24 bg-ground py-20 md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={h2}>{t.steps.title}</h2>
+            <h2 className={h2}>{t("steps.title")}</h2>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-7 pt-9 sm:px-9`} delay={0.05}>
             <ol className="m-0 grid list-none grid-cols-1 border-t-2 border-navy p-0 sm:grid-cols-2 lg:grid-cols-6">
-              {t.steps.items.map((label, i) => {
-                const Icon = stepIcons[i];
-                return (
-                <li key={label} className="flex items-center gap-3 border-b border-rule py-5 lg:flex-col lg:items-start lg:gap-4 lg:border-b-0 lg:border-r lg:px-4 lg:py-6 lg:first:pl-0 lg:last:border-r-0">
+              {STEPS.map(({ key, Icon }, i) => (
+                <li key={key} className="flex items-center gap-3 border-b border-rule py-5 lg:flex-col lg:items-start lg:gap-4 lg:border-b-0 lg:border-r lg:px-4 lg:py-6 lg:first:pl-0 lg:last:border-r-0">
                   <span className="font-condensed text-[19px] font-bold tabular-nums text-ink-soft">{String(i + 1).padStart(2, "0")}</span>
                   <Icon aria-hidden className="text-[24px] text-navy" />
-                  <span className="font-condensed text-[20px] font-bold leading-tight text-navy">{label}</span>
+                  <span className="font-condensed text-[20px] font-bold leading-tight text-navy">{t(`steps.items.${key}`)}</span>
                 </li>
-                );
-              })}
+              ))}
             </ol>
             <Link href={localize(lang, QUOTE.ip)} className={`${btnCherry} mt-7`}>
               <ClipboardIcon aria-hidden className="text-[20px]" />
-              {t.steps.cta}
+              {t("steps.cta")}
               <ArrowRightIcon aria-hidden className="text-[19px]" />
             </Link>
           </Reveal>
@@ -151,7 +163,7 @@ export default async function InternetB2B() {
       <ContactClose
         quoteHref={QUOTE.ip}
         callHref={CAL_IP}
-        title={t.close}
+        title={t("close")}
       />
     </>
   );

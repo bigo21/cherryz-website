@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/i18n/config";
 
 export interface ContactPayload {
@@ -39,33 +40,17 @@ function teamHtml(p: ContactPayload): string {
   </div>`;
 }
 
-const PROSPECT = {
-  fr: {
-    subject: "Nous avons bien reçu votre message | Cherryz",
-    hi: (n: string) => (n ? `Merci ${n} !` : "Merci !"),
-    received: "Nous avons bien reçu votre message. Notre équipe vous recontacte <strong>sous 24h</strong>.",
-    faster: "Pour aller plus vite, vous pouvez aussi réserver un créneau sur",
-    slogan: "Cherryz — Vous connecte !",
-  },
-  en: {
-    subject: "We have received your message | Cherryz",
-    hi: (n: string) => (n ? `Thank you, ${n}!` : "Thank you!"),
-    received: "We have received your message. Our team will get back to you <strong>within 24 hours</strong>.",
-    faster: "To speed things up, you can also book a slot on",
-    slogan: "Cherryz — Gets you connected!",
-  },
-};
-
-function prospectHtml(firstName: string, lang: Locale): string {
-  const t = PROSPECT[lang];
+async function prospectHtml(firstName: string, locale: Locale): Promise<string> {
+  const t = await getTranslations({ locale, namespace: "Email" });
+  const hi = firstName ? t("hi", { name: esc(firstName) }) : t("hiAnonymous");
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f6f5f3;padding:24px">
     <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden">
-      <div style="background:${NAVY};padding:24px"><h1 style="margin:0;color:#fff;font-size:22px">${t.hi(esc(firstName))}</h1></div>
+      <div style="background:${NAVY};padding:24px"><h1 style="margin:0;color:#fff;font-size:22px">${hi}</h1></div>
       <div style="padding:24px;color:${NAVY};font-size:15px;line-height:1.6">
-        <p style="margin:0 0 16px">${t.received}</p>
-        <p style="margin:0 0 16px">${t.faster} <a href="https://cal.com/vireel/cherryzip" style="color:${CHERRY}">cal.com</a>.</p>
-        <p style="margin:20px 0 0;font-weight:700;color:${CHERRY}">${t.slogan}</p>
+        <p style="margin:0 0 16px">${t.markup("contact.received", { strong: (chunks) => `<strong>${chunks}</strong>` })}</p>
+        <p style="margin:0 0 16px">${t("contact.faster")} <a href="https://cal.com/vireel/cherryzip" style="color:${CHERRY}">cal.com</a>.</p>
+        <p style="margin:20px 0 0;font-weight:700;color:${CHERRY}">${t("slogan")}</p>
       </div>
     </div>
   </div>`;
@@ -96,8 +81,8 @@ export async function sendContactEmails(p: ContactPayload, lang: Locale = "fr"):
     await resend.emails.send({
       from: FROM,
       to: p.email,
-      subject: PROSPECT[lang].subject,
-      html: prospectHtml(firstName, lang),
+      subject: (await getTranslations({ locale: lang, namespace: "Email" }))("contact.subject"),
+      html: await prospectHtml(firstName, lang),
     });
   } catch (e) {
     console.error("[contact] prospect email failed:", e);

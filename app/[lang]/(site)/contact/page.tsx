@@ -4,13 +4,13 @@ import ContactForm from "@/components/contact/ContactForm";
 import InkHero from "@/components/site/InkHero";
 import { ArrowRightIcon, CalendarIcon, ClipboardIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
-import { contact } from "@/content/contact";
+import { getLocale, getTranslations } from "next-intl/server";
 import { localize } from "@/lib/i18n/config";
-import { getLang, pageMetadata } from "@/lib/i18n/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = await getLang();
-  return pageMetadata(lang, "/contact", contact[lang].meta);
+  const t = await getTranslations("Contact.meta");
+  return pageMetadata("/contact", { title: t("title"), description: t("description") });
 }
 
 const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
@@ -19,34 +19,34 @@ const rowLink =
   "flex items-center justify-between gap-4 border-b border-rule py-4 font-condensed text-[20px] font-bold text-navy transition-colors hover:text-cherry focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy";
 
 export default async function Contact() {
-  const lang = await getLang();
-  const t = contact[lang];
+  const lang = await getLocale();
+  const t = await getTranslations("Contact");
   const coords = [
-    { Icon: PinIcon, k: t.coords.address, v: t.coords.addressValue, href: undefined },
-    { Icon: PhoneIcon, k: t.coords.phone, v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
-    { Icon: WhatsAppIcon, k: t.coords.whatsapp, v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
-    { Icon: MailIcon, k: t.coords.email, v: CONTACT.email, href: CONTACT.emailHref },
-    { Icon: GlobeIcon, k: t.coords.site, v: CONTACT.site, href: CONTACT.siteHref },
+    { Icon: PinIcon, k: t("coords.address"), v: t("coords.addressValue"), href: undefined },
+    { Icon: PhoneIcon, k: t("coords.phone"), v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
+    { Icon: WhatsAppIcon, k: t("coords.whatsapp"), v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
+    { Icon: MailIcon, k: t("coords.email"), v: CONTACT.email, href: CONTACT.emailHref },
+    { Icon: GlobeIcon, k: t("coords.site"), v: CONTACT.site, href: CONTACT.siteHref },
   ];
   const quotes = [
-    { label: t.price.ip, href: localize(lang, QUOTE.ip) },
-    { label: t.price.wifi, href: localize(lang, QUOTE.wifi) },
+    { label: t("price.ip"), href: localize(lang, QUOTE.ip) },
+    { label: t("price.wifi"), href: localize(lang, QUOTE.wifi) },
   ];
   const calls = [
-    { label: t.booking.ip, href: CAL_IP },
-    { label: t.booking.wifi, href: CAL_WIFI },
+    { label: t("booking.ip"), href: CAL_IP },
+    { label: t("booking.wifi"), href: CAL_WIFI },
   ];
   return (
     <>
       <InkHero
-        title={t.hero.title}
-        lead={t.hero.lead}
-        facts={t.hero.facts}
+        title={t("hero.title")}
+        lead={t("hero.lead")}
+        facts={(["reply", "visit", "base"] as const).map((k) => t(`hero.facts.${k}`))}
       >
         <div className={`${sheet} px-5 pb-6 pt-9 text-navy sm:px-9 lg:mt-6`}>
-          <h2 className={h3}>{t.price.title}</h2>
+          <h2 className={h3}>{t("price.title")}</h2>
           <p className="m-0 mt-4 font-sans text-[16.5px] leading-[1.55] text-ink-soft">
-            {t.price.lead}
+            {t("price.lead")}
           </p>
           <ul className="m-0 mt-5 flex list-none flex-col gap-3 p-0 sm:flex-row">
             {quotes.map((q) => (
@@ -75,7 +75,7 @@ export default async function Contact() {
           </div>
 
           <div className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-5`}>
-            <h2 className={h3}>{t.coords.title}</h2>
+            <h2 className={h3}>{t("coords.title")}</h2>
             <dl className="m-0">
               {coords.map(({ Icon, k, v, href }) => (
                 <div key={k} className="grid grid-cols-[28px_1fr] items-start gap-x-3 border-b border-rule py-4">
@@ -101,9 +101,9 @@ export default async function Contact() {
               ))}
             </dl>
 
-            <h2 className={`${h3} mt-10`}>{t.booking.title}</h2>
+            <h2 className={`${h3} mt-10`}>{t("booking.title")}</h2>
             <p className="m-0 mt-4 font-sans text-[16px] text-ink-soft">
-              {t.booking.lead}
+              {t("booking.lead")}
             </p>
             <ul className="m-0 mt-2 list-none p-0">
               {calls.map((c) => (

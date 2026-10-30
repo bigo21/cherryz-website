@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 // Line schematic of the broker mechanism, drawn for the navy ground: several
 // operators feed one Cherryz comparison, which delivers one connection to the
 // client's site. A horizontal layout for wide screens, a vertical one for phones.
@@ -8,15 +10,6 @@ const OPERATORS = [
   { name: "" }, // other operators: labelled from the copy
 ];
 
-/** Labels drawn inside the schematic; the page passes them in its locale. */
-export interface DiagramCopy {
-  label: string;
-  others: string;
-  hub: string;
-  connection: string;
-  site: string;
-  siteSub: string;
-}
 const INK = "#ffffff";
 const SOFT = "rgba(255,255,255,0.72)";
 const font = { fontFamily: "var(--font-condensed)" };
@@ -68,13 +61,14 @@ function Hub({ cx, cy, sub }: { cx: number; cy: number; sub: string }) {
   );
 }
 
-export function BrokerDiagramWide({ className, t }: { className?: string; t: DiagramCopy }) {
+export function BrokerDiagramWide({ className }: { className?: string }) {
+  const t = useTranslations("Home.broker.diagram");
   const ys = [40, 112, 184, 256];
   return (
-    <svg viewBox="0 0 640 300" role="img" aria-label={t.label} className={className} style={font}>
+    <svg viewBox="0 0 640 300" role="img" aria-label={t("label")} className={className} style={font}>
       {OPERATORS.map((op, i) => (
         <g key={op.name}>
-          <OperatorNode x={1} y={ys[i]} w={170} op={op} others={t.others} />
+          <OperatorNode x={1} y={ys[i]} w={170} op={op} others={t("others")} />
           <path
             d={`M171 ${ys[i]} C 225 ${ys[i]}, 225 150, 262 150`}
             fill="none"
@@ -85,24 +79,25 @@ export function BrokerDiagramWide({ className, t }: { className?: string; t: Dia
           />
         </g>
       ))}
-      <Hub cx={320} cy={150} sub={t.hub} />
+      <Hub cx={320} cy={150} sub={t("hub")} />
       <path d="M378 150 H 482" fill="none" stroke={INK} strokeWidth="2.5" />
       <path d="M474 142 L 484 150 L 474 158" fill="none" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
       <text x="430" y="136" textAnchor="middle" fontSize="13" fontWeight="600" letterSpacing="1" fill={SOFT}>
-        {t.connection}
+        {t("connection")}
       </text>
       <Building x={510} y={112} />
       <text x="558" y="236" textAnchor="middle" fontSize="17" fontWeight="700" fill={INK}>
-        {t.site}
+        {t("site")}
       </text>
       <text x="558" y="256" textAnchor="middle" fontSize="13.5" fontWeight="600" fill={SOFT}>
-        {t.siteSub}
+        {t("siteSub")}
       </text>
     </svg>
   );
 }
 
-export function BrokerDiagramTall({ className, t }: { className?: string; t: DiagramCopy }) {
+export function BrokerDiagramTall({ className }: { className?: string }) {
+  const t = useTranslations("Home.broker.diagram");
   const nodes = [
     { x: 1, y: 30 },
     { x: 177, y: 30 },
@@ -110,7 +105,7 @@ export function BrokerDiagramTall({ className, t }: { className?: string; t: Dia
     { x: 177, y: 94 },
   ];
   return (
-    <svg viewBox="0 0 340 590" role="img" aria-label={t.label} className={className} style={font}>
+    <svg viewBox="0 0 340 590" role="img" aria-label={t("label")} className={className} style={font}>
       {OPERATORS.map((op, i) => {
         const n = nodes[i];
         const sx = n.x + 81;
@@ -125,22 +120,22 @@ export function BrokerDiagramTall({ className, t }: { className?: string; t: Dia
               strokeWidth="1.5"
               strokeDasharray={op.logo ? undefined : "5 5"}
             />
-            <OperatorNode x={n.x} y={n.y} w={162} op={op} others={t.others} />
+            <OperatorNode x={n.x} y={n.y} w={162} op={op} others={t("others")} />
           </g>
         );
       })}
-      <Hub cx={170} cy={258} sub={t.hub} />
+      <Hub cx={170} cy={258} sub={t("hub")} />
       <path d="M170 316 V 366" fill="none" stroke={INK} strokeWidth="2.5" />
       <path d="M162 358 L 170 368 L 178 358" fill="none" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
       <text x="184" y="346" fontSize="13" fontWeight="600" letterSpacing="1" fill={SOFT}>
-        {t.connection}
+        {t("connection")}
       </text>
       <Building x={122} y={428} />
       <text x="170" y="556" textAnchor="middle" fontSize="17" fontWeight="700" fill={INK}>
-        {t.site}
+        {t("site")}
       </text>
       <text x="170" y="578" textAnchor="middle" fontSize="13.5" fontWeight="600" fill={SOFT}>
-        {t.siteSub}
+        {t("siteSub")}
       </text>
     </svg>
   );

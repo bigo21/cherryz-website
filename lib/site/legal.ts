@@ -3,9 +3,6 @@
 // they are legal statements and must not be guessed.
 export const TODO = "à compléter";
 
-/** How a missing fact is shown, per locale. */
-export const TODO_LABEL = { fr: "à compléter", en: "to be completed" } as const;
-
 export const LEGAL = {
   companyName: TODO, // raison sociale exacte, ex. « CHERRYZ SARL »
   legalForm: TODO, // forme juridique (SARL, SA, SAS…)

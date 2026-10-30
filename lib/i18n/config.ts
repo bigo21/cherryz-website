@@ -8,9 +8,6 @@ export const defaultLocale: Locale = "fr";
 export const hasLocale = (value: string): value is Locale =>
   (locales as readonly string[]).includes(value);
 
-/** Copy for one piece of UI, in every locale. English must mirror the French shape. */
-export type Localized<T> = Record<Locale, T>;
-
 /** Public URL of an internal path in a locale: "/contact" → "/en/contact" in English. */
 export function localize(lang: Locale, path: string): string {
   if (lang === defaultLocale || !path.startsWith("/")) return path;
@@ -26,5 +23,3 @@ export function splitLocale(pathname: string | null): { lang: Locale; path: stri
   }
   return { lang: defaultLocale, path: p };
 }
-
-export const htmlLang: Record<Locale, string> = { fr: "fr", en: "en" };

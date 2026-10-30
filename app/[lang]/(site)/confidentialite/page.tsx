@@ -2,29 +2,19 @@ import type { Metadata } from "next";
 import LegalPage, { Fact, Section } from "@/components/site/LegalPage";
 import { HOST, LEGAL } from "@/lib/site/legal";
 import { CONTACT } from "@/lib/site/site";
-import { getLang, pageMetadata } from "@/lib/i18n/server";
-
-const META = {
-  fr: {
-    title: "Politique de confidentialité | Cherryz",
-    description: "Quelles données Cherryz collecte via ses formulaires, pourquoi, avec qui elles sont partagées, combien de temps elles sont conservées et comment exercer vos droits.",
-  },
-  en: {
-    title: "Privacy policy | Cherryz",
-    description: "What data Cherryz collects through its forms, why, who it is shared with, how long it is kept and how to exercise your rights.",
-  },
-};
+import { getLocale, getTranslations } from "next-intl/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = await getLang();
-  return pageMetadata(lang, "/confidentialite", META[lang]);
+  const t = await getTranslations("Legal.privacy.meta");
+  return pageMetadata("/confidentialite", { title: t("title"), description: t("description") });
 }
 
 const link = "font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy";
 const list = "m-0 flex list-disc flex-col gap-1 pl-5";
 
 export default async function Confidentialite() {
-  return (await getLang()) === "en" ? <ConfidentialiteEn /> : <ConfidentialiteFr />;
+  return (await getLocale()) === "en" ? <ConfidentialiteEn /> : <ConfidentialiteFr />;
 }
 
 function ConfidentialiteFr() {

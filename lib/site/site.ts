@@ -30,7 +30,7 @@ export const CONTACT = {
   facebook: "https://facebook.com/cherryz.tech",
 } as const;
 
-/** Main navigation; labels live in content/chrome.ts under `nav`. */
+/** Main navigation; labels live in messages/*.json under `Chrome.nav`. */
 export const NAV_LINKS = [
   { key: "home", href: "/" },
   { key: "ip", href: "/internet-b2b" },

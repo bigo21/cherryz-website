@@ -5,8 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, quoteHrefFor } from "@/lib/site/site";
-import { chrome } from "@/content/chrome";
-import { useLang } from "@/lib/i18n/client";
+import { useLocale, useTranslations } from "next-intl";
 import { localize, splitLocale } from "@/lib/i18n/config";
 import { ArrowRightIcon } from "./icons";
 import LangSwitch from "./LangSwitch";
@@ -16,8 +15,8 @@ export default function SiteNav() {
   // The menu remembers the page it was opened on, so navigating closes it.
   const [openOn, setOpenOn] = useState<string | null>(null);
   const pathname = usePathname();
-  const lang = useLang();
-  const t = chrome[lang];
+  const lang = useLocale();
+  const t = useTranslations("Chrome");
   const { path } = splitLocale(pathname);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function SiteNav() {
       }}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-[18px] md:px-12">
-        <Link href={localize(lang, "/")} className="flex items-center" aria-label={t.homeLabel}>
+        <Link href={localize(lang, "/")} className="flex items-center" aria-label={t("homeLabel")}>
           <Image
             src="/brand/logo-white.png"
             alt="Cherryz"
@@ -65,7 +64,7 @@ export default function SiteNav() {
                 className="font-condensed text-[15px] font-semibold tracking-[0.6px] transition-colors"
                 style={{ color: active ? "#fff" : "rgba(255,255,255,.72)" }}
               >
-                {t.nav[l.key]}
+                {t(`nav.${l.key}`)}
               </Link>
             );
           })}
@@ -74,7 +73,7 @@ export default function SiteNav() {
             href={quoteHref}
             className="inline-flex items-center gap-2 rounded-[10px] bg-cherry px-5 py-3 font-condensed text-[16px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            {t.quoteLabel}
+            {t("quoteLabel")}
             <ArrowRightIcon aria-hidden className="text-[17px]" />
           </Link>
         </div>
@@ -83,7 +82,7 @@ export default function SiteNav() {
         <button
           type="button"
           onClick={() => setOpenOn(open ? null : pathname)}
-          aria-label={open ? t.menuClose : t.menuOpen}
+          aria-label={open ? t("menuClose") : t("menuOpen")}
           aria-expanded={open}
           className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
         >
@@ -113,7 +112,7 @@ export default function SiteNav() {
                 aria-current={l.href === path ? "page" : undefined}
                 className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85"
               >
-                {t.nav[l.key]}
+                {t(`nav.${l.key}`)}
               </Link>
             ))}
             <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85" />
@@ -121,7 +120,7 @@ export default function SiteNav() {
               href={quoteHref}
               className="mt-4 inline-flex items-center justify-center gap-2 rounded-[10px] bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              {t.quoteLabel}
+              {t("quoteLabel")}
               <ArrowRightIcon aria-hidden className="text-[17px]" />
             </Link>
           </div>

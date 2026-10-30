@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
-import { TODO, TODO_LABEL } from "@/lib/site/legal";
-import { getLang } from "@/lib/i18n/server";
-
-const UPDATED = { fr: "Dernière mise à jour :", en: "Last updated:" } as const;
+import { getTranslations } from "next-intl/server";
+import { TODO } from "@/lib/site/legal";
 
 /** Long-form legal page: navy title band, then a readable text column. */
 export default async function LegalPage({
@@ -14,12 +12,7 @@ export default async function LegalPage({
   updatedAt: string;
   children: ReactNode;
 }) {
-  const lang = await getLang();
-  const date = new Date(`${updatedAt}T12:00:00Z`).toLocaleDateString(lang === "en" ? "en-GB" : "fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const t = await getTranslations("Legal");
   return (
     <>
       <header className="bg-navy pb-14 pt-[140px] text-white">
@@ -27,7 +20,7 @@ export default async function LegalPage({
           <h1 className="m-0 font-condensed text-[clamp(38px,5vw,56px)] font-bold leading-[1] tracking-[-0.015em]">
             {title}
           </h1>
-          <p className="mt-4 font-sans text-[15px] text-white/70">{UPDATED[lang]} {date}</p>
+          <p className="mt-4 font-sans text-[15px] text-white/70">{t("updated", { date: new Date(`${updatedAt}T12:00:00Z`) })}</p>
         </div>
       </header>
       <div className="bg-white py-14 md:py-20">
@@ -50,8 +43,9 @@ export function Section({ title, children }: { title: string; children: ReactNod
 
 /** A company fact; renders visibly as missing until Cherryz fills it in lib/site/legal.ts. */
 export async function Fact({ value }: { value: string }) {
+  const t = await getTranslations("Legal");
   return value === TODO ? (
-    <mark className="rounded-[4px] bg-cherry/10 px-1 text-cherry">[{TODO_LABEL[await getLang()]}]</mark>
+    <mark className="rounded-[4px] bg-cherry/10 px-1 text-cherry">[{t("todo")}]</mark>
   ) : (
     <>{value}</>
   );
