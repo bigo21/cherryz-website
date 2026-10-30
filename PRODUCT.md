@@ -49,11 +49,11 @@ After a quote request, Cherryz studies the answers, calls the prospect back, and
 - **Languages: bilingual French and English, required for the redesign launch** (confirmed 2026-10-30). French is the source language today. The English copy, including the quote questionnaires and confirmation emails, does not exist yet.
 - The quote questionnaires' content (questions, options, branching) is fixed. Submissions go to Supabase, in the `cherryz` schema only, never `public`, and emails go out through Resend.
 - The site runs on Next.js 16 (App Router) on Vercel. `proxy.ts` provides a maintenance gate (`MAINTENANCE_MODE`) that must keep working.
-- **Undecided facts, do not resolve them in copy without the user:**
-  - the B2B price claim: "à partir de 45 000 XAF/Mbps" vs a "45 000 – 70 000 XAF" range;
-  - the response delay: 24h on Contact vs 48h on the questionnaires;
-  - the legal pages: they do not exist yet;
-  - whether the 1xBet logo stays in the client references.
+- **Decided on 2026-10-30:**
+  - Response delays: 24h for the contact form, 48h for quote requests.
+  - B2B price claim: "à partir de 45 000 XAF/Mbps". The current range of 45 000 – 70 000 XAF/Mbps is used only as a labelled estimate.
+  - The 1xBet logo stays in the client references.
+  - Legal pages are `/mentions-legales` and `/confidentialite`. The company identifiers in `lib/site/legal.ts` are still empty and must be provided by Cherryz before these pages go to production: legal name, legal form, capital, RCCM, NIU, address, publication director, ART reference, data retention period.
 
 ## Brand Commitments
 
