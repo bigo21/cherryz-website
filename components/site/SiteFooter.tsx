@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CAL_IP, CAL_WIFI, CONTACT, NAV_LINKS } from "@/lib/site/site";
+import { CAL_IP, CAL_WIFI, CONTACT, NAV_LINKS, QUOTE } from "@/lib/site/site";
 import {
   CalendarIcon,
+  ClipboardIcon,
   FacebookIcon,
   GlobeIcon,
   LinkedInIcon,
@@ -49,15 +50,23 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <div className={colTitle}>Rendez-vous</div>
+            <div className={colTitle}>Devis &amp; rendez-vous</div>
             <div className="flex flex-col gap-[11px]">
+              <Link href={QUOTE.ip} className={linkCls}>
+                <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> Devis
+                Internet B2B
+              </Link>
+              <Link href={QUOTE.wifi} className={linkCls}>
+                <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> Devis
+                WiFi Zone
+              </Link>
               <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> Devis
+                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> Appel
                 Internet B2B
               </a>
               <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> RDV WiFi
-                Zone
+                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> Appel
+                WiFi Zone
               </a>
             </div>
           </div>

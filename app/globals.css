@@ -158,3 +158,43 @@ html {
 body {
   font-family: var(--font-sans);
 }
+
+/*
+ * Reveal on scroll (components/site/Reveal.tsx), pure CSS. Content is visible by
+ * default — without JavaScript, on a slow connection, or in browsers without
+ * scroll-driven animations — and only animates in where the browser supports it
+ * and the visitor has not asked for reduced motion.
+ */
+@keyframes chzReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: chzReveal linear both;
+      animation-timing-function: cubic-bezier(0.16, 0.7, 0.3, 1);
+      animation-timeline: view();
+      animation-range: entry calc(var(--reveal-delay, 0) * 100%)
+        entry calc(45% + var(--reveal-delay, 0) * 100%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

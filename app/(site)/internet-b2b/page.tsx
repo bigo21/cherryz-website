@@ -7,8 +7,8 @@ import ReassuranceBar from "@/components/site/ReassuranceBar";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
-import { CalendarIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
-import { CAL_IP } from "@/lib/site/site";
+import { ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
+import { CAL_IP, QUOTE, QUOTE_LABEL } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "Internet B2B avec IP publique dédiée | Cherryz",
@@ -46,7 +46,7 @@ const features = [
 ];
 
 const steps = [
-  { Icon: CalendarIcon, k: "ÉTAPE 1", t: "RDV en ligne" },
+  { Icon: ClipboardIcon, k: "ÉTAPE 1", t: "Demande en ligne" },
   { Icon: PhoneIcon, k: "ÉTAPE 2", t: "Contact sous 24h" },
   { Icon: PinIcon, k: "ÉTAPE 3", t: "Descente gratuite" },
   { Icon: Router, k: "ÉTAPE 4", t: "Cotation sur-mesure" },
@@ -72,9 +72,9 @@ export default function InternetB2B() {
         subtitle="Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption."
         actions={
           <>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Demander un devis →
-            </a>
+            <Link href={QUOTE.ip} className={btnPrimary}>
+              {QUOTE_LABEL} gratuit →
+            </Link>
             <a href="#comment" className={btnGhost}>Comment ça marche ↓</a>
           </>
         }
@@ -210,9 +210,9 @@ export default function InternetB2B() {
             ))}
           </Reveal>
           <Reveal className="mt-[52px] text-center" delay={0.1}>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Prendre RDV maintenant →
-            </a>
+            <Link href={QUOTE.ip} className={btnPrimary}>
+              Commencer ma demande →
+            </Link>
           </Reveal>
         </div>
       </section>
@@ -227,10 +227,12 @@ export default function InternetB2B() {
         subtitle="Notre équipe se déplace gratuitement pour étudier votre situation, partout au Cameroun."
         actions={
           <>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Demander un devis →
+            <Link href={QUOTE.ip} className={btnPrimary}>
+              {QUOTE_LABEL} →
+            </Link>
+            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnGhost}>
+              Préférer un appel →
             </a>
-            <Link href="/wifi-zone" className={btnGhost}>Voir la WiFi Zone →</Link>
           </>
         }
       />

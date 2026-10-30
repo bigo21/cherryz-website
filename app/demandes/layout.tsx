@@ -23,13 +23,13 @@ export default function DemandesLayout({
         </div>
       </nav>
 
-      {children}
+      <main>{children}</main>
 
       <footer className="bg-navy py-9 text-center">
         <span className="font-condensed text-[16px] font-semibold tracking-[0.5px] text-accent-vivid">
           Cherryz — Vous connecte !
         </span>
-        <div className="mt-2 font-sans text-[13px] text-white/40">
+        <div className="mt-2 font-sans text-[13px] text-white/60">
           © 2026 Cherryz. Tous droits réservés.
         </div>
       </footer>

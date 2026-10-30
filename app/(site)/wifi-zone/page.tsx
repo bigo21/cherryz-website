@@ -6,7 +6,7 @@ import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
 import Image from "next/image";
-import { CAL_WIFI } from "@/lib/site/site";
+import { CAL_WIFI, QUOTE, QUOTE_LABEL } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "WiFi Zone monétisable clé en main | Cherryz",
@@ -100,9 +100,9 @@ export default function WifiZone() {
         subtitle="Bâtiment, quartier, résidence, campus, marché, hôtel : quel que soit votre espace, Cherryz vous accompagne de l'idée à la rentabilité. On diagnostique, on dimensionne, on déploie, et on automatise l'infrastructure réseau de votre business."
         actions={
           <>
-            <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Parlez-nous de votre projet →
-            </a>
+            <Link href={QUOTE.wifi} className={btnPrimary}>
+              {QUOTE_LABEL} gratuit →
+            </Link>
             <a href="#cas" className={btnGhost}>Découvrir nos réalisations ↓</a>
           </>
         }
@@ -207,9 +207,9 @@ export default function WifiZone() {
               Vous n&apos;avez pas besoin d&apos;être technicien. Vous avez besoin
               d&apos;un partenaire. <strong className="text-white">C&apos;est exactement ce qu&apos;on est.</strong>
             </p>
-            <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Réserver mon diagnostic gratuit →
-            </a>
+            <Link href={QUOTE.wifi} className={btnPrimary}>
+              Demander mon diagnostic gratuit →
+            </Link>
           </Reveal>
         </div>
       </section>
@@ -305,10 +305,12 @@ export default function WifiZone() {
         subtitle="Dites-nous où, dites-nous votre ambition, on s'occupe du reste. Diagnostic gratuit. Déplacement sur site. Partout au Cameroun."
         actions={
           <>
-            <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
+            <Link href={QUOTE.wifi} className={btnPrimary}>
               Lancer mon projet WiFi Zone →
+            </Link>
+            <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnGhost}>
+              Préférer un appel →
             </a>
-            <Link href="/internet-b2b" className={btnGhost}>Besoin d&apos;Internet B2B plutôt ? →</Link>
           </>
         }
       />

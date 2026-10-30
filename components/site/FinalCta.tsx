@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 
 // Dark final CTA band with diagonal red wedge + rippling pictogram.
 export default function FinalCta({
@@ -33,11 +34,14 @@ export default function FinalCta({
         <div className="relative hidden h-[240px] w-[240px] flex-none items-center justify-center lg:flex">
           <span className="absolute h-[120px] w-[120px] rounded-full border-2 border-white/45 animate-ripple" />
           <span className="absolute h-[120px] w-[120px] rounded-full border-2 border-white/45 animate-ripple [animation-delay:1.7s]" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* Optimised and lazy-loaded: the block is hidden below lg, so mobile never fetches it. */}
+          <Image
             src="/brand/pictogram.png"
-            alt="Cherryz"
-            className="relative w-[130px] [filter:drop-shadow(0_0_26px_rgba(255,255,255,.35))]"
+            alt=""
+            width={130}
+            height={114}
+            sizes="130px"
+            className="relative h-auto w-[130px] [filter:drop-shadow(0_0_26px_rgba(255,255,255,.35))]"
           />
         </div>
       </div>

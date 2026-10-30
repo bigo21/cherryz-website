@@ -3,6 +3,23 @@
 export const CAL_IP = "https://cal.com/vireel/cherryzip";
 export const CAL_WIFI = "https://cal.com/vireel/cherryz";
 
+// Quote questionnaires: the primary call to action everywhere on the site.
+// Cal.com bookings stay available as the secondary "prefer a call" option.
+export const QUOTE = {
+  hub: "/demandes",
+  ip: "/demandes/internet-b2b",
+  wifi: "/demandes/wifi-zone",
+} as const;
+
+export const QUOTE_LABEL = "Obtenir mon devis";
+
+/** The questionnaire matching the page the visitor is on (the choice page otherwise). */
+export function quoteHrefFor(pathname: string | null): string {
+  if (pathname?.startsWith("/internet-b2b")) return QUOTE.ip;
+  if (pathname?.startsWith("/wifi-zone")) return QUOTE.wifi;
+  return QUOTE.hub;
+}
+
 export const CONTACT = {
   address: "Yaoundé, Cameroun",
   phoneDisplay: "+237 242 01 46 64",

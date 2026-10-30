@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS } from "@/lib/site/site";
+import { NAV_LINKS, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,6 +22,7 @@ export default function SiteNav() {
   useEffect(() => setOpen(false), [pathname]);
 
   const solid = scrolled || open;
+  const quoteHref = quoteHrefFor(pathname);
 
   return (
     <nav
@@ -60,10 +61,10 @@ export default function SiteNav() {
             );
           })}
           <Link
-            href="/contact"
+            href={quoteHref}
             className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
           >
-            Demander un devis →
+            {QUOTE_LABEL} →
           </Link>
         </div>
 
@@ -104,10 +105,10 @@ export default function SiteNav() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={quoteHref}
               className="mt-4 rounded-full bg-cherry-alt px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              Demander un devis →
+              {QUOTE_LABEL} →
             </Link>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { getSchema, type Answers, type QuoteType } from "@/lib/quote/schemas";
@@ -11,6 +11,8 @@ import {
   type GeoValue,
 } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
+import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
+import { CONTACT } from "@/lib/site/site";
 
 interface SavedState {
   step: number;
@@ -19,11 +21,11 @@ interface SavedState {
 }
 
 const inputClass =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy-alt transition-colors placeholder:text-[#9aa2ad] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.13)]";
+  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
 
 function chipClass(selected: boolean): string {
   return [
-    "cursor-pointer font-sans text-[15px] px-[17px] py-[11px] rounded-full transition-all duration-150 border-[1.5px]",
+    "cursor-pointer font-sans text-[15px] px-[17px] py-[11px] rounded-full transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
     selected
       ? "border-cherry bg-cherry/[0.07] text-cherry font-semibold"
       : "border-[rgba(16,27,43,0.18)] bg-white text-[#374151] font-medium",
@@ -32,7 +34,7 @@ function chipClass(selected: boolean): string {
 
 function scaleChipClass(selected: boolean): string {
   return [
-    "cursor-pointer w-[46px] h-[46px] rounded-[12px] font-condensed font-bold text-[18px] transition-all duration-150 border-[1.5px]",
+    "cursor-pointer w-[46px] h-[46px] rounded-[12px] font-condensed font-bold text-[18px] transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
     selected
       ? "border-cherry bg-cherry text-white"
       : "border-[rgba(16,27,43,0.18)] bg-white text-[#374151]",
@@ -83,7 +85,10 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
   const [showErrors, setShowErrors] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [locating, setLocating] = useState(false);
   const hydrated = useRef(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const moved = useRef(false);
 
   // Persist progress to sessionStorage (skip the very first render).
   useEffect(() => {
@@ -97,6 +102,13 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
       /* private mode, ignore */
     }
   }, [type, step, answers, done]);
+
+  // After a step change (not on first load), move focus to the new step's heading
+  // so keyboard and screen-reader users start at the top of the new questions.
+  useEffect(() => {
+    if (!moved.current) return;
+    headingRef.current?.focus({ preventScroll: true });
+  }, [step, done]);
 
   const currentStep = schema[step - 1];
   const visible = visibleQuestions(currentStep, answers);
@@ -116,13 +128,20 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
   function detectGeo(id: string) {
     if (typeof navigator !== "undefined" && navigator.geolocation) {
+      setLocating(true);
       navigator.geolocation.getCurrentPosition(
-        (pos) =>
+        (pos) => {
+          setLocating(false);
           setAns(id, {
             ok: true,
             coords: `${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`,
-          } satisfies GeoValue),
-        () => setAns(id, { ok: false, denied: true } satisfies GeoValue),
+          } satisfies GeoValue);
+        },
+        () => {
+          setLocating(false);
+          setAns(id, { ok: false, denied: true } satisfies GeoValue);
+        },
+        { timeout: 15000 },
       );
     } else {
       setAns(id, { ok: false, denied: true } satisfies GeoValue);
@@ -139,11 +158,12 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     try {
       const res = await submitQuoteRequest({ type, answers, tracking: collectTracking() });
       if (!res.ok) throw new Error(res.error ?? "unknown");
+      moved.current = true;
       setDone(true);
       scrollTop();
     } catch {
       setSubmitError(
-        "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.",
+        "Votre demande n'a pas pu être envoyée. Vos réponses sont conservées : réessayez dans un instant, ou écrivez-nous sur WhatsApp.",
       );
     } finally {
       setSubmitting(false);
@@ -152,15 +172,23 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
   function next() {
     const errs = validateQuestions(visible, answers);
-    if (Object.keys(errs).length) {
+    const invalid = visible.find((q) => errs[q.id]);
+    if (invalid) {
       setErrors(errs);
       setShowErrors(true);
+      // Bring the first problem into view and put the keyboard on it.
+      requestAnimationFrame(() => {
+        const block = document.getElementById(`q-${invalid.id}`);
+        block?.scrollIntoView({ behavior: "smooth", block: "center" });
+        block?.querySelector<HTMLElement>("input, textarea, button")?.focus({ preventScroll: true });
+      });
       return;
     }
     if (step >= total) {
       void submit();
       return;
     }
+    moved.current = true;
     setStep((s) => s + 1);
     setErrors({});
     setShowErrors(false);
@@ -172,42 +200,70 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
       router.push("/demandes");
       return;
     }
+    moved.current = true;
     setStep((s) => s - 1);
     setErrors({});
     setShowErrors(false);
     scrollTop();
   }
 
-  const progressPct = total ? Math.round((step / total) * 100) : 0;
+  function restart() {
+    moved.current = true;
+    setAnswers({});
+    setStep(1);
+    setDone(false);
+    setErrors({});
+    setShowErrors(false);
+    setSubmitError(null);
+    scrollTop();
+  }
+
+  // Share of the questionnaire already completed (0% on step 1, not 1/total).
+  const progressPct = total ? Math.round(((step - 1) / total) * 100) : 0;
+  const errorCount = showErrors ? Object.keys(errors).length : 0;
   const prospectName = String(answers.q16 ?? "").trim().split(" ")[0] || "";
 
   if (done) {
     return (
-      <div className="rounded-[20px] bg-white px-10 py-[52px] text-center shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-pop">
+      <div className="rounded-[20px] bg-white px-6 py-[52px] text-center shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-pop sm:px-10">
         <div className="mx-auto mb-6 flex h-[82px] w-[82px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_36px_-16px_rgba(162,3,45,0.85)]">
           <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h1 className="m-0 font-condensed text-[36px] font-bold leading-[1.02]">
+        <h2
+          ref={headingRef}
+          tabIndex={-1}
+          className="m-0 font-condensed text-[36px] font-bold leading-[1.02] outline-none"
+        >
           Merci{prospectName ? ` ${prospectName}` : ""} !
-        </h1>
+        </h2>
         <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-[#4b5563]">
-          Votre demande a bien été reçue. Notre équipe va l&apos;étudier et vous
-          recontacter sous 48h. Un email de confirmation vient de vous être
-          envoyé.
+          Votre demande a bien été reçue. Un email de confirmation vient de vous
+          être envoyé.
         </p>
+        <ol className="mx-auto mt-7 max-w-[400px] space-y-3 text-left font-sans text-[15.5px] leading-[1.45] text-navy-alt">
+          {[
+            "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
+            "Nous vous recontactons sous 48h pour affiner votre besoin.",
+            "Si besoin, un technicien se déplace gratuitement sur votre site.",
+          ].map((t, i) => (
+            <li key={t} className="flex gap-3">
+              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-cherry/[0.09] font-condensed text-[14px] font-bold text-cherry">
+                {i + 1}
+              </span>
+              {t}
+            </li>
+          ))}
+        </ol>
         <div className="mt-[30px] flex flex-wrap justify-center gap-3">
           <a
-            href="https://wa.me/237242014664"
+            href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-[9px] rounded-full bg-cherry px-[26px] py-[14px] font-condensed text-[16px] font-bold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-              <path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.94-.27-.1-.46-.15-.65.15-.19.29-.75.94-.92 1.13-.17.19-.34.21-.63.07-.29-.15-1.23-.45-2.34-1.44-.86-.77-1.45-1.72-1.62-2.01-.17-.29-.02-.45.13-.59.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.65-1.57-.89-2.15-.23-.56-.47-.48-.65-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38 0 1.4 1.02 2.76 1.17 2.95.15.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34z" />
-              <path d="M12 2a10 10 0 0 0-8.53 15.26L2 22l4.85-1.27A10 10 0 1 0 12 2zm0 18.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31A8.2 8.2 0 1 1 12 20.2z" />
-            </svg>
+            <WhatsAppIcon className="h-[18px] w-[18px]" />
             WhatsApp
           </a>
           <Link
@@ -217,51 +273,96 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             Retour à l&apos;accueil
           </Link>
         </div>
+        <button
+          type="button"
+          onClick={restart}
+          className="mt-6 cursor-pointer font-sans text-[15px] font-semibold text-cherry underline underline-offset-4"
+        >
+          Faire une nouvelle demande
+        </button>
       </div>
     );
   }
 
   return (
     <>
-      <div className="rounded-[20px] bg-white px-9 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade">
+      <div className="rounded-[20px] bg-white px-5 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade sm:px-9">
         {/* Progress */}
         <div className="mb-[26px]">
-          <div className="mb-[9px] flex items-baseline justify-between">
-            <span className="font-condensed text-[14px] font-bold tracking-[1px] text-cherry">
+          <div className="mb-[9px] flex items-baseline justify-between gap-3">
+            <span className="whitespace-nowrap font-condensed text-[14px] font-bold tracking-[1px] text-cherry">
               ÉTAPE {step} SUR {total}
             </span>
-            <span className="font-sans text-[13px] font-medium text-[#9aa2ad]">
-              {currentStep.title}
-            </span>
+            {step < total && (
+              <span className="min-w-0 truncate text-right font-sans text-[13px] font-medium text-[#6b7280]">
+                Ensuite : {schema[step].title}
+              </span>
+            )}
           </div>
-          <div className="h-[7px] overflow-hidden rounded-full bg-[#eceef1]">
+          <div
+            role="progressbar"
+            aria-label="Progression du questionnaire"
+            aria-valuemin={0}
+            aria-valuemax={total}
+            aria-valuenow={step - 1}
+            aria-valuetext={`Étape ${step} sur ${total}`}
+            className="h-[7px] overflow-hidden rounded-full bg-[#eceef1]"
+          >
             <div
               className="h-full rounded-full bg-gradient-to-r from-cherry to-cherry-dark transition-[width] duration-300"
-              style={{ width: `${progressPct}%` }}
+              style={{ width: `${Math.max(progressPct, 4)}%` }}
             />
           </div>
         </div>
 
-        <h2 className="mb-1 font-condensed text-[28px] font-bold leading-[1.05]">
+        <h2
+          ref={headingRef}
+          tabIndex={-1}
+          className="mb-1 font-condensed text-[28px] font-bold leading-[1.05] outline-none"
+        >
           {currentStep.title}
         </h2>
         <p className="mb-[22px] font-sans text-[15.5px] text-[#6B7280]">
           {currentStep.subtitle}
         </p>
 
+        <div role="status" aria-live="polite" className="sr-only">
+          {errorCount
+            ? `${errorCount} ${errorCount > 1 ? "réponses manquent" : "réponse manque"} sur cette étape.`
+            : ""}
+        </div>
+
         {visible.map((q) => {
           const v = answers[q.id];
           const err = showErrors ? errors[q.id] : undefined;
           const showOther = q.hasOther && otherSelected(q, answers);
+          const fieldId = `f-${q.id}`;
+          const errId = err ? `e-${q.id}` : undefined;
+          const isGroup = q.type === "single" || q.type === "multi" || q.type === "scale" || q.type === "consent";
+          const title = (
+            <>
+              {q.label}
+              {q.required ? (
+                <span className="text-cherry" aria-hidden>
+                  {" "}*
+                </span>
+              ) : null}
+            </>
+          );
           return (
-            <div key={q.id} className="mb-[22px] animate-step">
-              <label className="mb-[3px] block font-sans text-[17px] font-semibold leading-[1.35] text-navy-alt">
-                {q.label}
-                {q.required ? <span className="text-cherry"> *</span> : null}
-              </label>
-              <div className="mb-[11px] font-sans text-[13px] font-medium text-[#9aa2ad]">
-                {q.required ? "" : "Facultatif"}
-              </div>
+            <Field key={q.id} id={`q-${q.id}`} group={isGroup} errorId={errId}>
+              {q.type === "consent" ? null : isGroup ? (
+                <legend className={labelClass}>{title}</legend>
+              ) : (
+                <label htmlFor={fieldId} className={labelClass}>
+                  {title}
+                </label>
+              )}
+              {q.type !== "consent" && (
+                <div className="mb-[11px] font-sans text-[13px] font-medium text-[#6b7280]">
+                  {q.required ? <span className="sr-only">Obligatoire</span> : "Facultatif"}
+                </div>
+              )}
 
               {(q.type === "single" || q.type === "multi") && (
                 <div className="flex flex-wrap gap-[9px]">
@@ -274,6 +375,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                       <button
                         key={opt}
                         type="button"
+                        aria-pressed={selected}
                         onClick={() =>
                           q.type === "multi" ? toggleMulti(q.id, opt) : setAns(q.id, opt)
                         }
@@ -287,20 +389,32 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               )}
 
               {q.type === "scale" && (
-                <div className="flex flex-wrap items-center gap-[10px]">
-                  <span className="font-sans text-[13px] font-medium text-[#9aa2ad]">Très insatisfait</span>
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <button key={n} type="button" onClick={() => setAns(q.id, n)} className={scaleChipClass(v === n)}>
-                      {n}
-                    </button>
-                  ))}
-                  <span className="font-sans text-[13px] font-medium text-[#9aa2ad]">Très satisfait</span>
+                <div>
+                  <div className="flex flex-wrap gap-[10px]">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button
+                        key={n}
+                        type="button"
+                        aria-pressed={v === n}
+                        aria-label={`${n} sur 5${n === 1 ? ", très insatisfait" : n === 5 ? ", très satisfait" : ""}`}
+                        onClick={() => setAns(q.id, n)}
+                        className={scaleChipClass(v === n)}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
+                  <div aria-hidden className="mt-2 flex max-w-[270px] justify-between font-sans text-[13px] font-medium text-[#6b7280]">
+                    <span>1 = très insatisfait</span>
+                    <span>5 = très satisfait</span>
+                  </div>
                 </div>
               )}
 
               {showOther && (
                 <input
                   type="text"
+                  aria-label={`Précisez « Autre » : ${q.label}`}
                   value={String(answers[`${q.id}__autre`] ?? "")}
                   onChange={(e) => setAns(`${q.id}__autre`, e.target.value)}
                   placeholder="Précisez…"
@@ -310,27 +424,39 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
               {(q.type === "text" || q.type === "email" || q.type === "tel") && (
                 <input
+                  id={fieldId}
                   type={q.type === "text" ? "text" : q.type}
+                  inputMode={q.type === "tel" ? "tel" : undefined}
+                  autoComplete={autoCompleteFor(q.id, q.type)}
                   value={String(v ?? "")}
                   onChange={(e) => setAns(q.id, e.target.value)}
                   placeholder={q.placeholder}
+                  aria-invalid={err ? true : undefined}
+                  aria-describedby={errId}
+                  aria-required={q.required || undefined}
                   className={inputClass}
                 />
               )}
 
               {q.type === "textarea" && (
                 <textarea
+                  id={fieldId}
                   rows={4}
                   value={String(v ?? "")}
                   onChange={(e) => setAns(q.id, e.target.value)}
                   placeholder={q.placeholder}
+                  aria-invalid={err ? true : undefined}
+                  aria-describedby={errId}
+                  aria-required={q.required || undefined}
                   className={`${inputClass} resize-y`}
                 />
               )}
 
               {q.type === "geo" && (
                 <GeoField
+                  inputId={fieldId}
                   value={v as GeoValue | undefined}
+                  locating={locating}
                   textValue={String(answers[`${q.id}__text`] ?? "")}
                   onDetect={() => detectGeo(q.id)}
                   onText={(val) => setAns(`${q.id}__text`, val)}
@@ -339,43 +465,62 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
               {q.type === "consent" && (
                 <label
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setAns(q.id, v !== true);
-                  }}
                   className={[
-                    "flex cursor-pointer items-start gap-3 rounded-[12px] border-[1.5px] bg-[#f7f7f8] px-[18px] py-4",
-                    v === true ? "border-cherry" : "border-[rgba(16,27,43,0.14)]",
+                    "flex cursor-pointer items-start gap-3 rounded-[12px] border-[1.5px] bg-[#f7f7f8] px-[18px] py-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-cherry",
+                    v === true ? "border-cherry" : err ? "border-cherry/60" : "border-[rgba(16,27,43,0.14)]",
                   ].join(" ")}
                 >
+                  <input
+                    type="checkbox"
+                    checked={v === true}
+                    onChange={(e) => setAns(q.id, e.target.checked)}
+                    aria-invalid={err ? true : undefined}
+                    aria-describedby={errId}
+                    className="peer sr-only"
+                  />
                   <span
+                    aria-hidden
                     className={[
-                      "flex h-6 w-6 flex-none items-center justify-center rounded-[6px] border-[1.5px] text-[15px] text-white",
+                      "flex h-6 w-6 flex-none items-center justify-center rounded-[6px] border-[1.5px] text-white",
                       v === true ? "border-cherry bg-cherry" : "border-[rgba(16,27,43,0.3)] bg-white",
                     ].join(" ")}
                   >
-                    {v === true ? "✓" : ""}
+                    {v === true ? <CheckMark /> : null}
                   </span>
                   <span className="font-sans text-[15px] leading-[1.45] text-navy-alt">
                     J&apos;accepte que Cherryz utilise mes informations pour me
                     recontacter dans le cadre de ma demande.
+                    <span className="text-cherry" aria-hidden> *</span>
                   </span>
                 </label>
               )}
 
-              {err && <FieldError message={err} />}
-            </div>
+              {err && <FieldError id={errId} message={err} />}
+            </Field>
           );
         })}
 
-        {submitError && <FieldError message={submitError} />}
+        {submitError && (
+          <div role="alert" className="mt-2 rounded-[12px] border border-cherry/25 bg-cherry/[0.05] px-4 py-3">
+            <FieldError message={submitError} />
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy-alt underline underline-offset-4"
+            >
+              <WhatsAppIcon className="h-4 w-4 text-[#128c4a]" />
+              Écrire sur WhatsApp
+            </a>
+          </div>
+        )}
 
-        <div className="mt-7 flex items-center justify-between gap-[14px] border-t border-[rgba(16,27,43,0.08)] pt-[22px]">
+        <div className="mt-7 flex items-center justify-between gap-3 border-t border-[rgba(16,27,43,0.08)] pt-[22px]">
           <button
             type="button"
             onClick={prev}
             disabled={submitting}
-            className="cursor-pointer rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-6 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#6B7280] transition-colors hover:border-navy-alt hover:text-navy-alt disabled:opacity-50"
+            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy-alt hover:text-navy-alt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
           >
             {step <= 1 ? "Annuler" : "← Précédent"}
           </button>
@@ -383,68 +528,124 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             type="button"
             onClick={next}
             disabled={submitting}
-            className="cursor-pointer rounded-[11px] border-none bg-cherry px-[30px] py-[14px] font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-[0_14px_30px_-16px_rgba(162,3,45,0.85)] transition-colors hover:bg-cherry-dark disabled:opacity-70"
+            aria-busy={submitting || undefined}
+            className="cursor-pointer whitespace-nowrap rounded-[11px] border-none bg-cherry px-5 py-[14px] font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-[0_14px_30px_-16px_rgba(162,3,45,0.85)] transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70 sm:px-[30px]"
           >
-            {submitting ? "Envoi…" : step >= total ? "Envoyer ma demande →" : "Suivant →"}
+            {submitting ? "Envoi en cours…" : step >= total ? "Envoyer ma demande →" : "Suivant →"}
           </button>
         </div>
       </div>
-      <p className="mt-4 text-center font-sans text-[13px] text-navy/45">
-        🔒 Vos réponses sont enregistrées automatiquement sur cet appareil.
+      <p className="mt-4 flex items-center justify-center gap-[6px] text-center font-sans text-[13px] text-navy/70">
+        <LockIcon className="flex-none" aria-hidden />
+        Vos réponses sont enregistrées automatiquement sur cet appareil.
       </p>
     </>
   );
 }
 
+const labelClass =
+  "mb-[3px] block p-0 font-sans text-[17px] font-semibold leading-[1.35] text-navy-alt";
+
+/** Question wrapper: a fieldset for choice groups, a plain block for text fields. */
+function Field({
+  id,
+  group,
+  errorId,
+  children,
+}: {
+  id: string;
+  group: boolean;
+  errorId?: string;
+  children: ReactNode;
+}) {
+  const cls = "mb-[22px] min-w-0 border-0 p-0 animate-step";
+  return group ? (
+    <fieldset id={id} aria-describedby={errorId} className={cls}>
+      {children}
+    </fieldset>
+  ) : (
+    <div id={id} className={cls}>
+      {children}
+    </div>
+  );
+}
+
+function autoCompleteFor(id: string, type: string): string | undefined {
+  if (type === "email") return "email";
+  if (type === "tel") return "tel";
+  if (id === "q16") return "name";
+  if (id === "q18" && type === "text") return "organization";
+  return undefined;
+}
+
+function CheckMark() {
+  return (
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
 function GeoField({
+  inputId,
   value,
+  locating,
   textValue,
   onDetect,
   onText,
 }: {
+  inputId: string;
   value: GeoValue | undefined;
+  locating: boolean;
   textValue: string;
   onDetect: () => void;
   onText: (val: string) => void;
 }) {
   const ok = Boolean(value?.ok);
-  const hint = ok
-    ? `Position détectée : ${value?.coords}. Vous pouvez préciser ci-dessous si besoin.`
-    : value?.denied
-      ? "Localisation non disponible : décrivez-la manuellement ci-dessous."
-      : "Ou décrivez votre localisation manuellement :";
+  const hint = locating
+    ? "Localisation en cours… autorisez l'accès à votre position si votre navigateur le demande."
+    : ok
+      ? `Position détectée : ${value?.coords}. Vous pouvez préciser ci-dessous si besoin.`
+      : value?.denied
+        ? "Localisation non disponible : décrivez-la manuellement ci-dessous."
+        : "Ou décrivez votre localisation manuellement :";
   return (
     <div>
       <button
         type="button"
         onClick={onDetect}
+        disabled={locating}
         className={[
-          "inline-flex cursor-pointer items-center gap-2 rounded-[11px] border-[1.5px] px-5 py-[13px] font-sans text-[15px] font-semibold",
+          "inline-flex cursor-pointer items-center gap-2 rounded-[11px] border-[1.5px] px-5 py-[13px] font-sans text-[15px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:cursor-wait disabled:opacity-70",
           ok ? "border-cherry bg-cherry/[0.07] text-cherry" : "border-[rgba(16,27,43,0.2)] bg-white text-[#374151]",
         ].join(" ")}
       >
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
           <circle cx="12" cy="10" r="2.5" />
         </svg>
-        {ok ? "Position détectée ✓" : "Utiliser ma position actuelle"}
+        {locating ? "Localisation…" : ok ? "Position détectée" : "Utiliser ma position actuelle"}
+        {ok && !locating ? <CheckMark /> : null}
       </button>
-      <div className="my-[10px] font-sans text-[13.5px] font-medium text-[#6B7280]">{hint}</div>
+      <div aria-live="polite" className="my-[10px] font-sans text-[13.5px] font-medium text-[#4b5563]">
+        {hint}
+      </div>
       <input
+        id={inputId}
         type="text"
         value={textValue}
         onChange={(e) => onText(e.target.value)}
-        placeholder="Décrivez votre localisation (quartier, points de repère)"
+        placeholder="Quartier, points de repère"
         className={inputClass}
       />
     </div>
   );
 }
 
-function FieldError({ message }: { message: string }) {
+function FieldError({ id, message }: { id?: string; message: string }) {
   return (
-    <div className="mt-2 flex items-center gap-[6px] font-sans text-[13.5px] font-medium text-cherry">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="flex-none">
+    <div id={id} className="mt-2 flex items-center gap-[6px] font-sans text-[13.5px] font-medium text-cherry">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="flex-none" aria-hidden>
         <path d="M12 3l9 16H3z" />
         <path d="M12 10v4M12 17h.01" />
       </svg>

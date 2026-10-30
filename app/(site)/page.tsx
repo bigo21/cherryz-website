@@ -8,7 +8,7 @@ import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import LogoMarquee, { type Logo } from "@/components/site/LogoMarquee";
 import { CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
-import { CAL_IP, CAL_WIFI } from "@/lib/site/site";
+import { QUOTE, QUOTE_LABEL } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "Cherryz | L'Internet professionnel au meilleur prix, partout au Cameroun",
@@ -84,9 +84,9 @@ export default function Home() {
         subtitle="Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d'autres) pour vous offrir une connexion dédiée, stable et jusqu'à 50% moins chère. Sans travaux. Sans coupure."
         actions={
           <>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Demander un devis gratuit →
-            </a>
+            <Link href={QUOTE.hub} className={btnPrimary}>
+              {QUOTE_LABEL} gratuit →
+            </Link>
             <Link href="/wifi-zone" className={btnGhostStrong}>
               Découvrir la WiFi Zone →
             </Link>
@@ -148,7 +148,32 @@ export default function Home() {
 
           {/* Comparatif */}
           <Reveal className="mt-[70px]" delay={0.05}>
-            <div className="overflow-x-auto rounded-2xl border border-navy/10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)]">
+            {/* Mobile: one card per criterion, Cherryz first, nothing scrolls sideways. */}
+            <ul className="m-0 flex list-none flex-col gap-3 p-0 md:hidden">
+              {comparatif.map((row) => (
+                <li key={row.label} className="overflow-hidden rounded-2xl border border-navy/10 bg-white">
+                  <div className="bg-surface px-5 py-3 font-sans text-[15px] font-semibold text-navy">
+                    {row.label}
+                  </div>
+                  <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 px-5 py-4 font-sans text-[15px]">
+                    <dt className="font-condensed text-[14px] font-bold tracking-[0.4px] text-cherry-alt">Cherryz</dt>
+                    <dd className="m-0 font-semibold text-navy">
+                      {row.check ? (
+                        <span className="inline-flex items-center gap-[6px]">
+                          <CheckLineIcon className="inline-block align-[-0.12em] text-positive" />
+                          {row.cherry}
+                        </span>
+                      ) : (
+                        row.cherry
+                      )}
+                    </dd>
+                    <dt className="font-condensed text-[14px] font-semibold tracking-[0.4px] text-navy/70">Seul</dt>
+                    <dd className="m-0 text-navy/70">{row.alone}</dd>
+                  </dl>
+                </li>
+              ))}
+            </ul>
+            <div className="hidden overflow-x-auto rounded-2xl border border-navy/10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)] md:block">
               <div className="grid min-w-[640px] grid-cols-[1.4fr_1fr_1fr]">
                 <div className="bg-surface px-[26px] py-[22px] font-condensed text-[14px] font-semibold uppercase tracking-[1px] text-navy/50">
                   Comparatif
@@ -234,14 +259,12 @@ export default function Home() {
               de grille tarifaire figée : nous construisons votre prix après
               avoir compris votre besoin.
             </p>
-            <a
-              href={CAL_IP}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={QUOTE.hub}
               className="inline-block rounded-full bg-cherry-alt px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-[#c0093a]"
             >
-              Parlez-nous de votre projet →
-            </a>
+              Décrire mon projet →
+            </Link>
           </Reveal>
         </div>
       </section>
@@ -329,12 +352,12 @@ export default function Home() {
         subtitle="Notre équipe se déplace gratuitement pour étudier votre situation, partout au Cameroun."
         actions={
           <>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
-              Demander un devis →
-            </a>
-            <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnGhost}>
-              Lancer une WiFi Zone →
-            </a>
+            <Link href={QUOTE.hub} className={btnPrimary}>
+              {QUOTE_LABEL} →
+            </Link>
+            <Link href="/contact" className={btnGhost}>
+              Préférer un appel →
+            </Link>
           </>
         }
       />

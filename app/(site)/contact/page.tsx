@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
-import { CalendarIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
-import { CAL_IP, CAL_WIFI, CONTACT } from "@/lib/site/site";
+import { CalendarIcon, ClipboardIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
+import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "Contact | Cherryz",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 const coords = [
   { Icon: PinIcon, k: "ADRESSE", v: CONTACT.address, href: undefined },
   { Icon: PhoneIcon, k: "TÉLÉPHONE", v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
+  { Icon: WhatsAppIcon, k: "WHATSAPP", v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
   { Icon: MailIcon, k: "EMAIL", v: CONTACT.email, href: CONTACT.emailHref },
   { Icon: GlobeIcon, k: "SITE WEB", v: CONTACT.site, href: CONTACT.siteHref },
 ];
@@ -42,6 +44,34 @@ export default function Contact() {
 
       {/* FORM + SIDEBAR */}
       <section className="bg-surface pb-[100px] pt-20">
+        <div className="mx-auto mb-10 max-w-[1280px] px-6 md:px-12">
+          <div className="flex flex-col gap-5 rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-start gap-[14px]">
+              <ClipboardIcon className="mt-[2px] flex-none text-[26px] text-cherry-alt" />
+              <div>
+                <h2 className="m-0 font-condensed text-[22px] font-bold">Besoin d&apos;un prix ?</h2>
+                <p className="mt-1 font-sans text-[15.5px] text-navy/70">
+                  Notre questionnaire de devis prend 3 minutes et nous donne
+                  tout ce qu&apos;il faut pour vous chiffrer.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { label: "Devis Internet B2B", href: QUOTE.ip },
+                { label: "Devis WiFi Zone", href: QUOTE.wifi },
+              ].map((q) => (
+                <Link
+                  key={q.href}
+                  href={q.href}
+                  className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-[#c0093a]"
+                >
+                  {q.label} →
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
         <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-10 px-6 md:px-12 lg:grid-cols-[1.35fr_1fr]">
           <ContactForm />
 

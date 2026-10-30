@@ -6,7 +6,7 @@ import { submitContactMessage } from "@/app/actions/contact";
 const labelCls =
   "mb-[7px] block font-condensed text-[14px] font-semibold tracking-[0.6px] text-navy";
 const fieldCls =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy-alt transition-colors placeholder:text-[#9aa2ad] focus:border-cherry-alt focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.13)]";
+  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry-alt focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -84,7 +84,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="rounded-[20px] border border-navy/[0.08] bg-white p-10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)]">
+    <div className="rounded-[20px] border border-navy/[0.08] bg-white p-6 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)] sm:p-10">
       <h2 className="mb-[6px] font-condensed text-[30px] font-bold">Écrivez-nous</h2>
       <p className="mb-[26px] font-sans text-[15.5px] text-navy/60">
         Les champs marqués d&apos;un * sont obligatoires.
@@ -92,25 +92,25 @@ export default function ContactForm() {
       <form onSubmit={onSubmit} noValidate>
         <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2">
           <div>
-            <label className={labelCls}>NOM COMPLET *</label>
-            <input type="text" required value={form.full_name} onChange={set("full_name")} placeholder="Votre nom" className={fieldCls} />
+            <label htmlFor="c-name" className={labelCls}>NOM COMPLET *</label>
+            <input id="c-name" autoComplete="name" type="text" required value={form.full_name} onChange={set("full_name")} placeholder="Votre nom" className={fieldCls} />
           </div>
           <div>
-            <label className={labelCls}>EMAIL PROFESSIONNEL *</label>
-            <input type="email" required value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" className={fieldCls} />
+            <label htmlFor="c-email" className={labelCls}>EMAIL PROFESSIONNEL *</label>
+            <input id="c-email" autoComplete="email" type="email" required value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" className={fieldCls} />
           </div>
           <div>
-            <label className={labelCls}>TÉLÉPHONE / WHATSAPP</label>
-            <input type="tel" value={form.phone} onChange={set("phone")} placeholder="+237 6 00 00 00 00" className={fieldCls} />
+            <label htmlFor="c-phone" className={labelCls}>TÉLÉPHONE / WHATSAPP</label>
+            <input id="c-phone" autoComplete="tel" type="tel" value={form.phone} onChange={set("phone")} placeholder="+237 6 00 00 00 00" className={fieldCls} />
           </div>
           <div>
-            <label className={labelCls}>ENTREPRISE / ORGANISATION</label>
-            <input type="text" value={form.company} onChange={set("company")} placeholder="Nom de votre structure" className={fieldCls} />
+            <label htmlFor="c-company" className={labelCls}>ENTREPRISE / ORGANISATION</label>
+            <input id="c-company" autoComplete="organization" type="text" value={form.company} onChange={set("company")} placeholder="Nom de votre structure" className={fieldCls} />
           </div>
         </div>
         <div className="mt-[18px]">
-          <label className={labelCls}>VOTRE BESOIN *</label>
-          <select required value={form.besoin} onChange={set("besoin")} className={fieldCls}>
+          <label htmlFor="c-besoin" className={labelCls}>VOTRE BESOIN *</label>
+          <select id="c-besoin" required value={form.besoin} onChange={set("besoin")} className={fieldCls}>
             <option value="">Sélectionnez…</option>
             <option value="Internet B2B">Internet B2B</option>
             <option value="WiFi Zone">WiFi Zone</option>
@@ -118,20 +118,20 @@ export default function ContactForm() {
           </select>
         </div>
         <div className="mt-[18px]">
-          <label className={labelCls}>MESSAGE</label>
-          <textarea rows={4} value={form.message} onChange={set("message")} placeholder="Décrivez votre projet, votre localisation, vos besoins…" className={`${fieldCls} resize-y`} />
+          <label htmlFor="c-message" className={labelCls}>MESSAGE</label>
+          <textarea id="c-message" rows={4} value={form.message} onChange={set("message")} placeholder="Décrivez votre projet, votre localisation, vos besoins…" className={`${fieldCls} resize-y`} />
         </div>
 
         {error && (
-          <p className="mt-4 font-sans text-[14px] font-medium text-cherry-alt">{error}</p>
+          <p role="alert" className="mt-4 font-sans text-[14px] font-medium text-cherry-alt">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={submitting}
-          className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry-alt px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-[#c0093a] disabled:opacity-70"
+          className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry-alt px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-[#c0093a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry-alt disabled:opacity-70"
         >
-          {submitting ? "Envoi…" : "Envoyer ma demande →"}
+          {submitting ? "Envoi en cours…" : "Envoyer mon message →"}
         </button>
       </form>
     </div>
