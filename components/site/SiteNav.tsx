@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
+import { ArrowRightIcon } from "./icons";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -62,9 +63,10 @@ export default function SiteNav() {
           })}
           <Link
             href={quoteHref}
-            className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
+            className="inline-flex items-center gap-2 rounded-[10px] bg-cherry px-5 py-3 font-condensed text-[16px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            {QUOTE_LABEL} →
+            {QUOTE_LABEL}
+            <ArrowRightIcon aria-hidden className="text-[17px]" />
           </Link>
         </div>
 
@@ -106,9 +108,10 @@ export default function SiteNav() {
             ))}
             <Link
               href={quoteHref}
-              className="mt-4 rounded-full bg-cherry-alt px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-[10px] bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              {QUOTE_LABEL} →
+              {QUOTE_LABEL}
+              <ArrowRightIcon aria-hidden className="text-[17px]" />
             </Link>
           </div>
         </div>

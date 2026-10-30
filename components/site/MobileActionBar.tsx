@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CONTACT, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
-import { WhatsAppIcon } from "./icons";
+import { ArrowRightIcon, WhatsAppIcon } from "./icons";
 
 /**
  * Mobile-only bottom bar: the quote questionnaire for the current page + WhatsApp.
@@ -12,14 +12,34 @@ import { WhatsAppIcon } from "./icons";
  */
 export default function MobileActionBar() {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [ctaInView, setCtaInView] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 420);
+    const onScroll = () => setScrolled(window.scrollY > 420);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Step aside while a page's own primary action ([data-primary-cta]) is on screen,
+  // so the bar never covers it or duplicates it.
+  useEffect(() => {
+    const targets = document.querySelectorAll("[data-primary-cta]");
+    if (!targets.length) return;
+    const onScreen = new Set<Element>();
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) onScreen.add(e.target);
+        else onScreen.delete(e.target);
+      }
+      setCtaInView(onScreen.size > 0);
+    });
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, [pathname]);
+
+  const visible = scrolled && !ctaInView;
 
   return (
     <>
@@ -32,16 +52,17 @@ export default function MobileActionBar() {
         <div className="flex gap-3">
           <Link
             href={quoteHrefFor(pathname)}
-            className="flex-1 rounded-full bg-cherry-alt px-5 py-[13px] text-center font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
+            className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-cherry px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
-            {QUOTE_LABEL} →
+            {QUOTE_LABEL}
+            <ArrowRightIcon aria-hidden className="text-[17px]" />
           </Link>
           <a
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nous écrire sur WhatsApp"
-            className="flex flex-none items-center justify-center gap-2 rounded-full border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
+            className="flex flex-none items-center justify-center gap-2 rounded-[10px] border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
             <WhatsAppIcon className="h-[18px] w-[18px] text-whatsapp" />
             WhatsApp

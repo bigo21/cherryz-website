@@ -11,7 +11,7 @@ export default function SiteLayout({
     <>
       <a
         href="#contenu"
-        className="sr-only z-[200] rounded-full bg-white px-5 py-3 font-condensed font-semibold text-navy focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[200] rounded-[10px] bg-white px-5 py-3 font-condensed font-semibold text-navy focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         Aller au contenu
       </a>

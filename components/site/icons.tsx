@@ -42,6 +42,14 @@ export function CalendarIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line(props)}>
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export function ClipboardIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...line(props)}>

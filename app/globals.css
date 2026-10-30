@@ -26,6 +26,13 @@
   --color-surface: #f6f5f3;
   --color-surface-alt: #e2e3e5;
 
+  /* Refonte « Calcul + Proximité » : feuille de devis sur fond d'encre marine */
+  --color-ground: #edf0f4;
+  --color-paper: #ffffff;
+  --color-rule: rgba(16, 27, 40, 0.12);
+  --color-ink-soft: #4a5563;
+  --color-stamp: #a2032d;
+
   /* États */
   --color-positive: #1f8a5b;
   --color-whatsapp: #25d366;
@@ -52,8 +59,24 @@
   --animate-overlay: chzOverlay 0.25s ease both;
   --animate-modal: chzModal 0.32s cubic-bezier(0.16, 0.7, 0.3, 1) both;
   --animate-pop: chzPop 0.4s both;
+  --animate-stamp: chzStamp 0.45s cubic-bezier(0.16, 0.7, 0.3, 1) both;
   --animate-marquee-l: chzMarqueeL 32s linear infinite;
   --animate-marquee-r: chzMarqueeR 32s linear infinite;
+}
+
+@keyframes chzStamp {
+  0% {
+    opacity: 0;
+    transform: rotate(-14deg) scale(1.35);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-14deg) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-14deg) scale(1);
+  }
 }
 
 @keyframes chzMarqueeL {
@@ -197,4 +220,17 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Perforated top edge of a quote sheet (the tear-off line of a carbon quote book). */
+.sheet-perforated {
+  -webkit-mask:
+    radial-gradient(circle 5px at 50% 0, transparent 98%, #000) top / 18px 100% repeat-x;
+  mask:
+    radial-gradient(circle 5px at 50% 0, transparent 98%, #000) top / 18px 100% repeat-x;
+}
+
+::selection {
+  background: rgba(162, 3, 45, 0.18);
+  color: inherit;
 }

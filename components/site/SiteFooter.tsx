@@ -33,7 +33,7 @@ export default function SiteFooter() {
             <p className="max-w-[280px] font-sans text-[15.5px] leading-[1.6] text-white/[0.62]">
               Votre Internet Professionnel. Accessible. Partout au Cameroun.
             </p>
-            <p className="mt-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-accent-vivid">
+            <p className="mt-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white">
               Cherryz — Vous connecte !
             </p>
           </div>
