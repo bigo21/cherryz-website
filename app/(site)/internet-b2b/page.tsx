@@ -47,7 +47,7 @@ const features = [
 
 const steps = [
   { Icon: ClipboardIcon, k: "ÉTAPE 1", t: "Demande en ligne" },
-  { Icon: PhoneIcon, k: "ÉTAPE 2", t: "Contact sous 24h" },
+  { Icon: PhoneIcon, k: "ÉTAPE 2", t: "Contact sous 48h" },
   { Icon: PinIcon, k: "ÉTAPE 3", t: "Descente gratuite" },
   { Icon: Router, k: "ÉTAPE 4", t: "Cotation sur-mesure" },
   { Icon: Sparkle, k: "ÉTAPE 5", t: "Installation rapide" },

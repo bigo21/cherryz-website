@@ -42,3 +42,10 @@ yarn-error.log*
 next-env.d.ts
 
 /design_handoff_site_cherryz
+
+# Impeccable: local working files (screenshots, caches, decision pages)
+.impeccable/review/
+.impeccable/hook.cache.json
+.impeccable/live/
+.impeccable/questions/
+.impeccable/config.local.json

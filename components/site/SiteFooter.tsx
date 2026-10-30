@@ -101,10 +101,10 @@ export default function SiteFooter() {
 
         <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
           <div className="flex flex-wrap gap-5">
-            <Link href="/" className="font-sans text-[14px] text-white/55 hover:text-white">
+            <Link href="/mentions-legales" className="font-sans text-[14px] text-white/55 hover:text-white">
               Mentions légales
             </Link>
-            <Link href="/" className="font-sans text-[14px] text-white/55 hover:text-white">
+            <Link href="/confidentialite" className="font-sans text-[14px] text-white/55 hover:text-white">
               Politique de confidentialité
             </Link>
           </div>
