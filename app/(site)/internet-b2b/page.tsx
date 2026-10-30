@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import type { SVGProps } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
-import ReassuranceBar from "@/components/site/ReassuranceBar";
-import SectionEyebrow from "@/components/site/SectionEyebrow";
-import FinalCta from "@/components/site/FinalCta";
+import InkHero, { btnCherry, inkLink } from "@/components/site/InkHero";
+import QuoteSheet from "@/components/site/QuoteSheet";
+import ContactClose from "@/components/site/ContactClose";
 import Reveal from "@/components/site/Reveal";
-import { ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
-import { CAL_IP, QUOTE, QUOTE_LABEL } from "@/lib/site/site";
+import { ArrowRightIcon, ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
+import { CAL_IP, QUOTE } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "Internet B2B avec IP publique dédiée | Cherryz",
@@ -27,214 +25,144 @@ const Flask = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M10 2h4v6
 const ShieldCheck = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" /><path d="M9 12l2 2 4-4" /></svg>);
 const Users = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M16 3.1a4 4 0 0 1 0 7.8M8 3.1a4 4 0 0 0 0 7.8" /><circle cx="12" cy="16" r="4" /><path d="M4 21a6 6 0 0 1 16 0" /></svg>);
 const Router = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="2" y="6" width="20" height="12" rx="2" /><circle cx="12" cy="12" r="3" /><path d="M6 10v4M18 10v4" /></svg>);
-const Sparkle = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 3l1.7 4.5L18 9l-4.3 1.5L12 15l-1.7-4.5L6 9l4.3-1.5z" /><path d="M18.5 14.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" /></svg>);
+const Server = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="3" y="4" width="18" height="7" rx="1.5" /><rect x="3" y="13" width="18" height="7" rx="1.5" /><path d="M7 7.5h.01M7 16.5h.01" /></svg>);
+const Camera = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M3 8l12-3 2 6-12 3z" /><path d="M17 11l4 1-1 4M5 14v6M3 20h4" /></svg>);
+const Check = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M5 13l4 4L19 7" /></svg>);
 
 const usages = [
-  { img: "/photos/fond-vpn.jpg", alt: "VPN inter-agences", t: "Sécuriser vos VPN inter-agences", d: "Reliez vos sites en toute confidentialité." },
-  { img: "/photos/fond-serveurs.jpg", alt: "Serveurs internes", t: "Héberger vos serveurs internes", d: "Accessibles à distance, en toute sécurité." },
-  { img: "/photos/fond-callcenter.jpg", alt: "Call center VoIP", t: "Call centers & systèmes VoIP", d: "Une voix claire, sans coupure." },
-  { img: "/photos/fond-conformite.jpg", alt: "Conformité des transactions", t: "Conformité de vos transactions", d: "Indispensable pour vos flux financiers." },
-  { img: "/photos/fond-video.jpg", alt: "Vidéosurveillance", t: "Vidéosurveillance en temps réel", d: "Vos caméras accessibles où que vous soyez." },
+  { Icon: Lock, t: "Sécuriser vos VPN inter-agences", d: "Reliez vos sites en toute confidentialité." },
+  { Icon: Server, t: "Héberger vos serveurs internes", d: "Accessibles à distance, en toute sécurité." },
+  { Icon: PhoneIcon, t: "Call centers & systèmes VoIP", d: "Une voix claire, sans coupure." },
+  { Icon: ShieldCheck, t: "Conformité de vos transactions", d: "Indispensable pour vos flux financiers." },
+  { Icon: Camera, t: "Vidéosurveillance en temps réel", d: "Vos caméras accessibles où que vous soyez." },
 ];
 
 const features = [
+  { Icon: Users, t: "Multi-opérateurs", d: "On choisit le meilleur réseau pour votre localisation, pas celui d'un fournisseur unique." },
   { Icon: Bolt, t: "Installation rapide", d: "Faisceaux hertziens : pas de génie civil, pas de tranchées." },
-  { Icon: Lock, t: "IP dédiée incluse", d: "Votre adresse, rien qu'à vous." },
+  { Icon: Lock, t: "IP dédiée incluse", d: "Votre adresse, rien qu'à vous. Personne d'autre ne la partage." },
   { Icon: Flask, t: "Test en parallèle", d: "Testez sans quitter votre opérateur actuel*." },
   { Icon: GlobeIcon, t: "Couverture nationale", d: "Partout au Cameroun via nos partenaires." },
   { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive, pas un call center distant." },
 ];
 
 const steps = [
-  { Icon: ClipboardIcon, k: "ÉTAPE 1", t: "Demande en ligne" },
-  { Icon: PhoneIcon, k: "ÉTAPE 2", t: "Contact sous 24h" },
-  { Icon: PinIcon, k: "ÉTAPE 3", t: "Descente gratuite" },
-  { Icon: Router, k: "ÉTAPE 4", t: "Cotation sur-mesure" },
-  { Icon: Sparkle, k: "ÉTAPE 5", t: "Installation rapide" },
-  { Icon: Sparkle, k: "RÉSULTAT", t: "Connecté & vous économisez", result: true },
+  { Icon: ClipboardIcon, t: "Demande en ligne" },
+  { Icon: PhoneIcon, t: "Contact sous 48h" },
+  { Icon: PinIcon, t: "Descente gratuite" },
+  { Icon: Router, t: "Cotation sur-mesure" },
+  { Icon: Bolt, t: "Installation rapide" },
+  { Icon: Check, t: "Connecté, vous économisez" },
 ];
+
+const h2 = "m-0 font-condensed text-[clamp(34px,4.2vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]";
+const wrap = "mx-auto max-w-[1280px] px-4 sm:px-6 md:px-12";
+const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
 
 export default function InternetB2B() {
   return (
     <>
-      <PageHero
-        eyebrow="CONNEXION IP PUBLIQUE · B2B"
-        image="/photos/b2b-hero.jpg"
-        imageAlt="Datacenter Cherryz"
-        title={
-          <>
-            Internet Dédié. IP Fixe.
-            <br />
-            Le meilleur du réseau camerounais, au{" "}
-            <span className="text-accent-vivid">meilleur prix.</span>
-          </>
-        }
-        subtitle="Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption."
+      <InkHero
+        title="Internet dédié. IP fixe."
+        lead="Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption."
         actions={
-          <>
-            <Link href={QUOTE.ip} className={btnPrimary}>
-              {QUOTE_LABEL} gratuit →
-            </Link>
-            <a href="#comment" className={btnGhost}>Comment ça marche ↓</a>
-          </>
+          <a href="#comment" className={inkLink}>
+            Comment ça marche
+          </a>
         }
-      />
-      <ReassuranceBar />
+        facts={["Régulée ART", "IP dédiée incluse", "Installation sans génie civil"]}
+      >
+        <QuoteSheet path="ip" />
+      </InkHero>
 
-      {/* QU'EST-CE QU'UNE IP DÉDIÉE */}
-      <section className="bg-white pb-24 pt-[104px]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-[60px] px-6 md:px-12 lg:grid-cols-[1fr_1.05fr]">
-          <Reveal>
-            <SectionEyebrow label="LES FONDAMENTAUX" />
-            <h2 className="m-0 font-condensed text-[44px] font-bold leading-[1.03] tracking-[-0.3px]">
-              Qu&apos;est-ce qu&apos;une IP
-              <br />
-              publique dédiée ?
-            </h2>
-            <p className="mt-[18px] max-w-[520px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
+      {/* QU'EST-CE QU'UNE IP PUBLIQUE DÉDIÉE */}
+      <section className="bg-ground py-20 md:py-28">
+        <div className={`${wrap} grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14`}>
+          <Reveal className="lg:col-span-5">
+            <h2 className={h2}>Qu&apos;est-ce qu&apos;une IP publique dédiée ?</h2>
+            <p className="mt-6 max-w-[52ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
               Votre adresse IP publique, c&apos;est l&apos;identité de votre
               entreprise sur Internet. Elle est indispensable pour faire tourner
               vos outils métier les plus sensibles.
             </p>
-            <div className="relative mt-[26px] overflow-hidden rounded-2xl bg-navy px-7 py-[26px]">
-              <div className="absolute -right-10 -top-10 h-[150px] w-[150px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.4),transparent 68%)" }} />
-              <div className="relative">
-                <div className="flex items-center gap-[10px]">
-                  <Lock className="text-[22px] text-accent-vivid" />
-                  <span className="font-condensed text-[22px] font-bold text-white">
-                    Avec Cherryz, votre IP est dédiée
-                  </span>
-                </div>
-                <p className="mt-[9px] font-sans text-[15.5px] leading-[1.55] text-white/[0.72]">
-                  Personne d&apos;autre ne la partage. Votre bande passante est
-                  garantie, en permanence.
-                </p>
-              </div>
-            </div>
+            <p className="mt-6 max-w-[52ch] border-l-2 border-navy pl-5 font-sans text-[17.5px] font-semibold leading-[1.55] text-navy">
+              Avec Cherryz, votre IP est dédiée : personne d&apos;autre ne la
+              partage, et votre bande passante est garantie en permanence.
+            </p>
           </Reveal>
-          <Reveal className="flex flex-col gap-[14px]" delay={0.08}>
-            {usages.map(({ img, alt, t, d }) => (
-              <div key={t} className="flex items-start gap-4 rounded-[14px] border border-navy/[0.07] bg-surface px-[22px] py-5 transition-all hover:translate-x-1 hover:border-cherry-alt/30">
-                <div className="relative h-[46px] w-[46px] flex-none overflow-hidden rounded-xl">
-                  <Image src={img} alt={alt} fill sizes="46px" className="object-cover" />
-                </div>
-                <div>
-                  <h4 className="m-0 font-condensed text-[20px] font-bold">{t}</h4>
-                  <p className="mt-[3px] font-sans text-[14.5px] leading-[1.45] text-navy/60">{d}</p>
-                </div>
-              </div>
-            ))}
+          <Reveal className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-7`} delay={0.05}>
+            <h3 className="m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]">
+              Ce qu&apos;elle vous permet
+            </h3>
+            <ul className="m-0 list-none p-0">
+              {usages.map(({ Icon, t, d }) => (
+                <li key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
+                  <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
+                  <div>
+                    <div className="font-condensed text-[21px] font-bold leading-tight text-navy">{t}</div>
+                    <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>
 
       {/* CE QUE CHERRYZ VOUS APPORTE */}
-      <section className="bg-surface-alt py-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[680px] text-center">
-            <SectionEyebrow label="CE QUE CHERRYZ VOUS APPORTE" centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
-              Une connexion pro, sans
-              <br />
-              les contraintes d&apos;un opérateur
-            </h2>
+      <section className="bg-navy-deep py-20 text-white md:py-28">
+        <div className={wrap}>
+          <Reveal>
+            <h2 className={`${h2} max-w-[22ch]`}>Une connexion pro, sans les contraintes d&apos;un opérateur.</h2>
           </Reveal>
-          <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
-            <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-cherry-alt p-[30px] text-white sm:col-span-2">
-              <div className="absolute -right-8 -top-10 h-[170px] w-[170px] rounded-full bg-white/[0.08]" />
-              <div className="relative">
-                <div className="font-condensed text-[13px] font-semibold tracking-[1.4px] text-white/75">PRIX NÉGOCIÉ</div>
-                <div className="mt-1 font-condensed text-[46px] font-bold leading-none">
-                  70 000 <span className="text-[22px] font-semibold">XAF/Mbps/mois</span>
+          <Reveal className={`${sheet} mt-12 px-5 pb-6 pt-9 text-navy sm:px-9`} delay={0.05}>
+            <dl className="m-0 grid grid-cols-1 gap-x-12 border-t-2 border-navy md:grid-cols-2">
+              {features.map(({ Icon, t, d }) => (
+                <div key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
+                  <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
+                  <div>
+                    <dt className="font-condensed text-[21px] font-bold leading-tight">{t}</dt>
+                    <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</dd>
+                  </div>
                 </div>
-                <p className="mt-[10px] max-w-[360px] font-sans text-[15.5px] leading-[1.5] text-white/85">
-                  Grâce à notre pouvoir d&apos;agrégation auprès des opérateurs.
-                </p>
-              </div>
-            </div>
-            {features.map(({ Icon, t, d }) => (
-              <div key={t} className="rounded-2xl border border-navy/[0.06] bg-white px-6 py-[26px] transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]">
-                <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry-alt/[0.08]">
-                  <Icon className="text-[22px] text-cherry-alt" />
-                </div>
-                <h4 className="m-0 font-condensed text-[20px] font-bold">{t}</h4>
-                <p className="mt-[5px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.62]">{d}</p>
-              </div>
-            ))}
-            <div className="relative flex items-center gap-[22px] overflow-hidden rounded-2xl bg-navy p-[30px] text-white sm:col-span-2">
-              <div className="absolute -bottom-[50px] -left-8 h-[170px] w-[170px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.35),transparent 68%)" }} />
-              <div className="relative flex h-[58px] w-[58px] flex-none items-center justify-center rounded-[14px] bg-white/[0.08]">
-                <Users className="text-[28px] text-accent-vivid" />
-              </div>
-              <div className="relative">
-                <h4 className="m-0 font-condensed text-[24px] font-bold">Multi-opérateurs</h4>
-                <p className="mt-[5px] max-w-[340px] font-sans text-[15.5px] leading-[1.5] text-white/75">
-                  On choisit le meilleur réseau pour <strong className="text-white">votre</strong> localisation, pas celui d&apos;un fournisseur unique.
-                </p>
-              </div>
-            </div>
+              ))}
+            </dl>
+            <p className="mb-0 mt-4 font-sans text-[13.5px] text-ink-soft">
+              *Contrat signé devant notaire requis avant le lancement du test.
+            </p>
           </Reveal>
-          <p className="mx-1 mt-4 font-sans text-[13px] text-navy/50">
-            *Contrat signé devant notaire requis avant le lancement du test.
-          </p>
         </div>
       </section>
 
       {/* COMMENT ÇA MARCHE */}
-      <section id="comment" className="scroll-mt-20 bg-white pb-24 pt-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[640px] text-center">
-            <SectionEyebrow label="COMMENT ÇA MARCHE" centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
-              Du premier contact à la connexion
-            </h2>
+      <section id="comment" className="scroll-mt-24 bg-ground py-20 md:py-28">
+        <div className={wrap}>
+          <Reveal>
+            <h2 className={h2}>Du premier contact à la connexion.</h2>
           </Reveal>
-          <Reveal className="relative grid grid-cols-2 gap-[14px] sm:grid-cols-3 lg:grid-cols-6" delay={0.05}>
-            <div className="absolute left-[8%] right-[8%] top-[26px] z-0 hidden h-[2px] lg:block" style={{ background: "repeating-linear-gradient(90deg,rgba(160,4,45,.35) 0 10px,transparent 10px 18px)" }} />
-            {steps.map((s) => (
-              <div key={s.k} className="relative z-[1] text-center">
-                <div
-                  className="mx-auto flex h-[54px] w-[54px] items-center justify-center rounded-full text-[22px] text-white"
-                  style={{
-                    background: s.result ? "#101b28" : "#a0042d",
-                    boxShadow: s.result ? "0 12px 24px -12px rgba(16,27,40,.6)" : "0 12px 24px -12px rgba(160,4,45,.9)",
-                  }}
-                >
-                  <s.Icon />
-                </div>
-                <div className="mt-3 font-condensed text-[12px] font-semibold tracking-[1px]" style={{ color: s.result ? "#101b28" : "#a0042d" }}>
-                  {s.k}
-                </div>
-                <div className="mt-[2px] font-condensed text-[17px] font-bold">{s.t}</div>
-              </div>
-            ))}
-          </Reveal>
-          <Reveal className="mt-[52px] text-center" delay={0.1}>
-            <Link href={QUOTE.ip} className={btnPrimary}>
-              Commencer ma demande →
+          <Reveal className={`${sheet} mt-12 px-5 pb-7 pt-9 sm:px-9`} delay={0.05}>
+            <ol className="m-0 grid list-none grid-cols-1 border-t-2 border-navy p-0 sm:grid-cols-2 lg:grid-cols-6">
+              {steps.map((s, i) => (
+                <li key={s.t} className="flex items-center gap-3 border-b border-rule py-5 lg:flex-col lg:items-start lg:gap-4 lg:border-b-0 lg:border-r lg:px-4 lg:py-6 lg:first:pl-0 lg:last:border-r-0">
+                  <span className="font-condensed text-[19px] font-bold tabular-nums text-ink-soft">{String(i + 1).padStart(2, "0")}</span>
+                  <s.Icon aria-hidden className="text-[24px] text-navy" />
+                  <span className="font-condensed text-[20px] font-bold leading-tight text-navy">{s.t}</span>
+                </li>
+              ))}
+            </ol>
+            <Link href={QUOTE.ip} className={`${btnCherry} mt-7`}>
+              <ClipboardIcon aria-hidden className="text-[20px]" />
+              Commencer ma demande
+              <ArrowRightIcon aria-hidden className="text-[19px]" />
             </Link>
           </Reveal>
         </div>
       </section>
 
-      <FinalCta
-        title={
-          <>
-            Un Internet pro, dédié,
-            <br />à partir de 45 000 XAF/Mbps.
-          </>
-        }
-        subtitle="Notre équipe se déplace gratuitement pour étudier votre situation, partout au Cameroun."
-        actions={
-          <>
-            <Link href={QUOTE.ip} className={btnPrimary}>
-              {QUOTE_LABEL} →
-            </Link>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnGhost}>
-              Préférer un appel →
-            </a>
-          </>
-        }
+      <ContactClose
+        quoteHref={QUOTE.ip}
+        callHref={CAL_IP}
+        title="Un Internet pro, dédié, à partir de 45 000 XAF/Mbps."
       />
     </>
   );

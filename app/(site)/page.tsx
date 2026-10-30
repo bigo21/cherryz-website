@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/site/Reveal";
 import type { Logo } from "@/components/site/LogoMarquee";
-import HomeHero, { Stamp } from "@/components/home/HomeHero";
+import HomeHero from "@/components/home/HomeHero";
+import ContactClose from "@/components/site/ContactClose";
 import { BrokerDiagramTall, BrokerDiagramWide } from "@/components/home/BrokerDiagram";
 import { ArrowRightIcon, CheckLineIcon, ClipboardIcon, GlobeIcon, PhoneIcon, WhatsAppIcon, WifiIcon } from "@/components/site/icons";
 import { CONTACT, QUOTE } from "@/lib/site/site";
@@ -79,6 +80,7 @@ const clients: Logo[] = [
   { src: "/logos/trim/best-dental.png", alt: "Best Dental" },
   { src: "/logos/trim/dpg-kennel.png", alt: "DPG Kennel" },
   { src: "/logos/trim/aaltelsolutions.png", alt: "AALTELSOLUTIONS" },
+  { src: "/logos/trim/1xbet.png", alt: "1xBet" },
 ];
 
 const h2 = "m-0 font-condensed text-[clamp(34px,4.2vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]";
@@ -275,9 +277,9 @@ export default function Home() {
               </h2>
               <span className="font-sans text-[14px] text-ink-soft">Entreprises, hôtels, institutions</span>
             </div>
-            <ul className="m-0 grid list-none grid-cols-2 p-0 sm:grid-cols-4 lg:grid-cols-8">
+            <ul className="m-0 flex list-none flex-wrap justify-center p-0">
               {clients.map((c) => (
-                <li key={c.src} className="flex h-[96px] items-center justify-center border-b border-rule px-4">
+                <li key={c.src} className="flex h-[96px] w-1/2 items-center justify-center border-b border-rule px-4 sm:w-1/4 lg:w-[12.5%]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={c.src} alt={c.alt} loading="lazy" className="max-h-[44px] max-w-[112px] object-contain" />
                 </li>
@@ -287,66 +289,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT : Yaoundé, et les trois façons de nous joindre */}
-      <section className="bg-navy text-white">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 lg:grid-cols-2">
-          <div className="relative min-h-[300px] lg:min-h-[600px]">
-            <Image
-              src="/photos/refonte/yaounde-nlongkak.jpg"
-              alt="Le carrefour Nlongkak à Yaoundé"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="px-4 py-16 sm:px-6 md:px-12 lg:py-20 lg:pr-16 xl:pr-[calc((100vw-1280px)/2+48px)] 2xl:pr-[128px]">
-            <div className="max-w-[560px]">
-              <div className="flex items-start justify-between gap-6">
-                <h2 className={`${h2} max-w-[17ch] text-white`}>Basés à Yaoundé, sur le terrain partout au Cameroun.</h2>
-                <Stamp className="hidden h-[92px] w-[92px] flex-none text-white/85 sm:block" />
-              </div>
-              <p className="mt-6 max-w-[48ch] font-sans text-[17.5px] leading-[1.6] text-white/80">
-                Notre équipe se déplace gratuitement pour étudier votre situation.
-                Choisissez le moyen qui vous arrange : de vraies personnes vous
-                répondent.
-              </p>
-              <div className="mt-10 flex flex-col gap-3">
-                <Link
-                  href={QUOTE.hub}
-                  data-primary-cta
-                  className="flex items-center justify-between gap-4 rounded-[10px] bg-cherry px-6 py-5 font-condensed text-[20px] font-semibold tracking-[0.01em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  <span className="flex items-center gap-3">
-                    <ClipboardIcon aria-hidden className="text-[22px]" /> Questionnaire de devis, 3 minutes
-                  </span>
-                  {arrow}
-                </Link>
-                <a
-                  href={CONTACT.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-primary-cta
-                  className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-[10px] border-[1.5px] border-white/25 px-6 py-5 font-condensed text-[20px] font-semibold text-white transition-colors hover:border-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  <span className="flex items-center gap-3">
-                    <WhatsAppIcon aria-hidden className="text-[22px] text-whatsapp" /> WhatsApp
-                  </span>
-                  <span className="font-sans text-[16px] font-medium tabular-nums text-white/75">{CONTACT.phoneDisplay}</span>
-                </a>
-                <a
-                  href={CONTACT.phoneHref}
-                  className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-[10px] border-[1.5px] border-white/25 px-6 py-5 font-condensed text-[20px] font-semibold text-white transition-colors hover:border-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  <span className="flex items-center gap-3">
-                    <PhoneIcon aria-hidden className="text-[22px]" /> Appeler
-                  </span>
-                  <span className="font-sans text-[16px] font-medium tabular-nums text-white/75">{CONTACT.phoneDisplay}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactClose quoteHref={QUOTE.hub} />
     </>
   );
 }
