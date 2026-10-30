@@ -494,6 +494,15 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   </span>
                 </label>
               )}
+              {q.type === "consent" && (
+                <p className="mb-0 mt-2 font-sans text-[13.5px] text-[#4b5563]">
+                  Détails dans notre{" "}
+                  <Link href="/confidentialite" target="_blank" className="font-semibold text-navy-alt underline underline-offset-4">
+                    politique de confidentialité
+                  </Link>
+                  .
+                </p>
+              )}
 
               {err && <FieldError id={errId} message={err} />}
             </Field>

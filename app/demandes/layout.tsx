@@ -31,6 +31,10 @@ export default function DemandesLayout({
         </span>
         <div className="mt-2 font-sans text-[13px] text-white/60">
           © 2026 Cherryz. Tous droits réservés.
+          <span aria-hidden> · </span>
+          <Link href="/mentions-legales" className="hover:text-white">Mentions légales</Link>
+          <span aria-hidden> · </span>
+          <Link href="/confidentialite" className="hover:text-white">Confidentialité</Link>
         </div>
       </footer>
     </div>
