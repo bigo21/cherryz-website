@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import type { Locale } from "@/lib/i18n/config";
 
 export interface ContactPayload {
   full_name: string;
@@ -38,22 +39,40 @@ function teamHtml(p: ContactPayload): string {
   </div>`;
 }
 
-function prospectHtml(firstName: string): string {
+const PROSPECT = {
+  fr: {
+    subject: "Nous avons bien reçu votre message | Cherryz",
+    hi: (n: string) => (n ? `Merci ${n} !` : "Merci !"),
+    received: "Nous avons bien reçu votre message. Notre équipe vous recontacte <strong>sous 24h</strong>.",
+    faster: "Pour aller plus vite, vous pouvez aussi réserver un créneau sur",
+    slogan: "Cherryz — Vous connecte !",
+  },
+  en: {
+    subject: "We have received your message | Cherryz",
+    hi: (n: string) => (n ? `Thank you, ${n}!` : "Thank you!"),
+    received: "We have received your message. Our team will get back to you <strong>within 24 hours</strong>.",
+    faster: "To speed things up, you can also book a slot on",
+    slogan: "Cherryz — Gets you connected!",
+  },
+};
+
+function prospectHtml(firstName: string, lang: Locale): string {
+  const t = PROSPECT[lang];
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f6f5f3;padding:24px">
     <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden">
-      <div style="background:${NAVY};padding:24px"><h1 style="margin:0;color:#fff;font-size:22px">Merci ${esc(firstName) || ""} !</h1></div>
+      <div style="background:${NAVY};padding:24px"><h1 style="margin:0;color:#fff;font-size:22px">${t.hi(esc(firstName))}</h1></div>
       <div style="padding:24px;color:${NAVY};font-size:15px;line-height:1.6">
-        <p style="margin:0 0 16px">Nous avons bien reçu votre message. Notre équipe vous recontacte <strong>sous 24h</strong>.</p>
-        <p style="margin:0 0 16px">Pour aller plus vite, vous pouvez aussi réserver un créneau sur <a href="https://cal.com/vireel/cherryzip" style="color:${CHERRY}">cal.com</a>.</p>
-        <p style="margin:20px 0 0;font-weight:700;color:${CHERRY}">Cherryz — Vous connecte !</p>
+        <p style="margin:0 0 16px">${t.received}</p>
+        <p style="margin:0 0 16px">${t.faster} <a href="https://cal.com/vireel/cherryzip" style="color:${CHERRY}">cal.com</a>.</p>
+        <p style="margin:20px 0 0;font-weight:700;color:${CHERRY}">${t.slogan}</p>
       </div>
     </div>
   </div>`;
 }
 
 /** Best-effort: never fail the submission on an email error. */
-export async function sendContactEmails(p: ContactPayload): Promise<void> {
+export async function sendContactEmails(p: ContactPayload, lang: Locale = "fr"): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn("[contact] RESEND_API_KEY not set: skipping emails.");
@@ -67,7 +86,7 @@ export async function sendContactEmails(p: ContactPayload): Promise<void> {
       from: FROM,
       to: NOTIFY_TO,
       replyTo: p.email,
-      subject: `Nouveau message contact : ${p.besoin ?? "Général"} (${p.full_name})`,
+      subject: `${lang === "en" ? "[EN] " : ""}Nouveau message contact : ${p.besoin ?? "Général"} (${p.full_name})`,
       html: teamHtml(p),
     });
   } catch (e) {
@@ -77,8 +96,8 @@ export async function sendContactEmails(p: ContactPayload): Promise<void> {
     await resend.emails.send({
       from: FROM,
       to: p.email,
-      subject: "Nous avons bien reçu votre message | Cherryz",
-      html: prospectHtml(firstName),
+      subject: PROSPECT[lang].subject,
+      html: prospectHtml(firstName, lang),
     });
   } catch (e) {
     console.error("[contact] prospect email failed:", e);

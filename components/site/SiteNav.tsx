@@ -4,13 +4,21 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
+import { NAV_LINKS, quoteHrefFor } from "@/lib/site/site";
+import { chrome } from "@/content/chrome";
+import { useLang } from "@/lib/i18n/client";
+import { localize, splitLocale } from "@/lib/i18n/config";
 import { ArrowRightIcon } from "./icons";
+import LangSwitch from "./LangSwitch";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  // The menu remembers the page it was opened on, so navigating closes it.
+  const [openOn, setOpenOn] = useState<string | null>(null);
   const pathname = usePathname();
+  const lang = useLang();
+  const t = chrome[lang];
+  const { path } = splitLocale(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -19,11 +27,10 @@ export default function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the mobile menu on route change.
-  useEffect(() => setOpen(false), [pathname]);
+  const open = openOn === pathname;
 
   const solid = scrolled || open;
-  const quoteHref = quoteHrefFor(pathname);
+  const quoteHref = localize(lang, quoteHrefFor(path));
 
   return (
     <nav
@@ -35,7 +42,7 @@ export default function SiteNav() {
       }}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-[18px] md:px-12">
-        <Link href="/" className="flex items-center" aria-label="Cherryz, retour à l'accueil">
+        <Link href={localize(lang, "/")} className="flex items-center" aria-label={t.homeLabel}>
           <Image
             src="/brand/logo-white.png"
             alt="Cherryz"
@@ -49,23 +56,25 @@ export default function SiteNav() {
         {/* Desktop links */}
         <div className="hidden items-center gap-[34px] md:flex">
           {NAV_LINKS.map((l) => {
-            const active = l.href === pathname;
+            const active = l.href === path;
             return (
               <Link
                 key={l.href}
-                href={l.href}
+                href={localize(lang, l.href)}
+                aria-current={active ? "page" : undefined}
                 className="font-condensed text-[15px] font-semibold tracking-[0.6px] transition-colors"
                 style={{ color: active ? "#fff" : "rgba(255,255,255,.72)" }}
               >
-                {l.label}
+                {t.nav[l.key]}
               </Link>
             );
           })}
+          <LangSwitch className="font-condensed text-[15px] font-semibold tracking-[0.06em] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
           <Link
             href={quoteHref}
             className="inline-flex items-center gap-2 rounded-[10px] bg-cherry px-5 py-3 font-condensed text-[16px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            {QUOTE_LABEL}
+            {t.quoteLabel}
             <ArrowRightIcon aria-hidden className="text-[17px]" />
           </Link>
         </div>
@@ -73,8 +82,8 @@ export default function SiteNav() {
         {/* Mobile toggle */}
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          onClick={() => setOpenOn(open ? null : pathname)}
+          aria-label={open ? t.menuClose : t.menuOpen}
           aria-expanded={open}
           className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
         >
@@ -100,17 +109,19 @@ export default function SiteNav() {
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.href}
-                href={l.href}
+                href={localize(lang, l.href)}
+                aria-current={l.href === path ? "page" : undefined}
                 className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85"
               >
-                {l.label}
+                {t.nav[l.key]}
               </Link>
             ))}
+            <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85" />
             <Link
               href={quoteHref}
               className="mt-4 inline-flex items-center justify-center gap-2 rounded-[10px] bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              {QUOTE_LABEL}
+              {t.quoteLabel}
               <ArrowRightIcon aria-hidden className="text-[17px]" />
             </Link>
           </div>

@@ -14,6 +14,16 @@ la maintenance est active par défaut même si la variable est oubliée. Un
 **Ne pas supprimer `MAINTENANCE_MODE=off` en Production** : sans la variable, le site
 repasserait en maintenance au déploiement suivant.
 
+## Langues (FR / EN)
+
+Le français est servi à la racine (`/internet-b2b`), l'anglais sous `/en`
+(`/en/internet-b2b`). Les pages vivent dans `app/[lang]/` ; `proxy.ts` réécrit
+en interne les URL françaises vers `/fr/...` (l'URL visible ne change pas) et
+redirige `/fr/...` vers l'URL sans préfixe. Les textes sont dans `content/`
+(un fichier par page, FR et EN côte à côte). Les réponses aux questionnaires sont
+toujours enregistrées en français ; les emails à l'équipe d'une demande anglaise
+portent `[EN]` dans l'objet.
+
 ## Mise en place (dashboard Vercel)
 
 1. **Importer le repo** `github.com/bigo21/cherryz-website` dans Vercel.

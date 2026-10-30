@@ -7,12 +7,14 @@ import ContactClose from "@/components/site/ContactClose";
 import Reveal from "@/components/site/Reveal";
 import { ArrowRightIcon, ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
 import { CAL_IP, QUOTE } from "@/lib/site/site";
+import { internetB2B } from "@/content/internet-b2b";
+import { localize } from "@/lib/i18n/config";
+import { getLang, pageMetadata } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Internet B2B avec IP publique dédiée | Cherryz",
-  description:
-    "Internet professionnel dédié avec IP fixe, à partir de 45 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return pageMetadata(lang, "/internet-b2b", internetB2B[lang].meta);
+}
 
 const l = (p: SVGProps<SVGSVGElement>) => ({
   viewBox: "0 0 24 24", width: "1em", height: "1em", fill: "none",
@@ -29,48 +31,29 @@ const Server = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><rect x="3" y="4"
 const Camera = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M3 8l12-3 2 6-12 3z" /><path d="M17 11l4 1-1 4M5 14v6M3 20h4" /></svg>);
 const Check = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M5 13l4 4L19 7" /></svg>);
 
-const usages = [
-  { Icon: Lock, t: "Sécuriser vos VPN inter-agences", d: "Reliez vos sites en toute confidentialité." },
-  { Icon: Server, t: "Héberger vos serveurs internes", d: "Accessibles à distance, en toute sécurité." },
-  { Icon: PhoneIcon, t: "Call centers & systèmes VoIP", d: "Une voix claire, sans coupure." },
-  { Icon: ShieldCheck, t: "Conformité de vos transactions", d: "Indispensable pour vos flux financiers." },
-  { Icon: Camera, t: "Vidéosurveillance en temps réel", d: "Vos caméras accessibles où que vous soyez." },
-];
-
-const features = [
-  { Icon: Users, t: "Multi-opérateurs", d: "On choisit le meilleur réseau pour votre localisation, pas celui d'un fournisseur unique." },
-  { Icon: Bolt, t: "Installation rapide", d: "Faisceaux hertziens : pas de génie civil, pas de tranchées." },
-  { Icon: Lock, t: "IP dédiée incluse", d: "Votre adresse, rien qu'à vous. Personne d'autre ne la partage." },
-  { Icon: Flask, t: "Test en parallèle", d: "Testez sans quitter votre opérateur actuel*." },
-  { Icon: GlobeIcon, t: "Couverture nationale", d: "Partout au Cameroun via nos partenaires." },
-  { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive, pas un call center distant." },
-];
-
-const steps = [
-  { Icon: ClipboardIcon, t: "Demande en ligne" },
-  { Icon: PhoneIcon, t: "Contact sous 48h" },
-  { Icon: PinIcon, t: "Descente gratuite" },
-  { Icon: Router, t: "Cotation sur-mesure" },
-  { Icon: Bolt, t: "Installation rapide" },
-  { Icon: Check, t: "Connecté, vous économisez" },
-];
+// Icons, in the order of the items in content/internet-b2b.ts.
+const usageIcons = [Lock, Server, PhoneIcon, ShieldCheck, Camera];
+const featureIcons = [Users, Bolt, Lock, Flask, GlobeIcon, ShieldCheck];
+const stepIcons = [ClipboardIcon, PhoneIcon, PinIcon, Router, Bolt, Check];
 
 const h2 = "m-0 font-condensed text-[clamp(34px,4.2vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]";
 const wrap = "mx-auto max-w-[1280px] px-4 sm:px-6 md:px-12";
 const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
 
-export default function InternetB2B() {
+export default async function InternetB2B() {
+  const lang = await getLang();
+  const t = internetB2B[lang];
   return (
     <>
       <InkHero
-        title="Internet dédié. IP fixe."
-        lead="Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption."
+        title={t.hero.title}
+        lead={t.hero.lead}
         actions={
           <a href="#comment" className={inkLink}>
-            Comment ça marche
+            {t.hero.how}
           </a>
         }
-        facts={["Régulée ART", "IP dédiée incluse", "Installation sans génie civil"]}
+        facts={t.hero.facts}
       >
         <QuoteSheet path="ip" />
       </InkHero>
@@ -79,23 +62,22 @@ export default function InternetB2B() {
       <section className="bg-ground py-20 md:py-28">
         <div className={`${wrap} grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14`}>
           <Reveal className="lg:col-span-5">
-            <h2 className={h2}>Qu&apos;est-ce qu&apos;une IP publique dédiée ?</h2>
+            <h2 className={h2}>{t.ip.title}</h2>
             <p className="mt-6 max-w-[52ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
-              Votre adresse IP publique, c&apos;est l&apos;identité de votre
-              entreprise sur Internet. Elle est indispensable pour faire tourner
-              vos outils métier les plus sensibles.
+              {t.ip.lead}
             </p>
             <p className="mt-6 max-w-[52ch] border-l-2 border-navy pl-5 font-sans text-[17.5px] font-semibold leading-[1.55] text-navy">
-              Avec Cherryz, votre IP est dédiée : personne d&apos;autre ne la
-              partage, et votre bande passante est garantie en permanence.
+              {t.ip.point}
             </p>
           </Reveal>
           <Reveal className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-7`} delay={0.05}>
             <h3 className="m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]">
-              Ce qu&apos;elle vous permet
+              {t.ip.sheet}
             </h3>
             <ul className="m-0 list-none p-0">
-              {usages.map(({ Icon, t, d }) => (
+              {t.ip.usages.map(({ t, d }, i) => {
+                const Icon = usageIcons[i];
+                return (
                 <li key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
@@ -103,7 +85,8 @@ export default function InternetB2B() {
                     <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</p>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </Reveal>
         </div>
@@ -113,11 +96,13 @@ export default function InternetB2B() {
       <section className="bg-navy-deep py-20 text-white md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={`${h2} max-w-[22ch]`}>Une connexion pro, sans les contraintes d&apos;un opérateur.</h2>
+            <h2 className={`${h2} max-w-[22ch]`}>{t.features.title}</h2>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-6 pt-9 text-navy sm:px-9`} delay={0.05}>
             <dl className="m-0 grid grid-cols-1 gap-x-12 border-t-2 border-navy md:grid-cols-2">
-              {features.map(({ Icon, t, d }) => (
+              {t.features.items.map(({ t, d }, i) => {
+                const Icon = featureIcons[i];
+                return (
                 <div key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
@@ -125,10 +110,11 @@ export default function InternetB2B() {
                     <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</dd>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </dl>
             <p className="mb-0 mt-4 font-sans text-[13.5px] text-ink-soft">
-              *Contrat signé devant notaire requis avant le lancement du test.
+              {t.features.footnote}
             </p>
           </Reveal>
         </div>
@@ -138,21 +124,24 @@ export default function InternetB2B() {
       <section id="comment" className="scroll-mt-24 bg-ground py-20 md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={h2}>Du premier contact à la connexion.</h2>
+            <h2 className={h2}>{t.steps.title}</h2>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-7 pt-9 sm:px-9`} delay={0.05}>
             <ol className="m-0 grid list-none grid-cols-1 border-t-2 border-navy p-0 sm:grid-cols-2 lg:grid-cols-6">
-              {steps.map((s, i) => (
-                <li key={s.t} className="flex items-center gap-3 border-b border-rule py-5 lg:flex-col lg:items-start lg:gap-4 lg:border-b-0 lg:border-r lg:px-4 lg:py-6 lg:first:pl-0 lg:last:border-r-0">
+              {t.steps.items.map((label, i) => {
+                const Icon = stepIcons[i];
+                return (
+                <li key={label} className="flex items-center gap-3 border-b border-rule py-5 lg:flex-col lg:items-start lg:gap-4 lg:border-b-0 lg:border-r lg:px-4 lg:py-6 lg:first:pl-0 lg:last:border-r-0">
                   <span className="font-condensed text-[19px] font-bold tabular-nums text-ink-soft">{String(i + 1).padStart(2, "0")}</span>
-                  <s.Icon aria-hidden className="text-[24px] text-navy" />
-                  <span className="font-condensed text-[20px] font-bold leading-tight text-navy">{s.t}</span>
+                  <Icon aria-hidden className="text-[24px] text-navy" />
+                  <span className="font-condensed text-[20px] font-bold leading-tight text-navy">{label}</span>
                 </li>
-              ))}
+                );
+              })}
             </ol>
-            <Link href={QUOTE.ip} className={`${btnCherry} mt-7`}>
+            <Link href={localize(lang, QUOTE.ip)} className={`${btnCherry} mt-7`}>
               <ClipboardIcon aria-hidden className="text-[20px]" />
-              Commencer ma demande
+              {t.steps.cta}
               <ArrowRightIcon aria-hidden className="text-[19px]" />
             </Link>
           </Reveal>
@@ -162,7 +151,7 @@ export default function InternetB2B() {
       <ContactClose
         quoteHref={QUOTE.ip}
         callHref={CAL_IP}
-        title="Un Internet pro, dédié, à partir de 45 000 XAF/Mbps."
+        title={t.close}
       />
     </>
   );

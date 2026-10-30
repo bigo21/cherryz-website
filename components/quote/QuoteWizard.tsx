@@ -14,6 +14,9 @@ import { submitQuoteRequest } from "@/app/actions/quote";
 import { ArrowRightIcon, LockIcon, WhatsAppIcon } from "@/components/site/icons";
 import { Stamp } from "@/components/site/QuoteSheet";
 import { CONTACT } from "@/lib/site/site";
+import { quote, schemaEn, type WizardCopy } from "@/content/quote";
+import { useLang } from "@/lib/i18n/client";
+import { localize } from "@/lib/i18n/config";
 
 interface SavedState {
   step: number;
@@ -76,6 +79,10 @@ function collectTracking() {
 
 export default function QuoteWizard({ type }: { type: QuoteType }) {
   const router = useRouter();
+  const lang = useLang();
+  const t = quote[lang].wizard;
+  // Questions are written (and answers stored) in French; English only changes what is shown.
+  const tr = (s: string) => (lang === "en" ? (schemaEn[s] ?? s) : s);
   const schema = getSchema(type);
   const total = schema.length;
 
@@ -157,22 +164,20 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const res = await submitQuoteRequest({ type, answers, tracking: collectTracking() });
+      const res = await submitQuoteRequest({ type, answers, tracking: { ...collectTracking(), lang }, lang });
       if (!res.ok) throw new Error(res.error ?? "unknown");
       moved.current = true;
       setDone(true);
       scrollTop();
     } catch {
-      setSubmitError(
-        "Votre demande n'a pas pu être envoyée. Vos réponses sont conservées : réessayez dans un instant, ou écrivez-nous sur WhatsApp.",
-      );
+      setSubmitError(t.sendError);
     } finally {
       setSubmitting(false);
     }
   }
 
   function next() {
-    const errs = validateQuestions(visible, answers);
+    const errs = validateQuestions(visible, answers, lang);
     const invalid = visible.find((q) => errs[q.id]);
     if (invalid) {
       setErrors(errs);
@@ -198,7 +203,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
   function prev() {
     if (step <= 1) {
-      router.push("/demandes");
+      router.push(localize(lang, "/demandes"));
       return;
     }
     moved.current = true;
@@ -233,23 +238,18 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
           tabIndex={-1}
           className="m-0 font-condensed text-[36px] font-bold leading-[1.02] outline-none"
         >
-          Merci{prospectName ? ` ${prospectName}` : ""} !
+          {t.thanks(prospectName)}
         </h2>
         <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-ink-soft">
-          Votre demande a bien été reçue. Un email de confirmation vient de vous
-          être envoyé.
+          {t.received}
         </p>
         <ol className="mx-auto mt-8 max-w-[440px] list-none border-t-2 border-navy p-0 text-left font-sans text-[15.5px] leading-[1.45] text-navy">
-          {[
-            "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
-            "Nous vous recontactons sous 48h pour affiner votre besoin.",
-            "Si besoin, un technicien se déplace gratuitement sur votre site.",
-          ].map((t, i) => (
-            <li key={t} className="flex gap-4 border-b border-rule py-3">
+          {t.after.map((line, i) => (
+            <li key={line} className="flex gap-4 border-b border-rule py-3">
               <span className="flex-none font-condensed text-[17px] font-bold tabular-nums text-ink-soft">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              {t}
+              {line}
             </li>
           ))}
         </ol>
@@ -264,10 +264,10 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             WhatsApp
           </a>
           <Link
-            href="/"
+            href={localize(lang, "/")}
             className="inline-flex items-center gap-[9px] rounded-[10px] border-[1.5px] border-navy/25 bg-paper px-6 py-[14px] font-condensed text-[17px] font-semibold text-navy transition-colors hover:border-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
           >
-            Retour à l&apos;accueil
+            {t.home}
           </Link>
         </div>
         <button
@@ -275,7 +275,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
           onClick={restart}
           className="mt-6 cursor-pointer font-sans text-[15px] font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy"
         >
-          Faire une nouvelle demande
+          {t.restart}
         </button>
       </div>
     );
@@ -288,21 +288,21 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         <div className="mb-[26px]">
           <div className="mb-[9px] flex items-baseline justify-between gap-3">
             <span className="whitespace-nowrap font-condensed text-[15px] font-semibold tracking-[0.06em] tabular-nums text-navy">
-              Étape {step} sur {total}
+              {t.stepOf(step, total)}
             </span>
             {step < total && (
               <span className="min-w-0 truncate text-right font-sans text-[13.5px] font-medium text-ink-soft">
-                Ensuite : {schema[step].title}
+                {t.next} {tr(schema[step].title)}
               </span>
             )}
           </div>
           <div
             role="progressbar"
-            aria-label="Progression du questionnaire"
+            aria-label={t.progress}
             aria-valuemin={0}
             aria-valuemax={total}
             aria-valuenow={step - 1}
-            aria-valuetext={`Étape ${step} sur ${total}`}
+            aria-valuetext={t.stepOf(step, total)}
             className="h-[4px] overflow-hidden bg-rule"
           >
             <div
@@ -317,15 +317,15 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
           tabIndex={-1}
           className="mb-1 font-condensed text-[30px] font-bold leading-[1.05] outline-none"
         >
-          {currentStep.title}
+          {tr(currentStep.title)}
         </h2>
         <p className="mb-6 border-b-2 border-navy pb-4 font-sans text-[16px] text-ink-soft">
-          {currentStep.subtitle}
+          {tr(currentStep.subtitle)}
         </p>
 
         <div role="status" aria-live="polite" className="sr-only">
           {errorCount
-            ? `${errorCount} ${errorCount > 1 ? "réponses manquent" : "réponse manque"} sur cette étape.`
+            ? t.missing(errorCount)
             : ""}
         </div>
 
@@ -338,7 +338,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
           const isGroup = q.type === "single" || q.type === "multi" || q.type === "scale" || q.type === "consent";
           const title = (
             <>
-              {q.label}
+              {tr(q.label)}
               {q.required ? (
                 <span className="text-cherry" aria-hidden>
                   {" "}*
@@ -357,7 +357,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               )}
               {q.type !== "consent" && (
                 <div className="mb-[11px] font-sans text-[13.5px] font-medium text-ink-soft">
-                  {q.required ? <span className="sr-only">Obligatoire</span> : "Facultatif"}
+                  {q.required ? <span className="sr-only">{t.required}</span> : t.optional}
                 </div>
               )}
 
@@ -378,7 +378,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                         }
                         className={chipClass(selected)}
                       >
-                        {opt}
+                        {tr(opt)}
                       </button>
                     );
                   })}
@@ -393,7 +393,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                         key={n}
                         type="button"
                         aria-pressed={v === n}
-                        aria-label={`${n} sur 5${n === 1 ? ", très insatisfait" : n === 5 ? ", très satisfait" : ""}`}
+                        aria-label={t.scale(n)}
                         onClick={() => setAns(q.id, n)}
                         className={scaleChipClass(v === n)}
                       >
@@ -402,8 +402,8 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                     ))}
                   </div>
                   <div aria-hidden className="mt-2 flex max-w-[270px] justify-between font-sans text-[13.5px] font-medium text-ink-soft">
-                    <span>1 = très insatisfait</span>
-                    <span>5 = très satisfait</span>
+                    <span>{t.scaleLow}</span>
+                    <span>{t.scaleHigh}</span>
                   </div>
                 </div>
               )}
@@ -411,10 +411,10 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               {showOther && (
                 <input
                   type="text"
-                  aria-label={`Précisez « Autre » : ${q.label}`}
+                  aria-label={t.otherAria(tr(q.label))}
                   value={String(answers[`${q.id}__autre`] ?? "")}
                   onChange={(e) => setAns(`${q.id}__autre`, e.target.value)}
-                  placeholder="Précisez…"
+                  placeholder={t.otherPh}
                   className={`${inputClass} mt-[10px]`}
                 />
               )}
@@ -427,7 +427,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   autoComplete={autoCompleteFor(q.id, q.type)}
                   value={String(v ?? "")}
                   onChange={(e) => setAns(q.id, e.target.value)}
-                  placeholder={q.placeholder}
+                  placeholder={q.placeholder && tr(q.placeholder)}
                   aria-invalid={err ? true : undefined}
                   aria-describedby={errId}
                   aria-required={q.required || undefined}
@@ -441,7 +441,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   rows={4}
                   value={String(v ?? "")}
                   onChange={(e) => setAns(q.id, e.target.value)}
-                  placeholder={q.placeholder}
+                  placeholder={q.placeholder && tr(q.placeholder)}
                   aria-invalid={err ? true : undefined}
                   aria-describedby={errId}
                   aria-required={q.required || undefined}
@@ -457,6 +457,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   textValue={String(answers[`${q.id}__text`] ?? "")}
                   onDetect={() => detectGeo(q.id)}
                   onText={(val) => setAns(`${q.id}__text`, val)}
+                  t={t.geo}
                 />
               )}
 
@@ -485,17 +486,16 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                     {v === true ? <CheckMark /> : null}
                   </span>
                   <span className="font-sans text-[15px] leading-[1.45] text-navy">
-                    J&apos;accepte que Cherryz utilise mes informations pour me
-                    recontacter dans le cadre de ma demande.
+                    {t.consent}
                     <span className="text-cherry" aria-hidden> *</span>
                   </span>
                 </label>
               )}
               {q.type === "consent" && (
                 <p className="mb-0 mt-2 font-sans text-[13.5px] text-ink-soft">
-                  Détails dans notre{" "}
-                  <Link href="/confidentialite" target="_blank" className="font-semibold text-navy underline underline-offset-4">
-                    politique de confidentialité
+                  {t.consentDetails}{" "}
+                  <Link href={localize(lang, "/confidentialite")} target="_blank" className="font-semibold text-navy underline underline-offset-4">
+                    {t.consentLink}
                   </Link>
                   .
                 </p>
@@ -516,7 +516,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy underline underline-offset-4"
             >
               <WhatsAppIcon aria-hidden className="h-4 w-4 text-[#128c4a]" />
-              Écrire sur WhatsApp
+              {t.writeWhatsapp}
             </a>
           </div>
         )}
@@ -528,10 +528,10 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             disabled={submitting}
             className="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[10px] border-[1.5px] border-navy/20 bg-paper px-4 py-[14px] font-condensed text-[17px] font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy disabled:opacity-50 sm:px-6"
           >
-            {step <= 1 ? "Annuler" : (
+            {step <= 1 ? t.cancel : (
               <>
                 <ArrowRightIcon aria-hidden className="rotate-180 text-[17px]" />
-                Précédent
+                {t.prev}
               </>
             )}
           </button>
@@ -542,9 +542,9 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             aria-busy={submitting || undefined}
             className="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[10px] border-none bg-cherry px-5 py-[14px] font-condensed text-[18px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70 sm:px-7"
           >
-            {submitting ? "Envoi en cours…" : (
+            {submitting ? t.sending : (
               <>
-                {step >= total ? "Envoyer ma demande" : "Suivant"}
+                {step >= total ? t.send : t.nextBtn}
                 <ArrowRightIcon aria-hidden className="text-[18px]" />
               </>
             )}
@@ -553,7 +553,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
       </div>
       <p className="mt-4 flex items-center justify-center gap-[6px] text-center font-sans text-[13.5px] text-ink-soft">
         <LockIcon className="flex-none" aria-hidden />
-        Vos réponses sont enregistrées automatiquement sur cet appareil.
+        {t.saved}
       </p>
     </>
   );
@@ -609,6 +609,7 @@ function GeoField({
   textValue,
   onDetect,
   onText,
+  t,
 }: {
   inputId: string;
   value: GeoValue | undefined;
@@ -616,15 +617,16 @@ function GeoField({
   textValue: string;
   onDetect: () => void;
   onText: (val: string) => void;
+  t: WizardCopy["geo"];
 }) {
   const ok = Boolean(value?.ok);
   const hint = locating
-    ? "Localisation en cours… autorisez l'accès à votre position si votre navigateur le demande."
+    ? t.hintLocating
     : ok
-      ? `Position détectée : ${value?.coords}. Vous pouvez préciser ci-dessous si besoin.`
+      ? t.hintFound(value?.coords ?? "")
       : value?.denied
-        ? "Localisation non disponible : décrivez-la manuellement ci-dessous."
-        : "Ou décrivez votre localisation manuellement :";
+        ? t.hintDenied
+        : t.hintIdle;
   return (
     <div>
       <button
@@ -640,7 +642,7 @@ function GeoField({
           <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
           <circle cx="12" cy="10" r="2.5" />
         </svg>
-        {locating ? "Localisation…" : ok ? "Position détectée" : "Utiliser ma position actuelle"}
+        {locating ? t.locating : ok ? t.found : t.use}
         {ok && !locating ? <CheckMark /> : null}
       </button>
       <div aria-live="polite" className="my-[10px] font-sans text-[13.5px] font-medium text-ink-soft">
@@ -651,7 +653,7 @@ function GeoField({
         type="text"
         value={textValue}
         onChange={(e) => onText(e.target.value)}
-        placeholder="Quartier, points de repère"
+        placeholder={t.placeholder}
         className={inputClass}
       />
     </div>

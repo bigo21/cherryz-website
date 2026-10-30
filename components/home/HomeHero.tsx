@@ -2,17 +2,11 @@
 
 import { useState } from "react";
 import QuoteSheet, { type SheetPath } from "@/components/site/QuoteSheet";
+import type { home } from "@/content/home";
 
-// Copy lives here as data so the English dictionary can replace it later.
-const COPY = {
-  title: "On compare les opérateurs pour vous.",
-  lead: "Internet professionnel moins cher ou WiFi Zone rentable : Cherryz met Camtel, Orange, MTN et d'autres en concurrence, puis vous livre la meilleure solution, partout au Cameroun.",
-  pathLabel: "Votre projet",
-  tabs: { ip: "Connecter mon entreprise", wifi: "Lancer une WiFi Zone" },
-  trust: ["Régulée ART", "Partenaire Camtel · Orange · MTN", "Visite technique gratuite"],
-};
+export type HomeHeroCopy = (typeof home)["fr"]["hero"];
 
-export default function HomeHero() {
+export default function HomeHero({ t: COPY }: { t: HomeHeroCopy }) {
   const [path, setPath] = useState<SheetPath>("ip");
   const [stampKey, setStampKey] = useState(0);
 

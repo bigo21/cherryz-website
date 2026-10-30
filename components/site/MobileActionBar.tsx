@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CONTACT, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
+import { CONTACT, quoteHrefFor } from "@/lib/site/site";
+import { chrome } from "@/content/chrome";
+import { useLang } from "@/lib/i18n/client";
+import { localize, splitLocale } from "@/lib/i18n/config";
 import { ArrowRightIcon, WhatsAppIcon } from "./icons";
 
 /**
@@ -12,6 +15,8 @@ import { ArrowRightIcon, WhatsAppIcon } from "./icons";
  */
 export default function MobileActionBar() {
   const pathname = usePathname();
+  const lang = useLang();
+  const t = chrome[lang];
   const [scrolled, setScrolled] = useState(false);
   const [ctaInView, setCtaInView] = useState(false);
 
@@ -51,17 +56,17 @@ export default function MobileActionBar() {
       >
         <div className="flex gap-3">
           <Link
-            href={quoteHrefFor(pathname)}
+            href={localize(lang, quoteHrefFor(splitLocale(pathname).path))}
             className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-cherry px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
-            {QUOTE_LABEL}
+            {t.quoteLabel}
             <ArrowRightIcon aria-hidden className="text-[17px]" />
           </Link>
           <a
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Nous écrire sur WhatsApp"
+            aria-label={t.whatsappAria}
             className="flex flex-none items-center justify-center gap-2 rounded-[10px] border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
             <WhatsAppIcon className="h-[18px] w-[18px] text-whatsapp" />

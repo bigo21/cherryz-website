@@ -7,12 +7,14 @@ import ContactClose from "@/components/site/ContactClose";
 import Reveal from "@/components/site/Reveal";
 import { ArrowRightIcon, ClipboardIcon } from "@/components/site/icons";
 import { CAL_WIFI, QUOTE } from "@/lib/site/site";
+import { wifiZone } from "@/content/wifi-zone";
+import { localize } from "@/lib/i18n/config";
+import { getLang, pageMetadata } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "WiFi Zone monétisable clé en main | Cherryz",
-  description:
-    "Lancez votre business WiFi : immeuble, quartier, hôtel, campus, marché… Cherryz diagnostique, dimensionne, déploie et automatise la monétisation (vouchers, paiement mobile). Agrément ART, SAV de proximité.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return pageMetadata(lang, "/wifi-zone", wifiZone[lang].meta);
+}
 
 type Ic = ComponentType<SVGProps<SVGSVGElement>>;
 const l = (p: SVGProps<SVGSVGElement>) => ({
@@ -35,40 +37,10 @@ const Legal = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 3v18M
 const Trending = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M3 17l6-6 4 4 8-8M15 7h6v6" /></svg>);
 const ShieldCheck = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" /><path d="M9 12l2 2 4-4" /></svg>);
 
-const zones: { Icon: Ic; t: string; sub: string; d: string }[] = [
-  { Icon: Building, t: "Bâtiment / Immeuble", sub: "Résidences, immeubles de bureaux, co-living", d: "Couverture intérieure multi-étages, portail captif par locataire." },
-  { Icon: District, t: "Quartier", sub: "Zone résidentielle, cité, lotissement", d: "Antennes extérieures longue portée, distribution multi-foyers." },
-  { Icon: Hotel, t: "Hôtel / Auberge", sub: "Hôtels, motels, maisons d'hôtes", d: "WiFi premium par chambre, gestion par vouchers." },
-  { Icon: Campus, t: "Campus / École", sub: "Universités, lycées, centres de formation", d: "Haute densité, gestion de bande passante par zone." },
-  { Icon: Market, t: "Marché / Zone commerciale", sub: "Marchés, galeries marchandes, gares", d: "Points d'accès robustes, monétisation par session." },
-  { Icon: Factory, t: "Site industriel / Chantier", sub: "Usines, entrepôts, bases vie", d: "Couverture étendue, connexion stable pour opérations." },
-  { Icon: Clinic, t: "Clinique / Centre de santé", sub: "Hôpitaux, pharmacies, laboratoires", d: "Réseau sécurisé, séparation flux patients/staff." },
-  { Icon: Bulb, t: "Votre idée", sub: "Tout autre espace", d: "On étudie, on propose, on déploie." },
-];
-
-const method = [
-  { t: "Diagnostic", d: "On visite votre site, on analyse l'environnement, la densité, le potentiel.", obtain: "Une vision claire de la faisabilité et du marché." },
-  { t: "Dimensionnement", d: "On calcule la bande passante nécessaire, le nombre de points d'accès, la couverture.", obtain: "Un plan technique adapté à votre zone exacte." },
-  { t: "Modèle économique", d: "On structure vos tarifs, vos offres (vouchers, abonnements, forfaits) et vos marges.", obtain: "Un business plan concret avec projection de revenus." },
-  { t: "Déploiement", d: "On installe l'infrastructure complète : antennes, routeurs, câblage, portail captif.", obtain: "Une WiFi Zone opérationnelle, prête à vendre." },
-  { t: "Automatisation", d: "On configure la monétisation automatique : paiement mobile, vouchers, portail.", obtain: "Vos clients paient et vous encaissez, sans intervention manuelle." },
-  { t: "Suivi & SAV", d: "Monitoring à distance, maintenance, optimisation continue.", obtain: "Un business qui tourne, même quand vous dormez." },
-];
-
-const diffs: { Icon: Ic; t: string; d: string }[] = [
-  { Icon: Coins, t: "Bande passante au meilleur prix", d: "Apportez votre propre connectivité, ou laissez Cherryz s'en occuper : on agrège les meilleures offres Camtel, Orange et MTN, et votre marge est maximisée dès le premier jour." },
-  { Icon: Star, t: "Accompagnement de A à Z", d: "Du diagnostic terrain jusqu'à l'automatisation de vos revenus." },
-  { Icon: Bars, t: "Business structuré", d: "On ne vous laisse pas avec du matériel, on vous livre un modèle économique clé en main." },
-  { Icon: Legal, t: "100% légal", d: "Agrément installeur et revendeur ART : zéro risque juridique." },
-  { Icon: Trending, t: "Évolutif", d: "Commencez avec 1 antenne, étendez à tout un quartier, on grandit avec vous." },
-  { Icon: ShieldCheck, t: "SAV de proximité", d: "Équipe technique réactive, monitoring continu, intervention rapide." },
-];
-
-const cases: { Icon: Ic; who: string; place: string; setup: string; stat: string; unit: string }[] = [
-  { Icon: Building, who: "Propriétaire d'immeuble", place: "24 appartements, Yaoundé", setup: "WiFi par étage + vouchers mensuels", stat: "+150 000 XAF", unit: "de revenu par mois" },
-  { Icon: District, who: "Entrepreneur de quartier", place: "Zone résidentielle dense, Douala", setup: "3 antennes, couverture 500 m", stat: "+200 clients", unit: "en 2 mois" },
-  { Icon: Hotel, who: "Gérant d'hôtel", place: "Hôtel 30 chambres", setup: "WiFi premium inclus dans le tarif chambre", stat: "+40 %", unit: "de satisfaction client" },
-];
+// Icons, in the order of the items in content/wifi-zone.ts.
+const zoneIcons: Ic[] = [Building, District, Hotel, Campus, Market, Factory, Clinic, Bulb];
+const diffIcons: Ic[] = [Coins, Star, Bars, Legal, Trending, ShieldCheck];
+const caseIcons: Ic[] = [Building, District, Hotel];
 
 const h2 = "m-0 font-condensed text-[clamp(34px,4.2vw,52px)] font-bold leading-[1] tracking-[-0.015em] [text-wrap:balance]";
 const h3 = "m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]";
@@ -76,18 +48,20 @@ const wrap = "mx-auto max-w-[1280px] px-4 sm:px-6 md:px-12";
 const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
 const legend = "font-condensed text-[15px] font-semibold tracking-[0.06em] text-ink-soft";
 
-export default function WifiZone() {
+export default async function WifiZone() {
+  const lang = await getLang();
+  const t = wifiZone[lang];
   return (
     <>
       <InkHero
-        title="Lancez votre business WiFi."
-        lead="Bâtiment, quartier, hôtel, campus, marché : Cherryz vous accompagne de l'idée à la rentabilité. On diagnostique, on dimensionne, on déploie et on automatise l'encaissement."
+        title={t.hero.title}
+        lead={t.hero.lead}
         actions={
           <a href="#methode" className={inkLink}>
-            Voir la méthode
+            {t.hero.method}
           </a>
         }
-        facts={["Agrément ART installeur et revendeur", "Diagnostic sur site gratuit", "Paiement mobile intégré"]}
+        facts={t.hero.facts}
       >
         <QuoteSheet path="wifi" />
       </InkHero>
@@ -96,20 +70,20 @@ export default function WifiZone() {
       <section className="bg-ground py-20 md:py-28">
         <div className={`${wrap} grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14`}>
           <Reveal className="lg:col-span-4">
-            <h2 className={h2}>Peu importe la taille. On la dimensionne.</h2>
+            <h2 className={h2}>{t.zones.title}</h2>
             <p className="mt-6 max-w-[44ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
-              Chaque espace a sa densité, sa portée et sa façon de payer. On
-              conçoit la WiFi Zone pour le vôtre.
+              {t.zones.lead}
             </p>
             <p className="mt-6 max-w-[44ch] border-l-2 border-navy pl-5 font-sans text-[17.5px] font-semibold leading-[1.55] text-navy">
-              Vous avez une zone et une ambition ? C&apos;est tout ce qu&apos;il
-              nous faut pour commencer.
+              {t.zones.point}
             </p>
           </Reveal>
           <Reveal className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-8`} delay={0.05}>
-            <h3 className={h3}>Les espaces qu&apos;on équipe</h3>
+            <h3 className={h3}>{t.zones.sheet}</h3>
             <ul className="m-0 grid list-none grid-cols-1 gap-x-10 p-0 md:grid-cols-2">
-              {zones.map(({ Icon, t, sub, d }) => (
+              {t.zones.items.map(({ t, sub, d }, i) => {
+                const Icon = zoneIcons[i];
+                return (
                 <li key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-[18px]">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
@@ -118,7 +92,8 @@ export default function WifiZone() {
                     <p className="m-0 mt-2 font-sans text-[16px] leading-[1.5] text-navy">{d}</p>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </Reveal>
         </div>
@@ -128,20 +103,19 @@ export default function WifiZone() {
       <section id="methode" className="scroll-mt-24 bg-navy-deep py-20 text-white md:py-28">
         <div className={wrap}>
           <Reveal className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
-            <h2 className={`${h2} lg:col-span-7`}>On ne vous vend pas du matériel. On vous monte un business.</h2>
+            <h2 className={`${h2} lg:col-span-7`}>{t.method.title}</h2>
             <p className="m-0 max-w-[48ch] font-sans text-[17.5px] leading-[1.6] text-white/75 lg:col-span-5">
-              Vous n&apos;avez pas besoin d&apos;être technicien. Vous avez besoin
-              d&apos;un partenaire, et c&apos;est exactement ce qu&apos;on est.
+              {t.method.lead}
             </p>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-7 pt-9 text-navy sm:px-9`} delay={0.05}>
             <div aria-hidden className={`hidden grid-cols-[56px_1.15fr_1fr] gap-x-8 border-b-2 border-navy pb-3 md:grid ${legend}`}>
-              <span>Étape</span>
-              <span>Ce qu&apos;on fait</span>
-              <span>Ce que vous obtenez</span>
+              <span>{t.method.cols.step}</span>
+              <span>{t.method.cols.do}</span>
+              <span>{t.method.cols.get}</span>
             </div>
             <ol className="m-0 list-none border-t-2 border-navy p-0 md:border-t-0">
-              {method.map((m, i) => (
+              {t.method.items.map((m, i) => (
                 <li key={m.t} className="grid grid-cols-[44px_1fr] gap-x-3 border-b border-rule py-5 md:grid-cols-[56px_1.15fr_1fr] md:gap-x-8">
                   <span className="font-condensed text-[22px] font-bold tabular-nums text-ink-soft md:row-span-1">
                     {String(i + 1).padStart(2, "0")}
@@ -151,15 +125,15 @@ export default function WifiZone() {
                     <p className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{m.d}</p>
                   </div>
                   <p className="col-start-2 m-0 mt-3 font-sans text-[16px] font-semibold leading-[1.45] md:col-start-auto md:mt-0">
-                    <span className="mr-2 font-condensed text-[14px] font-semibold tracking-[0.06em] text-ink-soft md:hidden">Vous obtenez</span>
+                    <span className="mr-2 font-condensed text-[14px] font-semibold tracking-[0.06em] text-ink-soft md:hidden">{t.method.getShort}</span>
                     {m.obtain}
                   </p>
                 </li>
               ))}
             </ol>
-            <Link href={QUOTE.wifi} className={`${btnCherry} mt-7`}>
+            <Link href={localize(lang, QUOTE.wifi)} className={`${btnCherry} mt-7`}>
               <ClipboardIcon aria-hidden className="text-[20px]" />
-              Demander mon diagnostic gratuit
+              {t.method.cta}
               <ArrowRightIcon aria-hidden className="text-[19px]" />
             </Link>
           </Reveal>
@@ -170,11 +144,13 @@ export default function WifiZone() {
       <section className="bg-paper py-20 md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={`${h2} max-w-[20ch]`}>Ce qui nous différencie ? On reste après l&apos;installation.</h2>
+            <h2 className={`${h2} max-w-[20ch]`}>{t.diffs.title}</h2>
           </Reveal>
           <Reveal className="mt-12" delay={0.05}>
             <dl className="m-0 grid grid-cols-1 gap-x-12 border-t-2 border-navy md:grid-cols-2">
-              {diffs.map(({ Icon, t, d }) => (
+              {t.diffs.items.map(({ t, d }, i) => {
+                const Icon = diffIcons[i];
+                return (
                 <div key={t} className="grid grid-cols-[32px_1fr] items-start gap-x-3 border-b border-rule py-5">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy" />
                   <div>
@@ -182,7 +158,8 @@ export default function WifiZone() {
                     <dd className="m-0 mt-1 font-sans text-[16px] leading-[1.5] text-ink-soft">{d}</dd>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </dl>
           </Reveal>
         </div>
@@ -192,16 +169,17 @@ export default function WifiZone() {
       <section id="cas" className="scroll-mt-24 bg-ground py-20 md:py-28">
         <div className={wrap}>
           <Reveal>
-            <h2 className={h2}>Ce que ça peut donner.</h2>
+            <h2 className={h2}>{t.cases.title}</h2>
             <p className="mt-6 max-w-[56ch] font-sans text-[17.5px] leading-[1.65] text-ink-soft">
-              Trois projets types, pour situer l&apos;ordre de grandeur. Le vôtre
-              sera chiffré après le diagnostic sur site.
+              {t.cases.lead}
             </p>
           </Reveal>
           <Reveal className={`${sheet} mt-12 px-5 pb-6 pt-9 sm:px-9`} delay={0.05}>
-            <h3 className={h3}>Projets types</h3>
+            <h3 className={h3}>{t.cases.sheet}</h3>
             <ul className="m-0 list-none p-0">
-              {cases.map(({ Icon, who, place, setup, stat, unit }) => (
+              {t.cases.items.map(({ who, place, setup, stat, unit }, i) => {
+                const Icon = caseIcons[i];
+                return (
                 <li key={who} className="grid grid-cols-[32px_1fr] items-start gap-x-3 gap-y-3 border-b border-rule py-5 md:grid-cols-[32px_1fr_1fr_auto] md:items-baseline md:gap-x-8">
                   <Icon aria-hidden className="mt-[3px] text-[22px] text-navy md:self-start" />
                   <div>
@@ -214,10 +192,11 @@ export default function WifiZone() {
                     <div className="mt-1 font-sans text-[14px] text-ink-soft">{unit}</div>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
             <p className="mb-0 mt-4 font-sans text-[13.5px] text-ink-soft">
-              Résultats indicatifs basés sur des projets types. Chaque projet est unique.
+              {t.cases.footnote}
             </p>
           </Reveal>
         </div>
@@ -226,8 +205,8 @@ export default function WifiZone() {
       <ContactClose
         quoteHref={QUOTE.wifi}
         callHref={CAL_WIFI}
-        title="Vous avez un espace. Nous avons la méthode."
-        lead="Dites-nous où, dites-nous votre ambition, on s'occupe du reste. Diagnostic gratuit, déplacement sur site, partout au Cameroun."
+        title={t.close.title}
+        lead={t.close.lead}
       />
     </>
   );

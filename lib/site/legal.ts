@@ -3,6 +3,9 @@
 // they are legal statements and must not be guessed.
 export const TODO = "à compléter";
 
+/** How a missing fact is shown, per locale. */
+export const TODO_LABEL = { fr: "à compléter", en: "to be completed" } as const;
+
 export const LEGAL = {
   companyName: TODO, // raison sociale exacte, ex. « CHERRYZ SARL »
   legalForm: TODO, // forme juridique (SARL, SA, SAS…)
@@ -13,7 +16,7 @@ export const LEGAL = {
   publicationDirector: TODO, // nom et fonction du directeur de la publication
   artLicence: TODO, // référence de l'agrément / autorisation ART
   retention: TODO, // durée de conservation des demandes (ex. « 3 ans après le dernier contact »)
-  updatedAt: "30 octobre 2026",
+  updatedAt: "2026-10-30", // ISO date, formatted per locale on the page
 } as const;
 
 export const HOST = {

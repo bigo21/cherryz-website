@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import type { Locale } from "@/lib/i18n/config";
 import type { Answers, QuoteType } from "@/lib/quote/schemas";
 import { quoteTypeLabel, summarizeAnswers } from "@/lib/quote/summary";
 
@@ -71,22 +72,43 @@ function teamEmailHtml(
   </div>`;
 }
 
-function prospectEmailHtml(firstName: string, type: QuoteType): string {
-  const hi = firstName ? `Merci ${esc(firstName)} !` : "Merci !";
+const PROSPECT = {
+  fr: {
+    subject: "Votre demande Cherryz a bien été reçue",
+    hi: (n: string) => (n ? `Merci ${n} !` : "Merci !"),
+    type: { ip: "IP Publique Dédiée", wifi: "WiFi Zone" },
+    received: (type: string) =>
+      `Votre demande de cotation <strong>${type}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.`,
+    meanwhile: "En attendant, vous pouvez nous joindre directement :",
+    slogan: "Cherryz — Vous connecte !",
+  },
+  en: {
+    subject: "We have received your Cherryz request",
+    hi: (n: string) => (n ? `Thank you, ${n}!` : "Thank you!"),
+    type: { ip: "Dedicated public IP", wifi: "WiFi Zone" },
+    received: (type: string) =>
+      `We have received your <strong>${type}</strong> quote request. Our team will review it and get back to you <strong>within 48 hours</strong>.`,
+    meanwhile: "In the meantime, you can reach us directly:",
+    slogan: "Cherryz — Gets you connected!",
+  },
+};
+
+function prospectEmailHtml(firstName: string, type: QuoteType, lang: Locale): string {
+  const t = PROSPECT[lang];
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f6f5f3;padding:24px">
     <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(16,27,40,.4)">
       <div style="background:${NAVY};padding:26px">
-        <h1 style="margin:0;color:#fff;font-size:24px">${hi}</h1>
+        <h1 style="margin:0;color:#fff;font-size:24px">${t.hi(esc(firstName))}</h1>
       </div>
       <div style="padding:26px;color:${NAVY};font-size:15px;line-height:1.6">
-        <p style="margin:0 0 16px">Votre demande de cotation <strong>${esc(quoteTypeLabel(type))}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.</p>
-        <p style="margin:0 0 16px">En attendant, vous pouvez nous joindre directement :</p>
+        <p style="margin:0 0 16px">${t.received(esc(t.type[type]))}</p>
+        <p style="margin:0 0 16px">${t.meanwhile}</p>
         <ul style="margin:0 0 20px;padding-left:18px;color:#4b5563">
           <li>WhatsApp : <a href="https://wa.me/237242014664" style="color:${CHERRY}">+237 242 01 46 64</a></li>
           <li>Email : <a href="mailto:support@cherryz.tech" style="color:${CHERRY}">support@cherryz.tech</a></li>
         </ul>
-        <p style="margin:24px 0 0;font-weight:700;color:${CHERRY}">Cherryz — Vous connecte !</p>
+        <p style="margin:24px 0 0;font-weight:700;color:${CHERRY}">${t.slogan}</p>
       </div>
     </div>
   </div>`;
@@ -101,6 +123,7 @@ export async function sendQuoteEmails(params: {
   contact: Contact;
   answers: Answers;
   tracking: Record<string, unknown>;
+  lang?: Locale;
 }): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -109,7 +132,7 @@ export async function sendQuoteEmails(params: {
   }
 
   const resend = new Resend(apiKey);
-  const { type, contact, answers, tracking } = params;
+  const { type, contact, answers, tracking, lang = "fr" } = params;
   const firstName = (contact.full_name ?? "").trim().split(" ")[0] ?? "";
 
   // Team notification
@@ -118,7 +141,7 @@ export async function sendQuoteEmails(params: {
       from: FROM,
       to: NOTIFY_TO,
       replyTo: contact.email ?? undefined,
-      subject: `Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
+      subject: `${lang === "en" ? "[EN] " : ""}Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
       html: teamEmailHtml(type, contact, answers, tracking),
     });
   } catch (e) {
@@ -131,8 +154,8 @@ export async function sendQuoteEmails(params: {
       await resend.emails.send({
         from: FROM,
         to: contact.email,
-        subject: "Votre demande Cherryz a bien été reçue",
-        html: prospectEmailHtml(firstName, type),
+        subject: PROSPECT[lang].subject,
+        html: prospectEmailHtml(firstName, type, lang),
       });
     } catch (e) {
       console.error("[quote] prospect email failed:", e);

@@ -2,6 +2,7 @@
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendContactEmails } from "@/lib/email/contact-notifications";
+import { hasLocale } from "@/lib/i18n/config";
 
 export interface ContactInput {
   full_name: string;
@@ -11,6 +12,7 @@ export interface ContactInput {
   besoin?: string;
   message?: string;
   tracking?: Record<string, unknown>;
+  lang?: string;
 }
 
 export interface SubmitResult {
@@ -57,6 +59,6 @@ export async function submitContactMessage(
     return { ok: false, error: "db" };
   }
 
-  await sendContactEmails(record);
+  await sendContactEmails(record, input.lang && hasLocale(input.lang) ? input.lang : "fr");
   return { ok: true };
 }
