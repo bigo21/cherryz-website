@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { submitContactMessage } from "@/app/actions/contact";
+import { Stamp } from "@/components/site/QuoteSheet";
+import { ArrowRightIcon } from "@/components/site/icons";
 
-const labelCls =
-  "mb-[7px] block font-condensed text-[14px] font-semibold tracking-[0.6px] text-navy";
+const labelCls = "mb-[7px] block font-condensed text-[16px] font-semibold text-navy";
 const fieldCls =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry-alt focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
+  "w-full rounded-[10px] border-[1.5px] border-navy/20 bg-paper px-[15px] py-[13px] font-sans text-[16px] text-navy transition-colors placeholder:text-ink-soft/80 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/15";
+const sheetCls = "sheet-perforated rounded-b-[14px] bg-paper px-5 pb-8 pt-9 sm:px-9";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -59,22 +61,18 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-[20px] border border-navy/[0.08] bg-white p-10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)]">
-        <div className="py-10 text-center animate-pop">
-          <div className="mx-auto mb-[22px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-cherry-alt shadow-[0_18px_34px_-16px_rgba(160,4,45,.8)]">
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 className="m-0 font-condensed text-[34px] font-bold">Message envoyé !</h3>
-          <p className="mx-auto mt-3 max-w-[400px] font-sans text-[16.5px] leading-[1.55] text-navy/65">
+      <div className={sheetCls} role="status">
+        <div className="py-8 text-center">
+          <Stamp className="mx-auto mb-6 h-[104px] w-[104px] animate-stamp text-stamp" />
+          <h2 className="m-0 font-condensed text-[34px] font-bold text-navy">Message envoyé.</h2>
+          <p className="mx-auto mt-3 max-w-[400px] font-sans text-[16.5px] leading-[1.55] text-ink-soft">
             Merci {firstName}. Notre équipe vous recontacte sous 24h. Pour aller
             plus vite, réservez directement un créneau ci-contre.
           </p>
           <button
             type="button"
             onClick={reset}
-            className="mt-6 cursor-pointer rounded-full border-[1.5px] border-cherry-alt/[0.35] bg-white px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-cherry-alt transition-colors hover:bg-cherry-alt/[0.06]"
+            className="mt-6 cursor-pointer rounded-[10px] border-[1.5px] border-navy/25 bg-paper px-6 py-[13px] font-condensed text-[17px] font-semibold text-navy transition-colors hover:border-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
           >
             Envoyer un autre message
           </button>
@@ -84,32 +82,32 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="rounded-[20px] border border-navy/[0.08] bg-white p-6 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)] sm:p-10">
-      <h2 className="mb-[6px] font-condensed text-[30px] font-bold">Écrivez-nous</h2>
-      <p className="mb-[26px] font-sans text-[15.5px] text-navy/60">
+    <div className={sheetCls}>
+      <h2 className="m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]">Écrivez-nous</h2>
+      <p className="mb-[26px] mt-4 font-sans text-[15.5px] text-ink-soft">
         Les champs marqués d&apos;un * sont obligatoires.
       </p>
       <form onSubmit={onSubmit} noValidate>
         <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2">
           <div>
-            <label htmlFor="c-name" className={labelCls}>NOM COMPLET *</label>
+            <label htmlFor="c-name" className={labelCls}>Nom complet *</label>
             <input id="c-name" autoComplete="name" type="text" required value={form.full_name} onChange={set("full_name")} placeholder="Votre nom" className={fieldCls} />
           </div>
           <div>
-            <label htmlFor="c-email" className={labelCls}>EMAIL PROFESSIONNEL *</label>
+            <label htmlFor="c-email" className={labelCls}>Email professionnel *</label>
             <input id="c-email" autoComplete="email" type="email" required value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" className={fieldCls} />
           </div>
           <div>
-            <label htmlFor="c-phone" className={labelCls}>TÉLÉPHONE / WHATSAPP</label>
+            <label htmlFor="c-phone" className={labelCls}>Téléphone / WhatsApp</label>
             <input id="c-phone" autoComplete="tel" type="tel" value={form.phone} onChange={set("phone")} placeholder="+237 6 00 00 00 00" className={fieldCls} />
           </div>
           <div>
-            <label htmlFor="c-company" className={labelCls}>ENTREPRISE / ORGANISATION</label>
+            <label htmlFor="c-company" className={labelCls}>Entreprise / organisation</label>
             <input id="c-company" autoComplete="organization" type="text" value={form.company} onChange={set("company")} placeholder="Nom de votre structure" className={fieldCls} />
           </div>
         </div>
         <div className="mt-[18px]">
-          <label htmlFor="c-besoin" className={labelCls}>VOTRE BESOIN *</label>
+          <label htmlFor="c-besoin" className={labelCls}>Votre besoin *</label>
           <select id="c-besoin" required value={form.besoin} onChange={set("besoin")} className={fieldCls}>
             <option value="">Sélectionnez…</option>
             <option value="Internet B2B">Internet B2B</option>
@@ -118,20 +116,25 @@ export default function ContactForm() {
           </select>
         </div>
         <div className="mt-[18px]">
-          <label htmlFor="c-message" className={labelCls}>MESSAGE</label>
+          <label htmlFor="c-message" className={labelCls}>Message</label>
           <textarea id="c-message" rows={4} value={form.message} onChange={set("message")} placeholder="Décrivez votre projet, votre localisation, vos besoins…" className={`${fieldCls} resize-y`} />
         </div>
 
         {error && (
-          <p role="alert" className="mt-4 font-sans text-[14px] font-medium text-cherry-alt">{error}</p>
+          <p role="alert" className="mt-4 font-sans text-[14px] font-medium text-cherry">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={submitting}
-          className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry-alt px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-[#c0093a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry-alt disabled:opacity-70"
+          className="mt-6 flex w-full cursor-pointer items-center justify-center gap-2 rounded-[10px] border-none bg-cherry px-6 py-4 font-condensed text-[18px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70"
         >
-          {submitting ? "Envoi en cours…" : "Envoyer mon message →"}
+          {submitting ? "Envoi en cours…" : (
+            <>
+              Envoyer mon message
+              <ArrowRightIcon aria-hidden className="text-[19px]" />
+            </>
+          )}
         </button>
       </form>
     </div>

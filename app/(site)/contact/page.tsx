@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
-import { CalendarIcon, ClipboardIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
+import InkHero from "@/components/site/InkHero";
+import { ArrowRightIcon, CalendarIcon, ClipboardIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
 
 export const metadata: Metadata = {
@@ -11,121 +12,112 @@ export const metadata: Metadata = {
 };
 
 const coords = [
-  { Icon: PinIcon, k: "ADRESSE", v: CONTACT.address, href: undefined },
-  { Icon: PhoneIcon, k: "TÉLÉPHONE", v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
-  { Icon: WhatsAppIcon, k: "WHATSAPP", v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
-  { Icon: MailIcon, k: "EMAIL", v: CONTACT.email, href: CONTACT.emailHref },
-  { Icon: GlobeIcon, k: "SITE WEB", v: CONTACT.site, href: CONTACT.siteHref },
+  { Icon: PinIcon, k: "Adresse", v: CONTACT.address, href: undefined },
+  { Icon: PhoneIcon, k: "Téléphone", v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
+  { Icon: WhatsAppIcon, k: "WhatsApp", v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
+  { Icon: MailIcon, k: "Email", v: CONTACT.email, href: CONTACT.emailHref },
+  { Icon: GlobeIcon, k: "Site web", v: CONTACT.site, href: CONTACT.siteHref },
 ];
+
+const quotes = [
+  { label: "Devis Internet B2B", href: QUOTE.ip },
+  { label: "Devis WiFi Zone", href: QUOTE.wifi },
+];
+
+const calls = [
+  { label: "Internet B2B", href: CAL_IP },
+  { label: "WiFi Zone", href: CAL_WIFI },
+];
+
+const sheet = "sheet-perforated rounded-b-[14px] bg-paper";
+const h3 = "m-0 border-b-2 border-navy pb-4 font-condensed text-[24px] font-bold text-navy sm:text-[28px]";
+const rowLink =
+  "flex items-center justify-between gap-4 border-b border-rule py-4 font-condensed text-[20px] font-bold text-navy transition-colors hover:text-cherry focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy";
 
 export default function Contact() {
   return (
     <>
-      {/* HEADER */}
-      <header className="relative overflow-hidden bg-navy-deep pb-[70px] pt-[150px]">
-        <div
-          className="absolute bottom-0 right-0 top-0 z-0 w-[42%] opacity-90"
-          style={{ background: "linear-gradient(135deg,rgba(160,4,45,.9),rgba(125,3,35,.82))", clipPath: "polygon(42% 0,100% 0,100% 100%,14% 100%)" }}
-        />
-        <div className="relative z-[1] mx-auto max-w-[1280px] px-6 md:px-12">
-          <div className="mb-[22px] inline-flex items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[15px] py-2">
-            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-pink shadow-[0_0_10px_1px_#e11d63]" />
-            <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">CONTACT</span>
-          </div>
-          <h1 className="m-0 font-condensed text-[clamp(42px,6vw,66px)] font-bold leading-[0.98] tracking-[-0.4px] text-white">
-            Parlons de votre projet.
-          </h1>
-          <p className="mt-[18px] max-w-[560px] font-sans text-[19px] leading-[1.55] text-white/[0.78]">
-            Une question, un devis, une idée de WiFi Zone ? Notre équipe vous
-            répond sous 24h et se déplace gratuitement, partout au Cameroun.
+      <InkHero
+        title="Parlons de votre projet."
+        lead="Une question, un devis, une idée de WiFi Zone ? Notre équipe vous répond sous 24h et se déplace gratuitement, partout au Cameroun."
+        facts={["Réponse sous 24h", "Déplacement gratuit", "Basés à Yaoundé"]}
+      >
+        <div className={`${sheet} px-5 pb-6 pt-9 text-navy sm:px-9 lg:mt-6`}>
+          <h2 className={h3}>Besoin d&apos;un prix ?</h2>
+          <p className="m-0 mt-4 font-sans text-[16.5px] leading-[1.55] text-ink-soft">
+            Le questionnaire de devis prend 3 minutes et nous donne tout ce
+            qu&apos;il faut pour vous chiffrer. Réponse sous 48h.
           </p>
-        </div>
-      </header>
-
-      {/* FORM + SIDEBAR */}
-      <section className="bg-surface pb-[100px] pt-20">
-        <div className="mx-auto mb-10 max-w-[1280px] px-6 md:px-12">
-          <div className="flex flex-col gap-5 rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-[14px]">
-              <ClipboardIcon className="mt-[2px] flex-none text-[26px] text-cherry-alt" />
-              <div>
-                <h2 className="m-0 font-condensed text-[22px] font-bold">Besoin d&apos;un prix ?</h2>
-                <p className="mt-1 font-sans text-[15.5px] text-navy/70">
-                  Notre questionnaire de devis prend 3 minutes et nous donne
-                  tout ce qu&apos;il faut pour vous chiffrer.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {[
-                { label: "Devis Internet B2B", href: QUOTE.ip },
-                { label: "Devis WiFi Zone", href: QUOTE.wifi },
-              ].map((q) => (
+          <ul className="m-0 mt-5 flex list-none flex-col gap-3 p-0 sm:flex-row">
+            {quotes.map((q) => (
+              <li key={q.href} className="sm:flex-1">
                 <Link
-                  key={q.href}
                   href={q.href}
-                  className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-[#c0093a]"
+                  data-primary-cta
+                  className="flex items-center justify-between gap-3 rounded-[10px] bg-cherry px-5 py-4 font-condensed text-[18px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry"
                 >
-                  {q.label} →
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-10 px-6 md:px-12 lg:grid-cols-[1.35fr_1fr]">
-          <ContactForm />
-
-          <div className="flex flex-col gap-[18px]">
-            <div className="relative overflow-hidden rounded-[20px] bg-navy px-[30px] py-8 text-white">
-              <div className="absolute -right-10 -top-10 h-[150px] w-[150px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.4),transparent 68%)" }} />
-              <div className="relative">
-                <h3 className="mb-5 font-condensed text-[24px] font-bold">Nos coordonnées</h3>
-                <div className="flex flex-col gap-4">
-                  {coords.map((c) => (
-                    <div key={c.k} className="flex items-start gap-[13px]">
-                      <span className="text-[19px] leading-[1.3] text-white/80">
-                        <c.Icon className="align-[-0.14em]" />
-                      </span>
-                      <div>
-                        <div className="font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</div>
-                        {c.href ? (
-                          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="font-sans text-[15.5px] text-white transition-colors hover:text-accent-vivid">
-                            {c.v}
-                          </a>
-                        ) : (
-                          <div className="font-sans text-[15.5px] text-white">{c.v}</div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7">
-              <h3 className="mb-[6px] font-condensed text-[22px] font-bold">Réserver un créneau</h3>
-              <p className="mb-[18px] font-sans text-[14.5px] text-navy/60">
-                Prenez rendez-vous en ligne, directement.
-              </p>
-              {[
-                { label: "Internet B2B", href: CAL_IP },
-                { label: "WiFi Zone", href: CAL_WIFI },
-              ].map((rdv, i) => (
-                <a
-                  key={rdv.label}
-                  href={rdv.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex items-center justify-between gap-3 rounded-xl border border-navy/[0.08] bg-surface px-[18px] py-4 transition-colors hover:border-cherry-alt hover:bg-white ${i === 0 ? "mb-3" : ""}`}
-                >
-                  <span className="flex items-center gap-[11px]">
-                    <CalendarIcon className="text-[20px] text-navy" />
-                    <span className="font-condensed text-[17px] font-bold text-navy">{rdv.label}</span>
+                  <span className="flex items-center gap-2">
+                    <ClipboardIcon aria-hidden className="text-[20px]" />
+                    {q.label}
                   </span>
-                  <span className="font-condensed text-[18px] font-bold text-cherry-alt">→</span>
-                </a>
+                  <ArrowRightIcon aria-hidden className="flex-none text-[18px]" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </InkHero>
+
+      <section className="bg-ground py-20 md:py-28">
+        <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-10 px-4 sm:px-6 md:px-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <ContactForm />
+          </div>
+
+          <div className={`${sheet} px-5 pb-6 pt-9 sm:px-9 lg:col-span-5`}>
+            <h2 className={h3}>Nos coordonnées</h2>
+            <dl className="m-0">
+              {coords.map(({ Icon, k, v, href }) => (
+                <div key={k} className="grid grid-cols-[28px_1fr] items-start gap-x-3 border-b border-rule py-4">
+                  <Icon aria-hidden className="mt-[3px] text-[19px] text-navy" />
+                  <div>
+                    <dt className="font-condensed text-[15px] font-semibold tracking-[0.06em] text-ink-soft">{k}</dt>
+                    <dd className="m-0 mt-[2px] font-sans text-[16px] text-navy">
+                      {href ? (
+                        <a
+                          href={href}
+                          target={href.startsWith("http") ? "_blank" : undefined}
+                          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="underline decoration-navy/25 underline-offset-4 hover:decoration-navy"
+                        >
+                          {v}
+                        </a>
+                      ) : (
+                        v
+                      )}
+                    </dd>
+                  </div>
+                </div>
               ))}
-            </div>
+            </dl>
+
+            <h2 className={`${h3} mt-10`}>Réserver un créneau</h2>
+            <p className="m-0 mt-4 font-sans text-[16px] text-ink-soft">
+              Prenez rendez-vous en ligne, directement avec l&apos;équipe.
+            </p>
+            <ul className="m-0 mt-2 list-none p-0">
+              {calls.map((c) => (
+                <li key={c.label}>
+                  <a href={c.href} target="_blank" rel="noopener noreferrer" className={rowLink}>
+                    <span className="flex items-center gap-3">
+                      <CalendarIcon aria-hidden className="text-[20px]" />
+                      {c.label}
+                    </span>
+                    <ArrowRightIcon aria-hidden className="flex-none text-[18px]" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

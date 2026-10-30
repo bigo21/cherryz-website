@@ -143,7 +143,7 @@ The density is that of a working document: compact rows, firm 2px navy rules und
 - Drawn line icons and line schematics; no glyph icons.
 - Content is visible without JavaScript; motion is an enhancement that reduced motion removes.
 
-**Migration status (branch `refonte`).** Only the home page (`app/(site)/page.tsx`) and the shared chrome (nav, footer, mobile action bar, icons, reveal) are in this world. Internet B2B, WiFi Zone, Contact, the `/demandes` questionnaires and the maintenance page still carry the previous look (pill buttons, eyebrow chips, photo heroes, `cherry-alt`, accent pinks, card shadows and the marquee). Those patterns are not the system; migrate them to this file, do not copy from them.
+**Migration status (branch `refonte`).** Home, Internet B2B, WiFi Zone, Contact, the `/demandes` hub and both questionnaires, the legal pages and the shared chrome are in this world. Only the maintenance page still carries the previous look (pill buttons, eyebrow chips, photo hero, `cherry-alt`, accent pinks); those patterns are not the system. `PageHero`, `FinalCta`, `SectionEyebrow` and `ReassuranceBar` are leftovers of the old look and no page uses them.
 
 ## Colors
 

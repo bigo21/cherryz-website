@@ -11,7 +11,8 @@ import {
   type GeoValue,
 } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
-import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
+import { ArrowRightIcon, LockIcon, WhatsAppIcon } from "@/components/site/icons";
+import { Stamp } from "@/components/site/QuoteSheet";
 import { CONTACT } from "@/lib/site/site";
 
 interface SavedState {
@@ -21,23 +22,23 @@ interface SavedState {
 }
 
 const inputClass =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
+  "w-full rounded-[10px] border-[1.5px] border-navy/20 bg-paper px-[15px] py-[14px] font-sans text-[16px] text-navy transition-colors placeholder:text-ink-soft/80 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/15 aria-[invalid=true]:border-cherry";
 
 function chipClass(selected: boolean): string {
   return [
-    "cursor-pointer font-sans text-[15px] px-[17px] py-[11px] rounded-full transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
+    "cursor-pointer text-left font-sans text-[15px] px-4 py-[10px] rounded-[8px] transition-colors duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
     selected
-      ? "border-cherry bg-cherry/[0.07] text-cherry font-semibold"
-      : "border-[rgba(16,27,43,0.18)] bg-white text-[#374151] font-medium",
+      ? "border-navy bg-navy text-paper font-semibold"
+      : "border-navy/20 bg-paper text-navy font-medium hover:border-navy/50",
   ].join(" ");
 }
 
 function scaleChipClass(selected: boolean): string {
   return [
-    "cursor-pointer w-[46px] h-[46px] rounded-[12px] font-condensed font-bold text-[18px] transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
+    "cursor-pointer w-[46px] h-[46px] rounded-[8px] font-condensed font-bold text-[18px] tabular-nums transition-colors duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
     selected
-      ? "border-cherry bg-cherry text-white"
-      : "border-[rgba(16,27,43,0.18)] bg-white text-[#374151]",
+      ? "border-navy bg-navy text-paper"
+      : "border-navy/20 bg-paper text-navy hover:border-navy/50",
   ].join(" ");
 }
 
@@ -225,12 +226,8 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
   if (done) {
     return (
-      <div className="rounded-[20px] bg-white px-6 py-[52px] text-center shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-pop sm:px-10">
-        <div className="mx-auto mb-6 flex h-[82px] w-[82px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_36px_-16px_rgba(162,3,45,0.85)]">
-          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
+      <div className="sheet-perforated rounded-b-[14px] bg-paper px-6 pb-10 pt-12 text-center text-navy sm:px-10">
+        <Stamp className="mx-auto mb-6 h-[104px] w-[104px] animate-stamp text-stamp" />
         <h2
           ref={headingRef}
           tabIndex={-1}
@@ -238,19 +235,19 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         >
           Merci{prospectName ? ` ${prospectName}` : ""} !
         </h2>
-        <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-[#4b5563]">
+        <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-ink-soft">
           Votre demande a bien été reçue. Un email de confirmation vient de vous
           être envoyé.
         </p>
-        <ol className="mx-auto mt-7 max-w-[400px] space-y-3 text-left font-sans text-[15.5px] leading-[1.45] text-navy-alt">
+        <ol className="mx-auto mt-8 max-w-[440px] list-none border-t-2 border-navy p-0 text-left font-sans text-[15.5px] leading-[1.45] text-navy">
           {[
             "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
             "Nous vous recontactons sous 48h pour affiner votre besoin.",
             "Si besoin, un technicien se déplace gratuitement sur votre site.",
           ].map((t, i) => (
-            <li key={t} className="flex gap-3">
-              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-cherry/[0.09] font-condensed text-[14px] font-bold text-cherry">
-                {i + 1}
+            <li key={t} className="flex gap-4 border-b border-rule py-3">
+              <span className="flex-none font-condensed text-[17px] font-bold tabular-nums text-ink-soft">
+                {String(i + 1).padStart(2, "0")}
               </span>
               {t}
             </li>
@@ -261,14 +258,14 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-[9px] rounded-full bg-cherry px-[26px] py-[14px] font-condensed text-[16px] font-bold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
+            className="inline-flex items-center gap-[9px] rounded-[10px] bg-cherry px-6 py-[14px] font-condensed text-[17px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry"
           >
-            <WhatsAppIcon className="h-[18px] w-[18px]" />
+            <WhatsAppIcon aria-hidden className="h-[18px] w-[18px]" />
             WhatsApp
           </a>
           <Link
             href="/"
-            className="inline-flex items-center gap-[9px] rounded-full border-[1.5px] border-cherry/[0.35] bg-white px-[26px] py-[14px] font-condensed text-[16px] font-bold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry/[0.06]"
+            className="inline-flex items-center gap-[9px] rounded-[10px] border-[1.5px] border-navy/25 bg-paper px-6 py-[14px] font-condensed text-[17px] font-semibold text-navy transition-colors hover:border-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
           >
             Retour à l&apos;accueil
           </Link>
@@ -276,7 +273,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         <button
           type="button"
           onClick={restart}
-          className="mt-6 cursor-pointer font-sans text-[15px] font-semibold text-cherry underline underline-offset-4"
+          className="mt-6 cursor-pointer font-sans text-[15px] font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy"
         >
           Faire une nouvelle demande
         </button>
@@ -286,15 +283,15 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
   return (
     <>
-      <div className="rounded-[20px] bg-white px-5 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade sm:px-9">
+      <div className="sheet-perforated rounded-b-[14px] bg-paper px-5 pb-[30px] pt-10 text-navy animate-fade sm:px-9">
         {/* Progress */}
         <div className="mb-[26px]">
           <div className="mb-[9px] flex items-baseline justify-between gap-3">
-            <span className="whitespace-nowrap font-condensed text-[14px] font-bold tracking-[1px] text-cherry">
-              ÉTAPE {step} SUR {total}
+            <span className="whitespace-nowrap font-condensed text-[15px] font-semibold tracking-[0.06em] tabular-nums text-navy">
+              Étape {step} sur {total}
             </span>
             {step < total && (
-              <span className="min-w-0 truncate text-right font-sans text-[13px] font-medium text-[#6b7280]">
+              <span className="min-w-0 truncate text-right font-sans text-[13.5px] font-medium text-ink-soft">
                 Ensuite : {schema[step].title}
               </span>
             )}
@@ -306,10 +303,10 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             aria-valuemax={total}
             aria-valuenow={step - 1}
             aria-valuetext={`Étape ${step} sur ${total}`}
-            className="h-[7px] overflow-hidden rounded-full bg-[#eceef1]"
+            className="h-[4px] overflow-hidden bg-rule"
           >
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cherry to-cherry-dark transition-[width] duration-300"
+              className="h-full bg-navy transition-[width] duration-300 motion-reduce:transition-none"
               style={{ width: `${Math.max(progressPct, 4)}%` }}
             />
           </div>
@@ -318,11 +315,11 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         <h2
           ref={headingRef}
           tabIndex={-1}
-          className="mb-1 font-condensed text-[28px] font-bold leading-[1.05] outline-none"
+          className="mb-1 font-condensed text-[30px] font-bold leading-[1.05] outline-none"
         >
           {currentStep.title}
         </h2>
-        <p className="mb-[22px] font-sans text-[15.5px] text-[#6B7280]">
+        <p className="mb-6 border-b-2 border-navy pb-4 font-sans text-[16px] text-ink-soft">
           {currentStep.subtitle}
         </p>
 
@@ -359,7 +356,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                 </label>
               )}
               {q.type !== "consent" && (
-                <div className="mb-[11px] font-sans text-[13px] font-medium text-[#6b7280]">
+                <div className="mb-[11px] font-sans text-[13.5px] font-medium text-ink-soft">
                   {q.required ? <span className="sr-only">Obligatoire</span> : "Facultatif"}
                 </div>
               )}
@@ -404,7 +401,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                       </button>
                     ))}
                   </div>
-                  <div aria-hidden className="mt-2 flex max-w-[270px] justify-between font-sans text-[13px] font-medium text-[#6b7280]">
+                  <div aria-hidden className="mt-2 flex max-w-[270px] justify-between font-sans text-[13.5px] font-medium text-ink-soft">
                     <span>1 = très insatisfait</span>
                     <span>5 = très satisfait</span>
                   </div>
@@ -466,8 +463,8 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               {q.type === "consent" && (
                 <label
                   className={[
-                    "flex cursor-pointer items-start gap-3 rounded-[12px] border-[1.5px] bg-[#f7f7f8] px-[18px] py-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-cherry",
-                    v === true ? "border-cherry" : err ? "border-cherry/60" : "border-[rgba(16,27,43,0.14)]",
+                    "flex cursor-pointer items-start gap-3 rounded-[10px] border-[1.5px] bg-ground px-[18px] py-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-navy",
+                    v === true ? "border-navy" : err ? "border-cherry/60" : "border-navy/15",
                   ].join(" ")}
                 >
                   <input
@@ -482,12 +479,12 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                     aria-hidden
                     className={[
                       "flex h-6 w-6 flex-none items-center justify-center rounded-[6px] border-[1.5px] text-white",
-                      v === true ? "border-cherry bg-cherry" : "border-[rgba(16,27,43,0.3)] bg-white",
+                      v === true ? "border-navy bg-navy" : "border-navy/30 bg-paper",
                     ].join(" ")}
                   >
                     {v === true ? <CheckMark /> : null}
                   </span>
-                  <span className="font-sans text-[15px] leading-[1.45] text-navy-alt">
+                  <span className="font-sans text-[15px] leading-[1.45] text-navy">
                     J&apos;accepte que Cherryz utilise mes informations pour me
                     recontacter dans le cadre de ma demande.
                     <span className="text-cherry" aria-hidden> *</span>
@@ -495,9 +492,9 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                 </label>
               )}
               {q.type === "consent" && (
-                <p className="mb-0 mt-2 font-sans text-[13.5px] text-[#4b5563]">
+                <p className="mb-0 mt-2 font-sans text-[13.5px] text-ink-soft">
                   Détails dans notre{" "}
-                  <Link href="/confidentialite" target="_blank" className="font-semibold text-navy-alt underline underline-offset-4">
+                  <Link href="/confidentialite" target="_blank" className="font-semibold text-navy underline underline-offset-4">
                     politique de confidentialité
                   </Link>
                   .
@@ -510,41 +507,51 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         })}
 
         {submitError && (
-          <div role="alert" className="mt-2 rounded-[12px] border border-cherry/25 bg-cherry/[0.05] px-4 py-3">
+          <div role="alert" className="mt-2 rounded-[10px] border border-cherry/25 bg-cherry/[0.05] px-4 py-3">
             <FieldError message={submitError} />
             <a
               href={CONTACT.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy-alt underline underline-offset-4"
+              className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy underline underline-offset-4"
             >
-              <WhatsAppIcon className="h-4 w-4 text-[#128c4a]" />
+              <WhatsAppIcon aria-hidden className="h-4 w-4 text-[#128c4a]" />
               Écrire sur WhatsApp
             </a>
           </div>
         )}
 
-        <div className="mt-7 flex items-center justify-between gap-3 border-t border-[rgba(16,27,43,0.08)] pt-[22px]">
+        <div className="mt-7 flex items-center justify-between gap-3 border-t border-rule pt-[22px]">
           <button
             type="button"
             onClick={prev}
             disabled={submitting}
-            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy-alt hover:text-navy-alt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
+            className="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[10px] border-[1.5px] border-navy/20 bg-paper px-4 py-[14px] font-condensed text-[17px] font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy disabled:opacity-50 sm:px-6"
           >
-            {step <= 1 ? "Annuler" : "← Précédent"}
+            {step <= 1 ? "Annuler" : (
+              <>
+                <ArrowRightIcon aria-hidden className="rotate-180 text-[17px]" />
+                Précédent
+              </>
+            )}
           </button>
           <button
             type="button"
             onClick={next}
             disabled={submitting}
             aria-busy={submitting || undefined}
-            className="cursor-pointer whitespace-nowrap rounded-[11px] border-none bg-cherry px-5 py-[14px] font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-[0_14px_30px_-16px_rgba(162,3,45,0.85)] transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70 sm:px-[30px]"
+            className="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[10px] border-none bg-cherry px-5 py-[14px] font-condensed text-[18px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70 sm:px-7"
           >
-            {submitting ? "Envoi en cours…" : step >= total ? "Envoyer ma demande →" : "Suivant →"}
+            {submitting ? "Envoi en cours…" : (
+              <>
+                {step >= total ? "Envoyer ma demande" : "Suivant"}
+                <ArrowRightIcon aria-hidden className="text-[18px]" />
+              </>
+            )}
           </button>
         </div>
       </div>
-      <p className="mt-4 flex items-center justify-center gap-[6px] text-center font-sans text-[13px] text-navy/70">
+      <p className="mt-4 flex items-center justify-center gap-[6px] text-center font-sans text-[13.5px] text-ink-soft">
         <LockIcon className="flex-none" aria-hidden />
         Vos réponses sont enregistrées automatiquement sur cet appareil.
       </p>
@@ -553,7 +560,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 }
 
 const labelClass =
-  "mb-[3px] block p-0 font-sans text-[17px] font-semibold leading-[1.35] text-navy-alt";
+  "mb-[3px] block p-0 font-sans text-[17px] font-semibold leading-[1.35] text-navy";
 
 /** Question wrapper: a fieldset for choice groups, a plain block for text fields. */
 function Field({
@@ -625,8 +632,8 @@ function GeoField({
         onClick={onDetect}
         disabled={locating}
         className={[
-          "inline-flex cursor-pointer items-center gap-2 rounded-[11px] border-[1.5px] px-5 py-[13px] font-sans text-[15px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:cursor-wait disabled:opacity-70",
-          ok ? "border-cherry bg-cherry/[0.07] text-cherry" : "border-[rgba(16,27,43,0.2)] bg-white text-[#374151]",
+          "inline-flex cursor-pointer items-center gap-2 rounded-[10px] border-[1.5px] px-5 py-[13px] font-sans text-[15px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy disabled:cursor-wait disabled:opacity-70",
+          ok ? "border-navy bg-navy text-paper" : "border-navy/20 bg-paper text-navy hover:border-navy/50",
         ].join(" ")}
       >
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -636,7 +643,7 @@ function GeoField({
         {locating ? "Localisation…" : ok ? "Position détectée" : "Utiliser ma position actuelle"}
         {ok && !locating ? <CheckMark /> : null}
       </button>
-      <div aria-live="polite" className="my-[10px] font-sans text-[13.5px] font-medium text-[#4b5563]">
+      <div aria-live="polite" className="my-[10px] font-sans text-[13.5px] font-medium text-ink-soft">
         {hint}
       </div>
       <input

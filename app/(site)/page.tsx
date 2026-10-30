@@ -6,8 +6,8 @@ import type { Logo } from "@/components/site/LogoMarquee";
 import HomeHero from "@/components/home/HomeHero";
 import ContactClose from "@/components/site/ContactClose";
 import { BrokerDiagramTall, BrokerDiagramWide } from "@/components/home/BrokerDiagram";
-import { ArrowRightIcon, CheckLineIcon, ClipboardIcon, GlobeIcon, PhoneIcon, WhatsAppIcon, WifiIcon } from "@/components/site/icons";
-import { CONTACT, QUOTE } from "@/lib/site/site";
+import { ArrowRightIcon, CheckLineIcon, ClipboardIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
+import { QUOTE } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "Cherryz | L'Internet professionnel au meilleur prix, partout au Cameroun",
