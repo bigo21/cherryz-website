@@ -71,7 +71,7 @@ export default function SiteNav() {
           <LangSwitch className="font-condensed text-[15px] font-semibold tracking-[0.06em] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
           <Link
             href={quoteHref}
-            className="inline-flex items-center gap-2 rounded-[10px] bg-cherry px-5 py-3 font-condensed text-[16px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center gap-2 bg-cherry px-5 py-3 font-condensed text-[16px] font-semibold tracking-[0.02em] text-white transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             {t("quoteLabel")}
             <ArrowRightIcon aria-hidden className="text-[17px]" />
@@ -118,7 +118,7 @@ export default function SiteNav() {
             <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85" />
             <Link
               href={quoteHref}
-              className="mt-4 inline-flex items-center justify-center gap-2 rounded-[10px] bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
+              className="mt-4 inline-flex items-center justify-center gap-2 bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
               {t("quoteLabel")}
               <ArrowRightIcon aria-hidden className="text-[17px]" />

@@ -56,7 +56,7 @@ export default function MobileActionBar() {
         <div className="flex gap-3">
           <Link
             href={localize(lang, quoteHrefFor(splitLocale(pathname).path))}
-            className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-cherry px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
+            className="flex flex-1 items-center justify-center gap-2 bg-cherry px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
             {t("quoteLabel")}
             <ArrowRightIcon aria-hidden className="text-[17px]" />
@@ -66,7 +66,7 @@ export default function MobileActionBar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t("whatsappAria")}
-            className="flex flex-none items-center justify-center gap-2 rounded-[10px] border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
+            className="flex flex-none items-center justify-center gap-2 border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
             <WhatsAppIcon className="h-[18px] w-[18px] text-whatsapp" />
             WhatsApp

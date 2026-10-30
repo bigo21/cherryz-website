@@ -33,6 +33,13 @@
   --color-ink-soft: #4a5563;
   --color-stamp: #a2032d;
 
+  /* Refonte « Faisceaux sur Yaoundé » : la ville au crépuscule, un faisceau cerise */
+  --color-night: #0a111b;
+  --color-dusk: #152031;
+  --color-beam: #ff3d6a;
+  --color-haze: #cdd6e1;
+  --color-dawn: #f3f0eb;
+
   /* États */
   --color-positive: #1f8a5b;
   --color-whatsapp: #25d366;
@@ -233,4 +240,39 @@ body {
 ::selection {
   background: rgba(162, 3, 45, 0.18);
   color: inherit;
+}
+
+/* ── Refonte « Faisceaux sur Yaoundé » ──────────────────────────────────── */
+
+/*
+ * A box with the photo's own aspect ratio that covers its container, exactly like
+ * object-fit: cover. Points placed in % inside it stay on the same rooftop at
+ * every viewport size. The container needs `container-type: size`.
+ */
+.cover-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100cqw, 100cqh * var(--ar));
+  height: max(100cqh, 100cqw / var(--ar));
+  transform: translate(-50%, -50%);
+}
+
+/* Relay chapters: stacked by default, layered into one pinned frame by GSAP. */
+[data-pinned] .relay-frame {
+  display: grid;
+  height: 100svh;
+}
+[data-pinned] .relay-chapter {
+  grid-area: 1 / 1;
+  min-height: 0;
+}
+
+.beam-page ::selection {
+  background: #a2032d;
+  color: #fff;
+}
+.beam-page :focus-visible {
+  outline: 2px solid #ff3d6a;
+  outline-offset: 2px;
 }
