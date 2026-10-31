@@ -1,56 +1,70 @@
 @import "tailwindcss";
 
 /*
- * Cherryz design tokens.
- * Source: design_handoff_site_cherryz/README.md (§ Système de design).
- * Fonts (--font-barlow / --font-barlow-condensed) are injected by next/font in app/layout.tsx.
+ * Cherryz design tokens (brief de design du 31 octobre 2026, see CLAUDE.md).
+ * Every visual value comes from here. Fonts (--font-barlow / --font-barlow-condensed)
+ * are injected by next/font in app/[lang]/layout.tsx.
  */
 @theme {
-  /* Brand : rouge cerise */
-  --color-cherry: #a2032d;
-  --color-cherry-alt: #a0042d;
+  /* Palette: the only colours of the site, one role each. */
+  --color-cherry: #a0042d;
   --color-cherry-dark: #7c0530;
-  --color-cherry-deep: #6e0320;
-
-  /* Accents : rouge vif */
   --color-accent: #c50c4f;
-  --color-accent-pink: #e11d63;
-  --color-accent-vivid: #ff254f;
-
-  /* Fonds sombres / marine */
+  --color-accent-on-dark: #ea4883;
   --color-navy: #101b28;
-  --color-navy-alt: #101b2b;
-  --color-navy-deep: #0b131d;
-
-  /* Fonds clairs */
+  --color-ink-2: #404953;
+  --color-ink-3: #70767e;
+  --color-on-dark-2: #cfd1d4;
+  --color-line: #e2e3e5;
   --color-surface: #f6f5f3;
-  --color-surface-alt: #e2e3e5;
+  --color-cherry-tint: #f4e1e6;
 
-  /* États */
+  /* Function colours: confirmation, and the WhatsApp button only. */
   --color-positive: #1f8a5b;
   --color-whatsapp: #25d366;
 
-  /* Typographie */
+  /* Legacy names, kept until their usages move to the palette above. */
+  --color-cherry-alt: var(--color-cherry);
+  --color-accent-pink: var(--color-accent-on-dark);
+  --color-accent-vivid: var(--color-accent-on-dark);
+  --color-navy-alt: var(--color-navy);
+  --color-navy-deep: var(--color-navy);
+  --color-surface-alt: var(--color-surface);
+
+  /* Typography */
   --font-sans: var(--font-barlow), system-ui, sans-serif;
   --font-condensed: var(--font-barlow-condensed), system-ui, sans-serif;
 
-  /* Rayons */
-  --radius-btn: 10px;
-  --radius-card: 16px;
-  --radius-pill: 100px;
+  --text-display: clamp(44px, 6.4vw, 84px);
+  --text-display--line-height: 0.98;
+  --text-title-lg: clamp(32px, 4vw, 46px);
+  --text-title-lg--line-height: 1.05;
+  --text-title-md: 30px;
+  --text-title-md--line-height: 1.1;
+  --text-title-sm: 22px;
+  --text-title-sm--line-height: 1.2;
+  --text-lead: 18px;
+  --text-lead--line-height: 1.6;
+  --text-body: 16px;
+  --text-body--line-height: 1.6;
+  --text-small: 14px;
+  --text-small--line-height: 1.5;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.08em;
 
-  /* Ombres */
+  /* Shadows: cards and the primary cherry button, nothing else. */
   --shadow-card: 0 24px 50px -34px rgba(16, 27, 40, 0.4);
   --shadow-cherry: 0 18px 40px -16px rgba(160, 4, 45, 0.95);
-  --shadow-modal: 0 40px 90px -30px rgba(0, 0, 0, 0.7);
+
+  /* Motion: one curve for the whole site. */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Animations */
   --animate-fade: chzFade 0.8s both;
   --animate-ripple: chzRipple 3.2s ease-out infinite;
   --animate-float: chzFloat 6s ease-in-out infinite;
   --animate-step: chzStep 0.3s both;
-  --animate-overlay: chzOverlay 0.25s ease both;
-  --animate-modal: chzModal 0.32s cubic-bezier(0.16, 0.7, 0.3, 1) both;
   --animate-pop: chzPop 0.4s both;
   --animate-marquee-l: chzMarqueeL 32s linear infinite;
   --animate-marquee-r: chzMarqueeR 32s linear infinite;
@@ -113,26 +127,6 @@
   from {
     opacity: 0;
     transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes chzOverlay {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes chzModal {
-  from {
-    opacity: 0;
-    transform: translateY(24px) scale(0.98);
   }
   to {
     opacity: 1;
