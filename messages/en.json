@@ -378,7 +378,30 @@
       },
       "cta": "Start my request"
     },
-    "close": "Dedicated business Internet, from 45,000 XAF per Mbps."
+    "close": "Dedicated business Internet, from 45,000 XAF per Mbps.",
+    "beam": {
+      "photoAlt": "An operator's server room, racks lit up",
+      "rack": "Operator network",
+      "site": "Your head office",
+      "readout": "{mbps, number} Mbps dedicated · fixed IP",
+      "speed": "Bandwidth you need",
+      "estimate": "Your estimate, per month",
+      "caption": "Illustrative photo. Indicative prices, set after we survey your site."
+    },
+    "pick": {
+      "photoAlt": "Company offices in front of their server room",
+      "hint": "Tap what you need: we carry it into your questionnaire.",
+      "cta": "{count, plural, =0 {Get my quote} one {Get my quote for this use} other {Get my quote for these # uses}}"
+    },
+    "featurePhotos": {
+      "multiOperator": "Cherryz team comparing operator offers on a screen",
+      "fastInstall": "Technician fixing a microwave antenna to a mast",
+      "dedicatedIp": "Technician connecting network equipment in a rack",
+      "trial": "Adviser presenting a proposal on a tablet",
+      "coverage": "Yaoundé from the air at sunset",
+      "support": "Support technician in front of monitoring screens"
+    },
+    "stepsLabel": "The six steps, from request to connection"
   },
   "WifiZone": {
     "meta": {

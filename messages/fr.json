@@ -378,7 +378,30 @@
       },
       "cta": "Commencer ma demande"
     },
-    "close": "Un Internet pro, dédié, à partir de 45 000 XAF/Mbps."
+    "close": "Un Internet pro, dédié, à partir de 45 000 XAF/Mbps.",
+    "beam": {
+      "photoAlt": "Salle serveurs d'un opérateur, baies éclairées",
+      "rack": "Réseau opérateur",
+      "site": "Votre siège",
+      "readout": "{mbps, number} Mbps dédiés · IP fixe",
+      "speed": "Débit souhaité",
+      "estimate": "Votre estimation, par mois",
+      "caption": "Photo d'illustration. Prix indicatifs, fixés après l'étude de votre site."
+    },
+    "pick": {
+      "photoAlt": "Bureaux d'entreprise devant leur salle serveurs",
+      "hint": "Touchez ce dont vous avez besoin : on le reporte dans votre questionnaire.",
+      "cta": "{count, plural, =0 {Recevoir mon devis} one {Recevoir mon devis pour cet usage} other {Recevoir mon devis pour ces # usages}}"
+    },
+    "featurePhotos": {
+      "multiOperator": "Équipe Cherryz comparant les offres des opérateurs sur un écran",
+      "fastInstall": "Technicien fixant une antenne hertzienne sur un mât",
+      "dedicatedIp": "Technicien raccordant un équipement réseau dans une baie",
+      "trial": "Conseiller présentant une proposition sur une tablette",
+      "coverage": "Yaoundé vue du ciel au coucher du soleil",
+      "support": "Technicien du support devant ses écrans de supervision"
+    },
+    "stepsLabel": "Les six étapes, de la demande à la connexion"
   },
   "WifiZone": {
     "meta": {

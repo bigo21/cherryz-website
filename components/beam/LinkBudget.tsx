@@ -9,11 +9,11 @@ import { localize } from "@/lib/i18n/config";
 import { ArrowRightIcon, CheckLineIcon } from "@/components/site/icons";
 
 // Current public price ranges (XAF per Mbps per month), shown as labelled estimates.
-const PRICE = { alone: [90_000, 180_000], cherryz: [45_000, 70_000] } as const;
-const MBPS = [10, 20, 50, 100] as const;
+export const PRICE = { alone: [90_000, 180_000], cherryz: [45_000, 70_000] } as const;
+export const MBPS = [10, 20, 50, 100] as const;
 const IP_SCALE = PRICE.alone[1] * 100;
 // The beam thickens with the bandwidth (px in the diagram's own units).
-const BEAM_WIDTH: Record<(typeof MBPS)[number], number> = { 10: 3, 20: 6, 50: 11, 100: 18 };
+export const BEAM_WIDTH: Record<(typeof MBPS)[number], number> = { 10: 3, 20: 6, 50: 11, 100: 18 };
 
 // WiFi Zone: plain arithmetic on the visitor's own assumptions, over 30 days.
 const USERS = [30, 75, 150] as const;
@@ -26,7 +26,7 @@ const COMPARE_ROWS = ["price", "installation", "technology", "support", "flexibi
 const spring = { type: "spring", stiffness: 140, damping: 22 } as const;
 
 /** A figure that runs to its new value (instantly under reduced motion). */
-function Ticker({ value }: { value: number }) {
+export function Ticker({ value }: { value: number }) {
   const format = useFormatter();
   const reduce = useReducedMotion();
   const [shown, setShown] = useState(value);
