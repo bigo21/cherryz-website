@@ -31,40 +31,49 @@ export function present(q: Question, answers: Answers): boolean {
   return String(v ?? "").trim() !== "";
 }
 
-function requiredMessage(q: Question): string {
+/** Why an answer is rejected; the text lives in the catalogs, under `Validation`. */
+export type ValidationError =
+  | "single"
+  | "multi"
+  | "consent"
+  | "email"
+  | "tel"
+  | "geo"
+  | "other"
+  | "emailFormat"
+  | "telFormat"
+  | "otherText";
+
+function requiredError(q: Question): ValidationError {
   switch (q.type) {
     case "single":
     case "scale":
-      return "Choisissez une réponse.";
+      return "single";
     case "multi":
-      return "Choisissez au moins une réponse.";
     case "consent":
-      return "Cochez la case pour que nous puissions vous recontacter.";
     case "email":
-      return "Indiquez votre adresse email.";
     case "tel":
-      return "Indiquez un numéro de téléphone.";
     case "geo":
-      return "Indiquez où se trouve le site (position ou description).";
+      return q.type;
     default:
-      return "Ce champ est obligatoire.";
+      return "other";
   }
 }
 
-/** Validate a set of questions; returns { questionId: errorMessage }. */
+/** Validate a set of questions; returns { questionId: error }. */
 export function validateQuestions(
   questions: Question[],
   answers: Answers,
-): Record<string, string> {
-  const errs: Record<string, string> = {};
+): Record<string, ValidationError> {
+  const errs: Record<string, ValidationError> = {};
   for (const q of questions) {
     if (q.required && !present(q, answers)) {
-      errs[q.id] = requiredMessage(q);
+      errs[q.id] = requiredError(q);
       continue;
     }
     const raw = String(answers[q.id] ?? "").trim();
     if (q.type === "email" && raw && !EMAIL_RE.test(raw)) {
-      errs[q.id] = "Adresse email incomplète, par ex. nom@entreprise.cm.";
+      errs[q.id] = "emailFormat";
     }
     if (q.type === "tel" && raw) {
       const digits = raw.replace(/\D/g, "");
@@ -76,14 +85,14 @@ export function validateQuestions(
       const ok = foreign
         ? digits.length >= 8 && digits.length <= 15
         : digits.replace(/^(00)?237/, "").length === 9;
-      if (!ok) errs[q.id] = "Numéro incomplet : 9 chiffres attendus, par ex. 6 77 12 34 56.";
+      if (!ok) errs[q.id] = "telFormat";
     }
     if (
       q.hasOther &&
       otherSelected(q, answers) &&
       !String(answers[`${q.id}__autre`] ?? "").trim()
     ) {
-      errs[q.id] = "Merci de préciser « Autre ».";
+      errs[q.id] = "otherText";
     }
   }
   return errs;
@@ -93,7 +102,7 @@ export function validateQuestions(
 export function validateSubmission(
   type: QuoteType,
   answers: Answers,
-): Record<string, string> {
+): Record<string, ValidationError> {
   const all = getSchema(type).flatMap((step) => visibleQuestions(step, answers));
   return validateQuestions(all, answers);
 }

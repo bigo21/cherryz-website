@@ -14,6 +14,31 @@ la maintenance est active par défaut même si la variable est oubliée. Un
 **Ne pas supprimer `MAINTENANCE_MODE=off` en Production** : sans la variable, le site
 repasserait en maintenance au déploiement suivant.
 
+## Langues (FR / EN)
+
+Le français est servi à la racine (`/internet-b2b`), l'anglais sous `/en`
+(`/en/internet-b2b`). Les pages vivent dans `app/[lang]/` ; `proxy.ts` réécrit
+en interne les URL françaises vers `/fr/...` (l'URL visible ne change pas) et
+redirige `/fr/...` vers l'URL sans préfixe.
+
+Les traductions passent par [next-intl](https://next-intl.dev) :
+
+- **Catalogues** : `messages/fr.json` (référence) et `messages/en.json`, rangés par
+  espace de noms (`Home`, `InternetB2B`, `Quote`, `Questionnaire`…). Les deux
+  fichiers doivent avoir exactement les mêmes clés.
+- **Format des messages** : ICU MessageFormat, avec des variables (`{name}`), des
+  pluriels (`{count, plural, …}`) et des balises (`<strong>`, `<br></br>`).
+- **Nombres et dates** : formatés par `Intl` selon la langue.
+- **Configuration** : `i18n/request.ts`, typage des clés dans `i18n/types.d.ts`.
+- **Questionnaires** : sous `Questionnaire`, les libellés des étapes et des options
+  sont indexés par position dans `lib/quote/schemas.ts`. Ce schéma garde les
+  valeurs enregistrées, en français.
+- **Contrôle** : `npm run i18n:check` vérifie la parité FR/EN, la syntaxe ICU et
+  l'alignement avec les questionnaires.
+
+Les réponses aux questionnaires sont toujours enregistrées en français. Les emails
+à l'équipe d'une demande anglaise portent `[EN]` dans l'objet.
+
 ## Mise en place (dashboard Vercel)
 
 1. **Importer le repo** `github.com/bigo21/cherryz-website` dans Vercel.
@@ -48,7 +73,7 @@ repasserait en maintenance au déploiement suivant.
 
 En cas de problème : définir `MAINTENANCE_MODE=on` en **Production** sur Vercel et redéployer
 → toutes les URL servent la page de maintenance (503), sans changement de code. Les
-demandes de devis (`/demandes`) restent accessibles. Repasser à `off` + redéployer pour rouvrir.
+demandes de devis (`/demandes`) et les pages légales restent accessibles. Repasser à `off` + redéployer pour rouvrir.
 
 ## Base de données / emails
 

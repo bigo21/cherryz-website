@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
+import { NAV_LINKS, quoteHrefFor } from "@/lib/site/site";
+import { useLocale, useTranslations } from "next-intl";
+import { localize, splitLocale } from "@/lib/i18n/config";
+import LangSwitch from "./LangSwitch";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const lang = useLocale();
+  const t = useTranslations("Chrome");
+  const { path } = splitLocale(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -22,7 +28,7 @@ export default function SiteNav() {
   useEffect(() => setOpen(false), [pathname]);
 
   const solid = scrolled || open;
-  const quoteHref = quoteHrefFor(pathname);
+  const quoteHref = localize(lang, quoteHrefFor(path));
 
   return (
     <nav
@@ -34,7 +40,7 @@ export default function SiteNav() {
       }}
     >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-[18px] md:px-12">
-        <Link href="/" className="flex items-center" aria-label="Cherryz, retour à l'accueil">
+        <Link href={localize(lang, "/")} className="flex items-center" aria-label={t("homeLabel")}>
           <Image
             src="/brand/logo-white.png"
             alt="Cherryz"
@@ -48,23 +54,24 @@ export default function SiteNav() {
         {/* Desktop links */}
         <div className="hidden items-center gap-[34px] md:flex">
           {NAV_LINKS.map((l) => {
-            const active = l.href === pathname;
+            const active = l.href === path;
             return (
               <Link
                 key={l.href}
-                href={l.href}
+                href={localize(lang, l.href)}
                 className="font-condensed text-[15px] font-semibold tracking-[0.6px] transition-colors"
                 style={{ color: active ? "#fff" : "rgba(255,255,255,.72)" }}
               >
-                {l.label}
+                {t(`nav.${l.key}`)}
               </Link>
             );
           })}
+          <LangSwitch className="font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
           <Link
             href={quoteHref}
             className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
           >
-            {QUOTE_LABEL} →
+            {t("quoteLabel")} →
           </Link>
         </div>
 
@@ -72,7 +79,7 @@ export default function SiteNav() {
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={open ? t("menuClose") : t("menuOpen")}
           aria-expanded={open}
           className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
         >
@@ -98,17 +105,18 @@ export default function SiteNav() {
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.href}
-                href={l.href}
+                href={localize(lang, l.href)}
                 className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85"
               >
-                {l.label}
+                {t(`nav.${l.key}`)}
               </Link>
             ))}
+            <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85" />
             <Link
               href={quoteHref}
               className="mt-4 rounded-full bg-cherry-alt px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              {QUOTE_LABEL} →
+              {t("quoteLabel")} →
             </Link>
           </div>
         </div>

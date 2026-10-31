@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import ContactForm from "@/components/contact/ContactForm";
 import { CalendarIcon, ClipboardIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
+import { localize } from "@/lib/i18n/config";
+import { pageMetadata } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Contact | Cherryz",
-  description:
-    "Parlons de votre projet : devis Internet B2B, WiFi Zone ou toute autre demande. Réponse sous 24h, déplacement gratuit partout au Cameroun. Basés à Yaoundé.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Contact.meta");
+  return pageMetadata("/contact", { title: t("title"), description: t("description") });
+}
 
-const coords = [
-  { Icon: PinIcon, k: "ADRESSE", v: CONTACT.address, href: undefined },
-  { Icon: PhoneIcon, k: "TÉLÉPHONE", v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
-  { Icon: WhatsAppIcon, k: "WHATSAPP", v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
-  { Icon: MailIcon, k: "EMAIL", v: CONTACT.email, href: CONTACT.emailHref },
-  { Icon: GlobeIcon, k: "SITE WEB", v: CONTACT.site, href: CONTACT.siteHref },
-];
 
-export default function Contact() {
+export default async function Contact() {
+  const lang = await getLocale();
+  const t = await getTranslations("Contact");
+  const coords = [
+    { Icon: PinIcon, k: t("coords.address"), v: t("coords.addressValue"), href: undefined },
+    { Icon: PhoneIcon, k: t("coords.phone"), v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
+    { Icon: WhatsAppIcon, k: t("coords.whatsapp"), v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
+    { Icon: MailIcon, k: t("coords.email"), v: CONTACT.email, href: CONTACT.emailHref },
+    { Icon: GlobeIcon, k: t("coords.site"), v: CONTACT.site, href: CONTACT.siteHref },
+  ];
   return (
     <>
       {/* HEADER */}
@@ -30,14 +34,13 @@ export default function Contact() {
         <div className="relative z-[1] mx-auto max-w-[1280px] px-6 md:px-12">
           <div className="mb-[22px] inline-flex items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[15px] py-2">
             <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-pink shadow-[0_0_10px_1px_#e11d63]" />
-            <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">CONTACT</span>
+            <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">{t("hero.eyebrow")}</span>
           </div>
           <h1 className="m-0 font-condensed text-[clamp(42px,6vw,66px)] font-bold leading-[0.98] tracking-[-0.4px] text-white">
-            Parlons de votre projet.
+            {t("hero.title")}
           </h1>
           <p className="mt-[18px] max-w-[560px] font-sans text-[19px] leading-[1.55] text-white/[0.78]">
-            Une question, un devis, une idée de WiFi Zone ? Notre équipe vous
-            répond sous 24h et se déplace gratuitement, partout au Cameroun.
+            {t("hero.lead")}
           </p>
         </div>
       </header>
@@ -49,21 +52,20 @@ export default function Contact() {
             <div className="flex items-start gap-[14px]">
               <ClipboardIcon className="mt-[2px] flex-none text-[26px] text-cherry-alt" />
               <div>
-                <h2 className="m-0 font-condensed text-[22px] font-bold">Besoin d&apos;un prix ?</h2>
+                <h2 className="m-0 font-condensed text-[22px] font-bold">{t("price.title")}</h2>
                 <p className="mt-1 font-sans text-[15.5px] text-navy/70">
-                  Notre questionnaire de devis prend 3 minutes et nous donne
-                  tout ce qu&apos;il faut pour vous chiffrer.
+                  {t("price.lead")}
                 </p>
               </div>
             </div>
             <div className="flex flex-wrap gap-3">
               {[
-                { label: "Devis Internet B2B", href: QUOTE.ip },
-                { label: "Devis WiFi Zone", href: QUOTE.wifi },
+                { label: t("price.ip"), href: QUOTE.ip },
+                { label: t("price.wifi"), href: QUOTE.wifi },
               ].map((q) => (
                 <Link
                   key={q.href}
-                  href={q.href}
+                  href={localize(lang, q.href)}
                   className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-[#c0093a]"
                 >
                   {q.label} →
@@ -79,7 +81,7 @@ export default function Contact() {
             <div className="relative overflow-hidden rounded-[20px] bg-navy px-[30px] py-8 text-white">
               <div className="absolute -right-10 -top-10 h-[150px] w-[150px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.4),transparent 68%)" }} />
               <div className="relative">
-                <h3 className="mb-5 font-condensed text-[24px] font-bold">Nos coordonnées</h3>
+                <h3 className="mb-5 font-condensed text-[24px] font-bold">{t("coords.title")}</h3>
                 <div className="flex flex-col gap-4">
                   {coords.map((c) => (
                     <div key={c.k} className="flex items-start gap-[13px]">
@@ -103,13 +105,13 @@ export default function Contact() {
             </div>
 
             <div className="rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7">
-              <h3 className="mb-[6px] font-condensed text-[22px] font-bold">Réserver un créneau</h3>
+              <h3 className="mb-[6px] font-condensed text-[22px] font-bold">{t("booking.title")}</h3>
               <p className="mb-[18px] font-sans text-[14.5px] text-navy/60">
-                Prenez rendez-vous en ligne, directement.
+                {t("booking.lead")}
               </p>
               {[
-                { label: "Internet B2B", href: CAL_IP },
-                { label: "WiFi Zone", href: CAL_WIFI },
+                { label: t("booking.ip"), href: CAL_IP },
+                { label: t("booking.wifi"), href: CAL_WIFI },
               ].map((rdv, i) => (
                 <a
                   key={rdv.label}

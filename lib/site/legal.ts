@@ -13,7 +13,7 @@ export const LEGAL = {
   publicationDirector: TODO, // nom et fonction du directeur de la publication
   artLicence: TODO, // référence de l'agrément / autorisation ART
   retention: TODO, // durée de conservation des demandes (ex. « 3 ans après le dernier contact »)
-  updatedAt: "30 octobre 2026",
+  updatedAt: "2026-10-30", // ISO date, formatted per locale on the page
 } as const;
 
 export const HOST = {

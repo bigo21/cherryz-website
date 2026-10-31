@@ -1,4 +1,6 @@
 import { Resend } from "resend";
+import { getTranslations } from "next-intl/server";
+import type { Locale } from "@/lib/i18n/config";
 import type { Answers, QuoteType } from "@/lib/quote/schemas";
 import { quoteTypeLabel, summarizeAnswers } from "@/lib/quote/summary";
 
@@ -71,8 +73,9 @@ function teamEmailHtml(
   </div>`;
 }
 
-function prospectEmailHtml(firstName: string, type: QuoteType): string {
-  const hi = firstName ? `Merci ${esc(firstName)} !` : "Merci !";
+async function prospectEmailHtml(firstName: string, type: QuoteType, locale: Locale): Promise<string> {
+  const t = await getTranslations({ locale, namespace: "Email" });
+  const hi = firstName ? t("hi", { name: esc(firstName) }) : t("hiAnonymous");
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f6f5f3;padding:24px">
     <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(16,27,40,.4)">
@@ -80,13 +83,13 @@ function prospectEmailHtml(firstName: string, type: QuoteType): string {
         <h1 style="margin:0;color:#fff;font-size:24px">${hi}</h1>
       </div>
       <div style="padding:26px;color:${NAVY};font-size:15px;line-height:1.6">
-        <p style="margin:0 0 16px">Votre demande de cotation <strong>${esc(quoteTypeLabel(type))}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.</p>
-        <p style="margin:0 0 16px">En attendant, vous pouvez nous joindre directement :</p>
+        <p style="margin:0 0 16px">${t.markup("quote.received", { type: esc(t(`quote.type.${type}`)), strong: (chunks) => `<strong>${chunks}</strong>` })}</p>
+        <p style="margin:0 0 16px">${t("quote.meanwhile")}</p>
         <ul style="margin:0 0 20px;padding-left:18px;color:#4b5563">
           <li>WhatsApp : <a href="https://wa.me/237242014664" style="color:${CHERRY}">+237 242 01 46 64</a></li>
           <li>Email : <a href="mailto:support@cherryz.tech" style="color:${CHERRY}">support@cherryz.tech</a></li>
         </ul>
-        <p style="margin:24px 0 0;font-weight:700;color:${CHERRY}">Cherryz — Vous connecte !</p>
+        <p style="margin:24px 0 0;font-weight:700;color:${CHERRY}">${t("slogan")}</p>
       </div>
     </div>
   </div>`;
@@ -101,6 +104,7 @@ export async function sendQuoteEmails(params: {
   contact: Contact;
   answers: Answers;
   tracking: Record<string, unknown>;
+  lang?: Locale;
 }): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -109,7 +113,7 @@ export async function sendQuoteEmails(params: {
   }
 
   const resend = new Resend(apiKey);
-  const { type, contact, answers, tracking } = params;
+  const { type, contact, answers, tracking, lang = "fr" } = params;
   const firstName = (contact.full_name ?? "").trim().split(" ")[0] ?? "";
 
   // Team notification
@@ -118,7 +122,7 @@ export async function sendQuoteEmails(params: {
       from: FROM,
       to: NOTIFY_TO,
       replyTo: contact.email ?? undefined,
-      subject: `Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
+      subject: `${lang === "en" ? "[EN] " : ""}Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
       html: teamEmailHtml(type, contact, answers, tracking),
     });
   } catch (e) {
@@ -131,8 +135,8 @@ export async function sendQuoteEmails(params: {
       await resend.emails.send({
         from: FROM,
         to: contact.email,
-        subject: "Votre demande Cherryz a bien été reçue",
-        html: prospectEmailHtml(firstName, type),
+        subject: (await getTranslations({ locale: lang, namespace: "Email" }))("quote.subject"),
+        html: await prospectEmailHtml(firstName, type, lang),
       });
     } catch (e) {
       console.error("[quote] prospect email failed:", e);

@@ -11,17 +11,14 @@ export const QUOTE = {
   wifi: "/demandes/wifi-zone",
 } as const;
 
-export const QUOTE_LABEL = "Obtenir mon devis";
-
-/** The questionnaire matching the page the visitor is on (the choice page otherwise). */
-export function quoteHrefFor(pathname: string | null): string {
-  if (pathname?.startsWith("/internet-b2b")) return QUOTE.ip;
-  if (pathname?.startsWith("/wifi-zone")) return QUOTE.wifi;
+/** The questionnaire matching the page the visitor is on (the choice page otherwise). Takes a locale-free path. */
+export function quoteHrefFor(path: string): string {
+  if (path.startsWith("/internet-b2b")) return QUOTE.ip;
+  if (path.startsWith("/wifi-zone")) return QUOTE.wifi;
   return QUOTE.hub;
 }
 
 export const CONTACT = {
-  address: "Yaoundé, Cameroun",
   phoneDisplay: "+237 242 01 46 64",
   phoneHref: "tel:+237242014664",
   whatsapp: "https://wa.me/237242014664",
@@ -33,9 +30,10 @@ export const CONTACT = {
   facebook: "https://facebook.com/cherryz.tech",
 } as const;
 
+/** Main navigation; labels live in messages/*.json under `Chrome.nav`. */
 export const NAV_LINKS = [
-  { label: "Accueil", href: "/" },
-  { label: "Internet B2B", href: "/internet-b2b" },
-  { label: "WiFi Zone", href: "/wifi-zone" },
-  { label: "Contact", href: "/contact" },
+  { key: "home", href: "/" },
+  { key: "ip", href: "/internet-b2b" },
+  { key: "wifi", href: "/wifi-zone" },
+  { key: "contact", href: "/contact" },
 ] as const;

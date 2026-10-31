@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { CAL_IP, CAL_WIFI, CONTACT, NAV_LINKS, QUOTE } from "@/lib/site/site";
+import { localize } from "@/lib/i18n/config";
+import LangSwitch from "./LangSwitch";
 import {
   CalendarIcon,
   ClipboardIcon,
@@ -17,7 +20,9 @@ const colTitle =
 const linkCls =
   "font-sans text-[15.5px] text-white/[0.78] transition-colors hover:text-white";
 
-export default function SiteFooter() {
+export default async function SiteFooter() {
+  const lang = await getLocale();
+  const t = await getTranslations("Chrome");
   return (
     <footer className="bg-navy px-6 pb-8 pt-16 text-white md:px-0">
       <div className="mx-auto max-w-[1280px] px-0 md:px-12">
@@ -31,51 +36,47 @@ export default function SiteFooter() {
               className="mb-4 block h-10 w-auto"
             />
             <p className="max-w-[280px] font-sans text-[15.5px] leading-[1.6] text-white/[0.62]">
-              Votre Internet Professionnel. Accessible. Partout au Cameroun.
+              {t("footer.tagline")}
             </p>
             <p className="mt-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-accent-vivid">
-              Cherryz — Vous connecte !
+              {t("footer.slogan")}
             </p>
           </div>
 
           <div>
-            <div className={colTitle}>Navigation</div>
+            <div className={colTitle}>{t("footer.navTitle")}</div>
             <div className="flex flex-col gap-[11px]">
               {NAV_LINKS.map((l) => (
-                <Link key={l.href} href={l.href} className={linkCls}>
-                  {l.label}
+                <Link key={l.href} href={localize(lang, l.href)} className={linkCls}>
+                  {t(`nav.${l.key}`)}
                 </Link>
               ))}
             </div>
           </div>
 
           <div>
-            <div className={colTitle}>Devis &amp; rendez-vous</div>
+            <div className={colTitle}>{t("footer.quotesTitle")}</div>
             <div className="flex flex-col gap-[11px]">
-              <Link href={QUOTE.ip} className={linkCls}>
-                <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> Devis
-                Internet B2B
+              <Link href={localize(lang, QUOTE.ip)} className={linkCls}>
+                <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.quoteIp")}
               </Link>
-              <Link href={QUOTE.wifi} className={linkCls}>
-                <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> Devis
-                WiFi Zone
+              <Link href={localize(lang, QUOTE.wifi)} className={linkCls}>
+                <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.quoteWifi")}
               </Link>
               <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> Appel
-                Internet B2B
+                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.callIp")}
               </a>
               <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> Appel
-                WiFi Zone
+                <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.callWifi")}
               </a>
             </div>
           </div>
 
           <div>
-            <div className={colTitle}>Contact</div>
+            <div className={colTitle}>{t("footer.contactTitle")}</div>
             <div className="flex flex-col gap-[11px] font-sans text-[15px] leading-[1.4] text-white/[0.78]">
               <span>
-                <PinIcon className="mr-1 inline-block align-[-0.14em]" /> {CONTACT.address}
+                <PinIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.address")}
               </span>
               <a href={CONTACT.phoneHref} className={linkCls}>
                 <PhoneIcon className="mr-1 inline-block align-[-0.14em]" />{" "}
@@ -101,15 +102,16 @@ export default function SiteFooter() {
 
         <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
           <div className="flex flex-wrap gap-5">
-            <Link href="/mentions-legales" className="font-sans text-[14px] text-white/55 hover:text-white">
-              Mentions légales
+            <Link href={localize(lang, "/mentions-legales")} className="font-sans text-[14px] text-white/55 hover:text-white">
+              {t("footer.legal")}
             </Link>
-            <Link href="/confidentialite" className="font-sans text-[14px] text-white/55 hover:text-white">
-              Politique de confidentialité
+            <Link href={localize(lang, "/confidentialite")} className="font-sans text-[14px] text-white/55 hover:text-white">
+              {t("footer.privacy")}
             </Link>
+            <LangSwitch long className="font-sans text-[14px] text-white/55 hover:text-white" />
           </div>
           <div className="font-sans text-[14px] text-white/45">
-            © 2026 Cherryz. Tous droits réservés.
+            {t("footer.rights")}
           </div>
         </div>
       </div>

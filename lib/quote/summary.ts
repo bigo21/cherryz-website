@@ -1,3 +1,4 @@
+import fr from "@/messages/fr.json";
 import { getSchema, type Answers, type QuoteType } from "./schemas";
 import { otherSelected, visibleQuestions, type GeoValue } from "./validation";
 
@@ -44,16 +45,20 @@ function formatValue(
   return base;
 }
 
-/** Flatten the answers into labelled, human-readable Q/A pairs (visible questions only). */
+/**
+ * Flatten the answers into labelled, human-readable Q/A pairs (visible questions only),
+ * in French: the summary goes to the team, whatever the visitor's language.
+ */
 export function summarizeAnswers(
   type: QuoteType,
   answers: Answers,
 ): SummaryItem[] {
+  const labels: Record<string, { label: string }> = fr.Questionnaire[type].questions;
   const items: SummaryItem[] = [];
   for (const step of getSchema(type)) {
     for (const q of visibleQuestions(step, answers)) {
       const value = formatValue(q, answers);
-      if (value) items.push({ label: q.label, value });
+      if (value) items.push({ label: labels[q.id]?.label ?? q.id, value });
     }
   }
   return items;

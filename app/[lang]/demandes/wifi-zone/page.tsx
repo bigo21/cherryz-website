@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import QuoteWizard from "@/components/quote/QuoteWizard";
-import { GlobeIcon } from "@/components/site/icons";
+import { WifiIcon } from "@/components/site/icons";
+import { QUOTE } from "@/lib/site/site";
+import { localize } from "@/lib/i18n/config";
+import { pageMetadata } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Demande de cotation IP Publique Dédiée | Cherryz",
-  description:
-    "Formulaire de demande de devis Internet professionnel avec IP publique dédiée. ± 3 minutes, réponse sous 48h, sans engagement.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Quote.wifi.meta");
+  return pageMetadata(QUOTE.wifi, { title: t("title"), description: t("description") });
+}
 
-export default function DemandeInternetB2B() {
+export default async function DemandeWifiZone() {
+  const lang = await getLocale();
+  const t = await getTranslations("Quote");
   return (
     <>
       <header className="relative overflow-hidden bg-navy-deep pb-[60px] pt-[140px]">
@@ -19,29 +24,29 @@ export default function DemandeInternetB2B() {
         />
         <div className="relative z-[1] mx-auto max-w-[900px] px-6">
           <Link
-            href="/demandes"
+            href={localize(lang, QUOTE.hub)}
             className="mb-[18px] inline-flex items-center gap-[7px] font-condensed text-[14px] font-semibold tracking-[0.5px] text-white/60 transition-colors hover:text-white"
           >
-            ← Toutes les demandes
+            ← {t("back")}
           </Link>
           <div className="mb-[18px] flex w-fit items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[14px] py-[7px]">
-            <GlobeIcon className="text-[15px] text-white" />
+            <WifiIcon className="text-[15px] text-white" />
             <span className="font-condensed text-[12px] font-semibold tracking-[1.4px] text-white/90">
-              INTERNET · IP PUBLIQUE DÉDIÉE
+              {t("wifi.eyebrow")}
             </span>
           </div>
           <h1 className="m-0 font-condensed text-[clamp(32px,4.4vw,42px)] font-bold leading-[1.05] tracking-[-0.3px] text-white">
-            Demande de devis Internet avec IP Publique Dédiée
+            {t("wifi.title")}
           </h1>
           <p className="mt-[14px] font-sans text-[17px] leading-[1.55] text-white/75">
-            ± 3 minutes · Réponse sous 48h · Sans engagement
+            {[t("wifi.facts.duration"), t("wifi.facts.reply"), t("wifi.facts.survey")].join(" · ")}
           </p>
         </div>
       </header>
 
       <section className="pb-[100px] pt-[50px]">
         <div className="mx-auto -mt-10 max-w-[700px] px-6">
-          <QuoteWizard type="ip" />
+          <QuoteWizard type="wifi" />
         </div>
       </section>
     </>

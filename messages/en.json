@@ -1,0 +1,1068 @@
+{
+  "Site": {
+    "meta": {
+      "title": "Cherryz — Gets you connected!",
+      "description": "Cherryz, your Internet connectivity broker in Cameroon: business Internet with a dedicated public IP and revenue-generating WiFi Zones, at the best price."
+    }
+  },
+  "Chrome": {
+    "skip": "Skip to content",
+    "homeLabel": "Cherryz, back to the home page",
+    "nav": {
+      "home": "Home",
+      "ip": "Business Internet",
+      "wifi": "WiFi Zone",
+      "contact": "Contact"
+    },
+    "quoteLabel": "Get my quote",
+    "menuOpen": "Open the menu",
+    "menuClose": "Close the menu",
+    "switchLang": {
+      "label": "Français",
+      "short": "FR",
+      "aria": "Voir cette page en français"
+    },
+    "whatsappAria": "Message us on WhatsApp",
+    "footer": {
+      "tagline": "Your business Internet. Affordable. Everywhere in Cameroon.",
+      "slogan": "Cherryz — Gets you connected!",
+      "navTitle": "Navigation",
+      "quotesTitle": "Quotes & meetings",
+      "quoteIp": "Business Internet quote",
+      "quoteWifi": "WiFi Zone quote",
+      "callIp": "Business Internet call",
+      "callWifi": "WiFi Zone call",
+      "contactTitle": "Contact",
+      "address": "Yaoundé, Cameroon",
+      "legal": "Legal notice",
+      "privacy": "Privacy policy",
+      "privacyShort": "Privacy",
+      "rights": "© 2026 Cherryz. All rights reserved."
+    },
+    "quoteFree": "Get my free quote",
+    "preferCall": "Prefer a call",
+    "visitLead": "Our team comes to you free of charge to assess your situation, anywhere in Cameroon.",
+    "reassurance": {
+      "art": "ART-regulated",
+      "partners": "Camtel · Orange · MTN partner",
+      "discount": "Up to 50% less",
+      "ip": "Dedicated, secure IP",
+      "test": "Test before you commit"
+    },
+    "testNote": "*A contract signed before a notary is required before the test starts."
+  },
+  "Home": {
+    "meta": {
+      "title": "Cherryz | Business Internet at the best price, everywhere in Cameroon",
+      "description": "Cherryz brings together the offers of the major operators (Camtel, Orange, MTN) for a dedicated, stable connection at up to 50% less. Business Internet with a public IP and revenue-generating WiFi Zones."
+    },
+    "hero": {
+      "eyebrow": "CONNECTIVITY AGGREGATOR · CAMEROON",
+      "imageAlt": "Cherryz, a connected network",
+      "title": "Business Internet at the <accent>best price.</accent><br></br>Everywhere in Cameroon.",
+      "subtitle": "Cherryz brings together the offers of the largest operators (Camtel, Orange, MTN and many more) to give you a dedicated, stable connection at up to 50% less. No works. No downtime.",
+      "wifi": "Discover the WiFi Zone"
+    },
+    "why": {
+      "eyebrow": "WHY CHERRYZ",
+      "imageAlt": "Cherryz technician on site",
+      "priceValue": "45,000",
+      "priceUnit": "XAF/Mbps",
+      "priceInstead": "instead of 90,000 – 180,000",
+      "title": "One point of contact.<br></br>The best networks.<br></br>The right price.",
+      "p1": "Cameroonian businesses pay between 90,000 and 180,000 XAF/Mbps/month when they go straight to an operator. Cherryz negotiates with several providers on your behalf and offers you the best solution, from 45,000 XAF/Mbps/month.",
+      "p2": "We are not one more operator. We are your <strong>connectivity broker</strong>: we analyse your needs, compare the options and deliver the solution that fits best, technically and financially."
+    },
+    "compare": {
+      "head": "Comparison",
+      "alone": "Going straight to an operator",
+      "cherry": "Going through Cherryz",
+      "aloneShort": "Alone",
+      "cherryShort": "Cherryz",
+      "rows": {
+        "price": {
+          "label": "Price / Mbps / month",
+          "alone": "90,000 – 180,000 XAF",
+          "cherry": "45,000 – 70,000 XAF"
+        },
+        "install": {
+          "label": "Installation",
+          "alone": "Heavy works, long lead times",
+          "cherry": "Fast, no civil engineering"
+        },
+        "choice": {
+          "label": "Technology choice",
+          "alone": "Limited to 1 operator",
+          "cherry": "Multi-operator, best option"
+        },
+        "support": {
+          "label": "Support",
+          "alone": "Standard, waiting in line",
+          "cherry": "Dedicated, responsive, local"
+        },
+        "flex": {
+          "label": "Flexibility",
+          "alone": "Rigid contracts",
+          "cherry": "Tailored, scalable"
+        },
+        "test": {
+          "label": "Prior testing",
+          "alone": "Rarely possible",
+          "cherry": "Side-by-side test available*"
+        }
+      }
+    },
+    "approach": {
+      "eyebrow": "OUR APPROACH",
+      "title": "We don't sell a connection.<br></br>We solve a problem.",
+      "steps": {
+        "listen": {
+          "t": "Listen",
+          "d": "We understand your business, your usage, your constraints.",
+          "alt": "Client meeting in an office"
+        },
+        "study": {
+          "t": "Survey",
+          "d": "Free site visit: technical feasibility analysis.",
+          "alt": "Technician on a site survey"
+        },
+        "solution": {
+          "t": "Solution",
+          "d": "We put together the best offer from our partner operators.",
+          "alt": "Team in front of a network diagram"
+        },
+        "pricing": {
+          "t": "Quote",
+          "d": "A transparent price, fitted to your real budget.",
+          "alt": "Handing over a quote"
+        },
+        "deploy": {
+          "t": "Deployment",
+          "d": "Fast installation, without interrupting your business.",
+          "alt": "Installing network equipment"
+        },
+        "followup": {
+          "t": "Follow-up",
+          "d": "Dedicated after-sales support, monitoring, fast response.",
+          "alt": "Monitoring screen"
+        }
+      },
+      "note": "Every project is unique. That's why we don't publish a fixed price list: we build your price once we understand your needs.",
+      "cta": "Describe my project"
+    },
+    "services": {
+      "eyebrow": "OUR SERVICES",
+      "title": "Two ways to get better connected",
+      "whom": "FOR WHOM",
+      "what": "WHAT",
+      "plus": "BENEFIT",
+      "more": "Learn more",
+      "ip": {
+        "badge": "B2B",
+        "title": "Public IP Address",
+        "imageAlt": "Connected office",
+        "whom": "Businesses, institutions, organisations",
+        "what": "Dedicated Internet with a fixed IP, guaranteed bandwidth",
+        "plus": "Business-grade performance at a lower price"
+      },
+      "wifi": {
+        "badge": "REVENUE",
+        "title": "WiFi Zone",
+        "imageAlt": "Building with WiFi",
+        "whom": "Entrepreneurs, building managers, investors",
+        "what": "A shared, monetised Internet access point",
+        "plus": "Earn revenue from connectivity"
+      }
+    },
+    "trust": {
+      "eyebrow": "THEY TRUST US",
+      "title": "Our partners & references"
+    },
+    "final": {
+      "title": "Ready to pay less for<br></br>better Internet?"
+    }
+  },
+  "InternetB2B": {
+    "meta": {
+      "title": "Business Internet with a dedicated public IP | Cherryz",
+      "description": "Dedicated business Internet with a fixed IP, from 45,000 XAF/Mbps/month. Multi-operator (Camtel, Orange, MTN), fast installation with no civil works, dedicated IP included, test before you commit."
+    },
+    "hero": {
+      "eyebrow": "PUBLIC IP CONNECTION · B2B",
+      "imageAlt": "Cherryz datacenter",
+      "title": "Dedicated Internet. Fixed IP.<br></br>The best of Cameroon's networks, at the <accent>best price.</accent>",
+      "subtitle": "Cherryz picks the best infrastructure among our partner operators (Camtel, Orange, MTN) and delivers a business connection with a dedicated IP, with no works and no downtime.",
+      "how": "How it works"
+    },
+    "basics": {
+      "eyebrow": "THE BASICS",
+      "title": "What is a dedicated<br></br>public IP?",
+      "lead": "Your public IP address is your company's identity on the Internet. You need it to run your most sensitive business tools.",
+      "dedicatedTitle": "With Cherryz, your IP is dedicated",
+      "dedicatedBody": "Nobody else shares it. Your bandwidth is guaranteed, at all times.",
+      "usages": {
+        "vpn": {
+          "alt": "Inter-branch VPN",
+          "t": "Secure your inter-branch VPNs",
+          "d": "Link your sites in complete confidentiality."
+        },
+        "servers": {
+          "alt": "In-house servers",
+          "t": "Host your in-house servers",
+          "d": "Reachable remotely, securely."
+        },
+        "voip": {
+          "alt": "VoIP call centre",
+          "t": "Call centres & VoIP systems",
+          "d": "Clear voice, no drop-outs."
+        },
+        "compliance": {
+          "alt": "Transaction compliance",
+          "t": "Compliant transactions",
+          "d": "Essential for your financial flows."
+        },
+        "video": {
+          "alt": "Video surveillance",
+          "t": "Real-time video surveillance",
+          "d": "Your cameras, wherever you are."
+        }
+      }
+    },
+    "brings": {
+      "eyebrow": "WHAT CHERRYZ BRINGS YOU",
+      "title": "A business connection, without<br></br>an operator's constraints",
+      "priceLabel": "NEGOTIATED PRICE",
+      "priceValue": "70,000",
+      "priceUnit": "XAF/Mbps/month",
+      "priceNote": "Thanks to our aggregated buying power with the operators.",
+      "features": {
+        "install": {
+          "t": "Fast installation",
+          "d": "Microwave links: no civil engineering, no trenches."
+        },
+        "ip": {
+          "t": "Dedicated IP included",
+          "d": "Your address, yours alone."
+        },
+        "test": {
+          "t": "Side-by-side test",
+          "d": "Test without leaving your current operator*."
+        },
+        "coverage": {
+          "t": "Nationwide coverage",
+          "d": "Everywhere in Cameroon through our partners."
+        },
+        "support": {
+          "t": "Local after-sales support",
+          "d": "A responsive technical team, not a distant call centre."
+        }
+      },
+      "multiTitle": "Multi-operator",
+      "multiBody": "We pick the best network for <strong>your</strong> location, not a single provider's."
+    },
+    "how": {
+      "eyebrow": "HOW IT WORKS",
+      "title": "From first contact to connection",
+      "step": "STEP {n}",
+      "result": "RESULT",
+      "steps": {
+        "request": "Online request",
+        "contact": "Contact within 24h",
+        "visit": "Free site visit",
+        "quote": "Tailored quote",
+        "install": "Fast installation",
+        "result": "Connected & saving"
+      },
+      "cta": "Start my request"
+    },
+    "final": {
+      "title": "Dedicated business Internet,<br></br>from 45,000 XAF/Mbps."
+    }
+  },
+  "WifiZone": {
+    "meta": {
+      "title": "Turnkey revenue-generating WiFi Zone | Cherryz",
+      "description": "Launch your WiFi business: building, neighbourhood, hotel, campus, market… Cherryz surveys, sizes, deploys and automates the monetisation (vouchers, mobile payment). ART-approved, local after-sales support."
+    },
+    "hero": {
+      "eyebrow": "WIFI ZONE · TURNKEY BUSINESS",
+      "imageAlt": "A connected Cameroonian neighbourhood",
+      "title": "Launch your WiFi business.<br></br>We take care of <accent>everything.</accent>",
+      "subtitle": "Building, neighbourhood, residence, campus, market, hotel: whatever your space, Cherryz supports you from idea to profitability. We survey, size, deploy and automate your business's network infrastructure.",
+      "cases": "See our projects"
+    },
+    "zones": {
+      "eyebrow": "YOUR PROJECT. OUR EXPERTISE.",
+      "title": "Whatever the size, we build<br></br>your tailor-made WiFi Zone.",
+      "items": {
+        "building": {
+          "t": "Building",
+          "alt": "Residential building",
+          "sub": "Residences, office buildings, co-living",
+          "d": "Indoor multi-floor coverage, captive portal per tenant."
+        },
+        "district": {
+          "t": "Neighbourhood",
+          "alt": "Residential neighbourhood",
+          "sub": "Residential area, estate, housing development",
+          "d": "Long-range outdoor antennas, multi-household distribution."
+        },
+        "hotel": {
+          "t": "Hotel / Guesthouse",
+          "alt": "Hotel / Guesthouse",
+          "sub": "Hotels, motels, guesthouses",
+          "d": "Premium WiFi per room, managed with vouchers."
+        },
+        "campus": {
+          "t": "Campus / School",
+          "alt": "Campus / School",
+          "sub": "Universities, high schools, training centres",
+          "d": "High density, bandwidth management per area."
+        },
+        "market": {
+          "t": "Market / Shopping area",
+          "alt": "Market / Shopping area",
+          "sub": "Markets, shopping arcades, stations",
+          "d": "Rugged access points, pay-per-session."
+        },
+        "industrial": {
+          "t": "Industrial site / Worksite",
+          "alt": "Industrial site / Worksite",
+          "sub": "Factories, warehouses, worker camps",
+          "d": "Wide coverage, a stable connection for operations."
+        },
+        "clinic": {
+          "t": "Clinic / Health centre",
+          "alt": "Clinic / Health centre",
+          "sub": "Hospitals, pharmacies, laboratories",
+          "d": "Secure network, patient and staff traffic kept apart."
+        },
+        "idea": {
+          "t": "Your idea",
+          "alt": "Your idea",
+          "sub": "Any other space",
+          "d": "We study, we propose, we deploy."
+        }
+      },
+      "ambition": "You have a place and an ambition? <em>That's all we need to get started.</em>"
+    },
+    "method": {
+      "eyebrow": "OUR METHOD",
+      "title": "We don't sell you equipment.<br></br>We build you a business.",
+      "obtain": "YOU GET",
+      "steps": {
+        "diagnostic": {
+          "step": "STEP 1 · SURVEY",
+          "d": "We visit your site and analyse the surroundings, the density, the potential.",
+          "obtain": "A clear view of feasibility and the market."
+        },
+        "sizing": {
+          "step": "STEP 2 · SIZING",
+          "d": "We work out the bandwidth needed, the number of access points, the coverage.",
+          "obtain": "A technical plan fitted to your exact area."
+        },
+        "model": {
+          "step": "STEP 3 · BUSINESS MODEL",
+          "d": "We structure your prices, your offers (vouchers, subscriptions, bundles) and your margins.",
+          "obtain": "A concrete business plan with a revenue forecast."
+        },
+        "deploy": {
+          "step": "STEP 4 · DEPLOYMENT",
+          "d": "We install the complete infrastructure: antennas, routers, cabling, captive portal.",
+          "obtain": "A working WiFi Zone, ready to sell."
+        },
+        "automation": {
+          "step": "STEP 5 · AUTOMATION",
+          "d": "We set up automatic monetisation: mobile payment, vouchers, portal.",
+          "obtain": "Your customers pay and you get paid, with no manual work."
+        },
+        "support": {
+          "step": "STEP 6 · FOLLOW-UP & SUPPORT",
+          "d": "Remote monitoring, maintenance, continuous optimisation.",
+          "obtain": "A business that runs, even while you sleep."
+        }
+      },
+      "partner": "You don't need to be a technician. You need a partner. <strong>That's exactly what we are.</strong>",
+      "cta": "Request my free survey"
+    },
+    "why": {
+      "eyebrow": "WHY CHERRYZ",
+      "title": "What sets us apart?<br></br>We stay after the installation.",
+      "bandwidthTitle": "Bandwidth at the best price",
+      "bandwidthBody": "The choice is yours: bring your own connectivity, or let Cherryz handle it. We combine the best Camtel, Orange and MTN offers, and your margin is maximised from day one.",
+      "diffs": {
+        "az": {
+          "t": "Support from A to Z",
+          "d": "From the site survey to automating your revenue."
+        },
+        "business": {
+          "t": "A structured business",
+          "d": "We don't leave you with equipment, we hand you a turnkey business model."
+        },
+        "legal": {
+          "t": "100% legal",
+          "d": "ART installer and reseller approval: zero legal risk."
+        },
+        "scalable": {
+          "t": "Scalable",
+          "d": "Start with 1 antenna, expand to a whole neighbourhood, we grow with you."
+        },
+        "support": {
+          "t": "Local after-sales support",
+          "d": "A responsive technical team, continuous monitoring, fast response."
+        }
+      }
+    },
+    "cases": {
+      "eyebrow": "REAL-WORLD USE CASES",
+      "title": "They did it. Why not you?",
+      "items": {
+        "building": {
+          "badge": "Building owner",
+          "place": "24 flats, Yaoundé",
+          "desc": "WiFi per floor + monthly vouchers.",
+          "stat": "+150,000 XAF",
+          "suffix": " /month in passive income",
+          "alt": "Building in Yaoundé"
+        },
+        "district": {
+          "badge": "Neighbourhood entrepreneur",
+          "place": "Dense residential area, Douala",
+          "desc": "3 antennas, 500 m coverage.",
+          "stat": "+200 customers",
+          "suffix": " in 2 months",
+          "alt": "Neighbourhood in Douala"
+        },
+        "hotel": {
+          "badge": "Hotel manager",
+          "place": "30-room hotel",
+          "desc": "Premium WiFi included in the room rate.",
+          "stat": "+40%",
+          "suffix": " customer satisfaction",
+          "alt": "Connected hotel"
+        }
+      },
+      "note": "*Indicative results based on typical projects. Every project is unique."
+    },
+    "final": {
+      "title": "You have a space.<br></br>We have the method.",
+      "subtitle": "Tell us where, tell us your ambition, we'll handle the rest. Free survey. Site visit. Anywhere in Cameroon.",
+      "cta": "Launch my WiFi Zone project"
+    }
+  },
+  "Contact": {
+    "meta": {
+      "title": "Contact | Cherryz",
+      "description": "Tell us about your project: a business Internet quote, a WiFi Zone or anything else. Reply within 24 hours, free site visits anywhere in Cameroon. Based in Yaoundé."
+    },
+    "hero": {
+      "title": "Let's talk about your project.",
+      "lead": "A question, a quote, a WiFi Zone idea? Our team replies within 24 hours and comes to you free of charge, anywhere in Cameroon.",
+      "eyebrow": "CONTACT"
+    },
+    "price": {
+      "title": "Need a price?",
+      "lead": "Our quote questionnaire takes 3 minutes and gives us everything we need to price your project.",
+      "ip": "Business Internet quote",
+      "wifi": "WiFi Zone quote"
+    },
+    "coords": {
+      "title": "Our details",
+      "address": "Address",
+      "addressValue": "Yaoundé, Cameroon",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "site": "Website"
+    },
+    "booking": {
+      "title": "Book a slot",
+      "lead": "Book a meeting online, directly.",
+      "ip": "Business Internet",
+      "wifi": "WiFi Zone"
+    },
+    "form": {
+      "title": "Write to us",
+      "required": "Fields marked with * are required.",
+      "name": "Full name *",
+      "namePh": "Your name",
+      "email": "Work email *",
+      "emailPh": "you@company.com",
+      "phone": "Phone / WhatsApp",
+      "phonePh": "+237 6 00 00 00 00",
+      "company": "Company / organisation",
+      "companyPh": "Name of your organisation",
+      "need": "What do you need? *",
+      "needPh": "Select…",
+      "needs": {
+        "ip": "Business Internet",
+        "wifi": "WiFi Zone",
+        "other": "Other"
+      },
+      "message": "Message",
+      "messagePh": "Describe your project, your location, your needs…",
+      "errMissing": "Please enter your name, a valid email and what you need.",
+      "errSend": "Something went wrong. Please try again or write to us at support@cherryz.tech.",
+      "sending": "Sending…",
+      "send": "Send my message",
+      "sentTitle": "Message sent!",
+      "sentBody": "Thank you {name}. Our team will get back to you within 24 hours. To speed things up, book a slot directly alongside.",
+      "again": "Send another message"
+    }
+  },
+  "Quote": {
+    "hub": {
+      "meta": {
+        "title": "Quote request | Cherryz",
+        "description": "Choose your request: a business Internet quote with a dedicated public IP, or a WiFi Zone quote. A 3-minute form, reply within 48 hours."
+      },
+      "title": "What would you like a quote for?",
+      "lead": "Choose the service that matches your needs. The form takes about 3 minutes, and our team gets back to you within 48 hours.",
+      "ip": {
+        "title": "Dedicated Public IP Quote",
+        "desc": "A dedicated Internet connection for your business, with a fixed IP address and guaranteed bandwidth.",
+        "eyebrow": "INTERNET · B2B"
+      },
+      "wifi": {
+        "title": "WiFi Zone Quote",
+        "desc": "Turn your building, hotel or neighbourhood into a profitable, turnkey Internet access point.",
+        "eyebrow": "INTERNET · REVENUE"
+      },
+      "start": "Start my request",
+      "direct": "Would you rather talk to us directly?",
+      "whatsapp": "Message us on WhatsApp",
+      "or": "or",
+      "email": "send us an email",
+      "eyebrow": "QUOTE REQUEST"
+    },
+    "ip": {
+      "meta": {
+        "title": "Dedicated public IP quote request | Cherryz",
+        "description": "Quote request form for business Internet with a dedicated public IP. About 3 minutes, reply within 48 hours, no commitment."
+      },
+      "title": "Quote request: Internet with a Dedicated Public IP",
+      "facts": {
+        "duration": "± 3 minutes",
+        "reply": "Reply within 48h",
+        "commitment": "No commitment"
+      },
+      "eyebrow": "INTERNET · DEDICATED PUBLIC IP"
+    },
+    "wifi": {
+      "meta": {
+        "title": "WiFi Zone quote request | Cherryz",
+        "description": "Form to launch your revenue-generating WiFi Zone (building, hotel, neighbourhood…). About 3 minutes, reply within 48 hours, free survey."
+      },
+      "title": "I want to launch my WiFi Zone",
+      "facts": {
+        "duration": "± 3 minutes",
+        "reply": "Reply within 48h",
+        "survey": "Free survey"
+      },
+      "eyebrow": "INTERNET · WIFI ZONE"
+    },
+    "back": "All requests",
+    "homeLabel": "Cherryz, back to the home page",
+    "wizard": {
+      "stepOf": "Step {step} of {total}",
+      "next": "Next:",
+      "progress": "Questionnaire progress",
+      "missing": "{count, plural, one {# answer is} other {# answers are}} missing on this step.",
+      "required": "Required",
+      "optional": "Optional",
+      "scale": "{value, plural, =1 {1 out of 5, very dissatisfied} =5 {5 out of 5, very satisfied} other {# out of 5}}",
+      "scaleLow": "1 = very dissatisfied",
+      "scaleHigh": "5 = very satisfied",
+      "otherAria": "Specify \"Other\": {label}",
+      "otherPh": "Please specify…",
+      "consent": "I agree that Cherryz may use my information to contact me about my request.",
+      "consentDetails": "Details in our",
+      "consentLink": "privacy policy",
+      "sendError": "Your request could not be sent. Your answers are kept: try again in a moment, or message us on WhatsApp.",
+      "writeWhatsapp": "Message us on WhatsApp",
+      "cancel": "Cancel",
+      "prev": "Back",
+      "sending": "Sending…",
+      "send": "Send my request",
+      "nextBtn": "Next",
+      "saved": "Your answers are saved automatically on this device.",
+      "thanks": "Thank you, {name}!",
+      "thanksAnonymous": "Thank you!",
+      "received": "We have received your request. A confirmation email is on its way.",
+      "after": {
+        "review": "We review your answers and compare the offers of our partner operators.",
+        "callback": "We get back to you within 48 hours to fine-tune your needs.",
+        "visit": "If needed, a technician visits your site free of charge."
+      },
+      "home": "Back to the home page",
+      "restart": "Make a new request",
+      "geo": {
+        "use": "Use my current location",
+        "locating": "Locating…",
+        "found": "Location found",
+        "hintLocating": "Locating… allow access to your location if your browser asks.",
+        "hintFound": "Location found: {coords}. You can add details below if needed.",
+        "hintDenied": "Location unavailable: describe it below instead.",
+        "hintIdle": "Or describe your location yourself:",
+        "placeholder": "Neighbourhood, landmarks"
+      }
+    }
+  },
+  "Questionnaire": {
+    "ip": {
+      "steps": {
+        "0": {
+          "title": "Your current situation",
+          "subtitle": "Help us understand your starting point."
+        },
+        "1": {
+          "title": "What you need",
+          "subtitle": "Describe how you use the Internet and your constraints."
+        },
+        "2": {
+          "title": "Location",
+          "subtitle": "Where is your business located?"
+        },
+        "3": {
+          "title": "Your contact details",
+          "subtitle": "So that our team can get back to you."
+        },
+        "4": {
+          "title": "Last step",
+          "subtitle": "A few more words, and you're done."
+        }
+      },
+      "questions": {
+        "q1": {
+          "label": "Do you already have an Internet connection?",
+          "options": {
+            "0": "Yes, we already have an operator",
+            "1": "No, we are looking for a first solution",
+            "2": "We have a connection but it isn't good enough"
+          }
+        },
+        "q2": {
+          "label": "Who is your current Internet operator?",
+          "options": {
+            "0": "Camtel",
+            "1": "Matrix Telecom",
+            "2": "Creolink",
+            "3": "MTN",
+            "4": "Orange",
+            "5": "Several operators",
+            "6": "I don't know",
+            "7": "Other"
+          }
+        },
+        "q3": {
+          "label": "How satisfied are you with your current connection?"
+        },
+        "q4": {
+          "label": "What falls short?",
+          "options": {
+            "0": "Speed too low",
+            "1": "Frequent outages / instability",
+            "2": "High latency (video calls, VPN...)",
+            "3": "Price too high",
+            "4": "Unsatisfactory technical support",
+            "5": "No IP address, or a shared one",
+            "6": "Other"
+          }
+        },
+        "q5": {
+          "label": "Roughly what is your current Internet speed?",
+          "options": {
+            "0": "Less than 5 Mbps",
+            "1": "5 – 20 Mbps",
+            "2": "20 – 50 Mbps",
+            "3": "50 – 100 Mbps",
+            "4": "More than 100 Mbps",
+            "5": "I don't know my speed"
+          }
+        },
+        "q6": {
+          "label": "How much do you pay per month for your connection?",
+          "options": {
+            "0": "Less than 500,000 XAF",
+            "1": "500,000 – 1,000,000 XAF",
+            "2": "1,000,000 – 2,000,000 XAF",
+            "3": "2,000,000 – 3,000,000 XAF",
+            "4": "More than 3,000,000 XAF",
+            "5": "I'd rather not say"
+          }
+        },
+        "q7": {
+          "label": "How many users / workstations are connected?",
+          "options": {
+            "0": "1 – 10 workstations",
+            "1": "11 – 30 workstations",
+            "2": "31 – 50 workstations",
+            "3": "51 – 100 workstations",
+            "4": "More than 100 workstations",
+            "5": "I don't know yet"
+          }
+        },
+        "q8": {
+          "label": "What kind of site do you want to connect?",
+          "options": {
+            "0": "Office / Head office",
+            "1": "Bank branch / Counter",
+            "2": "Data centre / Server room",
+            "3": "Industrial site / Factory",
+            "4": "Call centre",
+            "5": "Other"
+          }
+        },
+        "q9": {
+          "label": "What do you mainly use the Internet for?",
+          "options": {
+            "0": "Web browsing & email",
+            "1": "IP telephony / VoIP / Call centre",
+            "2": "VPN between branches or remote sites",
+            "3": "Video conferencing (Teams, Zoom, Meet...)",
+            "4": "Hosting internal servers",
+            "5": "Remote surveillance cameras",
+            "6": "Banking transactions / ERP / Business software",
+            "7": "Cloud / Online backup",
+            "8": "Other"
+          }
+        },
+        "q10": {
+          "label": "Do you need a dedicated public IP address?",
+          "options": {
+            "0": "Yes, it's essential for us",
+            "1": "No, it's not our priority",
+            "2": "I don't know, I'd like to learn more"
+          }
+        },
+        "q11": {
+          "label": "Any servers, cameras or equipment to reach remotely?",
+          "options": {
+            "0": "Yes",
+            "1": "No",
+            "2": "Not yet, but it's planned"
+          }
+        },
+        "q12": {
+          "label": "Would you like to trial the service?",
+          "options": {
+            "0": "Yes, I want to test before deciding",
+            "1": "No, I'm ready to switch straight away",
+            "2": "I'd like more information first"
+          }
+        },
+        "q13": {
+          "label": "City and neighbourhood of your business",
+          "placeholder": "e.g. Yaoundé, Bastos"
+        },
+        "q14": {
+          "label": "Region",
+          "options": {
+            "0": "Centre",
+            "1": "Littoral",
+            "2": "West",
+            "3": "North-West",
+            "4": "South-West",
+            "5": "South",
+            "6": "East",
+            "7": "Adamawa",
+            "8": "North",
+            "9": "Far North"
+          }
+        },
+        "q15": {
+          "label": "Exact location"
+        },
+        "q16": {
+          "label": "Your first and last name",
+          "placeholder": "First Last"
+        },
+        "q17": {
+          "label": "Your position / role",
+          "options": {
+            "0": "Managing Director / CEO",
+            "1": "IT Director (CIO)",
+            "2": "Information Systems Manager",
+            "3": "Finance & Administration Director (CFO)",
+            "4": "Purchasing / Logistics Manager",
+            "5": "Manager / Owner",
+            "6": "Other"
+          }
+        },
+        "q18": {
+          "label": "Name of your company or organisation",
+          "placeholder": "Organisation name"
+        },
+        "q19": {
+          "label": "Industry",
+          "options": {
+            "0": "Banking / Insurance",
+            "1": "Microfinance (MFI)",
+            "2": "Call centre",
+            "3": "Hotel / Restaurant / Tourism",
+            "4": "Clinic / Health / Pharmacy",
+            "5": "University / School / Training",
+            "6": "NGO / International organisation",
+            "7": "Industry / Manufacturing",
+            "8": "SME / Retail / Distribution",
+            "9": "Public administration / Semi-public",
+            "10": "Other"
+          }
+        },
+        "q20": {
+          "label": "WhatsApp / Phone number",
+          "placeholder": "+237 6 00 00 00 00"
+        },
+        "q21": {
+          "label": "Work email address",
+          "placeholder": "you@company.com"
+        },
+        "q22": {
+          "label": "Anything else you'd like to share?",
+          "placeholder": "Your message (optional)"
+        },
+        "q23": {
+          "label": "Shall we keep in touch?"
+        }
+      }
+    },
+    "wifi": {
+      "steps": {
+        "0": {
+          "title": "Where you stand",
+          "subtitle": "Tell us how far along your project is."
+        },
+        "1": {
+          "title": "Your WiFi Zone project",
+          "subtitle": "Details of the area to cover."
+        },
+        "2": {
+          "title": "Location",
+          "subtitle": "Where is your project located?"
+        },
+        "3": {
+          "title": "Your contact details",
+          "subtitle": "So that our team can get back to you."
+        },
+        "4": {
+          "title": "Last step",
+          "subtitle": "One last consent, and you're done."
+        }
+      },
+      "questions": {
+        "q1": {
+          "label": "How far along is your project?",
+          "options": {
+            "0": "Still an idea",
+            "1": "I've found a location",
+            "2": "I already have an agreement with a landlord",
+            "3": "I'm ready to start",
+            "4": "I already have a WiFi Zone and want to improve it"
+          }
+        },
+        "q2": {
+          "label": "What is your estimated start-up budget?",
+          "options": {
+            "0": "Less than 1,000,000 XAF",
+            "1": "1,000,000 – 2,000,000 XAF",
+            "2": "2,000,000 – 3,000,000 XAF",
+            "3": "To be defined with the Cherryz team"
+          }
+        },
+        "q3": {
+          "label": "Have you heard about the ART licences required?",
+          "options": {
+            "0": "Yes, I know what they are",
+            "1": "I've heard of them but don't know the details",
+            "2": "No, this is the first I've heard of them"
+          }
+        },
+        "q4": {
+          "label": "Have you taken the free Cherryz training?",
+          "options": {
+            "0": "Yes, I have",
+            "1": "I'm taking it now",
+            "2": "No, not yet",
+            "3": "I didn't know it existed"
+          }
+        },
+        "q6": {
+          "label": "Where do you want to deploy your WiFi Zone?",
+          "options": {
+            "0": "Residential neighbourhood",
+            "1": "Apartment block / Residence",
+            "2": "Market / Shopping area",
+            "3": "Campus / School",
+            "4": "Clinic / Health centre",
+            "5": "Restaurant / Café / Public space",
+            "6": "Other"
+          }
+        },
+        "q7": {
+          "label": "Do you have a space, or an agreement with a landlord?",
+          "options": {
+            "0": "Yes, I already have an agreement",
+            "1": "Under negotiation",
+            "2": "No, not yet",
+            "3": "It's my own space"
+          }
+        },
+        "q8": {
+          "label": "How many potential users do you expect?",
+          "options": {
+            "0": "Fewer than 20 users",
+            "1": "20 – 50 users",
+            "2": "50 – 100 users",
+            "3": "More than 100 users",
+            "4": "I don't know yet"
+          }
+        },
+        "q9": {
+          "label": "Is there already an Internet connection on site?",
+          "options": {
+            "0": "Yes, I already have one",
+            "1": "No, not yet",
+            "2": "Being installed"
+          }
+        },
+        "q10": {
+          "label": "Do you already have network equipment?",
+          "options": {
+            "0": "Yes, I already have equipment",
+            "1": "Partly (some equipment)",
+            "2": "No, I'm starting from scratch"
+          }
+        },
+        "q11b": {
+          "label": "What would you like to improve in your current WiFi Zone?",
+          "options": {
+            "0": "Speed / capacity",
+            "1": "Area coverage",
+            "2": "Payment / voucher system",
+            "3": "Connection stability",
+            "4": "Adding equipment",
+            "5": "Other"
+          }
+        },
+        "q11": {
+          "label": "Which revenue model(s) are you considering?",
+          "options": {
+            "0": "Selling prepaid tickets / vouchers",
+            "1": "Monthly user subscriptions",
+            "2": "Free, funded by advertising",
+            "3": "Free, offered as a service (building, hotel...)",
+            "4": "I don't know yet, I'd like advice"
+          }
+        },
+        "q12": {
+          "label": "Is there a stable power supply on site?",
+          "options": {
+            "0": "Yes, stable power (reliable ENEO)",
+            "1": "Yes, but with frequent outages",
+            "2": "No, no power on site yet",
+            "3": "I have a generator / solar backup"
+          }
+        },
+        "q13": {
+          "label": "City and neighbourhood of your project",
+          "placeholder": "e.g. Douala, Bonaberi"
+        },
+        "q14": {
+          "label": "Region",
+          "options": {
+            "0": "Centre",
+            "1": "Littoral",
+            "2": "West",
+            "3": "North-West",
+            "4": "South-West",
+            "5": "South",
+            "6": "East",
+            "7": "Adamawa",
+            "8": "North",
+            "9": "Far North"
+          }
+        },
+        "q15": {
+          "label": "Exact location"
+        },
+        "q16": {
+          "label": "Your first and last name",
+          "placeholder": "First Last"
+        },
+        "q17": {
+          "label": "WhatsApp / Phone number",
+          "placeholder": "+237 6 00 00 00 00"
+        },
+        "q18": {
+          "label": "Work email address",
+          "placeholder": "you@email.com"
+        },
+        "q19": {
+          "label": "Name of your company or organisation",
+          "placeholder": "Optional, leave blank if you are an individual"
+        },
+        "q5": {
+          "label": "A message or question for our team?",
+          "placeholder": "Your message (optional)"
+        },
+        "q20": {
+          "label": "Shall we keep in touch?"
+        }
+      }
+    }
+  },
+  "Validation": {
+    "single": "Choose an answer.",
+    "multi": "Choose at least one answer.",
+    "consent": "Tick the box so that we can get back to you.",
+    "email": "Enter your email address.",
+    "tel": "Enter a phone number.",
+    "geo": "Tell us where the site is (location or description).",
+    "other": "This field is required.",
+    "emailFormat": "Incomplete email address, e.g. name@company.cm.",
+    "telFormat": "Incomplete number: 9 digits expected, e.g. 6 77 12 34 56.",
+    "otherText": "Please specify \"Other\"."
+  },
+  "Maintenance": {
+    "body": "Our website is currently being improved to give you an even better experience. We will be back very soon with an optimised service.",
+    "wait": "In the meantime, you can already send your request:",
+    "ip": "Request a dedicated public IP quote",
+    "wifi": "Request a WiFi Zone quote",
+    "direct": "You can also contact us directly via:"
+  },
+  "Legal": {
+    "updated": "Last updated: {date, date, long}",
+    "todo": "to be completed",
+    "notice": {
+      "meta": {
+        "title": "Legal notice | Cherryz",
+        "description": "Identification of the publisher of cherryz.tech, hosting, intellectual property and governing law."
+      }
+    },
+    "privacy": {
+      "meta": {
+        "title": "Privacy policy | Cherryz",
+        "description": "What data Cherryz collects through its forms, why, who it is shared with, how long it is kept and how to exercise your rights."
+      }
+    }
+  },
+  "Email": {
+    "hi": "Thank you, {name}!",
+    "hiAnonymous": "Thank you!",
+    "slogan": "Cherryz — Gets you connected!",
+    "contact": {
+      "subject": "We have received your message | Cherryz",
+      "received": "We have received your message. Our team will get back to you <strong>within 24 hours</strong>.",
+      "faster": "To speed things up, you can also book a slot on"
+    },
+    "quote": {
+      "subject": "We have received your Cherryz request",
+      "type": {
+        "ip": "Dedicated public IP",
+        "wifi": "WiFi Zone"
+      },
+      "received": "We have received your <strong>{type}</strong> quote request. Our team will review it and get back to you <strong>within 48 hours</strong>.",
+      "meanwhile": "In the meantime, you can reach us directly:"
+    }
+  }
+}

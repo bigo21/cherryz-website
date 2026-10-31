@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
+import { getTranslations } from "next-intl/server";
 import { TODO } from "@/lib/site/legal";
 
 /** Long-form legal page: navy title band, then a readable text column. */
-export default function LegalPage({
+export default async function LegalPage({
   title,
   updatedAt,
   children,
@@ -11,6 +12,7 @@ export default function LegalPage({
   updatedAt: string;
   children: ReactNode;
 }) {
+  const t = await getTranslations("Legal");
   return (
     <>
       <header className="bg-navy pb-14 pt-[140px] text-white">
@@ -18,7 +20,7 @@ export default function LegalPage({
           <h1 className="m-0 font-condensed text-[clamp(38px,5vw,56px)] font-bold leading-[1] tracking-[-0.015em]">
             {title}
           </h1>
-          <p className="mt-4 font-sans text-[15px] text-white/70">Dernière mise à jour : {updatedAt}</p>
+          <p className="mt-4 font-sans text-[15px] text-white/70">{t("updated", { date: new Date(`${updatedAt}T12:00:00Z`) })}</p>
         </div>
       </header>
       <div className="bg-white py-14 md:py-20">
@@ -40,9 +42,10 @@ export function Section({ title, children }: { title: string; children: ReactNod
 }
 
 /** A company fact; renders visibly as missing until Cherryz fills it in lib/site/legal.ts. */
-export function Fact({ value }: { value: string }) {
+export async function Fact({ value }: { value: string }) {
+  const t = await getTranslations("Legal");
   return value === TODO ? (
-    <mark className="rounded-[4px] bg-cherry/10 px-1 text-cherry">[{TODO}]</mark>
+    <mark className="rounded-[4px] bg-cherry/10 px-1 text-cherry">[{t("todo")}]</mark>
   ) : (
     <>{value}</>
   );

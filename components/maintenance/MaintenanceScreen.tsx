@@ -1,8 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import LangSwitch from "@/components/site/LangSwitch";
+import { localize } from "@/lib/i18n/config";
+import { CONTACT } from "@/lib/site/site";
 import MaintenanceIllustration from "./MaintenanceIllustration";
 
-export default function MaintenanceScreen() {
+export default async function MaintenanceScreen() {
+  const lang = await getLocale();
+  const t = await getTranslations("Maintenance");
+  const tc = await getTranslations("Chrome");
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden bg-navy text-white">
       {/* Decorative halos + diagonal band */}
@@ -46,6 +53,7 @@ export default function MaintenanceScreen() {
           priority
           className="block h-11 w-auto animate-fade"
         />
+        <LangSwitch long className="ml-auto font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
       </header>
 
       {/* Content */}
@@ -57,37 +65,35 @@ export default function MaintenanceScreen() {
             maintenance
           </h1> */}
           <p className="mt-6 max-w-[600px] font-sans text-[clamp(17px,2vw,21px)] font-normal leading-[1.55] text-white/[0.76] animate-fade [animation-delay:0.2s]">
-            Notre site est actuellement en cours d&apos;amélioration afin de
-            vous offrir une expérience encore plus performante. Nous serons de
-            retour très prochainement avec un service optimisé.
+            {t("body")}
           </p>
 
           <p className="mb-[14px] mt-[34px] font-condensed text-[15px] font-semibold uppercase tracking-[1px] text-white/55 animate-fade [animation-delay:0.28s]">
-            En attendant, vous pouvez déjà faire votre demande :
+            {t("wait")}
           </p>
 
           <div className="flex flex-wrap gap-[14px] animate-fade [animation-delay:0.34s]">
             <Link
-              href="/demandes/internet-b2b"
+              href={localize(lang, "/demandes/internet-b2b")}
               className="inline-flex items-center gap-[10px] rounded-[10px] border-none bg-cherry px-7 py-4 font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-cherry transition-transform hover:-translate-y-[2px] hover:bg-cherry-dark"
             >
-              Demander une cotation IP Publique Dédiée
+              {t("ip")}
             </Link>
             <Link
-              href="/demandes/wifi-zone"
+              href={localize(lang, "/demandes/wifi-zone")}
               className="inline-flex items-center gap-[10px] rounded-[10px] border-[1.6px] border-cherry bg-transparent px-7 py-4 font-condensed text-[17px] font-bold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry hover:text-white"
             >
-              Demander une cotation WiFi Zone
+              {t("wifi")}
             </Link>
           </div>
 
           <div className="mt-[38px] border-t border-white/[0.12] pt-7 animate-fade [animation-delay:0.42s]">
             <p className="mb-[14px] font-condensed text-[15px] font-semibold uppercase tracking-[1px] text-white/55">
-              Vous pouvez également nous contactez directement via :
+              {t("direct")}
             </p>
             <div className="flex flex-wrap gap-[14px]">
               <a
-                href="https://wa.me/237242014664"
+                href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent hover:bg-white/[0.11]"
@@ -103,12 +109,12 @@ export default function MaintenanceScreen() {
                     WHATSAPP
                   </span>
                   <span className="font-sans text-[16px] font-semibold">
-                    +237 242 01 46 64
+                    {CONTACT.phoneDisplay}
                   </span>
                 </span>
               </a>
               <a
-                href="mailto:support@cherryz.tech"
+                href={CONTACT.emailHref}
                 className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent hover:bg-white/[0.11]"
               >
                 <span className="inline-flex text-accent">
@@ -131,7 +137,7 @@ export default function MaintenanceScreen() {
                     EMAIL
                   </span>
                   <span className="font-sans text-[16px] font-semibold">
-                    support@cherryz.tech
+                    {CONTACT.email}
                   </span>
                 </span>
               </a>
@@ -144,7 +150,7 @@ export default function MaintenanceScreen() {
       {/* Footer */}
       <footer className="relative z-[2] px-[6vw] pb-10 pt-6 text-center">
         <span className="font-condensed text-[19px] font-semibold tracking-[0.6px] text-accent">
-          Cherryz — Vous connecte !
+          {tc("footer.slogan")}
         </span>
       </footer>
     </main>

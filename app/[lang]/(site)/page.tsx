@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import Reveal from "@/components/site/Reveal";
 import PageHero, { btnPrimary, btnGhostStrong, btnGhost } from "@/components/site/PageHero";
 import ReassuranceBar from "@/components/site/ReassuranceBar";
@@ -8,31 +9,34 @@ import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import LogoMarquee, { type Logo } from "@/components/site/LogoMarquee";
 import { CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
-import { QUOTE, QUOTE_LABEL } from "@/lib/site/site";
+import { QUOTE } from "@/lib/site/site";
+import { localize } from "@/lib/i18n/config";
+import { rich } from "@/lib/i18n/rich";
+import { pageMetadata } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Cherryz | L'Internet professionnel au meilleur prix, partout au Cameroun",
-  description:
-    "Cherryz agrège les solutions des grands opérateurs (Camtel, Orange, MTN) pour une connexion dédiée, stable et jusqu'à 50% moins chère. Internet B2B avec IP publique et WiFi Zone monétisable.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Home.meta");
+  return pageMetadata("/", { title: t("title"), description: t("description") });
+}
 
-const comparatif: { label: string; alone: string; cherry: string; check?: boolean }[] = [
-  { label: "Prix / Mbps / mois", alone: "90 000 – 180 000 XAF", cherry: "45 000 – 70 000 XAF" },
-  { label: "Installation", alone: "Travaux lourds, délais longs", cherry: "Rapide, sans génie civil" },
-  { label: "Choix technologique", alone: "Limité à 1 opérateur", cherry: "Multi-opérateurs, meilleure option" },
-  { label: "Support", alone: "Standard, file d'attente", cherry: "Dédié, réactif, de proximité" },
-  { label: "Flexibilité", alone: "Contrats rigides", cherry: "Sur-mesure, évolutif" },
-  { label: "Test préalable", alone: "Rarement possible", cherry: "Test en parallèle disponible*", check: true },
-];
+// Comparison rows; their copy lives under `Home.compare.rows`.
+const comparatif = [
+  { key: "price" },
+  { key: "install" },
+  { key: "choice" },
+  { key: "support" },
+  { key: "flex" },
+  { key: "test", check: true },
+] as const;
 
 const approche = [
-  { n: "01", t: "Écoute", d: "On comprend votre activité, vos usages, vos contraintes.", img: "/photos/approche-01-ecoute.jpg", alt: "Échange client en bureau" },
-  { n: "02", t: "Étude", d: "Descente gratuite sur site : analyse de faisabilité technique.", img: "/photos/approche-02-etude.jpg", alt: "Technicien en visite technique" },
-  { n: "03", t: "Solution", d: "On assemble la meilleure offre parmi nos partenaires opérateurs.", img: "/photos/approche-03-solution.jpg", alt: "Équipe devant schéma réseau" },
-  { n: "04", t: "Cotation", d: "Prix transparent, adapté à votre budget réel.", img: "/photos/approche-04-cotation.jpg", alt: "Remise de devis" },
-  { n: "05", t: "Déploiement", d: "Installation rapide, sans interruption de votre activité.", img: "/photos/approche-05-deploiement.jpg", alt: "Installation d'équipement réseau" },
-  { n: "06", t: "Suivi", d: "SAV dédié, monitoring, intervention rapide.", img: "/photos/approche-06-suivi.jpg", alt: "Écran de monitoring" },
-];
+  { n: "01", key: "listen", img: "/photos/approche-01-ecoute.jpg" },
+  { n: "02", key: "study", img: "/photos/approche-02-etude.jpg" },
+  { n: "03", key: "solution", img: "/photos/approche-03-solution.jpg" },
+  { n: "04", key: "pricing", img: "/photos/approche-04-cotation.jpg" },
+  { n: "05", key: "deploy", img: "/photos/approche-05-deploiement.jpg" },
+  { n: "06", key: "followup", img: "/photos/approche-06-suivi.jpg" },
+] as const;
 
 const operators = [
   { src: "/logos/orange.png", alt: "Orange Cameroun", h: 150 },
@@ -63,32 +67,28 @@ const clientsRow2: Logo[] = [
   { src: "/logos/1xbet.png", alt: "1xBet" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const lang = await getLocale();
+  const t = await getTranslations("Home");
+  const tc = await getTranslations("Chrome");
   return (
     <>
       <PageHero
-        eyebrow="AGRÉGATEUR DE CONNECTIVITÉ · CAMEROUN"
+        eyebrow={t("hero.eyebrow")}
         image="/photos/accueil-hero.jpg"
-        imageAlt="Cherryz, réseau connecté"
+        imageAlt={t("hero.imageAlt")}
         minHeight={780}
         contentMaxWidth={840}
         emphasis
-        title={
-          <>
-            L&apos;Internet professionnel au{" "}
-            <span className="text-accent-vivid">meilleur prix.</span>
-            <br />
-            Partout au Cameroun.
-          </>
-        }
-        subtitle="Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d'autres) pour vous offrir une connexion dédiée, stable et jusqu'à 50% moins chère. Sans travaux. Sans coupure."
+        title={t.rich("hero.title", rich)}
+        subtitle={t("hero.subtitle")}
         actions={
           <>
-            <Link href={QUOTE.hub} className={btnPrimary}>
-              {QUOTE_LABEL} gratuit →
+            <Link href={localize(lang, QUOTE.hub)} className={btnPrimary}>
+              {tc("quoteFree")} →
             </Link>
-            <Link href="/wifi-zone" className={btnGhostStrong}>
-              Découvrir la WiFi Zone →
+            <Link href={localize(lang, "/wifi-zone")} className={btnGhostStrong}>
+              {t("hero.wifi")} →
             </Link>
           </>
         }
@@ -105,7 +105,7 @@ export default function Home() {
               <div className="relative z-[1] h-[470px] overflow-hidden rounded-2xl shadow-[0_30px_60px_-34px_rgba(16,27,40,.5)]">
                 <Image
                   src="/photos/pourquoi-cherryz.jpg"
-                  alt="Technicien Cherryz sur site"
+                  alt={t("why.imageAlt")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
@@ -113,35 +113,24 @@ export default function Home() {
               </div>
               <div className="absolute -left-[18px] bottom-[34px] z-[2] rounded-[14px] bg-navy px-5 py-4 text-white shadow-[0_22px_46px_-20px_rgba(16,27,40,.6)] animate-float">
                 <div className="font-condensed text-[32px] font-bold leading-none text-accent-vivid">
-                  45 000
-                  <span className="text-[15px] text-white/60"> XAF/Mbps</span>
+                  {t("why.priceValue")}
+                  <span className="text-[15px] text-white/60"> {t("why.priceUnit")}</span>
                 </div>
                 <div className="mt-[2px] font-sans text-[13px] font-medium text-white/65">
-                  au lieu de 90 000 – 180 000
+                  {t("why.priceInstead")}
                 </div>
               </div>
             </div>
             <div>
-              <SectionEyebrow label="POURQUOI CHERRYZ" />
+              <SectionEyebrow label={t("why.eyebrow")} />
               <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.03] tracking-[-0.3px]">
-                Un seul interlocuteur.
-                <br />
-                Les meilleurs réseaux.
-                <br />
-                Le juste prix.
+                {t.rich("why.title", rich)}
               </h2>
               <p className="mt-[18px] max-w-[560px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
-                Les entreprises camerounaises paient entre 90 000 et 180 000
-                XAF/Mbps/mois en allant directement chez un opérateur. Cherryz
-                négocie pour vous auprès de plusieurs fournisseurs et vous
-                propose la meilleure solution, à partir de 45 000 XAF/Mbps/mois.
+                {t("why.p1")}
               </p>
               <p className="mt-[14px] max-w-[560px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
-                Nous ne sommes pas un opérateur de plus. Nous sommes votre{" "}
-                <strong className="text-navy">courtier en connectivité</strong> :
-                nous analysons votre besoin, comparons les options, et vous
-                livrons la solution la plus adaptée, techniquement et
-                financièrement.
+                {t.rich("why.p2", { strong: (c) => <strong className="text-navy">{c}</strong> })}
               </p>
             </div>
           </Reveal>
@@ -151,24 +140,24 @@ export default function Home() {
             {/* Mobile: one card per criterion, Cherryz first, nothing scrolls sideways. */}
             <ul className="m-0 flex list-none flex-col gap-3 p-0 md:hidden">
               {comparatif.map((row) => (
-                <li key={row.label} className="overflow-hidden rounded-2xl border border-navy/10 bg-white">
+                <li key={row.key} className="overflow-hidden rounded-2xl border border-navy/10 bg-white">
                   <div className="bg-surface px-5 py-3 font-sans text-[15px] font-semibold text-navy">
-                    {row.label}
+                    {t(`compare.rows.${row.key}.label`)}
                   </div>
                   <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 px-5 py-4 font-sans text-[15px]">
-                    <dt className="font-condensed text-[14px] font-bold tracking-[0.4px] text-cherry-alt">Cherryz</dt>
+                    <dt className="font-condensed text-[14px] font-bold tracking-[0.4px] text-cherry-alt">{t("compare.cherryShort")}</dt>
                     <dd className="m-0 font-semibold text-navy">
-                      {row.check ? (
+                      {"check" in row ? (
                         <span className="inline-flex items-center gap-[6px]">
                           <CheckLineIcon className="inline-block align-[-0.12em] text-positive" />
-                          {row.cherry}
+                          {t(`compare.rows.${row.key}.cherry`)}
                         </span>
                       ) : (
-                        row.cherry
+                        t(`compare.rows.${row.key}.cherry`)
                       )}
                     </dd>
-                    <dt className="font-condensed text-[14px] font-semibold tracking-[0.4px] text-navy/70">Seul</dt>
-                    <dd className="m-0 text-navy/70">{row.alone}</dd>
+                    <dt className="font-condensed text-[14px] font-semibold tracking-[0.4px] text-navy/70">{t("compare.aloneShort")}</dt>
+                    <dd className="m-0 text-navy/70">{t(`compare.rows.${row.key}.alone`)}</dd>
                   </dl>
                 </li>
               ))}
@@ -176,31 +165,31 @@ export default function Home() {
             <div className="hidden overflow-x-auto rounded-2xl border border-navy/10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)] md:block">
               <div className="grid min-w-[640px] grid-cols-[1.4fr_1fr_1fr]">
                 <div className="bg-surface px-[26px] py-[22px] font-condensed text-[14px] font-semibold uppercase tracking-[1px] text-navy/50">
-                  Comparatif
+                  {t("compare.head")}
                 </div>
                 <div className="border-l border-navy/[0.08] bg-surface px-[26px] py-[22px] font-condensed text-[18px] font-bold text-navy">
-                  Aller seul chez un opérateur
+                  {t("compare.alone")}
                 </div>
                 <div className="flex items-center gap-[9px] bg-cherry-alt px-[26px] py-[22px] font-condensed text-[18px] font-bold text-white">
-                  Passer par Cherryz
+                  {t("compare.cherry")}
                 </div>
                 {comparatif.map((row) => (
-                  <div key={row.label} className="contents">
+                  <div key={row.key} className="contents">
                     <div className="border-t border-navy/[0.08] px-[26px] py-5 font-sans text-[16px] font-semibold">
-                      {row.label}
+                      {t(`compare.rows.${row.key}.label`)}
                     </div>
                     <div className="border-l border-t border-navy/[0.08] px-[26px] py-5 font-sans text-[16px] text-navy/60">
-                      {row.alone}
+                      {t(`compare.rows.${row.key}.alone`)}
                     </div>
                     <div className="border-t border-navy/[0.08] bg-cherry-alt/[0.04] px-[26px] py-5 font-sans text-[16px] font-semibold text-navy">
-                      {row.check ? (
+                      {"check" in row ? (
                         <span className="inline-flex items-center gap-[6px]">
                           <CheckLineIcon className="inline-block align-[-0.12em] text-positive" />
-                          {row.cherry}
+                          {t(`compare.rows.${row.key}.cherry`)}
                         </span>
                       ) : (
-                        <span className={row.label === "Prix / Mbps / mois" ? "text-cherry-alt" : ""}>
-                          {row.cherry}
+                        <span className={row.key === "price" ? "text-cherry-alt" : ""}>
+                          {t(`compare.rows.${row.key}.cherry`)}
                         </span>
                       )}
                     </div>
@@ -209,7 +198,7 @@ export default function Home() {
               </div>
             </div>
             <p className="mx-1 mt-3 font-sans text-[13px] text-navy/50">
-              *Contrat signé devant notaire requis avant le lancement du test.
+              {tc("testNote")}
             </p>
           </Reveal>
         </div>
@@ -219,11 +208,9 @@ export default function Home() {
       <section className="bg-surface-alt py-[104px]">
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="mx-auto mb-14 max-w-[680px] text-center">
-            <SectionEyebrow label="NOTRE APPROCHE" centered />
+            <SectionEyebrow label={t("approach.eyebrow")} centered />
             <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
-              On ne vend pas une connexion.
-              <br />
-              On résout un problème.
+              {t.rich("approach.title", rich)}
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" delay={0.05}>
@@ -235,7 +222,7 @@ export default function Home() {
                 <div className="relative h-[150px]">
                   <Image
                     src={s.img}
-                    alt={s.alt}
+                    alt={t(`approach.steps.${s.key}.alt`)}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover"
@@ -245,9 +232,9 @@ export default function Home() {
                   <div className="font-condensed text-[34px] font-bold leading-none text-cherry-alt opacity-[0.28]">
                     {s.n}
                   </div>
-                  <h4 className="mt-[6px] font-condensed text-[22px] font-bold">{s.t}</h4>
+                  <h4 className="mt-[6px] font-condensed text-[22px] font-bold">{t(`approach.steps.${s.key}.t`)}</h4>
                   <p className="mt-[6px] font-sans text-[15px] leading-[1.5] text-navy/[0.62]">
-                    {s.d}
+                    {t(`approach.steps.${s.key}.d`)}
                   </p>
                 </div>
               </div>
@@ -255,15 +242,13 @@ export default function Home() {
           </Reveal>
           <Reveal className="mt-11 text-center" delay={0.1}>
             <p className="mx-auto mb-[22px] max-w-[640px] font-sans text-[16px] leading-[1.6] text-navy/[0.62]">
-              Chaque projet est unique. C&apos;est pourquoi nous ne publions pas
-              de grille tarifaire figée : nous construisons votre prix après
-              avoir compris votre besoin.
+              {t("approach.note")}
             </p>
             <Link
-              href={QUOTE.hub}
+              href={localize(lang, QUOTE.hub)}
               className="inline-block rounded-full bg-cherry-alt px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-[#c0093a]"
             >
-              Décrire mon projet →
+              {t("approach.cta")} →
             </Link>
           </Reveal>
         </div>
@@ -273,38 +258,32 @@ export default function Home() {
       <section id="services" className="bg-white pb-[100px] pt-[110px]">
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="mx-auto mb-[58px] max-w-[640px] text-center">
-            <SectionEyebrow label="NOS SERVICES" centered />
+            <SectionEyebrow label={t("services.eyebrow")} centered />
             <h2 className="m-0 font-condensed text-[48px] font-bold leading-[1.02] tracking-[-0.3px]">
-              Deux façons de mieux vous connecter
+              {t("services.title")}
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-7 lg:grid-cols-2" delay={0.05}>
-            <ServiceCard
-              badge="B2B"
-              title="Adresse IP Publique"
-              icon={<GlobeIcon className="text-[24px] text-white" />}
-              image="/photos/service-ip.jpg"
-              imageAlt="Bureau connecté"
-              rows={[
-                ["POUR QUI", "Entreprises, institutions, organisations"],
-                ["QUOI", "Internet dédié avec IP fixe, bande passante garantie"],
-                ["ATOUT", "Performance pro à prix réduit"],
-              ]}
-              href="/internet-b2b"
-            />
-            <ServiceCard
-              badge="REVENUS"
-              title="WiFi Zone"
-              icon={<WifiIcon className="text-[24px] text-white" />}
-              image="/photos/service-wifizone.jpg"
-              imageAlt="Immeuble avec WiFi"
-              rows={[
-                ["POUR QUI", "Entrepreneurs, gestionnaires d'immeubles, investisseurs"],
-                ["QUOI", "Point d'accès Internet partagé et monétisé"],
-                ["ATOUT", "Générer des revenus avec la connectivité"],
-              ]}
-              href="/wifi-zone"
-            />
+            {([
+              { key: "ip", icon: <GlobeIcon className="text-[24px] text-white" />, image: "/photos/service-ip.jpg", href: "/internet-b2b" },
+              { key: "wifi", icon: <WifiIcon className="text-[24px] text-white" />, image: "/photos/service-wifizone.jpg", href: "/wifi-zone" },
+            ] as const).map((s) => (
+              <ServiceCard
+                key={s.key}
+                badge={t(`services.${s.key}.badge`)}
+                title={t(`services.${s.key}.title`)}
+                icon={s.icon}
+                image={s.image}
+                imageAlt={t(`services.${s.key}.imageAlt`)}
+                rows={[
+                  [t("services.whom"), t(`services.${s.key}.whom`)],
+                  [t("services.what"), t(`services.${s.key}.what`)],
+                  [t("services.plus"), t(`services.${s.key}.plus`)],
+                ]}
+                href={localize(lang, s.href)}
+                more={t("services.more")}
+              />
+            ))}
           </Reveal>
         </div>
       </section>
@@ -313,9 +292,9 @@ export default function Home() {
       <section className="bg-surface py-[90px]">
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="mb-11 text-center">
-            <SectionEyebrow label="ILS NOUS FONT CONFIANCE" centered />
+            <SectionEyebrow label={t("trust.eyebrow")} centered />
             <h2 className="m-0 font-condensed text-[42px] font-bold leading-[1.02] tracking-[-0.3px]">
-              Nos partenaires &amp; références
+              {t("trust.title")}
             </h2>
           </Reveal>
           <Reveal delay={0.05}>
@@ -342,21 +321,15 @@ export default function Home() {
       </section>
 
       <FinalCta
-        title={
-          <>
-            Prêt à payer moins pour
-            <br />
-            un Internet meilleur ?
-          </>
-        }
-        subtitle="Notre équipe se déplace gratuitement pour étudier votre situation, partout au Cameroun."
+        title={t.rich("final.title", rich)}
+        subtitle={tc("visitLead")}
         actions={
           <>
-            <Link href={QUOTE.hub} className={btnPrimary}>
-              {QUOTE_LABEL} →
+            <Link href={localize(lang, QUOTE.hub)} className={btnPrimary}>
+              {tc("quoteLabel")} →
             </Link>
-            <Link href="/contact" className={btnGhost}>
-              Préférer un appel →
+            <Link href={localize(lang, "/contact")} className={btnGhost}>
+              {tc("preferCall")} →
             </Link>
           </>
         }
@@ -373,6 +346,7 @@ function ServiceCard({
   imageAlt,
   rows,
   href,
+  more,
 }: {
   badge: string;
   title: string;
@@ -381,6 +355,7 @@ function ServiceCard({
   imageAlt: string;
   rows: [string, string][];
   href: string;
+  more: string;
 }) {
   return (
     <div className="relative overflow-hidden rounded-[18px] border border-navy/[0.09] bg-white shadow-[0_26px_54px_-36px_rgba(16,27,40,.45)] transition-all hover:-translate-y-[6px] hover:shadow-[0_38px_66px_-34px_rgba(16,27,40,.55)]">
@@ -408,7 +383,7 @@ function ServiceCard({
           href={href}
           className="mt-5 inline-block rounded-full bg-navy px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry-alt"
         >
-          En savoir plus →
+          {more} →
         </Link>
       </div>
     </div>

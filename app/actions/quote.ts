@@ -4,11 +4,13 @@ import type { Answers, QuoteType } from "@/lib/quote/schemas";
 import { validateSubmission } from "@/lib/quote/validation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendQuoteEmails } from "@/lib/email/quote-notifications";
+import { hasLocale } from "@/lib/i18n/config";
 
 export interface SubmitPayload {
   type: QuoteType;
   answers: Answers;
   tracking?: Record<string, unknown>;
+  lang?: string;
 }
 
 export interface SubmitResult {
@@ -46,7 +48,7 @@ function extractContact(type: QuoteType, a: Answers) {
 export async function submitQuoteRequest(
   payload: SubmitPayload,
 ): Promise<SubmitResult> {
-  const { type, answers, tracking } = payload ?? ({} as SubmitPayload);
+  const { type, answers, tracking, lang } = payload ?? ({} as SubmitPayload);
 
   if (type !== "ip" && type !== "wifi") {
     return { ok: false, error: "invalid_type" };
@@ -80,7 +82,13 @@ export async function submitQuoteRequest(
   }
 
   // Best-effort emails: never fail the submission if sending errors out.
-  await sendQuoteEmails({ type, contact, answers, tracking: tracking ?? {} });
+  await sendQuoteEmails({
+    type,
+    contact,
+    answers,
+    tracking: tracking ?? {},
+    lang: lang && hasLocale(lang) ? lang : "fr",
+  });
 
   return { ok: true };
 }

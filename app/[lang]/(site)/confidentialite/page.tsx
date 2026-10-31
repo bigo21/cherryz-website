@@ -2,17 +2,22 @@ import type { Metadata } from "next";
 import LegalPage, { Fact, Section } from "@/components/site/LegalPage";
 import { HOST, LEGAL } from "@/lib/site/legal";
 import { CONTACT } from "@/lib/site/site";
+import { getLocale, getTranslations } from "next-intl/server";
+import { pageMetadata } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Politique de confidentialité | Cherryz",
-  description:
-    "Quelles données Cherryz collecte via ses formulaires, pourquoi, avec qui elles sont partagées, combien de temps elles sont conservées et comment exercer vos droits.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Legal.privacy.meta");
+  return pageMetadata("/confidentialite", { title: t("title"), description: t("description") });
+}
 
 const link = "font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy";
 const list = "m-0 flex list-disc flex-col gap-1 pl-5";
 
-export default function Confidentialite() {
+export default async function Confidentialite() {
+  return (await getLocale()) === "en" ? <ConfidentialiteEn /> : <ConfidentialiteFr />;
+}
+
+function ConfidentialiteFr() {
   return (
     <LegalPage title="Politique de confidentialité" updatedAt={LEGAL.updatedAt}>
       <Section title="Qui est responsable de vos données">
@@ -51,8 +56,8 @@ export default function Confidentialite() {
           </li>
           <li>
             <strong>Informations techniques jointes à chaque demande</strong> : page
-            d&apos;envoi, site d&apos;origine, paramètres de campagne (UTM), type
-            de navigateur, date et heure.
+            d&apos;envoi, site d&apos;origine, paramètres de campagne (UTM), langue,
+            type de navigateur, date et heure.
           </li>
         </ul>
         <p className="m-0">
@@ -128,6 +133,120 @@ export default function Confidentialite() {
           Si vous estimez que vos droits ne sont pas respectés, vous pouvez
           saisir l&apos;Autorité de protection des données à caractère personnel
           (APDP) du Cameroun.
+        </p>
+      </Section>
+    </LegalPage>
+  );
+}
+
+// English translation, for information. The French version prevails.
+function ConfidentialiteEn() {
+  return (
+    <LegalPage title="Privacy policy" updatedAt={LEGAL.updatedAt}>
+      <Section title="Who is responsible for your data">
+        <p className="m-0">
+          <Fact value={LEGAL.companyName} /> (Cherryz), whose registered office is at{" "}
+          <Fact value={LEGAL.address} />, Yaoundé, Cameroon, is the controller of
+          the processing described here. For any question:{" "}
+          <a className={link} href={CONTACT.emailHref}>{CONTACT.email}</a>.
+        </p>
+        <p className="m-0">
+          This policy applies under Law No. 2024/017 of 23 December 2024 on the
+          protection of personal data in Cameroon. This English version is a
+          translation provided for information; the French version prevails.
+        </p>
+      </Section>
+
+      <Section title="The data we collect">
+        <p className="m-0">We only collect what you choose to send us:</p>
+        <ul className={list}>
+          <li>
+            <strong>Quote questionnaire</strong> (Business Internet or WiFi Zone):
+            name, position, company, email, phone, city and neighbourhood, and
+            your answers about your project (current connection, needs, budget,
+            site to equip…).
+          </li>
+          <li>
+            <strong>Exact location</strong>, only if you click &ldquo;Use my
+            current location&rdquo; and allow it in your browser; otherwise, the
+            description you type in.
+          </li>
+          <li>
+            <strong>Contact form</strong>: name, email, phone, company, need and
+            message.
+          </li>
+          <li>
+            <strong>Technical information attached to each request</strong>: page
+            it was sent from, referring site, campaign parameters (UTM), language,
+            browser type, date and time.
+          </li>
+        </ul>
+        <p className="m-0">
+          The website uses neither advertising cookies nor audience measurement
+          tools. Your questionnaire answers are saved on your device while you
+          fill it in, so you don&apos;t lose them; they only reach us when you
+          send the request.
+        </p>
+      </Section>
+
+      <Section title="Why we use it">
+        <ul className={list}>
+          <li>to study your needs and prepare your quote;</li>
+          <li>to get back to you and, if needed, arrange a technical visit;</li>
+          <li>to send you an email confirming that we received your request.</li>
+        </ul>
+        <p className="m-0">
+          This processing is based on your consent, given by ticking the box
+          before sending, and on the pre-contractual steps you ask us to take.
+          Your data is neither sold nor used for advertising.
+        </p>
+      </Section>
+
+      <Section title="Who has access to it">
+        <p className="m-0">
+          Only the Cherryz team handling requests has access to it. We use the
+          following technical providers, acting on our behalf:
+        </p>
+        <ul className={list}>
+          <li>{HOST.name}: website hosting;</li>
+          <li>Supabase: secure storage of requests;</li>
+          <li>Resend: sending notification and confirmation emails.</li>
+        </ul>
+        <p className="m-0">
+          If you book a slot through Cal.com or write to us on WhatsApp, those
+          services process your data under their own policies. These providers
+          may store data outside Cameroon; we choose them for their security
+          guarantees.
+        </p>
+      </Section>
+
+      <Section title="How long we keep it">
+        <p className="m-0">
+          Your requests are kept <Fact value={LEGAL.retention} />, then deleted.
+          If you become a client, the data needed for the contract is kept for the
+          duration of the relationship and the legal periods that apply to it.
+        </p>
+      </Section>
+
+      <Section title="How we protect it">
+        <p className="m-0">
+          Exchanges with the website are encrypted (HTTPS). Requests are stored
+          in a database that is closed to public reading: the form can save a
+          request, but nobody can read it back from the website.
+        </p>
+      </Section>
+
+      <Section title="Your rights">
+        <p className="m-0">
+          You may at any time ask to access, correct or delete your data, object
+          to its processing or withdraw your consent. Write to us at{" "}
+          <a className={link} href={CONTACT.emailHref}>{CONTACT.email}</a>,
+          stating the email used in your request; we will reply as soon as
+          possible.
+        </p>
+        <p className="m-0">
+          If you believe your rights are not being respected, you can refer the
+          matter to Cameroon&apos;s Personal Data Protection Authority (APDP).
         </p>
       </Section>
     </LegalPage>
