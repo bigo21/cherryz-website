@@ -12,7 +12,7 @@ export default function FinalCta({
   actions: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-[100px]">
+    <section className="relative overflow-hidden bg-navy py-[100px]">
       <div
         className="absolute bottom-0 right-0 top-0 z-0 w-[44%] opacity-90"
         style={{ background: "linear-gradient(135deg,rgba(160,4,45,.9),rgba(125,3,35,.82))", clipPath: "polygon(40% 0,100% 0,100% 100%,12% 100%)" }}

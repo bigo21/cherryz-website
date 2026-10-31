@@ -33,7 +33,7 @@ interface SavedState {
 }
 
 const inputClass =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
+  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
 
 function chipClass(selected: boolean): string {
   return [
@@ -256,7 +256,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-[#4b5563]">
           {t("received")}
         </p>
-        <ol className="mx-auto mt-7 max-w-[400px] space-y-3 text-left font-sans text-[15.5px] leading-[1.45] text-navy-alt">
+        <ol className="mx-auto mt-7 max-w-[400px] space-y-3 text-left font-sans text-[15.5px] leading-[1.45] text-navy">
           {(["review", "callback", "visit"] as const).map((line, i) => (
             <li key={line} className="flex gap-3">
               <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-cherry/[0.09] font-condensed text-[14px] font-bold text-cherry">
@@ -497,7 +497,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   >
                     {v === true ? <CheckMark /> : null}
                   </span>
-                  <span className="font-sans text-[15px] leading-[1.45] text-navy-alt">
+                  <span className="font-sans text-[15px] leading-[1.45] text-navy">
                     {t("consent")}
                     <span className="text-cherry" aria-hidden> *</span>
                   </span>
@@ -506,7 +506,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               {q.type === "consent" && (
                 <p className="mb-0 mt-2 font-sans text-[13.5px] text-[#4b5563]">
                   {t("consentDetails")}{" "}
-                  <Link href={localize(lang, "/confidentialite")} target="_blank" className="font-semibold text-navy-alt underline underline-offset-4">
+                  <Link href={localize(lang, "/confidentialite")} target="_blank" className="font-semibold text-navy underline underline-offset-4">
                     {t("consentLink")}
                   </Link>
                   .
@@ -525,7 +525,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               href={CONTACT.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy-alt underline underline-offset-4"
+              className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy underline underline-offset-4"
             >
               <WhatsAppIcon className="h-4 w-4 text-[#128c4a]" />
               {t("writeWhatsapp")}
@@ -538,7 +538,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             type="button"
             onClick={prev}
             disabled={submitting}
-            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy-alt hover:text-navy-alt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
+            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
           >
             {step <= 1 ? t("cancel") : `← ${t("prev")}`}
           </button>
@@ -562,7 +562,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 }
 
 const labelClass =
-  "mb-[3px] block p-0 font-sans text-[17px] font-semibold leading-[1.35] text-navy-alt";
+  "mb-[3px] block p-0 font-sans text-[17px] font-semibold leading-[1.35] text-navy";
 
 /** Question wrapper: a fieldset for choice groups, a plain block for text fields. */
 function Field({

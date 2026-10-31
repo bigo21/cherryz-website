@@ -32,7 +32,7 @@ export default async function DemandesLayout({
       <main>{children}</main>
 
       <footer className="bg-navy py-9 text-center">
-        <span className="font-condensed text-[16px] font-semibold tracking-[0.5px] text-accent-vivid">
+        <span className="font-condensed text-[16px] font-semibold tracking-[0.5px] text-accent-on-dark">
           {t("footer.slogan")}
         </span>
         <div className="mt-2 font-sans text-[13px] text-white/60">

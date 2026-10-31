@@ -26,14 +26,14 @@ export default async function Contact() {
   return (
     <>
       {/* HEADER */}
-      <header className="relative overflow-hidden bg-navy-deep pb-[70px] pt-[150px]">
+      <header className="relative overflow-hidden bg-navy pb-[70px] pt-[150px]">
         <div
           className="absolute bottom-0 right-0 top-0 z-0 w-[42%] opacity-90"
           style={{ background: "linear-gradient(135deg,rgba(160,4,45,.9),rgba(125,3,35,.82))", clipPath: "polygon(42% 0,100% 0,100% 100%,14% 100%)" }}
         />
         <div className="relative z-[1] mx-auto max-w-[1280px] px-6 md:px-12">
           <div className="mb-[22px] inline-flex items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[15px] py-2">
-            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-pink shadow-[0_0_10px_1px_#e11d63]" />
+            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_#e11d63]" />
             <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">{t("hero.eyebrow")}</span>
           </div>
           <h1 className="m-0 font-condensed text-[clamp(42px,6vw,66px)] font-bold leading-[0.98] tracking-[-0.4px] text-white">
@@ -50,7 +50,7 @@ export default async function Contact() {
         <div className="mx-auto mb-10 max-w-[1280px] px-6 md:px-12">
           <div className="flex flex-col gap-5 rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-[14px]">
-              <ClipboardIcon className="mt-[2px] flex-none text-[26px] text-cherry-alt" />
+              <ClipboardIcon className="mt-[2px] flex-none text-[26px] text-cherry" />
               <div>
                 <h2 className="m-0 font-condensed text-[22px] font-bold">{t("price.title")}</h2>
                 <p className="mt-1 font-sans text-[15.5px] text-navy/70">
@@ -66,7 +66,7 @@ export default async function Contact() {
                 <Link
                   key={q.href}
                   href={localize(lang, q.href)}
-                  className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-[#c0093a]"
+                  className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-[#c0093a]"
                 >
                   {q.label} →
                 </Link>
@@ -91,7 +91,7 @@ export default async function Contact() {
                       <div>
                         <div className="font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</div>
                         {c.href ? (
-                          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="font-sans text-[15.5px] text-white transition-colors hover:text-accent-vivid">
+                          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="font-sans text-[15.5px] text-white transition-colors hover:text-accent-on-dark">
                             {c.v}
                           </a>
                         ) : (
@@ -118,13 +118,13 @@ export default async function Contact() {
                   href={rdv.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-between gap-3 rounded-xl border border-navy/[0.08] bg-surface px-[18px] py-4 transition-colors hover:border-cherry-alt hover:bg-white ${i === 0 ? "mb-3" : ""}`}
+                  className={`flex items-center justify-between gap-3 rounded-xl border border-navy/[0.08] bg-surface px-[18px] py-4 transition-colors hover:border-cherry hover:bg-white ${i === 0 ? "mb-3" : ""}`}
                 >
                   <span className="flex items-center gap-[11px]">
                     <CalendarIcon className="text-[20px] text-navy" />
                     <span className="font-condensed text-[17px] font-bold text-navy">{rdv.label}</span>
                   </span>
-                  <span className="font-condensed text-[18px] font-bold text-cherry-alt">→</span>
+                  <span className="font-condensed text-[18px] font-bold text-cherry">→</span>
                 </a>
               ))}
             </div>

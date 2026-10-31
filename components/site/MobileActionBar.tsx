@@ -37,7 +37,7 @@ export default function MobileActionBar() {
         <div className="flex gap-3">
           <Link
             href={localize(lang, quoteHrefFor(path))}
-            className="flex-1 rounded-full bg-cherry-alt px-5 py-[13px] text-center font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
+            className="flex-1 rounded-full bg-cherry px-5 py-[13px] text-center font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
             {t("quoteLabel")} →
           </Link>

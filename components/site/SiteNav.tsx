@@ -70,7 +70,7 @@ export default function SiteNav() {
           <LangSwitch className="font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
           <Link
             href={quoteHref}
-            className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
+            className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
           >
             {t("quoteLabel")} →
           </Link>
@@ -115,7 +115,7 @@ export default function SiteNav() {
             <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85" />
             <Link
               href={quoteHref}
-              className="mt-4 rounded-full bg-cherry-alt px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
+              className="mt-4 rounded-full bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
               {t("quoteLabel")} →
             </Link>

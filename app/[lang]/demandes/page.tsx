@@ -23,14 +23,14 @@ export default async function Demandes() {
   return (
     <>
       {/* HEADER */}
-      <header className="relative overflow-hidden bg-navy-deep pb-[90px] pt-[150px]">
+      <header className="relative overflow-hidden bg-navy pb-[90px] pt-[150px]">
         <div
           className="absolute bottom-0 right-0 top-0 z-0 w-[42%] opacity-90"
           style={{ background: "linear-gradient(135deg,rgba(162,3,45,.9),rgba(125,3,35,.82))", clipPath: "polygon(42% 0,100% 0,100% 100%,14% 100%)" }}
         />
         <div className="relative z-[1] mx-auto max-w-[1280px] px-6 md:px-12">
           <div className="mb-[22px] inline-flex items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[15px] py-2">
-            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-pink shadow-[0_0_10px_1px_#e11d63]" />
+            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_#e11d63]" />
             <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">
               {t("eyebrow")}
             </span>

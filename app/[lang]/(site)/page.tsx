@@ -100,8 +100,8 @@ export default async function Home() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="grid grid-cols-1 items-center gap-[60px] lg:grid-cols-[0.92fr_1.08fr]">
             <div className="relative">
-              <div className="absolute -left-[22px] -top-[22px] z-0 h-[170px] w-[170px] rounded-2xl bg-cherry-alt" />
-              <div className="absolute -bottom-4 -right-4 z-0 h-[110px] w-[110px] rounded-2xl border-2 border-cherry-alt" />
+              <div className="absolute -left-[22px] -top-[22px] z-0 h-[170px] w-[170px] rounded-2xl bg-cherry" />
+              <div className="absolute -bottom-4 -right-4 z-0 h-[110px] w-[110px] rounded-2xl border-2 border-cherry" />
               <div className="relative z-[1] h-[470px] overflow-hidden rounded-2xl shadow-[0_30px_60px_-34px_rgba(16,27,40,.5)]">
                 <Image
                   src="/photos/pourquoi-cherryz.jpg"
@@ -112,7 +112,7 @@ export default async function Home() {
                 />
               </div>
               <div className="absolute -left-[18px] bottom-[34px] z-[2] rounded-[14px] bg-navy px-5 py-4 text-white shadow-[0_22px_46px_-20px_rgba(16,27,40,.6)] animate-float">
-                <div className="font-condensed text-[32px] font-bold leading-none text-accent-vivid">
+                <div className="font-condensed text-[32px] font-bold leading-none text-accent-on-dark">
                   {t("why.priceValue")}
                   <span className="text-[15px] text-white/60"> {t("why.priceUnit")}</span>
                 </div>
@@ -145,7 +145,7 @@ export default async function Home() {
                     {t(`compare.rows.${row.key}.label`)}
                   </div>
                   <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 px-5 py-4 font-sans text-[15px]">
-                    <dt className="font-condensed text-[14px] font-bold tracking-[0.4px] text-cherry-alt">{t("compare.cherryShort")}</dt>
+                    <dt className="font-condensed text-[14px] font-bold tracking-[0.4px] text-cherry">{t("compare.cherryShort")}</dt>
                     <dd className="m-0 font-semibold text-navy">
                       {"check" in row ? (
                         <span className="inline-flex items-center gap-[6px]">
@@ -170,7 +170,7 @@ export default async function Home() {
                 <div className="border-l border-navy/[0.08] bg-surface px-[26px] py-[22px] font-condensed text-[18px] font-bold text-navy">
                   {t("compare.alone")}
                 </div>
-                <div className="flex items-center gap-[9px] bg-cherry-alt px-[26px] py-[22px] font-condensed text-[18px] font-bold text-white">
+                <div className="flex items-center gap-[9px] bg-cherry px-[26px] py-[22px] font-condensed text-[18px] font-bold text-white">
                   {t("compare.cherry")}
                 </div>
                 {comparatif.map((row) => (
@@ -181,14 +181,14 @@ export default async function Home() {
                     <div className="border-l border-t border-navy/[0.08] px-[26px] py-5 font-sans text-[16px] text-navy/60">
                       {t(`compare.rows.${row.key}.alone`)}
                     </div>
-                    <div className="border-t border-navy/[0.08] bg-cherry-alt/[0.04] px-[26px] py-5 font-sans text-[16px] font-semibold text-navy">
+                    <div className="border-t border-navy/[0.08] bg-cherry/[0.04] px-[26px] py-5 font-sans text-[16px] font-semibold text-navy">
                       {"check" in row ? (
                         <span className="inline-flex items-center gap-[6px]">
                           <CheckLineIcon className="inline-block align-[-0.12em] text-positive" />
                           {t(`compare.rows.${row.key}.cherry`)}
                         </span>
                       ) : (
-                        <span className={row.key === "price" ? "text-cherry-alt" : ""}>
+                        <span className={row.key === "price" ? "text-cherry" : ""}>
                           {t(`compare.rows.${row.key}.cherry`)}
                         </span>
                       )}
@@ -205,7 +205,7 @@ export default async function Home() {
       </section>
 
       {/* NOTRE APPROCHE */}
-      <section className="bg-surface-alt py-[104px]">
+      <section className="bg-surface py-[104px]">
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="mx-auto mb-14 max-w-[680px] text-center">
             <SectionEyebrow label={t("approach.eyebrow")} centered />
@@ -229,7 +229,7 @@ export default async function Home() {
                   />
                 </div>
                 <div className="px-6 pb-[26px] pt-[22px]">
-                  <div className="font-condensed text-[34px] font-bold leading-none text-cherry-alt opacity-[0.28]">
+                  <div className="font-condensed text-[34px] font-bold leading-none text-cherry opacity-[0.28]">
                     {s.n}
                   </div>
                   <h4 className="mt-[6px] font-condensed text-[22px] font-bold">{t(`approach.steps.${s.key}.t`)}</h4>
@@ -246,7 +246,7 @@ export default async function Home() {
             </p>
             <Link
               href={localize(lang, QUOTE.hub)}
-              className="inline-block rounded-full bg-cherry-alt px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-[#c0093a]"
+              className="inline-block rounded-full bg-cherry px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-[#c0093a]"
             >
               {t("approach.cta")} →
             </Link>
@@ -362,7 +362,7 @@ function ServiceCard({
       <div className="relative h-[250px]">
         <Image src={image} alt={imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
         <div className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(11,19,29,0) 40%,rgba(11,19,29,.72))" }} />
-        <div className="absolute left-0 top-5 rounded-r-[7px] bg-cherry-alt px-2 py-[11px] font-condensed text-[12px] font-semibold tracking-[2px] text-white [writing-mode:vertical-rl] [transform:rotate(180deg)]">
+        <div className="absolute left-0 top-5 rounded-r-[7px] bg-cherry px-2 py-[11px] font-condensed text-[12px] font-semibold tracking-[2px] text-white [writing-mode:vertical-rl] [transform:rotate(180deg)]">
           {badge}
         </div>
         <div className="absolute bottom-5 left-[26px] flex items-center gap-[11px]">
@@ -374,14 +374,14 @@ function ServiceCard({
         <div className="grid grid-cols-[auto_1fr] gap-[8px_16px] font-sans text-[15.5px] leading-[1.45]">
           {rows.map(([k, v]) => (
             <div key={k} className="contents">
-              <span className="font-condensed font-bold tracking-[0.5px] text-cherry-alt">{k}</span>
+              <span className="font-condensed font-bold tracking-[0.5px] text-cherry">{k}</span>
               <span className="text-navy/70">{v}</span>
             </div>
           ))}
         </div>
         <Link
           href={href}
-          className="mt-5 inline-block rounded-full bg-navy px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry-alt"
+          className="mt-5 inline-block rounded-full bg-navy px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry"
         >
           {more} →
         </Link>

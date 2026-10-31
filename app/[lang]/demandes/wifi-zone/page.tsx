@@ -17,7 +17,7 @@ export default async function DemandeWifiZone() {
   const t = await getTranslations("Quote");
   return (
     <>
-      <header className="relative overflow-hidden bg-navy-deep pb-[60px] pt-[140px]">
+      <header className="relative overflow-hidden bg-navy pb-[60px] pt-[140px]">
         <div
           className="absolute bottom-0 right-0 top-0 z-0 w-[38%] opacity-90"
           style={{ background: "linear-gradient(135deg,rgba(162,3,45,.85),rgba(125,3,35,.78))", clipPath: "polygon(45% 0,100% 0,100% 100%,18% 100%)" }}

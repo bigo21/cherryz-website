@@ -96,7 +96,7 @@ export default async function InternetB2B() {
               <div className="absolute -right-10 -top-10 h-[150px] w-[150px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.4),transparent 68%)" }} />
               <div className="relative">
                 <div className="flex items-center gap-[10px]">
-                  <Lock className="text-[22px] text-accent-vivid" />
+                  <Lock className="text-[22px] text-accent-on-dark" />
                   <span className="font-condensed text-[22px] font-bold text-white">
                     {t("basics.dedicatedTitle")}
                   </span>
@@ -109,7 +109,7 @@ export default async function InternetB2B() {
           </Reveal>
           <Reveal className="flex flex-col gap-[14px]" delay={0.08}>
             {usages.map(({ key, img }) => (
-              <div key={key} className="flex items-start gap-4 rounded-[14px] border border-navy/[0.07] bg-surface px-[22px] py-5 transition-all hover:translate-x-1 hover:border-cherry-alt/30">
+              <div key={key} className="flex items-start gap-4 rounded-[14px] border border-navy/[0.07] bg-surface px-[22px] py-5 transition-all hover:translate-x-1 hover:border-cherry/30">
                 <div className="relative h-[46px] w-[46px] flex-none overflow-hidden rounded-xl">
                   <Image src={img} alt={t(`basics.usages.${key}.alt`)} fill sizes="46px" className="object-cover" />
                 </div>
@@ -124,7 +124,7 @@ export default async function InternetB2B() {
       </section>
 
       {/* CE QUE CHERRYZ VOUS APPORTE */}
-      <section className="bg-surface-alt py-[104px]">
+      <section className="bg-surface py-[104px]">
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="mx-auto mb-14 max-w-[680px] text-center">
             <SectionEyebrow label={t("brings.eyebrow")} centered />
@@ -133,7 +133,7 @@ export default async function InternetB2B() {
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
-            <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-cherry-alt p-[30px] text-white sm:col-span-2">
+            <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-cherry p-[30px] text-white sm:col-span-2">
               <div className="absolute -right-8 -top-10 h-[170px] w-[170px] rounded-full bg-white/[0.08]" />
               <div className="relative">
                 <div className="font-condensed text-[13px] font-semibold tracking-[1.4px] text-white/75">{t("brings.priceLabel")}</div>
@@ -147,8 +147,8 @@ export default async function InternetB2B() {
             </div>
             {features.map(({ Icon, key }) => (
               <div key={key} className="rounded-2xl border border-navy/[0.06] bg-white px-6 py-[26px] transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]">
-                <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry-alt/[0.08]">
-                  <Icon className="text-[22px] text-cherry-alt" />
+                <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry/[0.08]">
+                  <Icon className="text-[22px] text-cherry" />
                 </div>
                 <h4 className="m-0 font-condensed text-[20px] font-bold">{t(`brings.features.${key}.t`)}</h4>
                 <p className="mt-[5px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.62]">{t(`brings.features.${key}.d`)}</p>
@@ -157,7 +157,7 @@ export default async function InternetB2B() {
             <div className="relative flex items-center gap-[22px] overflow-hidden rounded-2xl bg-navy p-[30px] text-white sm:col-span-2">
               <div className="absolute -bottom-[50px] -left-8 h-[170px] w-[170px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.35),transparent 68%)" }} />
               <div className="relative flex h-[58px] w-[58px] flex-none items-center justify-center rounded-[14px] bg-white/[0.08]">
-                <Users className="text-[28px] text-accent-vivid" />
+                <Users className="text-[28px] text-accent-on-dark" />
               </div>
               <div className="relative">
                 <h4 className="m-0 font-condensed text-[24px] font-bold">{t("brings.multiTitle")}</h4>

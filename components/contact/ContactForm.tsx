@@ -7,7 +7,7 @@ import { submitContactMessage } from "@/app/actions/contact";
 const labelCls =
   "mb-[7px] block font-condensed text-[14px] font-semibold uppercase tracking-[0.6px] text-navy";
 const fieldCls =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry-alt focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
+  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -71,7 +71,7 @@ export default function ContactForm() {
     return (
       <div className="rounded-[20px] border border-navy/[0.08] bg-white p-10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)]">
         <div className="py-10 text-center animate-pop">
-          <div className="mx-auto mb-[22px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-cherry-alt shadow-[0_18px_34px_-16px_rgba(160,4,45,.8)]">
+          <div className="mx-auto mb-[22px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_34px_-16px_rgba(160,4,45,.8)]">
             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 13l4 4L19 7" />
             </svg>
@@ -83,7 +83,7 @@ export default function ContactForm() {
           <button
             type="button"
             onClick={reset}
-            className="mt-6 cursor-pointer rounded-full border-[1.5px] border-cherry-alt/[0.35] bg-white px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-cherry-alt transition-colors hover:bg-cherry-alt/[0.06]"
+            className="mt-6 cursor-pointer rounded-full border-[1.5px] border-cherry/[0.35] bg-white px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry/[0.06]"
           >
             {t("again")}
           </button>
@@ -132,13 +132,13 @@ export default function ContactForm() {
         </div>
 
         {error && (
-          <p role="alert" className="mt-4 font-sans text-[14px] font-medium text-cherry-alt">{error}</p>
+          <p role="alert" className="mt-4 font-sans text-[14px] font-medium text-cherry">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={submitting}
-          className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry-alt px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-[#c0093a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry-alt disabled:opacity-70"
+          className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-[#c0093a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70"
         >
           {submitting ? t("sending") : `${t("send")} →`}
         </button>

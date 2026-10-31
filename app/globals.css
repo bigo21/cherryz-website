@@ -23,14 +23,6 @@
   --color-positive: #1f8a5b;
   --color-whatsapp: #25d366;
 
-  /* Legacy names, kept until their usages move to the palette above. */
-  --color-cherry-alt: var(--color-cherry);
-  --color-accent-pink: var(--color-accent-on-dark);
-  --color-accent-vivid: var(--color-accent-on-dark);
-  --color-navy-alt: var(--color-navy);
-  --color-navy-deep: var(--color-navy);
-  --color-surface-alt: var(--color-surface);
-
   /* Typography */
   --font-sans: var(--font-barlow), system-ui, sans-serif;
   --font-condensed: var(--font-barlow-condensed), system-ui, sans-serif;
@@ -164,7 +156,7 @@ body {
     outline-offset: 2px;
   }
 
-  :where(.bg-navy, .bg-navy-deep, [data-surface="dark"]) :focus-visible {
+  :where(.bg-navy, [data-surface="dark"]) :focus-visible {
     outline-color: var(--color-accent-on-dark);
   }
 }
