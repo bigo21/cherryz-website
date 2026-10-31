@@ -32,6 +32,7 @@ export default function SiteNav() {
 
   return (
     <nav
+      data-surface="dark"
       className="fixed inset-x-0 top-0 z-[100] border-b transition-[background,box-shadow,border-color] duration-300"
       style={{
         background: solid ? "#101b28" : "transparent",

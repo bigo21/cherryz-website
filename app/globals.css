@@ -154,6 +154,22 @@ body {
 }
 
 /*
+ * One focus style for the whole site: 2px outline, 2px offset, accent on light
+ * backgrounds and accent-on-dark inside navy areas. Navy areas are found by their
+ * bg-navy class, or marked data-surface="dark" when their background is set otherwise.
+ */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  :where(.bg-navy, .bg-navy-deep, [data-surface="dark"]) :focus-visible {
+    outline-color: var(--color-accent-on-dark);
+  }
+}
+
+/*
  * Reveal on scroll (components/site/Reveal.tsx), pure CSS. Content is visible by
  * default — without JavaScript, on a slow connection, or in browsers without
  * scroll-driven animations — and only animates in where the browser supports it

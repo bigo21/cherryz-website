@@ -28,6 +28,7 @@ export default function MobileActionBar() {
   return (
     <>
       <div
+        data-surface="dark"
         className="fixed inset-x-0 bottom-0 z-[90] border-t border-white/10 bg-navy/[0.97] px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_30px_-18px_rgba(0,0,0,.6)] transition-transform duration-300 ease-out md:hidden"
         style={{ transform: visible ? "none" : "translateY(110%)" }}
         aria-hidden={!visible}
