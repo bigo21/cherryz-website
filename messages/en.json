@@ -153,7 +153,8 @@
           "text": "Dedicated after-sales support, monitoring, fast response."
         }
       },
-      "cta": "Start with the questionnaire"
+      "cta": "Start with the questionnaire",
+      "progress": "Step {current} of {total}"
     },
     "offers": {
       "title": "Two offers, one single contact.",
@@ -199,6 +200,100 @@
     "clients": {
       "title": "They trust us",
       "note": "Companies, hotels, institutions"
+    },
+    "console": {
+      "title": "Your bandwidth, your price.",
+      "lead": "Pick a speed: the bars show what you would pay on your own with an operator, and with Cherryz.",
+      "tabs": {
+        "ip": "Business Internet",
+        "wifi": "WiFi Zone"
+      },
+      "speed": "Bandwidth needed",
+      "alone": "On your own, with an operator",
+      "cherryz": "With Cherryz",
+      "perMonth": "per month",
+      "saving": "Estimated saving",
+      "note": "Basis: {cherryzMin, number} – {cherryzMax, number} XAF per Mbps per month through Cherryz, versus {aloneMin, number} – {aloneMax, number} XAF direct. Indicative estimate: the exact price is set after we survey your site.",
+      "users": "Users per day",
+      "ticket": "Day-pass price",
+      "revenue": "Estimated gross revenue",
+      "wifiNote": "A simulation based on your own assumptions, over 30 days, before connection and equipment costs. Cherryz prices those in your quote.",
+      "ctaIp": "Get my Internet quote",
+      "ctaWifi": "Get my WiFi Zone quote",
+      "compareTitle": "On your own, or with Cherryz"
+    },
+    "usagesTitle": "What a fixed IP lets you do",
+    "coverage": {
+      "title": "A covered area becomes revenue.",
+      "lead": "Building, neighbourhood, hotel, campus, market: we size the coverage for your space, and your customers pay by mobile money.",
+      "cta": "See the WiFi Zone method"
+    },
+    "map": {
+      "caption": "Illustrative photos. Simplified map; speeds and ranges are indicative, set after we survey your site.",
+      "hero": {
+        "ip": {
+          "label": "Your head office",
+          "readout": "{mbps, number} Mbps dedicated · fixed IP",
+          "alt": "Yaoundé from the air at sunset"
+        },
+        "wifi": {
+          "label": "Your residence",
+          "readout": "≈ {users, number} users a day",
+          "alt": "Residence at dusk, an antenna on the roof"
+        },
+        "ap": "Access point",
+        "covered": "Covered area"
+      },
+      "country": {
+        "label": "Simplified map of Cameroon: Cherryz in Yaoundé, the regional capitals and the covered areas",
+        "title": "Based in Yaoundé, working across Cameroon.",
+        "lead": "From the coast to the North, we pick the operator and the technology that best reach your site.",
+        "home": "Cherryz",
+        "progress": "{current} of {total}",
+        "legend": {
+          "home": "Cherryz, Yaoundé",
+          "city": "Regional capital",
+          "network": "Operator networks",
+          "covered": "Covered area"
+        },
+        "chapters": {
+          "operators": {
+            "alt": "An operator's server room"
+          },
+          "roof": {
+            "title": "A beam, not a trench.",
+            "text": "Depending on your site, the link arrives by fibre or by microwave beam from rooftop to rooftop. No civil works, no interruption to your business: a technician mounts the antenna and aligns it.",
+            "alt": "Cherryz technician fixing an antenna to a mast"
+          },
+          "online": {
+            "title": "Connected, online, looked after.",
+            "text": "Commissioning in your rack, speed tests in front of you, then a single local contact for support, whichever operator we chose.",
+            "alt": "Technician connecting network equipment in a rack"
+          }
+        }
+      },
+      "budget": {
+        "bandLabel": "{mbps, number} Mbps",
+        "operator": "Operator network",
+        "site": "Your site",
+        "ap": "Access point",
+        "reach": "≈ {users, number} users a day"
+      },
+      "trail": {
+        "label": "The six steps, from listening to follow-up"
+      },
+      "zones": {
+        "legend": "Places a WiFi Zone can cover",
+        "items": {
+          "building": "Building",
+          "campus": "Campus",
+          "clinic": "Clinic",
+          "hotel": "Hotel",
+          "industrial": "Industrial site",
+          "market": "Market",
+          "neighbourhood": "Neighbourhood"
+        }
+      }
     }
   },
   "InternetB2B": {

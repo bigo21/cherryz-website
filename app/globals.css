@@ -33,6 +33,11 @@
   --color-ink-soft: #4a5563;
   --color-stamp: #a2032d;
 
+  /* Refonte « Carte de couverture » : plan-guide en aplats, la couverture en lobes cerise */
+  --color-sea: #e9eef3;
+  --color-sand: #f5e2c8;
+  --color-sand-deep: #ead0ad;
+
   /* États */
   --color-positive: #1f8a5b;
   --color-whatsapp: #25d366;
@@ -233,4 +238,29 @@ body {
 ::selection {
   background: rgba(162, 3, 45, 0.18);
   color: inherit;
+}
+
+/* ── Refonte « Carte de couverture » ───────────────────────────────────── */
+
+/*
+ * A coverage lobe drawn in CSS: an organic outline that scales with its box,
+ * so a photo cropped inside keeps the same shape at every size.
+ */
+.lobe {
+  border-radius: 58% 42% 52% 48% / 46% 54% 46% 54%;
+}
+.lobe-b {
+  border-radius: 44% 56% 40% 60% / 58% 42% 58% 42%;
+}
+.lobe-c {
+  border-radius: 62% 38% 46% 54% / 40% 60% 40% 60%;
+}
+
+.map-page ::selection {
+  background: #a2032d;
+  color: #fff;
+}
+.map-page :focus-visible {
+  outline: 2px solid #a2032d;
+  outline-offset: 3px;
 }

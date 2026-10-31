@@ -153,7 +153,8 @@
           "text": "SAV dédié, monitoring, intervention rapide."
         }
       },
-      "cta": "Commencer par le questionnaire"
+      "cta": "Commencer par le questionnaire",
+      "progress": "Étape {current} sur {total}"
     },
     "offers": {
       "title": "Deux offres, un seul interlocuteur.",
@@ -199,6 +200,100 @@
     "clients": {
       "title": "Ils nous font confiance",
       "note": "Entreprises, hôtels, institutions"
+    },
+    "console": {
+      "title": "Votre débit, votre prix.",
+      "lead": "Choisissez un débit : la barre montre ce que vous paieriez seul chez un opérateur, et avec Cherryz.",
+      "tabs": {
+        "ip": "Internet entreprise",
+        "wifi": "WiFi Zone"
+      },
+      "speed": "Débit souhaité",
+      "alone": "Seul, chez un opérateur",
+      "cherryz": "Avec Cherryz",
+      "perMonth": "par mois",
+      "saving": "Économie estimée",
+      "note": "Base : {cherryzMin, number} – {cherryzMax, number} XAF par Mbps et par mois via Cherryz, contre {aloneMin, number} – {aloneMax, number} XAF en direct. Estimation indicative : le prix exact est fixé après l'étude de votre site.",
+      "users": "Utilisateurs par jour",
+      "ticket": "Prix du ticket journée",
+      "revenue": "Recette brute estimée",
+      "wifiNote": "Simulation sur vos propres hypothèses, sur 30 jours, avant coûts de connexion et d'équipement. Cherryz les chiffre dans votre devis.",
+      "ctaIp": "Recevoir mon devis Internet",
+      "ctaWifi": "Recevoir mon devis WiFi Zone",
+      "compareTitle": "Seul, ou avec Cherryz"
+    },
+    "usagesTitle": "Ce que l'IP fixe vous permet",
+    "coverage": {
+      "title": "Une zone couverte devient un revenu.",
+      "lead": "Immeuble, quartier, hôtel, campus, marché : on dimensionne la couverture pour votre espace, et vos clients paient par mobile money.",
+      "cta": "Voir la méthode WiFi Zone"
+    },
+    "map": {
+      "caption": "Photos d'illustration. Carte simplifiée ; débits et portées indicatifs, fixés après l'étude de votre site.",
+      "hero": {
+        "ip": {
+          "label": "Votre siège",
+          "readout": "{mbps, number} Mbps dédiés · IP fixe",
+          "alt": "Yaoundé vue du ciel au coucher du soleil"
+        },
+        "wifi": {
+          "label": "Votre résidence",
+          "readout": "≈ {users, number} connectés par jour",
+          "alt": "Résidence au crépuscule, une antenne sur le toit"
+        },
+        "ap": "Point d'accès",
+        "covered": "Zone couverte"
+      },
+      "country": {
+        "label": "Carte simplifiée du Cameroun : Cherryz à Yaoundé, les chefs-lieux de région et les zones couvertes",
+        "title": "Basés à Yaoundé, partout au Cameroun.",
+        "lead": "Du littoral au Nord, on choisit l'opérateur et la technologie qui arrivent le mieux jusqu'à votre site.",
+        "home": "Cherryz",
+        "progress": "{current} sur {total}",
+        "legend": {
+          "home": "Cherryz, Yaoundé",
+          "city": "Chef-lieu de région",
+          "network": "Réseaux opérateurs",
+          "covered": "Zone couverte"
+        },
+        "chapters": {
+          "operators": {
+            "alt": "Salle serveurs d'un opérateur"
+          },
+          "roof": {
+            "title": "Un faisceau, pas une tranchée.",
+            "text": "Selon votre site, la liaison arrive par fibre ou par faisceau hertzien de toit en toit. Pas de génie civil, pas d'interruption de votre activité : un technicien pose l'antenne et l'aligne.",
+            "alt": "Technicien Cherryz fixant une antenne sur un mât"
+          },
+          "online": {
+            "title": "Raccordé, en ligne, suivi.",
+            "text": "Mise en service dans votre baie, tests de débit devant vous, puis un seul interlocuteur local pour le support, quel que soit l'opérateur retenu.",
+            "alt": "Technicien raccordant un équipement réseau dans une baie"
+          }
+        }
+      },
+      "budget": {
+        "bandLabel": "{mbps, number} Mbps",
+        "operator": "Réseau opérateur",
+        "site": "Votre site",
+        "ap": "Point d'accès",
+        "reach": "≈ {users, number} connectés par jour"
+      },
+      "trail": {
+        "label": "Les six étapes, de l'écoute au suivi"
+      },
+      "zones": {
+        "legend": "Les lieux qu'une WiFi Zone peut couvrir",
+        "items": {
+          "building": "Immeuble",
+          "campus": "Campus",
+          "clinic": "Clinique",
+          "hotel": "Hôtel",
+          "industrial": "Site industriel",
+          "market": "Marché",
+          "neighbourhood": "Quartier"
+        }
+      }
     }
   },
   "InternetB2B": {
