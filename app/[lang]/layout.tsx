@@ -3,6 +3,7 @@ import { Barlow, Barlow_Condensed } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { locales } from "@/lib/i18n/config";
+import { SITE_URL } from "@/lib/site/site";
 import "../globals.css";
 
 const barlow = Barlow({
@@ -21,7 +22,7 @@ const barlowCondensed = Barlow_Condensed({
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Site.meta");
-  return { metadataBase: new URL("https://cherryz.tech"), title: t("title"), description: t("description") };
+  return { metadataBase: new URL(SITE_URL), title: t("title"), description: t("description") };
 }
 
 export function generateStaticParams() {

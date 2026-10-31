@@ -3,6 +3,11 @@
     "meta": {
       "title": "Cherryz — Gets you connected!",
       "description": "Cherryz, your Internet connectivity broker in Cameroon: business Internet with a dedicated public IP and revenue-generating WiFi Zones, at the best price."
+    },
+    "og": {
+      "alt": "Cherryz, Internet connectivity broker in Cameroon",
+      "title": "Business Internet at the best price, everywhere in Cameroon",
+      "lead": "Business Internet with a dedicated IP and WiFi Zones, from 45,000 XAF/Mbps"
     }
   },
   "Chrome": {

@@ -1,5 +1,8 @@
 // Shared site constants (contact, RDV links, navigation).
 
+/** Canonical origin of the site (metadata, sitemap, robots). */
+export const SITE_URL = "https://www.cherryz.tech";
+
 export const CAL_IP = "https://cal.com/vireel/cherryzip";
 export const CAL_WIFI = "https://cal.com/vireel/cherryz";
 
