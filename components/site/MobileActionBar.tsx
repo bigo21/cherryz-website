@@ -44,7 +44,6 @@ export default function MobileActionBar() {
           </Link>
           <ExternalLink
             href={CONTACT.whatsapp}
-            icon={false}
             aria-label={t("whatsappAria")}
             className="flex flex-none items-center justify-center gap-2 rounded-full border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
