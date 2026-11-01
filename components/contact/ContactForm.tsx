@@ -4,6 +4,7 @@ import { useState } from "react";
 import FieldError from "@/components/site/FieldError";
 import { useLocale, useTranslations } from "next-intl";
 import { submitContactMessage } from "@/app/actions/contact";
+import { ArrowRightIcon } from "@/components/site/icons";
 
 const labelCls =
   "mb-[7px] block font-condensed text-[14px] font-semibold uppercase tracking-[0.6px] text-navy";
@@ -180,7 +181,12 @@ export default function ContactForm() {
           disabled={submitting}
           className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70"
         >
-          {submitting ? t("sending") : `${t("send")} →`}
+          {submitting ? t("sending") : (
+            <>
+              {t("send")}
+              <ArrowRightIcon className="ml-2" />
+            </>
+          )}
         </button>
       </form>
     </div>

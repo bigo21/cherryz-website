@@ -4,7 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import QuoteWizard from "@/components/quote/QuoteWizard";
 import { clientMessages } from "@/lib/i18n/client-messages";
-import { GlobeIcon } from "@/components/site/icons";
+import { ArrowLeftIcon, GlobeIcon } from "@/components/site/icons";
 import { QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
 import { pageMetadata } from "@/lib/i18n/server";
@@ -29,7 +29,8 @@ export default async function DemandeInternetB2B() {
             href={localize(lang, QUOTE.hub)}
             className="mb-1.5 inline-flex min-h-11 items-center gap-[7px] font-condensed text-[14px] font-semibold tracking-[0.5px] text-white/60 transition-colors hover:text-white"
           >
-            ← {t("back")}
+            <ArrowLeftIcon />
+            {t("back")}
           </Link>
           <div className="mb-[18px] flex w-fit items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[14px] py-[7px]">
             <GlobeIcon className="text-[15px] text-white" />

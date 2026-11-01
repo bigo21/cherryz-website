@@ -9,7 +9,7 @@ import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
 import ExternalLink from "@/components/site/ExternalLink";
-import { ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
+import { ArrowDownIcon, ArrowRightIcon, ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
 import { CAL_IP, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
 import { rich } from "@/lib/i18n/rich";
@@ -74,9 +74,9 @@ export default async function InternetB2B() {
         actions={
           <>
             <Link href={localize(lang, QUOTE.ip)} className={btnPrimary}>
-              {tc("quoteFree")} →
+              {tc("quoteFree")}<ArrowRightIcon className="ml-2" />
             </Link>
-            <a href="#comment" className={btnGhost}>{t("hero.how")} ↓</a>
+            <a href="#comment" className={btnGhost}>{t("hero.how")}<ArrowDownIcon className="ml-2" /></a>
           </>
         }
       />
@@ -205,7 +205,7 @@ export default async function InternetB2B() {
           </Reveal>
           <Reveal className="mt-[52px] text-center" delay={0.1}>
             <Link href={localize(lang, QUOTE.ip)} className={btnPrimary}>
-              {t("how.cta")} →
+              {t("how.cta")}<ArrowRightIcon className="ml-2" />
             </Link>
           </Reveal>
         </div>
@@ -217,7 +217,7 @@ export default async function InternetB2B() {
         actions={
           <>
             <Link href={localize(lang, QUOTE.ip)} className={btnPrimary}>
-              {tc("quoteLabel")} →
+              {tc("quoteLabel")}<ArrowRightIcon className="ml-2" />
             </Link>
             <ExternalLink href={CAL_IP} className={btnGhost}>
               {tc("preferCall")}

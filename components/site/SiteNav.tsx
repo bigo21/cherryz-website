@@ -8,6 +8,7 @@ import { NAV_LINKS, quoteHrefFor } from "@/lib/site/site";
 import { useLocale, useTranslations } from "next-intl";
 import { localize, splitLocale } from "@/lib/i18n/config";
 import LangSwitch from "./LangSwitch";
+import { ArrowRightIcon } from "./icons";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -86,7 +87,7 @@ export default function SiteNav() {
             href={quoteHref}
             className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-cherry-dark"
           >
-            {t("quoteLabel")} →
+            {t("quoteLabel")}<ArrowRightIcon className="ml-2" />
           </Link>
         </div>
 
@@ -134,7 +135,7 @@ export default function SiteNav() {
               href={quoteHref}
               className="mt-4 rounded-full bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              {t("quoteLabel")} →
+              {t("quoteLabel")}<ArrowRightIcon className="ml-2" />
             </Link>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { CONTACT, quoteHrefFor } from "@/lib/site/site";
 import { localize, splitLocale } from "@/lib/i18n/config";
-import { WhatsAppIcon } from "./icons";
+import { ArrowRightIcon, WhatsAppIcon } from "./icons";
 import ExternalLink from "./ExternalLink";
 
 /**
@@ -40,7 +40,7 @@ export default function MobileActionBar() {
             href={localize(lang, quoteHrefFor(path))}
             className="flex-1 rounded-full bg-cherry px-5 py-[13px] text-center font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
-            {t("quoteLabel")} →
+            {t("quoteLabel")}<ArrowRightIcon className="ml-2" />
           </Link>
           <ExternalLink
             href={CONTACT.whatsapp}

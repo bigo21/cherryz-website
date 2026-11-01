@@ -136,13 +136,28 @@ export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** Replaces the typed "→" of link and button labels; always aria-hidden. */
-export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
+/**
+ * Arrows of link and button labels (no typed "→", "←" or "↓"); always
+ * aria-hidden, sized and aligned like the text around them.
+ */
+function Arrow({ className = "", ...props }: SVGProps<SVGSVGElement>) {
   return (
-    <svg aria-hidden {...line(props)}>
+    <svg aria-hidden {...line(props)} className={`inline-block shrink-0 align-middle ${className}`}>
       <path d="M5 12h14M13 6l6 6-6 6" />
     </svg>
   );
+}
+
+export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
+  return <Arrow {...props} />;
+}
+
+export function ArrowLeftIcon({ className = "", ...props }: SVGProps<SVGSVGElement>) {
+  return <Arrow {...props} className={`rotate-180 ${className}`} />;
+}
+
+export function ArrowDownIcon({ className = "", ...props }: SVGProps<SVGSVGElement>) {
+  return <Arrow {...props} className={`rotate-90 ${className}`} />;
 }
 
 /** Marks a link that opens a new tab; always aria-hidden (the label says it). */

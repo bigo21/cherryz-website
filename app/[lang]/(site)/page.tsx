@@ -8,7 +8,7 @@ import ReassuranceBar from "@/components/site/ReassuranceBar";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import LogoMarquee, { type Logo } from "@/components/site/LogoMarquee";
-import { CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
+import { ArrowRightIcon, CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
 import { QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
 import { rich } from "@/lib/i18n/rich";
@@ -85,10 +85,10 @@ export default async function Home() {
         actions={
           <>
             <Link href={localize(lang, QUOTE.hub)} className={btnPrimary}>
-              {tc("quoteFree")} →
+              {tc("quoteFree")}<ArrowRightIcon className="ml-2" />
             </Link>
             <Link href={localize(lang, "/wifi-zone")} className={btnGhostStrong}>
-              {t("hero.wifi")} →
+              {t("hero.wifi")}<ArrowRightIcon className="ml-2" />
             </Link>
           </>
         }
@@ -248,7 +248,7 @@ export default async function Home() {
               href={localize(lang, QUOTE.hub)}
               className="inline-block rounded-full bg-cherry px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-cherry-dark"
             >
-              {t("approach.cta")} →
+              {t("approach.cta")}<ArrowRightIcon className="ml-2" />
             </Link>
           </Reveal>
         </div>
@@ -328,10 +328,10 @@ export default async function Home() {
         actions={
           <>
             <Link href={localize(lang, QUOTE.hub)} className={btnPrimary}>
-              {tc("quoteLabel")} →
+              {tc("quoteLabel")}<ArrowRightIcon className="ml-2" />
             </Link>
             <Link href={localize(lang, "/contact")} className={btnGhost}>
-              {tc("preferCall")} →
+              {tc("preferCall")}<ArrowRightIcon className="ml-2" />
             </Link>
           </>
         }
@@ -385,7 +385,7 @@ function ServiceCard({
           href={href}
           className="mt-5 inline-block rounded-full bg-navy px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry"
         >
-          {more} →
+          {more}<ArrowRightIcon className="ml-2" />
         </Link>
       </div>
     </div>

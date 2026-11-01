@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
-import { GlobeIcon, WifiIcon } from "@/components/site/icons";
+import { ArrowRightIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
 import ExternalLink from "@/components/site/ExternalLink";
 import { CONTACT, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
@@ -63,7 +63,7 @@ export default async function Demandes() {
               <h2 className="m-0 font-condensed text-[30px] font-bold leading-[1.08]">{t(`${c.key}.title`)}</h2>
               <p className="mt-3 font-sans text-[16px] leading-[1.55] text-navy/[0.62]">{t(`${c.key}.desc`)}</p>
               <span className="mt-[22px] inline-flex items-center gap-2 font-condensed text-[16px] font-bold tracking-[0.5px] text-cherry">
-                {t("start")} →
+                {t("start")}<ArrowRightIcon className="ml-2" />
               </span>
             </Link>
           ))}

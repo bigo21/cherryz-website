@@ -4,7 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import ContactForm from "@/components/contact/ContactForm";
 import { clientMessages } from "@/lib/i18n/client-messages";
-import { CalendarIcon, ClipboardIcon, ExternalIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
+import { ArrowRightIcon, CalendarIcon, ClipboardIcon, ExternalIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
 import ExternalLink from "@/components/site/ExternalLink";
 import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
@@ -70,7 +70,7 @@ export default async function Contact() {
                   href={localize(lang, q.href)}
                   className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
                 >
-                  {q.label} →
+                  {q.label}<ArrowRightIcon className="ml-2" />
                 </Link>
               ))}
             </div>

@@ -5,6 +5,7 @@ import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
+import { ArrowDownIcon, ArrowRightIcon } from "@/components/site/icons";
 import ExternalLink from "@/components/site/ExternalLink";
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -105,9 +106,9 @@ export default async function WifiZone() {
         actions={
           <>
             <Link href={localize(lang, QUOTE.wifi)} className={btnPrimary}>
-              {tc("quoteFree")} →
+              {tc("quoteFree")}<ArrowRightIcon className="ml-2" />
             </Link>
-            <a href="#cas" className={btnGhost}>{t("hero.cases")} ↓</a>
+            <a href="#cas" className={btnGhost}>{t("hero.cases")}<ArrowDownIcon className="ml-2" /></a>
           </>
         }
       />
@@ -206,7 +207,7 @@ export default async function WifiZone() {
               {t.rich("method.partner", { strong: (c) => <strong className="font-semibold text-white">{c}</strong> })}
             </p>
             <Link href={localize(lang, QUOTE.wifi)} className={btnPrimary}>
-              {t("method.cta")} →
+              {t("method.cta")}<ArrowRightIcon className="ml-2" />
             </Link>
           </Reveal>
         </div>
@@ -293,7 +294,7 @@ export default async function WifiZone() {
         actions={
           <>
             <Link href={localize(lang, QUOTE.wifi)} className={btnPrimary}>
-              {t("final.cta")} →
+              {t("final.cta")}<ArrowRightIcon className="ml-2" />
             </Link>
             <ExternalLink href={CAL_WIFI} className={btnGhost}>
               {tc("preferCall")}

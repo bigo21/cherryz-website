@@ -12,7 +12,7 @@ import {
   type ValidationError,
 } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
-import { ExternalIcon, LockIcon, WhatsAppIcon } from "@/components/site/icons";
+import { ArrowLeftIcon, ArrowRightIcon, ExternalIcon, LockIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CONTACT } from "@/lib/site/site";
 import FieldError from "@/components/site/FieldError";
 import ExternalLink from "@/components/site/ExternalLink";
@@ -543,7 +543,12 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             disabled={submitting}
             className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-ink-2 transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
           >
-            {step <= 1 ? t("cancel") : `← ${t("prev")}`}
+            {step <= 1 ? t("cancel") : (
+              <>
+                <ArrowLeftIcon className="mr-2" />
+                {t("prev")}
+              </>
+            )}
           </button>
           <button
             type="button"
@@ -552,7 +557,12 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             aria-busy={submitting || undefined}
             className="cursor-pointer whitespace-nowrap rounded-[11px] border-none bg-cherry px-5 py-[14px] font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-[0_14px_30px_-16px_rgba(162,3,45,0.85)] transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70 sm:px-[30px]"
           >
-            {submitting ? t("sending") : `${step >= total ? t("send") : t("nextBtn")} →`}
+            {submitting ? t("sending") : (
+              <>
+                {step >= total ? t("send") : t("nextBtn")}
+                <ArrowRightIcon className="ml-2" />
+              </>
+            )}
           </button>
         </div>
       </div>
