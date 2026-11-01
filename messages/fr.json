@@ -1037,7 +1037,8 @@
     "wait": "En attendant, vous pouvez déjà faire votre demande :",
     "ip": "Demander une cotation IP Publique Dédiée",
     "wifi": "Demander une cotation WiFi Zone",
-    "direct": "Vous pouvez également nous contacter directement via :"
+    "direct": "Vous pouvez également nous contacter directement via :",
+    "title": "Site en maintenance"
   },
   "Legal": {
     "updated": "Dernière mise à jour : {date, date, long}",

@@ -65,6 +65,7 @@ export default async function MaintenanceScreen() {
             <br />
             maintenance
           </h1> */}
+          <h1 className="sr-only">{t("title")}</h1>
           <p className="mt-6 max-w-[600px] font-sans text-[clamp(17px,2vw,21px)] font-normal leading-[1.55] text-white/[0.76]">
             {t("body")}
           </p>
@@ -82,7 +83,7 @@ export default async function MaintenanceScreen() {
             </Link>
             <Link
               href={localize(lang, "/demandes/wifi-zone")}
-              className="inline-flex items-center gap-[10px] rounded-[10px] border-[1.6px] border-cherry bg-transparent px-7 py-4 font-condensed text-[17px] font-bold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry hover:text-white"
+              className="inline-flex items-center gap-[10px] rounded-[10px] border-[1.6px] border-white/40 bg-transparent px-7 py-4 font-condensed text-[17px] font-bold tracking-[0.5px] text-white transition-colors hover:border-white hover:bg-white/10"
             >
               {t("wifi")}
             </Link>
@@ -97,7 +98,7 @@ export default async function MaintenanceScreen() {
                 href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent hover:bg-white/[0.11]"
+                className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent-on-dark hover:bg-white/[0.11]"
               >
                 <span className="inline-flex text-whatsapp">
                   <svg viewBox="0 0 24 24" width="27" height="27" fill="currentColor">
@@ -116,9 +117,9 @@ export default async function MaintenanceScreen() {
               </a>
               <a
                 href={CONTACT.emailHref}
-                className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent hover:bg-white/[0.11]"
+                className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent-on-dark hover:bg-white/[0.11]"
               >
-                <span className="inline-flex text-accent">
+                <span className="inline-flex text-accent-on-dark">
                   <svg
                     viewBox="0 0 24 24"
                     width="27"
@@ -150,7 +151,7 @@ export default async function MaintenanceScreen() {
 
       {/* Footer */}
       <footer className="relative z-[2] px-[6vw] pb-10 pt-6 text-center">
-        <span className="font-condensed text-[19px] font-semibold tracking-[0.6px] text-accent">
+        <span className="font-condensed text-[19px] font-semibold tracking-[0.6px] text-accent-on-dark">
           {tc("footer.slogan")}
         </span>
       </footer>

@@ -1037,7 +1037,8 @@
     "wait": "In the meantime, you can already send your request:",
     "ip": "Request a dedicated public IP quote",
     "wifi": "Request a WiFi Zone quote",
-    "direct": "You can also contact us directly via:"
+    "direct": "You can also contact us directly via:",
+    "title": "Website under maintenance"
   },
   "Legal": {
     "updated": "Last updated: {date, date, long}",
