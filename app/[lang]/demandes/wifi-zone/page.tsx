@@ -25,7 +25,7 @@ export default async function DemandeWifiZone() {
         <div className="relative z-[1] mx-auto max-w-[900px] px-6">
           <Link
             href={localize(lang, QUOTE.hub)}
-            className="mb-[18px] inline-flex items-center gap-[7px] font-condensed text-[14px] font-semibold tracking-[0.5px] text-white/60 transition-colors hover:text-white"
+            className="mb-1.5 inline-flex min-h-11 items-center gap-[7px] font-condensed text-[14px] font-semibold tracking-[0.5px] text-white/60 transition-colors hover:text-white"
           >
             ← {t("back")}
           </Link>
