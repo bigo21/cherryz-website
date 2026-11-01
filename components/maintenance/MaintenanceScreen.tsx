@@ -55,7 +55,7 @@ export default async function MaintenanceScreen() {
           unoptimized
           className="block h-9 w-auto"
         />
-        <LangSwitch long className="ml-auto font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
+        <LangSwitch long className="ml-auto inline-flex min-h-11 min-w-11 items-center justify-center font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
       </header>
 
       {/* Content */}

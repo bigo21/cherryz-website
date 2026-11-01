@@ -14,7 +14,7 @@ export interface Contact {
 const FROM = process.env.RESEND_FROM ?? "Cherryz <onboarding@resend.dev>";
 const NOTIFY_TO = process.env.QUOTE_NOTIFY_EMAIL ?? "support@cherryz.tech";
 
-const CHERRY = "#a2032d";
+const CHERRY = "#a0042d";
 const NAVY = "#101b28";
 
 function esc(s: string): string {
@@ -30,7 +30,7 @@ function rowsHtml(items: { label: string; value: string }[]): string {
     .map(
       (i) => `
       <tr>
-        <td style="padding:10px 14px;border-bottom:1px solid #eceef1;font-size:13px;color:#6b7280;vertical-align:top;width:44%">${esc(i.label)}</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #eceef1;font-size:13px;color:#70767e;vertical-align:top;width:44%">${esc(i.label)}</td>
         <td style="padding:10px 14px;border-bottom:1px solid #eceef1;font-size:14px;color:${NAVY};font-weight:600">${esc(i.value)}</td>
       </tr>`,
     )
@@ -67,7 +67,7 @@ function teamEmailHtml(
         <h2 style="font-size:15px;color:${CHERRY};margin:0 0 8px">Réponses</h2>
         <table style="width:100%;border-collapse:collapse">${rowsHtml(items)}</table>
         <h2 style="font-size:13px;color:#9aa2ad;margin:22px 0 6px">Tracking</h2>
-        <pre style="background:#f6f5f3;border-radius:10px;padding:12px;font-size:12px;color:#6b7280;white-space:pre-wrap;word-break:break-word">${trackingText}</pre>
+        <pre style="background:#f6f5f3;border-radius:10px;padding:12px;font-size:12px;color:#70767e;white-space:pre-wrap;word-break:break-word">${trackingText}</pre>
       </div>
     </div>
   </div>`;
@@ -85,7 +85,7 @@ async function prospectEmailHtml(firstName: string, type: QuoteType, locale: Loc
       <div style="padding:26px;color:${NAVY};font-size:15px;line-height:1.6">
         <p style="margin:0 0 16px">${t.markup("quote.received", { type: esc(t(`quote.type.${type}`)), strong: (chunks) => `<strong>${chunks}</strong>` })}</p>
         <p style="margin:0 0 16px">${t("quote.meanwhile")}</p>
-        <ul style="margin:0 0 20px;padding-left:18px;color:#4b5563">
+        <ul style="margin:0 0 20px;padding-left:18px;color:#404953">
           <li>WhatsApp : <a href="https://wa.me/237242014664" style="color:${CHERRY}">+237 242 01 46 64</a></li>
           <li>Email : <a href="mailto:support@cherryz.tech" style="color:${CHERRY}">support@cherryz.tech</a></li>
         </ul>

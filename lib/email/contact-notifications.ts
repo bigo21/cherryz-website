@@ -13,7 +13,7 @@ export interface ContactPayload {
 
 const FROM = process.env.RESEND_FROM ?? "Cherryz <onboarding@resend.dev>";
 const NOTIFY_TO = process.env.QUOTE_NOTIFY_EMAIL ?? "support@cherryz.tech";
-const CHERRY = "#a2032d";
+const CHERRY = "#a0042d";
 const NAVY = "#101b28";
 
 function esc(s: string): string {
@@ -22,7 +22,7 @@ function esc(s: string): string {
 
 function teamHtml(p: ContactPayload): string {
   const row = (k: string, v: string | null | undefined) =>
-    v ? `<tr><td style="padding:9px 14px;border-bottom:1px solid #eceef1;font-size:13px;color:#6b7280;width:38%">${esc(k)}</td><td style="padding:9px 14px;border-bottom:1px solid #eceef1;font-size:14px;color:${NAVY};font-weight:600">${esc(v)}</td></tr>` : "";
+    v ? `<tr><td style="padding:9px 14px;border-bottom:1px solid #eceef1;font-size:13px;color:#70767e;width:38%">${esc(k)}</td><td style="padding:9px 14px;border-bottom:1px solid #eceef1;font-size:14px;color:${NAVY};font-weight:600">${esc(v)}</td></tr>` : "";
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f6f5f3;padding:24px">
     <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden">
