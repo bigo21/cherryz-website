@@ -1069,5 +1069,31 @@
       "received": "We have received your <strong>{type}</strong> quote request. Our team will review it and get back to you <strong>within 48 hours</strong>.",
       "meanwhile": "In the meantime, you can reach us directly:"
     }
+  },
+  "NotFound": {
+    "code": "Error 404",
+    "title": "This page doesn’t exist",
+    "lead": "The link may be old or mistyped. The pages below take you to our offers, a quote request or our team.",
+    "home": "Back to the home page",
+    "linksTitle": "Where were you heading?",
+    "links": {
+      "ip": {
+        "title": "Business Internet",
+        "desc": "A dedicated connection with a fixed public IP"
+      },
+      "wifi": {
+        "title": "WiFi Zone",
+        "desc": "Shared Internet access that earns revenue"
+      },
+      "quote": {
+        "title": "Request a quote",
+        "desc": "A 3-minute questionnaire"
+      },
+      "contact": {
+        "title": "Contact",
+        "desc": "Write to or call our team"
+      }
+    },
+    "metaTitle": "Page not found | Cherryz"
   }
 }

@@ -1069,5 +1069,31 @@
       "received": "Votre demande de cotation <strong>{type}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.",
       "meanwhile": "En attendant, vous pouvez nous joindre directement :"
     }
+  },
+  "NotFound": {
+    "code": "Erreur 404",
+    "title": "Cette page n’existe pas",
+    "lead": "Le lien est peut-être ancien ou mal recopié. Les pages ci-dessous vous mènent à nos offres, à une demande de devis ou à notre équipe.",
+    "home": "Retour à l’accueil",
+    "linksTitle": "Où souhaitiez-vous aller ?",
+    "links": {
+      "ip": {
+        "title": "Internet B2B",
+        "desc": "Connexion dédiée avec IP publique fixe"
+      },
+      "wifi": {
+        "title": "WiFi Zone",
+        "desc": "Un accès Internet partagé qui rapporte"
+      },
+      "quote": {
+        "title": "Demander un devis",
+        "desc": "Questionnaire de 3 minutes"
+      },
+      "contact": {
+        "title": "Contact",
+        "desc": "Écrire ou appeler notre équipe"
+      }
+    },
+    "metaTitle": "Page introuvable | Cherryz"
   }
 }

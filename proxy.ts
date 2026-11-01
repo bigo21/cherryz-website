@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { splitLocale } from "@/lib/i18n/config";
+import { LOCALE_HEADER, splitLocale } from "@/lib/i18n/config";
 
 // Public gate (Next.js 16 Proxy, ex-Middleware).
 //
@@ -21,11 +21,14 @@ export function proxy(req: NextRequest) {
   const { lang, path } = splitLocale(pathname);
 
   // Serve the request: English URLs map onto app/[lang] directly, French ones are
-  // rewritten to /fr/... so the visible URL stays unprefixed.
+  // rewritten to /fr/... so the visible URL stays unprefixed. The locale also travels
+  // as a header, for the global 404 which renders outside app/[lang].
+  const headers = new Headers(req.headers);
+  headers.set(LOCALE_HEADER, lang);
   const pass = () =>
     lang === "fr"
-      ? NextResponse.rewrite(new URL(`/fr${path === "/" ? "" : path}${req.nextUrl.search}`, req.url))
-      : NextResponse.next();
+      ? NextResponse.rewrite(new URL(`/fr${path === "/" ? "" : path}${req.nextUrl.search}`, req.url), { request: { headers } })
+      : NextResponse.next({ request: { headers } });
 
   // Always reachable, even during maintenance: the maintenance page, the quote
   // request flow (/demandes) and the legal pages.

@@ -5,6 +5,9 @@ export const locales = ["fr", "en"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "fr";
 
+/** Request header set by proxy.ts with the locale of the URL (read by the global 404). */
+export const LOCALE_HEADER = "x-chz-locale";
+
 export const hasLocale = (value: string): value is Locale =>
   (locales as readonly string[]).includes(value);
 

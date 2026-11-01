@@ -135,3 +135,12 @@ export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+/** Replaces the typed "→" of link and button labels; always aria-hidden. */
+export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg aria-hidden {...line(props)}>
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
