@@ -130,7 +130,7 @@ export default async function Home() {
                 {t("why.p1")}
               </p>
               <p className="mt-[14px] max-w-[560px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
-                {t.rich("why.p2", { strong: (c) => <strong className="text-navy">{c}</strong> })}
+                {t.rich("why.p2", { strong: (c) => <strong className="font-semibold text-navy">{c}</strong> })}
               </p>
             </div>
           </Reveal>

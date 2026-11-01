@@ -163,7 +163,7 @@ export default async function InternetB2B() {
               <div className="relative">
                 <h4 className="m-0 font-condensed text-[24px] font-bold">{t("brings.multiTitle")}</h4>
                 <p className="mt-[5px] max-w-[340px] font-sans text-[15.5px] leading-[1.5] text-white/75">
-                  {t.rich("brings.multiBody", { strong: (c) => <strong className="text-white">{c}</strong> })}
+                  {t.rich("brings.multiBody", { strong: (c) => <strong className="font-semibold text-white">{c}</strong> })}
                 </p>
               </div>
             </div>

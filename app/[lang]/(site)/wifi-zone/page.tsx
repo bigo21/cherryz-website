@@ -203,7 +203,7 @@ export default async function WifiZone() {
           </Reveal>
           <Reveal className="mt-11 text-center" delay={0.1}>
             <p className="mx-auto mb-6 max-w-[620px] font-sans text-[17px] leading-[1.6] text-white/[0.72]">
-              {t.rich("method.partner", { strong: (c) => <strong className="text-white">{c}</strong> })}
+              {t.rich("method.partner", { strong: (c) => <strong className="font-semibold text-white">{c}</strong> })}
             </p>
             <Link href={localize(lang, QUOTE.wifi)} className={btnPrimary}>
               {t("method.cta")} →
