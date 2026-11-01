@@ -46,12 +46,13 @@ export default async function MaintenanceScreen() {
       {/* Header */}
       <header className="relative z-[2] flex flex-wrap items-center gap-4 px-[6vw] pt-[34px]">
         <Image
-          src="/brand/logo-white.png"
+          src="/brand/logo-white@2x.png"
           alt="Cherryz"
-          width={107}
-          height={44}
+          width={102}
+          height={36}
           priority
-          className="block h-11 w-auto animate-fade"
+          unoptimized
+          className="block h-9 w-auto"
         />
         <LangSwitch long className="ml-auto font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
       </header>
@@ -64,7 +65,7 @@ export default async function MaintenanceScreen() {
             <br />
             maintenance
           </h1> */}
-          <p className="mt-6 max-w-[600px] font-sans text-[clamp(17px,2vw,21px)] font-normal leading-[1.55] text-white/[0.76] animate-fade [animation-delay:0.2s]">
+          <p className="mt-6 max-w-[600px] font-sans text-[clamp(17px,2vw,21px)] font-normal leading-[1.55] text-white/[0.76]">
             {t("body")}
           </p>
 

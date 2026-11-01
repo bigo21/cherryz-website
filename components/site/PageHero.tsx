@@ -68,14 +68,14 @@ export default function PageHero({
         </div>
 
         <h1
-          className="m-0 font-condensed text-[clamp(46px,6.6vw,82px)] font-bold leading-[0.95] tracking-[-0.5px] text-white animate-fade [animation-delay:0.12s]"
+          className="m-0 font-condensed text-[clamp(46px,6.6vw,82px)] font-bold leading-[0.95] tracking-[-0.5px] text-white"
           style={emphasis ? { textShadow: "0 4px 24px rgba(0,0,0,.5)" } : undefined}
         >
           {title}
         </h1>
 
         <p
-          className={`mt-[26px] max-w-[620px] font-sans text-[20px] leading-[1.55] animate-fade [animation-delay:0.22s] ${emphasis ? "text-white/90" : "text-white/[0.78]"}`}
+          className={`mt-[26px] max-w-[620px] font-sans text-[20px] leading-[1.55] ${emphasis ? "text-white/90" : "text-white/[0.78]"}`}
           style={emphasis ? { textShadow: "0 2px 12px rgba(0,0,0,.5)" } : undefined}
         >
           {subtitle}

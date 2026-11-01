@@ -43,12 +43,13 @@ export default function SiteNav() {
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-[18px] md:px-12">
         <Link href={localize(lang, "/")} className="flex items-center" aria-label={t("homeLabel")}>
           <Image
-            src="/brand/logo-white.png"
+            src="/brand/logo-white@2x.png"
             alt="Cherryz"
-            width={93}
-            height={38}
+            width={91}
+            height={32}
             priority
-            className="block h-[38px] w-auto"
+            unoptimized
+            className="block h-8 w-auto"
           />
         </Link>
 

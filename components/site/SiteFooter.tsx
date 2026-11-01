@@ -29,11 +29,12 @@ export default async function SiteFooter() {
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-11 md:grid-cols-[1.6fr_1fr_1fr_1.2fr]">
           <div>
             <Image
-              src="/brand/logo-white.png"
+              src="/brand/logo-white@2x.png"
               alt="Cherryz"
-              width={98}
-              height={40}
-              className="mb-4 block h-10 w-auto"
+              width={91}
+              height={32}
+              unoptimized
+              className="mb-4 block h-8 w-auto"
             />
             <p className="max-w-[280px] font-sans text-[15.5px] leading-[1.6] text-white/[0.62]">
               {t("footer.tagline")}
