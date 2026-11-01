@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { CONTACT, quoteHrefFor } from "@/lib/site/site";
 import { localize, splitLocale } from "@/lib/i18n/config";
 import { WhatsAppIcon } from "./icons";
+import ExternalLink from "./ExternalLink";
 
 /**
  * Mobile-only bottom bar: the quote questionnaire for the current page + WhatsApp.
@@ -41,16 +42,15 @@ export default function MobileActionBar() {
           >
             {t("quoteLabel")} →
           </Link>
-          <a
+          <ExternalLink
             href={CONTACT.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
+            icon={false}
             aria-label={t("whatsappAria")}
             className="flex flex-none items-center justify-center gap-2 rounded-full border border-white/25 px-5 py-[13px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
             <WhatsAppIcon className="h-[18px] w-[18px] text-whatsapp" />
             WhatsApp
-          </a>
+          </ExternalLink>
         </div>
       </div>
       {/* Keeps the footer's last line clear of the bar. */}

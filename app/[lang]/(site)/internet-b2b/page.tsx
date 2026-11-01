@@ -8,6 +8,7 @@ import ReassuranceBar from "@/components/site/ReassuranceBar";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
+import ExternalLink from "@/components/site/ExternalLink";
 import { ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
 import { CAL_IP, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
@@ -218,9 +219,9 @@ export default async function InternetB2B() {
             <Link href={localize(lang, QUOTE.ip)} className={btnPrimary}>
               {tc("quoteLabel")} →
             </Link>
-            <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={btnGhost}>
-              {tc("preferCall")} →
-            </a>
+            <ExternalLink href={CAL_IP} className={btnGhost}>
+              {tc("preferCall")}
+            </ExternalLink>
           </>
         }
       />

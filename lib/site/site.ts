@@ -27,8 +27,6 @@ export const CONTACT = {
   whatsapp: "https://wa.me/237242014664",
   email: "support@cherryz.tech",
   emailHref: "mailto:support@cherryz.tech",
-  site: "www.cherryz.tech",
-  siteHref: "https://www.cherryz.tech",
   linkedin: "https://linkedin.com/company/cherryztech",
   facebook: "https://facebook.com/cherryz.tech",
 } as const;

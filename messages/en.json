@@ -162,14 +162,14 @@
       "whom": "FOR WHOM",
       "what": "WHAT",
       "plus": "BENEFIT",
-      "more": "Learn more",
       "ip": {
         "badge": "B2B",
         "title": "Public IP Address",
         "imageAlt": "Connected office",
         "whom": "Businesses, institutions, organisations",
         "what": "Dedicated Internet with a fixed IP, guaranteed bandwidth",
-        "plus": "Business-grade performance at a lower price"
+        "plus": "Business-grade performance at a lower price",
+        "more": "Explore Business Internet"
       },
       "wifi": {
         "badge": "REVENUE",
@@ -177,7 +177,8 @@
         "imageAlt": "Building with WiFi",
         "whom": "Entrepreneurs, building managers, investors",
         "what": "A shared, monetised Internet access point",
-        "plus": "Earn revenue from connectivity"
+        "plus": "Earn revenue from connectivity",
+        "more": "Explore the WiFi Zone offer"
       }
     },
     "trust": {
@@ -478,8 +479,7 @@
       "addressValue": "Yaoundé, Cameroon",
       "phone": "Phone",
       "whatsapp": "WhatsApp",
-      "email": "Email",
-      "site": "Website"
+      "email": "Email"
     },
     "booking": {
       "title": "Book a slot",

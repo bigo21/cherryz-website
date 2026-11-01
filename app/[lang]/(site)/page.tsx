@@ -281,7 +281,7 @@ export default async function Home() {
                   [t("services.plus"), t(`services.${s.key}.plus`)],
                 ]}
                 href={localize(lang, s.href)}
-                more={t("services.more")}
+                more={t(`services.${s.key}.more`)}
               />
             ))}
           </Reveal>

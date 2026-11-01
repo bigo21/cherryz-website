@@ -4,11 +4,11 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { CAL_IP, CAL_WIFI, CONTACT, NAV_LINKS, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
 import LangSwitch from "./LangSwitch";
+import ExternalLink from "./ExternalLink";
 import {
   CalendarIcon,
   ClipboardIcon,
   FacebookIcon,
-  GlobeIcon,
   LinkedInIcon,
   MailIcon,
   PhoneIcon,
@@ -65,12 +65,12 @@ export default async function SiteFooter() {
               <Link href={localize(lang, QUOTE.wifi)} className={linkCls}>
                 <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.quoteWifi")}
               </Link>
-              <a href={CAL_IP} target="_blank" rel="noopener noreferrer" className={linkCls}>
+              <ExternalLink href={CAL_IP} className={linkCls}>
                 <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.callIp")}
-              </a>
-              <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={linkCls}>
+              </ExternalLink>
+              <ExternalLink href={CAL_WIFI} className={linkCls}>
                 <CalendarIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.callWifi")}
-              </a>
+              </ExternalLink>
             </div>
           </div>
 
@@ -87,17 +87,14 @@ export default async function SiteFooter() {
               <a href={CONTACT.emailHref} className={linkCls}>
                 <MailIcon className="mr-1 inline-block align-[-0.14em]" /> {CONTACT.email}
               </a>
-              <a href={CONTACT.siteHref} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                <GlobeIcon className="mr-1 inline-block align-[-0.14em]" /> {CONTACT.site}
-              </a>
             </div>
             <div className="-ml-3 mt-2 flex gap-1">
-              <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white">
+              <ExternalLink href={CONTACT.linkedin} icon={false} aria-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white">
                 <LinkedInIcon />
-              </a>
-              <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white">
+              </ExternalLink>
+              <ExternalLink href={CONTACT.facebook} icon={false} aria-label="Facebook" className="inline-flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white">
                 <FacebookIcon />
-              </a>
+              </ExternalLink>
             </div>
           </div>
         </div>

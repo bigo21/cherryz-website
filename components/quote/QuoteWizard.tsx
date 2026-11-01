@@ -12,9 +12,10 @@ import {
   type ValidationError,
 } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
-import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
+import { ExternalIcon, LockIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CONTACT } from "@/lib/site/site";
 import FieldError from "@/components/site/FieldError";
+import ExternalLink from "@/components/site/ExternalLink";
 import { useLocale, useMessages, useTranslations } from "next-intl";
 import { localize } from "@/lib/i18n/config";
 
@@ -91,6 +92,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
   const lang = useLocale();
   const t = useTranslations("Quote.wizard");
   const tv = useTranslations("Validation");
+  const tc = useTranslations("Chrome");
   // Answers are stored as the schema's (French) values; the catalog only changes what is shown.
   const copy: QuestionnaireCopy = useMessages().Questionnaire[type];
   const schema = getSchema(type);
@@ -268,15 +270,14 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
           ))}
         </ol>
         <div className="mt-[30px] flex flex-wrap justify-center gap-3">
-          <a
+          <ExternalLink
             href={CONTACT.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
+            icon={false}
             className="inline-flex items-center gap-[9px] rounded-full bg-cherry px-[26px] py-[14px] font-condensed text-[16px] font-bold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
           >
             <WhatsAppIcon className="h-[18px] w-[18px]" />
             WhatsApp
-          </a>
+          </ExternalLink>
           <Link
             href={localize(lang, "/")}
             className="inline-flex items-center gap-[9px] rounded-full border-[1.5px] border-cherry/[0.35] bg-white px-[26px] py-[14px] font-condensed text-[16px] font-bold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry/[0.06]"
@@ -509,6 +510,8 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   {t("consentDetails")}{" "}
                   <Link href={localize(lang, "/confidentialite")} target="_blank" className="font-semibold text-navy underline underline-offset-4">
                     {t("consentLink")}
+                    <ExternalIcon className="ml-1 inline-block align-baseline" />
+                    <span className="sr-only"> {tc("newTab")}</span>
                   </Link>
                   .
                 </p>
@@ -522,15 +525,14 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         {submitError && (
           <div role="alert" className="mt-2 rounded-[12px] border border-cherry/25 bg-cherry/[0.05] px-4 py-3">
             <FieldError message={submitError} />
-            <a
+            <ExternalLink
               href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+              icon={false}
               className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy underline underline-offset-4"
             >
               <WhatsAppIcon className="h-4 w-4 text-[#128c4a]" />
               {t("writeWhatsapp")}
-            </a>
+            </ExternalLink>
           </div>
         )}
 

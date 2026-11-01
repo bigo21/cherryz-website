@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { GlobeIcon, WifiIcon } from "@/components/site/icons";
+import ExternalLink from "@/components/site/ExternalLink";
 import { CONTACT, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
 import { pageMetadata } from "@/lib/i18n/server";
@@ -70,9 +71,9 @@ export default async function Demandes() {
         <div className="mx-auto mt-9 max-w-[1100px] px-6 text-center md:px-12">
           <p className="font-sans text-[15px] text-navy/50">
             {t("direct")}{" "}
-            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="font-semibold text-cherry">
+            <ExternalLink href={CONTACT.whatsapp} className="font-semibold text-cherry">
               {t("whatsapp")}
-            </a>{" "}
+            </ExternalLink>{" "}
             {t("or")}{" "}
             <a href={CONTACT.emailHref} className="font-semibold text-cherry">
               {t("email")}

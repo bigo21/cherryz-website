@@ -162,14 +162,14 @@
       "whom": "POUR QUI",
       "what": "QUOI",
       "plus": "ATOUT",
-      "more": "En savoir plus",
       "ip": {
         "badge": "B2B",
         "title": "Adresse IP Publique",
         "imageAlt": "Bureau connecté",
         "whom": "Entreprises, institutions, organisations",
         "what": "Internet dédié avec IP fixe, bande passante garantie",
-        "plus": "Performance pro à prix réduit"
+        "plus": "Performance pro à prix réduit",
+        "more": "Découvrir l’offre Internet B2B"
       },
       "wifi": {
         "badge": "REVENUS",
@@ -177,7 +177,8 @@
         "imageAlt": "Immeuble avec WiFi",
         "whom": "Entrepreneurs, gestionnaires d'immeubles, investisseurs",
         "what": "Point d'accès Internet partagé et monétisé",
-        "plus": "Générer des revenus avec la connectivité"
+        "plus": "Générer des revenus avec la connectivité",
+        "more": "Découvrir l’offre WiFi Zone"
       }
     },
     "trust": {
@@ -478,8 +479,7 @@
       "addressValue": "Yaoundé, Cameroun",
       "phone": "Téléphone",
       "whatsapp": "WhatsApp",
-      "email": "Email",
-      "site": "Site web"
+      "email": "Email"
     },
     "booking": {
       "title": "Réserver un créneau",

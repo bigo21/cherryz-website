@@ -5,6 +5,7 @@ import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
+import ExternalLink from "@/components/site/ExternalLink";
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { CAL_WIFI, QUOTE } from "@/lib/site/site";
@@ -294,9 +295,9 @@ export default async function WifiZone() {
             <Link href={localize(lang, QUOTE.wifi)} className={btnPrimary}>
               {t("final.cta")} →
             </Link>
-            <a href={CAL_WIFI} target="_blank" rel="noopener noreferrer" className={btnGhost}>
-              {tc("preferCall")} →
-            </a>
+            <ExternalLink href={CAL_WIFI} className={btnGhost}>
+              {tc("preferCall")}
+            </ExternalLink>
           </>
         }
       />

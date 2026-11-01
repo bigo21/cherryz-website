@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import LangSwitch from "@/components/site/LangSwitch";
+import ExternalLink from "@/components/site/ExternalLink";
 import { localize } from "@/lib/i18n/config";
 import { CONTACT } from "@/lib/site/site";
 import MaintenanceIllustration from "./MaintenanceIllustration";
@@ -94,10 +95,9 @@ export default async function MaintenanceScreen() {
               {t("direct")}
             </p>
             <div className="flex flex-wrap gap-[14px]">
-              <a
+              <ExternalLink
                 href={CONTACT.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
+                icon={false}
                 className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent-on-dark hover:bg-white/[0.11]"
               >
                 <span className="inline-flex text-whatsapp">
@@ -114,7 +114,7 @@ export default async function MaintenanceScreen() {
                     {CONTACT.phoneDisplay}
                   </span>
                 </span>
-              </a>
+              </ExternalLink>
               <a
                 href={CONTACT.emailHref}
                 className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent-on-dark hover:bg-white/[0.11]"

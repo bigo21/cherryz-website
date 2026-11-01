@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import ContactForm from "@/components/contact/ContactForm";
-import { CalendarIcon, ClipboardIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
+import { CalendarIcon, ClipboardIcon, ExternalIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
+import ExternalLink from "@/components/site/ExternalLink";
 import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
 import { pageMetadata } from "@/lib/i18n/server";
@@ -21,7 +22,6 @@ export default async function Contact() {
     { Icon: PhoneIcon, k: t("coords.phone"), v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
     { Icon: WhatsAppIcon, k: t("coords.whatsapp"), v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
     { Icon: MailIcon, k: t("coords.email"), v: CONTACT.email, href: CONTACT.emailHref },
-    { Icon: GlobeIcon, k: t("coords.site"), v: CONTACT.site, href: CONTACT.siteHref },
   ];
   return (
     <>
@@ -89,8 +89,16 @@ export default async function Contact() {
                         <c.Icon className="align-[-0.14em]" />
                       </span>
                       {/* A link wraps its label too: one touch target of at least 44px. */}
-                      {c.href ? (
-                        <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="group block min-h-11">
+                      {c.href?.startsWith("http") ? (
+                        <ExternalLink href={c.href} icon={false} className="group block min-h-11">
+                          <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
+                          <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">
+                            {c.v}
+                            <ExternalIcon className="ml-1 inline-block align-baseline text-small" />
+                          </span>
+                        </ExternalLink>
+                      ) : c.href ? (
+                        <a href={c.href} className="group block min-h-11">
                           <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
                           <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">{c.v}</span>
                         </a>
@@ -115,19 +123,18 @@ export default async function Contact() {
                 { label: t("booking.ip"), href: CAL_IP },
                 { label: t("booking.wifi"), href: CAL_WIFI },
               ].map((rdv, i) => (
-                <a
+                <ExternalLink
                   key={rdv.label}
                   href={rdv.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  icon={false}
                   className={`flex items-center justify-between gap-3 rounded-xl border border-navy/[0.08] bg-surface px-[18px] py-4 transition-colors hover:border-cherry hover:bg-white ${i === 0 ? "mb-3" : ""}`}
                 >
                   <span className="flex items-center gap-[11px]">
                     <CalendarIcon className="text-[20px] text-navy" />
                     <span className="font-condensed text-[17px] font-bold text-navy">{rdv.label}</span>
                   </span>
-                  <span className="font-condensed text-[18px] font-bold text-cherry">→</span>
-                </a>
+                  <ExternalIcon className="text-[18px] text-cherry" />
+                </ExternalLink>
               ))}
             </div>
           </div>

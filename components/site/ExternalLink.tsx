@@ -13,11 +13,12 @@ export default function ExternalLink({
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { icon?: boolean }) {
   const t = useTranslations("Chrome");
+  const label = props["aria-label"];
   return (
-    <a target="_blank" rel="noopener noreferrer" {...props}>
+    <a target="_blank" rel="noopener noreferrer" {...props} aria-label={label ? `${label} ${t("newTab")}` : undefined}>
       {children}
       {icon && <ExternalIcon className="ml-1 inline-block align-baseline text-small" />}
-      <span className="sr-only"> {t("newTab")}</span>
+      {!label && <span className="sr-only"> {t("newTab")}</span>}
     </a>
   );
 }
