@@ -22,6 +22,8 @@ export function quoteHrefFor(path: string): string {
 }
 
 export const CONTACT = {
+  // The office on a map (neighbourhood search until Cherryz provides an exact pin).
+  mapHref: "https://www.google.com/maps/search/?api=1&query=Quartier%20Fouda%2C%20Yaound%C3%A9",
   phoneDisplay: "+237 242 01 46 64",
   phoneHref: "tel:+237242014664",
   whatsapp: "https://wa.me/237242014664",

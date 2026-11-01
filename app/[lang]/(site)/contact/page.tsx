@@ -20,7 +20,7 @@ export default async function Contact() {
   const lang = await getLocale();
   const t = await getTranslations("Contact");
   const coords = [
-    { Icon: PinIcon, k: t("coords.address"), v: t("coords.addressValue"), href: undefined },
+    { Icon: PinIcon, k: t("coords.address"), v: t("coords.addressValue"), href: CONTACT.mapHref },
     { Icon: PhoneIcon, k: t("coords.phone"), v: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
     { Icon: WhatsAppIcon, k: t("coords.whatsapp"), v: CONTACT.phoneDisplay, href: CONTACT.whatsapp },
     { Icon: MailIcon, k: t("coords.email"), v: CONTACT.email, href: CONTACT.emailHref },
@@ -93,7 +93,7 @@ export default async function Contact() {
                         <c.Icon className="align-[-0.14em]" />
                       </span>
                       {/* A link wraps its label too: one touch target of at least 44px. */}
-                      {c.href?.startsWith("http") ? (
+                      {c.href.startsWith("http") ? (
                         <ExternalLink href={c.href} icon={false} className="group block min-h-11">
                           <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
                           <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">
@@ -101,16 +101,11 @@ export default async function Contact() {
                             <ExternalIcon className="ml-1 inline-block align-baseline text-small" />
                           </span>
                         </ExternalLink>
-                      ) : c.href ? (
+                      ) : (
                         <a href={c.href} className="group block min-h-11">
                           <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
                           <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">{c.v}</span>
                         </a>
-                      ) : (
-                        <div>
-                          <div className="font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</div>
-                          <div className="font-sans text-[15.5px] text-white">{c.v}</div>
-                        </div>
                       )}
                     </div>
                   ))}

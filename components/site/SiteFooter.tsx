@@ -77,9 +77,9 @@ export default async function SiteFooter() {
           <div>
             <div className={colTitle}>{t("footer.contactTitle")}</div>
             <div className="flex flex-col font-sans text-[15px] leading-[1.4] text-white/[0.78]">
-              <span className="inline-flex min-h-11 items-center">
+              <ExternalLink href={CONTACT.mapHref} className={linkCls}>
                 <PinIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.address")}
-              </span>
+              </ExternalLink>
               <a href={CONTACT.phoneHref} className={linkCls}>
                 <PhoneIcon className="mr-1 inline-block align-[-0.14em]" />{" "}
                 {CONTACT.phoneDisplay}

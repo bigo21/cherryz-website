@@ -38,7 +38,7 @@
       "callIp": "Appel Internet B2B",
       "callWifi": "Appel WiFi Zone",
       "contactTitle": "Contact",
-      "address": "Yaoundé, Cameroun",
+      "address": "Quartier Fouda, Yaoundé",
       "legal": "Mentions légales",
       "privacy": "Politique de confidentialité",
       "privacyShort": "Confidentialité",
@@ -72,11 +72,11 @@
     "why": {
       "eyebrow": "POURQUOI CHERRYZ",
       "imageAlt": "Technicien Cherryz sur site",
-      "priceValue": "45 000",
+      "priceValue": "Dès 45 000",
       "priceUnit": "XAF/Mbps",
       "priceInstead": "au lieu de 90 000 – 180 000",
       "title": "Un seul interlocuteur.<br></br>Les meilleurs réseaux.<br></br>Le juste prix.",
-      "p1": "Les entreprises camerounaises paient entre 90 000 et 180 000 XAF/Mbps/mois en allant directement chez un opérateur. Cherryz négocie pour vous auprès de plusieurs fournisseurs et vous propose la meilleure solution, à partir de 45 000 XAF/Mbps/mois.",
+      "p1": "Les entreprises camerounaises paient entre 90 000 et 180 000 XAF/Mbps/mois en allant directement chez un opérateur. Cherryz négocie pour vous auprès de plusieurs fournisseurs et vous propose la meilleure solution, de 45 000 à 70 000 XAF/Mbps/mois.",
       "p2": "Nous ne sommes pas un opérateur de plus. Nous sommes votre <strong>courtier en connectivité</strong> : nous analysons votre besoin, comparons les options, et vous livrons la solution la plus adaptée, techniquement et financièrement."
     },
     "compare": {
@@ -89,7 +89,7 @@
         "price": {
           "label": "Prix / Mbps / mois",
           "alone": "90 000 – 180 000 XAF",
-          "cherry": "45 000 – 70 000 XAF"
+          "cherry": "De 45 000 à 70 000 XAF"
         },
         "install": {
           "label": "Installation",
@@ -192,7 +192,7 @@
   "InternetB2B": {
     "meta": {
       "title": "Internet B2B avec IP publique dédiée | Cherryz",
-      "description": "Internet professionnel dédié avec IP fixe, à partir de 45 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement."
+      "description": "Internet professionnel dédié avec IP fixe, de 45 000 à 70 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement."
     },
     "hero": {
       "eyebrow": "CONNEXION IP PUBLIQUE · B2B",
@@ -239,7 +239,7 @@
       "eyebrow": "CE QUE CHERRYZ VOUS APPORTE",
       "title": "Une connexion pro, sans<br></br>les contraintes d'un opérateur",
       "priceLabel": "PRIX NÉGOCIÉ",
-      "priceValue": "70 000",
+      "priceValue": "De 45 000 à 70 000",
       "priceUnit": "XAF/Mbps/mois",
       "priceNote": "Grâce à notre pouvoir d'agrégation auprès des opérateurs.",
       "features": {
@@ -274,7 +274,7 @@
       "result": "RÉSULTAT",
       "steps": {
         "request": "Demande en ligne",
-        "contact": "Contact sous 24h",
+        "contact": "Premier appel sous 24h",
         "visit": "Descente gratuite",
         "quote": "Cotation sur-mesure",
         "install": "Installation rapide",
@@ -283,7 +283,7 @@
       "cta": "Commencer ma demande"
     },
     "final": {
-      "title": "Un Internet pro, dédié,<br></br>à partir de 45 000 XAF/Mbps."
+      "title": "Un Internet pro, dédié,<br></br>dès 45 000 XAF/Mbps."
     }
   },
   "WifiZone": {
@@ -422,7 +422,7 @@
     },
     "cases": {
       "eyebrow": "CAS D'USAGE CONCRETS",
-      "title": "Ils l'ont fait. Pourquoi pas vous ?",
+      "title": "Ce que votre WiFi Zone pourrait rapporter",
       "items": {
         "building": {
           "badge": "Propriétaire d'immeuble",
@@ -460,11 +460,11 @@
   "Contact": {
     "meta": {
       "title": "Contact | Cherryz",
-      "description": "Parlons de votre projet : devis Internet B2B, WiFi Zone ou toute autre demande. Réponse sous 24h, déplacement gratuit partout au Cameroun. Basés à Yaoundé."
+      "description": "Parlons de votre projet : devis Internet B2B, WiFi Zone ou toute autre demande. Premier appel sous 24h, déplacement gratuit partout au Cameroun. Basés à Yaoundé."
     },
     "hero": {
       "title": "Parlons de votre projet.",
-      "lead": "Une question, un devis, une idée de WiFi Zone ? Notre équipe vous répond sous 24h et se déplace gratuitement, partout au Cameroun.",
+      "lead": "Une question, un devis, une idée de WiFi Zone ? Premier appel sous 24h, et notre équipe se déplace gratuitement, partout au Cameroun.",
       "eyebrow": "CONTACT"
     },
     "price": {
@@ -476,7 +476,7 @@
     "coords": {
       "title": "Nos coordonnées",
       "address": "Adresse",
-      "addressValue": "Yaoundé, Cameroun",
+      "addressValue": "Quartier Fouda, Yaoundé",
       "phone": "Téléphone",
       "whatsapp": "WhatsApp",
       "email": "Email"
@@ -511,7 +511,7 @@
       "sending": "Envoi en cours…",
       "send": "Envoyer mon message",
       "sentTitle": "Message envoyé !",
-      "sentBody": "Merci {name}. Notre équipe vous recontacte sous 24h. Pour aller plus vite, réservez directement un créneau ci-contre.",
+      "sentBody": "Merci {name}. Premier appel de notre équipe sous 24h. Pour aller plus vite, réservez directement un créneau ci-contre.",
       "again": "Envoyer un autre message",
       "errors": {
         "name": "Indiquez votre nom.",
@@ -523,10 +523,10 @@
     "hub": {
       "meta": {
         "title": "Demande de cotation | Cherryz",
-        "description": "Choisissez votre demande : cotation Internet B2B avec IP publique dédiée, ou cotation WiFi Zone. Formulaire en 3 minutes, réponse sous 48h."
+        "description": "Choisissez votre demande : cotation Internet B2B avec IP publique dédiée, ou cotation WiFi Zone. Formulaire en 3 minutes, premier appel sous 24h."
       },
       "title": "Quelle demande souhaitez-vous faire ?",
-      "lead": "Choisissez le service qui correspond à votre besoin. Le formulaire prend environ 3 minutes, notre équipe vous recontacte sous 48h.",
+      "lead": "Choisissez le service qui correspond à votre besoin. Le formulaire prend environ 3 minutes. Premier appel sous 24h, puis devis sous 48h, ou après la descente sur site.",
       "ip": {
         "title": "Cotation IP Publique Dédiée",
         "desc": "Une connexion Internet dédiée pour votre entreprise, avec adresse IP fixe et bande passante garantie.",
@@ -547,12 +547,12 @@
     "ip": {
       "meta": {
         "title": "Demande de cotation IP Publique Dédiée | Cherryz",
-        "description": "Formulaire de demande de devis Internet professionnel avec IP publique dédiée. ± 3 minutes, réponse sous 48h, sans engagement."
+        "description": "Formulaire de demande de devis Internet professionnel avec IP publique dédiée. ± 3 minutes, premier appel sous 24h, sans engagement."
       },
       "title": "Demande de devis Internet avec IP Publique Dédiée",
       "facts": {
         "duration": "± 3 minutes",
-        "reply": "Réponse sous 48h",
+        "reply": "Premier appel sous 24h",
         "commitment": "Sans engagement"
       },
       "eyebrow": "INTERNET · IP PUBLIQUE DÉDIÉE"
@@ -560,12 +560,12 @@
     "wifi": {
       "meta": {
         "title": "Demande de cotation WiFi Zone | Cherryz",
-        "description": "Formulaire pour lancer votre WiFi Zone monétisable (immeuble, hôtel, quartier…). ± 3 minutes, réponse sous 48h, diagnostic gratuit."
+        "description": "Formulaire pour lancer votre WiFi Zone monétisable (immeuble, hôtel, quartier…). ± 3 minutes, premier appel sous 24h, diagnostic gratuit."
       },
       "title": "Je veux lancer ma WiFi Zone",
       "facts": {
         "duration": "± 3 minutes",
-        "reply": "Réponse sous 48h",
+        "reply": "Premier appel sous 24h",
         "survey": "Diagnostic gratuit"
       },
       "eyebrow": "INTERNET · WIFI ZONE"
@@ -600,8 +600,8 @@
       "received": "Votre demande a bien été reçue. Un email de confirmation vient de vous être envoyé.",
       "after": {
         "review": "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
-        "callback": "Nous vous recontactons sous 48h pour affiner votre besoin.",
-        "visit": "Si besoin, un technicien se déplace gratuitement sur votre site."
+        "callback": "Nous vous appelons une première fois sous 24h pour affiner votre besoin.",
+        "visit": "Vous recevez votre devis sous 48h, ou après la descente sur site, gratuite si elle est nécessaire."
       },
       "home": "Retour à l'accueil",
       "restart": "Faire une nouvelle demande",
@@ -1206,7 +1206,7 @@
     "slogan": "Cherryz — Vous connecte !",
     "contact": {
       "subject": "Nous avons bien reçu votre message | Cherryz",
-      "received": "Nous avons bien reçu votre message. Notre équipe vous recontacte <strong>sous 24h</strong>.",
+      "received": "Nous avons bien reçu votre message. Premier appel de notre équipe <strong>sous 24h</strong>.",
       "faster": "Pour aller plus vite, vous pouvez aussi réserver un créneau sur"
     },
     "quote": {
@@ -1215,7 +1215,7 @@
         "ip": "IP Publique Dédiée",
         "wifi": "WiFi Zone"
       },
-      "received": "Votre demande de cotation <strong>{type}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.",
+      "received": "Votre demande de cotation <strong>{type}</strong> a bien été reçue. Premier appel de notre équipe <strong>sous 24h</strong>, puis votre devis <strong>sous 48h, ou après la descente sur site</strong>.",
       "meanwhile": "En attendant, vous pouvez nous joindre directement :"
     }
   },
