@@ -115,7 +115,7 @@ export default async function InternetB2B() {
                   <Image src={img} alt={t(`basics.usages.${key}.alt`)} fill sizes="46px" className="object-cover" />
                 </div>
                 <div>
-                  <h4 className="m-0 font-condensed text-[20px] font-bold">{t(`basics.usages.${key}.t`)}</h4>
+                  <h3 className="m-0 font-condensed text-[20px] font-bold">{t(`basics.usages.${key}.t`)}</h3>
                   <p className="mt-[3px] font-sans text-[14.5px] leading-[1.45] text-navy/60">{t(`basics.usages.${key}.d`)}</p>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default async function InternetB2B() {
                 <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry/[0.08]">
                   <Icon className="text-[22px] text-cherry" />
                 </div>
-                <h4 className="m-0 font-condensed text-[20px] font-bold">{t(`brings.features.${key}.t`)}</h4>
+                <h3 className="m-0 font-condensed text-[20px] font-bold">{t(`brings.features.${key}.t`)}</h3>
                 <p className="mt-[5px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.62]">{t(`brings.features.${key}.d`)}</p>
               </div>
             ))}
@@ -161,7 +161,7 @@ export default async function InternetB2B() {
                 <Users className="text-[28px] text-accent-on-dark" />
               </div>
               <div className="relative">
-                <h4 className="m-0 font-condensed text-[24px] font-bold">{t("brings.multiTitle")}</h4>
+                <h3 className="m-0 font-condensed text-[24px] font-bold">{t("brings.multiTitle")}</h3>
                 <p className="mt-[5px] max-w-[340px] font-sans text-[15.5px] leading-[1.5] text-white/75">
                   {t.rich("brings.multiBody", { strong: (c) => <strong className="font-semibold text-white">{c}</strong> })}
                 </p>

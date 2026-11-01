@@ -232,7 +232,7 @@ export default async function Home() {
                   <div className="font-condensed text-[34px] font-bold leading-none text-cherry opacity-[0.28]">
                     {s.n}
                   </div>
-                  <h4 className="mt-[6px] font-condensed text-[22px] font-bold">{t(`approach.steps.${s.key}.t`)}</h4>
+                  <h3 className="mt-[6px] font-condensed text-[22px] font-bold">{t(`approach.steps.${s.key}.t`)}</h3>
                   <p className="mt-[6px] font-sans text-[15px] leading-[1.5] text-navy/[0.62]">
                     {t(`approach.steps.${s.key}.d`)}
                   </p>

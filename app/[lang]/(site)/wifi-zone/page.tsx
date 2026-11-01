@@ -131,7 +131,7 @@ export default async function WifiZone() {
                   <div className="absolute -right-8 -top-8 h-[120px] w-[120px] rounded-full bg-white/10" />
                   <div className="relative">
                     {z.Icon && <z.Icon className="text-[30px] text-white" />}
-                    <h4 className="mt-3 font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h4>
+                    <h3 className="mt-3 font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h3>
                     <div className="mt-1 font-sans text-[13px] font-semibold text-white/70">{t(`zones.items.${z.key}.sub`)}</div>
                     <p className="mt-[10px] border-t border-white/20 pt-[10px] font-sans text-[14.5px] leading-[1.5] text-white/90">
                       {t(`zones.items.${z.key}.d`)}
@@ -153,7 +153,7 @@ export default async function WifiZone() {
                     />
                   </div>
                   <div className="px-[22px] pb-6 pt-5">
-                    <h4 className="font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h4>
+                    <h3 className="font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h3>
                     <div className="mt-1 font-sans text-[13px] font-semibold text-navy/50">{t(`zones.items.${z.key}.sub`)}</div>
                     <p className="mt-[10px] border-t border-navy/[0.08] pt-[10px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.66]">
                       {t(`zones.items.${z.key}.d`)}
@@ -227,7 +227,7 @@ export default async function WifiZone() {
                 <Dollar className="text-[26px] text-white" />
               </div>
               <div className="min-w-0 basis-full sm:min-w-[280px] sm:flex-1 sm:basis-0">
-                <h4 className="m-0 font-condensed text-[24px] font-bold">{t("why.bandwidthTitle")}</h4>
+                <h3 className="m-0 font-condensed text-[24px] font-bold">{t("why.bandwidthTitle")}</h3>
                 <p className="mt-[6px] font-sans text-[15.5px] leading-[1.55] text-navy/[0.66]">
                   {t("why.bandwidthBody")}
                 </p>
@@ -238,7 +238,7 @@ export default async function WifiZone() {
                 <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry/[0.08]">
                   <f.Icon className="text-[22px] text-cherry" />
                 </div>
-                <h4 className="m-0 font-condensed text-[21px] font-bold">{t(`why.diffs.${f.key}.t`)}</h4>
+                <h3 className="m-0 font-condensed text-[21px] font-bold">{t(`why.diffs.${f.key}.t`)}</h3>
                 <p className="mt-[6px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.64]">{t(`why.diffs.${f.key}.d`)}</p>
               </div>
             ))}
