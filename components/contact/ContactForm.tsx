@@ -7,9 +7,9 @@ import { submitContactMessage } from "@/app/actions/contact";
 import { ArrowRightIcon } from "@/components/site/icons";
 
 const labelCls =
-  "mb-[7px] block font-condensed text-[14px] font-semibold uppercase tracking-[0.6px] text-navy";
+  "mb-2 block font-condensed text-small font-semibold uppercase tracking-wide text-navy";
 const fieldCls =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy transition-colors placeholder:text-ink-3 focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
+  "w-full rounded-xl border border-line bg-white px-4 py-3 text-body text-navy transition-colors placeholder:text-ink-3 focus:border-cherry";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -107,21 +107,21 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-[20px] border border-navy/[0.08] bg-white p-10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)]">
+      <div className="rounded-2xl border border-line bg-white p-10 shadow-card">
         <div className="py-10 text-center animate-pop">
-          <div className="mx-auto mb-[22px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_34px_-16px_rgba(160,4,45,.8)]">
-            <svg aria-hidden width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <div className="mx-auto mb-6 flex h-19 w-19 items-center justify-center rounded-full bg-cherry shadow-cherry">
+            <svg aria-hidden width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="m-0 font-condensed text-[34px] font-bold">{t("sentTitle")}</h3>
-          <p className="mx-auto mt-3 max-w-[400px] font-sans text-[16.5px] leading-[1.55] text-navy/65">
+          <h3 className="m-0 font-condensed text-title-md font-bold">{t("sentTitle")}</h3>
+          <p className="mx-auto mt-3 max-w-md font-sans text-body text-ink-2">
             {t("sentBody", { name: firstName })}
           </p>
           <button
             type="button"
             onClick={reset}
-            className="mt-6 cursor-pointer rounded-full border-[1.5px] border-cherry/[0.35] bg-white px-6 py-[13px] font-condensed text-[15px] font-semibold tracking-[0.5px] text-cherry transition-colors hover:bg-cherry/[0.06]"
+            className="mt-6 cursor-pointer rounded-full border border-cherry/30 bg-white px-6 py-3 font-condensed text-body font-semibold tracking-wide text-cherry transition hover:bg-cherry/5 active:scale-[0.97]"
           >
             {t("again")}
           </button>
@@ -131,13 +131,13 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="rounded-[20px] border border-navy/[0.08] bg-white p-6 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)] sm:p-10">
-      <h2 className="mb-[6px] font-condensed text-[30px] font-bold">{t("title")}</h2>
-      <p className="mb-[26px] font-sans text-[15.5px] text-navy/60">
+    <div className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-10">
+      <h2 className="mb-2 font-condensed text-title-md font-bold">{t("title")}</h2>
+      <p className="mb-6 font-sans text-body text-ink-2">
         {t("required")}
       </p>
       <form onSubmit={onSubmit} noValidate>
-        <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="c-name" className={labelCls}>{t("name")}</label>
             <input id="c-name" autoComplete="name" type="text" {...field("full_name").props} value={form.full_name} onChange={set("full_name")} placeholder={t("namePh")} className={fieldCls} />
@@ -157,7 +157,7 @@ export default function ContactForm() {
             <input id="c-company" autoComplete="organization" type="text" value={form.company} onChange={set("company")} placeholder={t("companyPh")} className={fieldCls} />
           </div>
         </div>
-        <div className="mt-[18px]">
+        <div className="mt-4">
           <label htmlFor="c-besoin" className={labelCls}>{t("need")}</label>
           <select id="c-besoin" {...field("besoin").props} value={form.besoin} onChange={set("besoin")} className={fieldCls}>
             <option value="">{t("needPh")}</option>
@@ -167,19 +167,19 @@ export default function ContactForm() {
           </select>
           {field("besoin").error}
         </div>
-        <div className="mt-[18px]">
+        <div className="mt-4">
           <label htmlFor="c-message" className={labelCls}>{t("message")}</label>
           <textarea id="c-message" rows={4} value={form.message} onChange={set("message")} placeholder={t("messagePh")} className={`${fieldCls} resize-y`} />
         </div>
 
         {error && (
-          <p role="alert" className="mt-4 font-sans text-[14px] font-medium text-cherry">{error}</p>
+          <p role="alert" className="mt-4 font-sans text-small font-medium text-cherry">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={submitting}
-          className="mt-6 w-full cursor-pointer rounded-xl border-none bg-cherry px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70"
+          className="mt-6 w-full cursor-pointer rounded-full bg-cherry px-8 py-4 font-condensed text-lead font-semibold tracking-wide text-white shadow-cherry transition hover:bg-cherry-dark active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? t("sending") : (
             <>

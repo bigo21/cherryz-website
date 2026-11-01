@@ -13,8 +13,8 @@ export default async function DemandesLayout({
   const t = await getTranslations("Chrome");
   return (
     <div className="min-h-screen bg-surface">
-      <nav className="fixed inset-x-0 top-0 z-[100] border-b border-white/[0.08] bg-navy shadow-[0_10px_30px_-18px_rgba(0,0,0,0.7)]">
-        <div className="relative mx-auto flex max-w-[1280px] items-center justify-center px-6 py-[18px] md:px-12">
+      <nav className="fixed inset-x-0 top-0 z-100 border-b border-white/10 bg-navy shadow-card">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-center px-6 py-4 md:px-12">
           <Link href={localize(lang, "/")} aria-label={t("homeLabel")} className="flex min-h-11 items-center">
             <Image
               src="/brand/logo-white@2x.png"
@@ -26,17 +26,17 @@ export default async function DemandesLayout({
               className="block h-8 w-auto"
             />
           </Link>
-          <LangSwitch className="absolute right-6 inline-flex min-h-11 min-w-11 items-center justify-center font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 hover:text-white md:right-12" />
+          <LangSwitch className="absolute right-6 inline-flex min-h-11 min-w-11 items-center justify-center font-condensed text-body font-semibold tracking-wide text-on-dark-2 underline decoration-white/30 underline-offset-4 hover:text-white md:right-12" />
         </div>
       </nav>
 
       <main>{children}</main>
 
       <footer className="bg-navy py-9 text-center">
-        <span className="font-condensed text-[16px] font-semibold tracking-[0.5px] text-accent-on-dark">
+        <span className="font-condensed text-body font-semibold tracking-wide text-accent-on-dark">
           {t("footer.slogan")}
         </span>
-        <div className="mt-2 font-sans text-[13px] text-white/60">
+        <div className="mt-2 font-sans text-caption tracking-normal text-on-dark-2">
           {t("footer.rights")}
           <span aria-hidden> · </span>
           <Link href={localize(lang, "/mentions-legales")} className="inline-flex min-h-11 min-w-11 items-center justify-center hover:text-white">{t("footer.legal")}</Link>

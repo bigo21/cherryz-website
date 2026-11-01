@@ -28,34 +28,28 @@ export default async function Contact() {
   return (
     <>
       {/* HEADER */}
-      <header className="relative overflow-hidden bg-navy pb-[70px] pt-[150px]">
-        <div
-          className="absolute bottom-0 right-0 top-0 z-0 w-[42%] opacity-90"
-          style={{ background: "linear-gradient(135deg,rgba(160,4,45,.9),rgba(125,3,35,.82))", clipPath: "polygon(42% 0,100% 0,100% 100%,14% 100%)" }}
-        />
-        <div className="relative z-[1] mx-auto max-w-[1280px] px-6 md:px-12">
-          <div className="mb-[22px] inline-flex items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[15px] py-2">
-            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_var(--color-accent-on-dark)]" />
-            <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">{t("hero.eyebrow")}</span>
-          </div>
-          <h1 className="m-0 font-condensed text-[clamp(42px,6vw,66px)] font-bold leading-[0.98] tracking-[-0.4px] text-white">
+      <header className="relative overflow-hidden bg-navy pb-18 pt-38">
+        <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 diagonal-cherry" />
+        <div className="relative z-1 mx-auto max-w-7xl px-6 md:px-12">
+          <p className="mb-6 font-condensed text-caption font-semibold uppercase text-on-dark-2">{t("hero.eyebrow")}</p>
+          <h1 className="m-0 font-condensed text-display font-bold tracking-tight text-balance text-white">
             {t("hero.title")}
           </h1>
-          <p className="mt-[18px] max-w-[560px] font-sans text-[19px] leading-[1.55] text-white/[0.78]">
+          <p className="mt-4 max-w-[65ch] font-sans text-lead text-on-dark-2">
             {t("hero.lead")}
           </p>
         </div>
       </header>
 
       {/* FORM + SIDEBAR */}
-      <section className="bg-surface pb-[100px] pt-20">
-        <div className="mx-auto mb-10 max-w-[1280px] px-6 md:px-12">
-          <div className="flex flex-col gap-5 rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-[14px]">
-              <ClipboardIcon className="mt-[2px] flex-none text-[26px] text-cherry" />
+      <section className="bg-surface py-20 md:py-28">
+        <div className="mx-auto mb-10 max-w-7xl px-6 md:px-12">
+          <div className="flex flex-col gap-5 rounded-2xl border border-line bg-white px-8 py-7 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-start gap-3">
+              <ClipboardIcon className="mt-1 flex-none size-6 text-cherry" />
               <div>
-                <h2 className="m-0 font-condensed text-[22px] font-bold">{t("price.title")}</h2>
-                <p className="mt-1 font-sans text-[15.5px] text-navy/70">
+                <h2 className="m-0 font-condensed text-title-sm font-bold">{t("price.title")}</h2>
+                <p className="mt-1 max-w-[65ch] font-sans text-body text-ink-2">
                   {t("price.lead")}
                 </p>
               </div>
@@ -68,7 +62,7 @@ export default async function Contact() {
                 <Link
                   key={q.href}
                   href={localize(lang, q.href)}
-                  className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
+                  className="rounded-full bg-cherry px-6 py-3 font-condensed text-body font-semibold tracking-wide text-white transition hover:bg-cherry-dark active:scale-[0.97]"
                 >
                   {q.label}<ArrowRightIcon className="ml-2" />
                 </Link>
@@ -76,35 +70,37 @@ export default async function Contact() {
             </div>
           </div>
         </div>
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-10 px-6 md:px-12 lg:grid-cols-[1.35fr_1fr]">
-          <NextIntlClientProvider messages={await clientMessages("Chrome", "Contact.form", "Validation")}>
-            <ContactForm />
-          </NextIntlClientProvider>
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 px-6 md:px-12 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <NextIntlClientProvider messages={await clientMessages("Chrome", "Contact.form", "Validation")}>
+              <ContactForm />
+            </NextIntlClientProvider>
+          </div>
 
-          <div className="flex flex-col gap-[18px]">
-            <div className="relative overflow-hidden rounded-[20px] bg-navy px-[30px] py-8 text-white">
-              <div className="absolute -right-10 -top-10 h-[150px] w-[150px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.4),transparent 68%)" }} />
+          <div className="flex flex-col gap-4 lg:col-span-2">
+            <div className="relative overflow-hidden rounded-2xl bg-navy px-8 py-8 text-white">
+              <div className="absolute -right-10 -top-10 h-38 w-38 rounded-full glow-cherry" />
               <div className="relative">
-                <h3 className="mb-5 font-condensed text-[24px] font-bold">{t("coords.title")}</h3>
+                <h3 className="mb-5 font-condensed text-title-sm font-bold">{t("coords.title")}</h3>
                 <div className="flex flex-col gap-4">
                   {coords.map((c) => (
-                    <div key={c.k} className="flex items-start gap-[13px]">
-                      <span className="text-[19px] leading-[1.3] text-white/80">
-                        <c.Icon className="align-[-0.14em]" />
+                    <div key={c.k} className="flex items-start gap-3">
+                      <span className="text-lead text-on-dark-2">
+                        <c.Icon className="icon-inline" />
                       </span>
                       {/* A link wraps its label too: one touch target of at least 44px. */}
                       {c.href.startsWith("http") ? (
                         <ExternalLink href={c.href} icon={false} className="group block min-h-11">
-                          <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
-                          <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">
+                          <span className="block font-condensed text-small font-semibold tracking-wide text-on-dark-2">{c.k}</span>
+                          <span className="block font-sans text-body text-white transition-colors group-hover:text-accent-on-dark">
                             {c.v}
-                            <ExternalIcon className="ml-1 inline-block align-baseline text-small" />
+                            <ExternalIcon className="ml-1 icon-inline text-small" />
                           </span>
                         </ExternalLink>
                       ) : (
                         <a href={c.href} className="group block min-h-11">
-                          <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
-                          <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">{c.v}</span>
+                          <span className="block font-condensed text-small font-semibold tracking-wide text-on-dark-2">{c.k}</span>
+                          <span className="block font-sans text-body text-white transition-colors group-hover:text-accent-on-dark">{c.v}</span>
                         </a>
                       )}
                     </div>
@@ -113,9 +109,9 @@ export default async function Contact() {
               </div>
             </div>
 
-            <div className="rounded-[20px] border border-navy/[0.08] bg-white px-[30px] py-7">
-              <h3 className="mb-[6px] font-condensed text-[22px] font-bold">{t("booking.title")}</h3>
-              <p className="mb-[18px] font-sans text-[14.5px] text-navy/60">
+            <div className="rounded-2xl border border-line bg-white px-8 py-7">
+              <h3 className="mb-2 font-condensed text-title-sm font-bold">{t("booking.title")}</h3>
+              <p className="mb-4 font-sans text-small text-ink-2">
                 {t("booking.lead")}
               </p>
               {[
@@ -126,13 +122,13 @@ export default async function Contact() {
                   key={rdv.label}
                   href={rdv.href}
                   icon={false}
-                  className={`flex items-center justify-between gap-3 rounded-xl border border-navy/[0.08] bg-surface px-[18px] py-4 transition-colors hover:border-cherry hover:bg-white ${i === 0 ? "mb-3" : ""}`}
+                  className={`flex items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-4 transition-colors hover:border-cherry hover:bg-white ${i === 0 ? "mb-3" : ""}`}
                 >
-                  <span className="flex items-center gap-[11px]">
-                    <CalendarIcon className="text-[20px] text-navy" />
-                    <span className="font-condensed text-[17px] font-bold text-navy">{rdv.label}</span>
+                  <span className="flex items-center gap-3">
+                    <CalendarIcon className="size-5 text-navy" />
+                    <span className="font-condensed text-lead font-bold text-navy">{rdv.label}</span>
                   </span>
-                  <ExternalIcon className="text-[18px] text-cherry" />
+                  <ExternalIcon className="size-4 text-cherry" />
                 </ExternalLink>
               ))}
             </div>

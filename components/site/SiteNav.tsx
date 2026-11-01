@@ -47,14 +47,9 @@ export default function SiteNav() {
   return (
     <nav
       data-surface="dark"
-      className="fixed inset-x-0 top-0 z-[100] border-b transition-[background,box-shadow,border-color] duration-300"
-      style={{
-        background: solid ? "#101b28" : "transparent",
-        boxShadow: solid ? "0 10px 30px -18px rgba(0,0,0,.7)" : "none",
-        borderBottomColor: solid ? "rgba(255,255,255,.08)" : "transparent",
-      }}
+      className={`fixed inset-x-0 top-0 z-100 border-b transition duration-300 ${solid ? "border-white/10 bg-navy shadow-card" : "border-transparent bg-transparent"}`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-[18px] md:px-12">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
         <Link href={localize(lang, "/")} className="flex min-h-11 items-center" aria-label={t("homeLabel")}>
           <Image
             src="/brand/logo-white@2x.png"
@@ -68,7 +63,7 @@ export default function SiteNav() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-[34px] md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((l) => {
             const active = l.href === path;
             return (
@@ -76,16 +71,16 @@ export default function SiteNav() {
                 key={l.href}
                 href={localize(lang, l.href)}
                 aria-current={active ? "page" : undefined}
-                className="font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/70 decoration-accent-on-dark decoration-2 underline-offset-8 transition-colors duration-150 hover:text-white aria-[current=page]:text-white aria-[current=page]:underline"
+                className="font-condensed text-body font-semibold tracking-wide text-on-dark-2 decoration-accent-on-dark decoration-2 underline-offset-8 transition-colors hover:text-white aria-current-page:text-white aria-current-page:underline"
               >
                 {t(`nav.${l.key}`)}
               </Link>
             );
           })}
-          <LangSwitch className="font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
+          <LangSwitch className="font-condensed text-body font-semibold tracking-wide text-on-dark-2 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
           <Link
             href={quoteHref}
-            className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-cherry-dark"
+            className="rounded-full bg-cherry px-6 py-3 font-condensed text-body font-semibold tracking-wide text-white shadow-cherry transition hover:bg-cherry-dark active:scale-[0.97]"
           >
             {t("quoteLabel")}<ArrowRightIcon className="ml-2" />
           </Link>
@@ -99,20 +94,11 @@ export default function SiteNav() {
           aria-label={open ? t("menuClose") : t("menuOpen")}
           aria-expanded={open}
           aria-controls="menu-mobile"
-          className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-1 md:hidden"
         >
-          <span
-            className="block h-[2px] w-6 bg-white transition-transform"
-            style={{ transform: open ? "translateY(7px) rotate(45deg)" : "none" }}
-          />
-          <span
-            className="block h-[2px] w-6 bg-white transition-opacity"
-            style={{ opacity: open ? 0 : 1 }}
-          />
-          <span
-            className="block h-[2px] w-6 bg-white transition-transform"
-            style={{ transform: open ? "translateY(-7px) rotate(-45deg)" : "none" }}
-          />
+          <span className={`block h-0.5 w-6 bg-white transition-transform ${open ? "translate-y-1.5 rotate-45" : ""}`} />
+          <span className={`block h-0.5 w-6 bg-white transition-opacity ${open ? "opacity-0" : ""}`} />
+          <span className={`block h-0.5 w-6 bg-white transition-transform ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
         </button>
       </div>
 
@@ -125,15 +111,15 @@ export default function SiteNav() {
                 key={l.href}
                 href={localize(lang, l.href)}
                 aria-current={l.href === path ? "page" : undefined}
-                className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85"
+                className="border-b border-white/5 py-3 font-condensed text-lead font-semibold tracking-wide text-on-dark-2"
               >
                 {t(`nav.${l.key}`)}
               </Link>
             ))}
-            <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85" />
+            <LangSwitch long className="border-b border-white/5 py-3 font-condensed text-lead font-semibold tracking-wide text-on-dark-2" />
             <Link
               href={quoteHref}
-              className="mt-4 rounded-full bg-cherry px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
+              className="mt-4 rounded-full bg-cherry px-6 py-3 text-center font-condensed text-body font-semibold tracking-wide text-white"
             >
               {t("quoteLabel")}<ArrowRightIcon className="ml-2" />
             </Link>

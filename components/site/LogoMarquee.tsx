@@ -29,7 +29,7 @@ export default function LogoMarquee({
           src={l.src}
           alt={labelled ? l.alt : ""}
           aria-hidden={labelled ? undefined : true}
-          className="h-[118px] w-auto object-contain opacity-90 grayscale"
+          className="h-30 w-auto object-contain opacity-90 grayscale"
         />
       ))}
     </div>

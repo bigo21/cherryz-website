@@ -65,7 +65,7 @@
     "hero": {
       "eyebrow": "CONNECTIVITY AGGREGATOR · CAMEROON",
       "imageAlt": "Cherryz, a connected network",
-      "title": "Business Internet at the <accent>best price.</accent><br></br>Everywhere in Cameroon.",
+      "title": "Business Internet at the best price.<br></br>Everywhere in Cameroon.",
       "subtitle": "Cherryz brings together the offers of the largest operators (Camtel, Orange, MTN and many more) to give you a dedicated, stable connection at up to 50% less. No works. No downtime.",
       "wifi": "Discover the WiFi Zone"
     },
@@ -119,7 +119,6 @@
       }
     },
     "approach": {
-      "eyebrow": "OUR APPROACH",
       "title": "We don’t sell a connection.<br></br>We solve a problem.",
       "steps": {
         "listen": {
@@ -157,7 +156,6 @@
       "cta": "Describe my project"
     },
     "services": {
-      "eyebrow": "OUR SERVICES",
       "title": "Two ways to get better connected",
       "whom": "FOR WHOM",
       "what": "WHAT",
@@ -182,8 +180,8 @@
       }
     },
     "trust": {
-      "eyebrow": "THEY TRUST US",
-      "title": "Our partners & references"
+      "title": "Our partners & references",
+      "marqueeLabel": "Our clients’ logos (scrolling pauses on hover or focus)"
     },
     "final": {
       "title": "Ready to pay less for<br></br>better Internet?"
@@ -197,7 +195,7 @@
     "hero": {
       "eyebrow": "PUBLIC IP CONNECTION · B2B",
       "imageAlt": "Cherryz datacenter",
-      "title": "Dedicated Internet, fixed IP.<br></br>The best of Cameroon’s networks, at the <accent>best price.</accent>",
+      "title": "Dedicated Internet, fixed IP.<br></br>The best of Cameroon’s networks, at the best price.",
       "subtitle": "Cherryz picks the best infrastructure among our partner operators (Camtel, Orange, MTN) and delivers a business connection with a dedicated IP, with no works and no downtime.",
       "how": "How it works"
     },
@@ -236,7 +234,6 @@
       }
     },
     "brings": {
-      "eyebrow": "WHAT CHERRYZ BRINGS YOU",
       "title": "A business connection, without<br></br>an operator’s constraints",
       "priceLabel": "NEGOTIATED PRICE",
       "priceValue": "45,000 to 70,000",
@@ -268,7 +265,6 @@
       "multiBody": "We pick the best network for <strong>your</strong> location, not a single provider’s."
     },
     "how": {
-      "eyebrow": "HOW IT WORKS",
       "title": "From first contact to connection",
       "step": "STEP {n}",
       "result": "RESULT",
@@ -294,7 +290,7 @@
     "hero": {
       "eyebrow": "WIFI ZONE · TURNKEY BUSINESS",
       "imageAlt": "A connected Cameroonian neighbourhood",
-      "title": "Launch your WiFi business.<br></br>We take care of <accent>everything.</accent>",
+      "title": "Launch your WiFi business.<br></br>We take care of everything.",
       "subtitle": "Building, neighbourhood, residence, campus, market, hotel: whatever your space, Cherryz supports you from idea to profitability. We survey, size, deploy and automate your business’s network infrastructure.",
       "cases": "See our projects"
     },
@@ -354,7 +350,6 @@
       "ambition": "You have a place and an ambition? <em>That’s all we need to get started.</em>"
     },
     "method": {
-      "eyebrow": "OUR METHOD",
       "title": "We don’t sell you equipment.<br></br>We build you a business.",
       "obtain": "YOU GET",
       "steps": {
@@ -393,7 +388,6 @@
       "cta": "Request my free survey"
     },
     "why": {
-      "eyebrow": "WHY CHERRYZ",
       "title": "What sets us apart?<br></br>We stay after the installation.",
       "bandwidthTitle": "Bandwidth at the best price",
       "bandwidthBody": "The choice is yours: bring your own connectivity, or let Cherryz handle it. We combine the best Camtel, Orange and MTN offers, and your margin is maximised from day one.",
@@ -421,7 +415,6 @@
       }
     },
     "cases": {
-      "eyebrow": "REAL-WORLD USE CASES",
       "title": "What your WiFi Zone could earn",
       "items": {
         "building": {
@@ -1038,7 +1031,9 @@
     "ip": "Request a dedicated public IP quote",
     "wifi": "Request a WiFi Zone quote",
     "direct": "You can also contact us directly via:",
-    "title": "Website under maintenance"
+    "title": "Website under maintenance",
+    "whatsappLabel": "WhatsApp",
+    "emailLabel": "Email"
   },
   "Legal": {
     "updated": "Last updated: {date, date, long}",

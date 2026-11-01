@@ -100,11 +100,11 @@ export function CheckLineIcon(props: SVGProps<SVGSVGElement>) {
 export function CheckBadgeIcon({ className }: { className?: string }) {
   return (
     <svg aria-hidden width="20" height="20" viewBox="0 0 20 20" className={className}>
-      <circle cx="10" cy="10" r="10" fill="#a0042d" />
+      <circle cx="10" cy="10" r="10" className="fill-cherry" />
       <path
         d="M5.5 10.2l2.8 2.8 6-6.4"
         fill="none"
-        stroke="#fff"
+        className="stroke-white"
         strokeWidth="1.9"
         strokeLinecap="round"
         strokeLinejoin="round"

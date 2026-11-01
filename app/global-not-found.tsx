@@ -32,7 +32,7 @@ export default async function GlobalNotFound() {
         <NextIntlClientProvider messages={await clientMessages("Chrome")}>
           <a
             href="#contenu"
-            className="sr-only z-50 rounded-full bg-white px-5 py-3 font-condensed font-semibold text-navy focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+            className="sr-only z-200 rounded-full bg-white px-5 py-3 font-condensed font-semibold text-navy focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
           >
             {t("skip")}
           </a>

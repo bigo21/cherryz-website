@@ -19,36 +19,31 @@ export default async function DemandeWifiZone() {
   const t = await getTranslations("Quote");
   return (
     <>
-      <header className="relative overflow-hidden bg-navy pb-[60px] pt-[140px]">
-        <div
-          className="absolute bottom-0 right-0 top-0 z-0 w-[38%] opacity-90"
-          style={{ background: "linear-gradient(135deg,rgba(162,3,45,.85),rgba(125,3,35,.78))", clipPath: "polygon(45% 0,100% 0,100% 100%,18% 100%)" }}
-        />
-        <div className="relative z-[1] mx-auto max-w-[900px] px-6">
+      <header className="relative overflow-hidden bg-navy pb-15 pt-35">
+        <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 diagonal-cherry" />
+        <div className="relative z-1 mx-auto max-w-4xl px-6">
           <Link
             href={localize(lang, QUOTE.hub)}
-            className="mb-1.5 inline-flex min-h-11 items-center gap-[7px] font-condensed text-[14px] font-semibold tracking-[0.5px] text-white/60 transition-colors hover:text-white"
+            className="mb-2 inline-flex min-h-11 items-center gap-2 font-condensed text-small font-semibold tracking-wide text-on-dark-2 transition-colors hover:text-white"
           >
             <ArrowLeftIcon />
             {t("back")}
           </Link>
-          <div className="mb-[18px] flex w-fit items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[14px] py-[7px]">
-            <WifiIcon className="text-[15px] text-white" />
-            <span className="font-condensed text-[12px] font-semibold tracking-[1.4px] text-white/90">
-              {t("wifi.eyebrow")}
-            </span>
-          </div>
-          <h1 className="m-0 font-condensed text-[clamp(32px,4.4vw,42px)] font-bold leading-[1.05] tracking-[-0.3px] text-white">
+          <p className="mb-4 flex items-center gap-2 font-condensed text-caption font-semibold uppercase text-on-dark-2">
+            <WifiIcon className="size-4" />
+            {t("wifi.eyebrow")}
+          </p>
+          <h1 className="m-0 font-condensed text-title-lg font-bold tracking-tight text-balance text-white">
             {t("wifi.title")}
           </h1>
-          <p className="mt-[14px] font-sans text-[17px] leading-[1.55] text-white/75">
+          <p className="mt-3 font-sans text-lead text-on-dark-2">
             {[t("wifi.facts.duration"), t("wifi.facts.reply"), t("wifi.facts.survey")].join(" · ")}
           </p>
         </div>
       </header>
 
-      <section className="pb-[100px] pt-[50px]">
-        <div className="mx-auto -mt-10 max-w-[700px] px-6">
+      <section className="pb-20 pt-12 md:pb-28">
+        <div className="mx-auto -mt-10 max-w-2xl px-6">
           <NextIntlClientProvider messages={await clientMessages("Chrome", "Quote.wizard", "Questionnaire.wifi", "Validation")}>
             <QuoteWizard type="wifi" />
           </NextIntlClientProvider>

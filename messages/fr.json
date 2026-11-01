@@ -65,7 +65,7 @@
     "hero": {
       "eyebrow": "AGRÉGATEUR DE CONNECTIVITÉ · CAMEROUN",
       "imageAlt": "Cherryz, réseau connecté",
-      "title": "L’Internet professionnel au <accent>meilleur prix.</accent><br></br>Partout au Cameroun.",
+      "title": "L’Internet professionnel au meilleur prix.<br></br>Partout au Cameroun.",
       "subtitle": "Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d’autres) pour vous offrir une connexion dédiée, stable et jusqu’à 50 % moins chère. Sans travaux. Sans coupure.",
       "wifi": "Découvrir la WiFi Zone"
     },
@@ -119,7 +119,6 @@
       }
     },
     "approach": {
-      "eyebrow": "NOTRE APPROCHE",
       "title": "On ne vend pas une connexion.<br></br>On résout un problème.",
       "steps": {
         "listen": {
@@ -157,7 +156,6 @@
       "cta": "Décrire mon projet"
     },
     "services": {
-      "eyebrow": "NOS SERVICES",
       "title": "Deux façons de mieux vous connecter",
       "whom": "POUR QUI",
       "what": "QUOI",
@@ -182,8 +180,8 @@
       }
     },
     "trust": {
-      "eyebrow": "ILS NOUS FONT CONFIANCE",
-      "title": "Nos partenaires & références"
+      "title": "Nos partenaires & références",
+      "marqueeLabel": "Logos de nos clients (défilement en pause au survol ou au focus)"
     },
     "final": {
       "title": "Prêt à payer moins pour<br></br>un Internet meilleur ?"
@@ -197,7 +195,7 @@
     "hero": {
       "eyebrow": "CONNEXION IP PUBLIQUE · B2B",
       "imageAlt": "Datacenter Cherryz",
-      "title": "Internet dédié, IP fixe.<br></br>Le meilleur du réseau camerounais, au <accent>meilleur prix.</accent>",
+      "title": "Internet dédié, IP fixe.<br></br>Le meilleur du réseau camerounais, au meilleur prix.",
       "subtitle": "Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption.",
       "how": "Comment ça marche"
     },
@@ -236,7 +234,6 @@
       }
     },
     "brings": {
-      "eyebrow": "CE QUE CHERRYZ VOUS APPORTE",
       "title": "Une connexion pro, sans<br></br>les contraintes d’un opérateur",
       "priceLabel": "PRIX NÉGOCIÉ",
       "priceValue": "De 45 000 à 70 000",
@@ -268,7 +265,6 @@
       "multiBody": "On choisit le meilleur réseau pour <strong>votre</strong> localisation, pas celui d’un fournisseur unique."
     },
     "how": {
-      "eyebrow": "COMMENT ÇA MARCHE",
       "title": "Du premier contact à la connexion",
       "step": "ÉTAPE {n}",
       "result": "RÉSULTAT",
@@ -294,7 +290,7 @@
     "hero": {
       "eyebrow": "WIFI ZONE · BUSINESS CLÉ EN MAIN",
       "imageAlt": "Quartier camerounais connecté",
-      "title": "Lancez votre business WiFi.<br></br>On s’occupe de <accent>tout.</accent>",
+      "title": "Lancez votre business WiFi.<br></br>On s’occupe de tout.",
       "subtitle": "Bâtiment, quartier, résidence, campus, marché, hôtel : quel que soit votre espace, Cherryz vous accompagne de l’idée à la rentabilité. On diagnostique, on dimensionne, on déploie, et on automatise l’infrastructure réseau de votre business.",
       "cases": "Découvrir nos réalisations"
     },
@@ -354,7 +350,6 @@
       "ambition": "Vous avez une zone et une ambition ? <em>C’est tout ce qu’il nous faut pour commencer.</em>"
     },
     "method": {
-      "eyebrow": "NOTRE MÉTHODE",
       "title": "On ne vous vend pas du matériel.<br></br>On vous monte un business.",
       "obtain": "VOUS OBTENEZ",
       "steps": {
@@ -393,7 +388,6 @@
       "cta": "Demander mon diagnostic gratuit"
     },
     "why": {
-      "eyebrow": "POURQUOI CHERRYZ",
       "title": "Ce qui nous différencie ?<br></br>On reste après l’installation.",
       "bandwidthTitle": "Bande passante au meilleur prix",
       "bandwidthBody": "Vous avez le choix : apportez votre propre solution de connectivité, ou laissez Cherryz s’en occuper. On agrège les meilleures offres Camtel, Orange et MTN, et votre marge est maximisée dès le premier jour.",
@@ -421,7 +415,6 @@
       }
     },
     "cases": {
-      "eyebrow": "CAS D’USAGE CONCRETS",
       "title": "Ce que votre WiFi Zone pourrait rapporter",
       "items": {
         "building": {
@@ -1038,7 +1031,9 @@
     "ip": "Demander une cotation IP publique dédiée",
     "wifi": "Demander une cotation WiFi Zone",
     "direct": "Vous pouvez également nous contacter directement via :",
-    "title": "Site en maintenance"
+    "title": "Site en maintenance",
+    "whatsappLabel": "WhatsApp",
+    "emailLabel": "E-mail"
   },
   "Legal": {
     "updated": "Dernière mise à jour : {date, date, long}",

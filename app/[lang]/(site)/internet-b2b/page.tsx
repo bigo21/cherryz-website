@@ -83,40 +83,40 @@ export default async function InternetB2B() {
       <ReassuranceBar />
 
       {/* QU'EST-CE QU'UNE IP DÉDIÉE */}
-      <section className="bg-white pb-24 pt-[104px]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-[60px] px-6 md:px-12 lg:grid-cols-[1fr_1.05fr]">
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-15 px-6 md:px-12 lg:grid-cols-2">
           <Reveal>
             <SectionEyebrow label={t("basics.eyebrow")} />
-            <h2 className="m-0 font-condensed text-[44px] font-bold leading-[1.03] tracking-[-0.3px]">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">
               {t.rich("basics.title", rich)}
             </h2>
-            <p className="mt-[18px] max-w-[520px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
+            <p className="mt-4 max-w-[65ch] font-sans text-body text-ink-2">
               {t("basics.lead")}
             </p>
-            <div className="relative mt-[26px] overflow-hidden rounded-2xl bg-navy px-7 py-[26px]">
-              <div className="absolute -right-10 -top-10 h-[150px] w-[150px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.4),transparent 68%)" }} />
+            <div className="relative mt-6 overflow-hidden rounded-2xl bg-navy px-7 py-6">
+              <div className="absolute -right-10 -top-10 h-38 w-38 rounded-full glow-cherry" />
               <div className="relative">
-                <div className="flex items-center gap-[10px]">
-                  <Lock className="text-[22px] text-accent-on-dark" />
-                  <span className="font-condensed text-[22px] font-bold text-white">
+                <div className="flex items-center gap-2">
+                  <Lock className="size-6 text-accent-on-dark" />
+                  <span className="font-condensed text-title-sm font-bold text-white">
                     {t("basics.dedicatedTitle")}
                   </span>
                 </div>
-                <p className="mt-[9px] font-sans text-[15.5px] leading-[1.55] text-white/[0.72]">
+                <p className="mt-2 font-sans text-body text-on-dark-2">
                   {t("basics.dedicatedBody")}
                 </p>
               </div>
             </div>
           </Reveal>
-          <Reveal className="flex flex-col gap-[14px]" delay={0.08}>
+          <Reveal className="flex flex-col gap-3" delay={0.08}>
             {usages.map(({ key, img }) => (
-              <div key={key} className="flex items-start gap-4 rounded-[14px] border border-navy/[0.07] bg-surface px-[22px] py-5 transition-all hover:translate-x-1 hover:border-cherry/30">
-                <div className="relative h-[46px] w-[46px] flex-none overflow-hidden rounded-xl">
+              <div key={key} className="flex items-start gap-4 rounded-2xl border border-line bg-surface px-6 py-5 transition-all hover:border-cherry/30">
+                <div className="relative h-12 w-12 flex-none overflow-hidden rounded-xl">
                   <Image src={img} alt={t(`basics.usages.${key}.alt`)} fill sizes="46px" className="object-cover" />
                 </div>
                 <div>
-                  <h3 className="m-0 font-condensed text-[20px] font-bold">{t(`basics.usages.${key}.t`)}</h3>
-                  <p className="mt-[3px] font-sans text-[14.5px] leading-[1.45] text-navy/60">{t(`basics.usages.${key}.d`)}</p>
+                  <h3 className="m-0 font-condensed text-title-sm font-bold">{t(`basics.usages.${key}.t`)}</h3>
+                  <p className="mt-1 font-sans text-small text-ink-2">{t(`basics.usages.${key}.d`)}</p>
                 </div>
               </div>
             ))}
@@ -125,85 +125,79 @@ export default async function InternetB2B() {
       </section>
 
       {/* CE QUE CHERRYZ VOUS APPORTE */}
-      <section className="bg-surface py-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[680px] text-center">
-            <SectionEyebrow label={t("brings.eyebrow")} centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+      <section className="bg-surface py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">
               {t.rich("brings.title", rich)}
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
-            <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-cherry p-[30px] text-white sm:col-span-2">
-              <div className="absolute -right-8 -top-10 h-[170px] w-[170px] rounded-full bg-white/[0.08]" />
+            <div className="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-cherry p-8 text-white sm:col-span-2">
+              <div className="absolute -right-8 -top-10 h-42 w-42 rounded-full bg-white/10" />
               <div className="relative">
-                <div className="font-condensed text-[13px] font-semibold tracking-[1.4px] text-white/75">{t("brings.priceLabel")}</div>
-                <div className="mt-1 font-condensed text-[46px] font-bold leading-none">
-                  {t("brings.priceValue")} <span className="text-[22px] font-semibold">{t("brings.priceUnit")}</span>
+                <div className="font-condensed text-caption font-semibold uppercase text-on-dark-2">{t("brings.priceLabel")}</div>
+                <div className="mt-1 font-condensed text-title-lg font-bold leading-none">
+                  {t("brings.priceValue")} <span className="text-title-sm font-semibold">{t("brings.priceUnit")}</span>
                 </div>
-                <p className="mt-[10px] max-w-[360px] font-sans text-[15.5px] leading-[1.5] text-white/85">
+                <p className="mt-2 max-w-md font-sans text-body text-on-dark-2">
                   {t("brings.priceNote")}
                 </p>
               </div>
             </div>
             {features.map(({ Icon, key }) => (
-              <div key={key} className="rounded-2xl border border-navy/[0.06] bg-white px-6 py-[26px] transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]">
-                <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry/[0.08]">
-                  <Icon className="text-[22px] text-cherry" />
+              <div key={key} className="rounded-2xl border border-line bg-white px-6 py-6 transition-all hover:-translate-y-1 hover:shadow-card">
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-cherry/10">
+                  <Icon className="size-6 text-cherry" />
                 </div>
-                <h3 className="m-0 font-condensed text-[20px] font-bold">{t(`brings.features.${key}.t`)}</h3>
-                <p className="mt-[5px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.62]">{t(`brings.features.${key}.d`)}</p>
+                <h3 className="m-0 font-condensed text-title-sm font-bold">{t(`brings.features.${key}.t`)}</h3>
+                <p className="mt-1 font-sans text-small text-ink-2">{t(`brings.features.${key}.d`)}</p>
               </div>
             ))}
-            <div className="relative flex items-center gap-[22px] overflow-hidden rounded-2xl bg-navy p-[30px] text-white sm:col-span-2">
-              <div className="absolute -bottom-[50px] -left-8 h-[170px] w-[170px] rounded-full" style={{ background: "radial-gradient(circle,rgba(160,4,45,.35),transparent 68%)" }} />
-              <div className="relative flex h-[58px] w-[58px] flex-none items-center justify-center rounded-[14px] bg-white/[0.08]">
-                <Users className="text-[28px] text-accent-on-dark" />
+            <div className="relative flex flex-col gap-4 overflow-hidden rounded-2xl bg-navy px-6 py-6 text-white">
+              <div className="absolute -bottom-12 -left-8 h-42 w-42 rounded-full glow-cherry" />
+              <div className="relative flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-white/10">
+                <Users className="size-6 text-accent-on-dark" />
               </div>
               <div className="relative">
-                <h3 className="m-0 font-condensed text-[24px] font-bold">{t("brings.multiTitle")}</h3>
-                <p className="mt-[5px] max-w-[340px] font-sans text-[15.5px] leading-[1.5] text-white/75">
+                <h3 className="m-0 font-condensed text-title-sm font-bold">{t("brings.multiTitle")}</h3>
+                <p className="mt-1 font-sans text-small text-on-dark-2">
                   {t.rich("brings.multiBody", { strong: (c) => <strong className="font-semibold text-white">{c}</strong> })}
                 </p>
               </div>
             </div>
           </Reveal>
-          <p className="mx-1 mt-4 font-sans text-[13px] text-navy/50">
+          <p className="mx-1 mt-4 font-sans text-caption tracking-normal text-ink-2">
             {tc("testNote")}
           </p>
         </div>
       </section>
 
       {/* COMMENT ÇA MARCHE */}
-      <section id="comment" className="scroll-mt-20 bg-white pb-24 pt-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[640px] text-center">
-            <SectionEyebrow label={t("how.eyebrow")} centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+      <section id="comment" className="scroll-mt-20 bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">
               {t("how.title")}
             </h2>
           </Reveal>
-          <Reveal className="relative grid grid-cols-2 gap-[14px] sm:grid-cols-3 lg:grid-cols-6" delay={0.05}>
-            <div className="absolute left-[8%] right-[8%] top-[26px] z-0 hidden h-[2px] lg:block" style={{ background: "repeating-linear-gradient(90deg,rgba(160,4,45,.35) 0 10px,transparent 10px 18px)" }} />
+          <Reveal className="relative grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6" delay={0.05}>
+            <div className="absolute left-1/12 right-1/12 top-6 z-0 hidden h-1 dash-cherry lg:block" />
             {steps.map((s, i) => (
-              <div key={s.key} className="relative z-[1] text-center">
+              <div key={s.key} className="relative z-1 text-center">
                 <div
-                  className="mx-auto flex h-[54px] w-[54px] items-center justify-center rounded-full text-[22px] text-white"
-                  style={{
-                    background: "result" in s ? "#101b28" : "#a0042d",
-                    boxShadow: "result" in s ? "0 12px 24px -12px rgba(16,27,40,.6)" : "0 12px 24px -12px rgba(160,4,45,.9)",
-                  }}
+                  className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full text-title-sm text-white ${"result" in s ? "bg-navy shadow-card" : "bg-cherry shadow-cherry"}`}
                 >
                   <s.Icon />
                 </div>
-                <div className="mt-3 font-condensed text-[12px] font-semibold tracking-[1px]" style={{ color: "result" in s ? "#101b28" : "#a0042d" }}>
+                <div className={`mt-3 font-condensed text-caption font-semibold uppercase ${"result" in s ? "text-navy" : "text-cherry"}`}>
                   {"result" in s ? t("how.result") : t("how.step", { n: i + 1 })}
                 </div>
-                <div className="mt-[2px] font-condensed text-[17px] font-bold">{t(`how.steps.${s.key}`)}</div>
+                <div className="mt-1 font-condensed text-lead font-bold">{t(`how.steps.${s.key}`)}</div>
               </div>
             ))}
           </Reveal>
-          <Reveal className="mt-[52px] text-center" delay={0.1}>
+          <Reveal className="mt-13 text-center" delay={0.1}>
             <Link href={localize(lang, QUOTE.ip)} className={btnPrimary}>
               {t("how.cta")}<ArrowRightIcon className="ml-2" />
             </Link>

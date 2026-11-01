@@ -12,28 +12,22 @@ export default function FinalCta({
   actions: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-navy py-[100px]">
-      <div
-        className="absolute bottom-0 right-0 top-0 z-0 w-[44%] opacity-90"
-        style={{ background: "linear-gradient(135deg,rgba(160,4,45,.9),rgba(125,3,35,.82))", clipPath: "polygon(40% 0,100% 0,100% 100%,12% 100%)" }}
-      />
-      <div
-        className="absolute -bottom-[120px] -left-[120px] z-0 h-[360px] w-[360px] rounded-full"
-        style={{ background: "radial-gradient(circle,rgba(160,4,45,.28),transparent 68%)" }}
-      />
-      <div className="relative z-[1] mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-10 px-6 md:px-12">
-        <div className="max-w-[640px]">
-          <h2 className="m-0 font-condensed text-[clamp(38px,5vw,54px)] font-bold leading-none tracking-[-0.4px] text-white">
+    <section className="relative overflow-hidden bg-navy py-20 md:py-28">
+      <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 diagonal-cherry" />
+      <div className="absolute -bottom-30 -left-30 z-0 h-90 w-90 rounded-full opacity-70 glow-cherry" />
+      <div className="relative z-1 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-10 px-6 md:px-12">
+        <div className="max-w-2xl">
+          <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight text-balance text-white">
             {title}
           </h2>
-          <p className="mt-5 max-w-[520px] font-sans text-[18.5px] leading-[1.55] text-white/[0.78]">
+          <p className="mt-5 max-w-[65ch] font-sans text-lead text-on-dark-2">
             {subtitle}
           </p>
-          <div className="mt-[34px] flex flex-wrap gap-[15px]">{actions}</div>
+          <div className="mt-8 flex flex-wrap gap-4">{actions}</div>
         </div>
-        <div className="relative hidden h-[240px] w-[240px] flex-none items-center justify-center lg:flex">
-          <span className="absolute h-[120px] w-[120px] rounded-full border-2 border-white/45 animate-ripple" />
-          <span className="absolute h-[120px] w-[120px] rounded-full border-2 border-white/45 animate-ripple [animation-delay:1.7s]" />
+        <div className="relative hidden h-60 w-60 flex-none items-center justify-center lg:flex">
+          <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple" />
+          <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple-late" />
           {/* Optimised and lazy-loaded: the block is hidden below lg, so mobile never fetches it. */}
           <Image
             src="/brand/pictogram.png"
@@ -41,7 +35,7 @@ export default function FinalCta({
             width={130}
             height={114}
             sizes="130px"
-            className="relative h-auto w-[130px] [filter:drop-shadow(0_0_26px_rgba(255,255,255,.35))]"
+            className="relative h-auto w-32"
           />
         </div>
       </div>

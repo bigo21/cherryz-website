@@ -88,7 +88,7 @@ const cases: { Icon: Ic; key: keyof Copy["cases"]["items"]; img: string }[] = [
 ];
 
 const featureCard =
-  "rounded-2xl border border-navy/[0.07] bg-surface px-6 py-[26px] transition-all hover:-translate-y-[5px] hover:bg-white hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]";
+  "rounded-2xl border border-line bg-surface px-6 py-6 transition-all hover:-translate-y-1 hover:bg-white hover:shadow-card";
 
 export default async function WifiZone() {
   const lang = await getLocale();
@@ -100,7 +100,6 @@ export default async function WifiZone() {
         eyebrow={t("hero.eyebrow")}
         image="/photos/wifi-hero.jpg"
         imageAlt={t("hero.imageAlt")}
-        minHeight={720}
         title={t.rich("hero.title", rich)}
         subtitle={t("hero.subtitle")}
         actions={
@@ -114,27 +113,27 @@ export default async function WifiZone() {
       />
 
       {/* TYPES DE ZONES */}
-      <section className="bg-white pb-24 pt-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[720px] text-center">
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
             <SectionEyebrow label={t("zones.eyebrow")} centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">
               {t.rich("zones.title", rich)}
             </h2>
           </Reveal>
-          <Reveal className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
+          <Reveal className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
             {zones.map((z) =>
               z.red ? (
                 <div
                   key={z.key}
-                  className="relative overflow-hidden rounded-2xl bg-cherry px-6 py-[26px] text-white transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-30px_rgba(160,4,45,.8)]"
+                  className="relative overflow-hidden rounded-2xl bg-cherry px-6 py-6 text-white transition-all hover:-translate-y-1 hover:shadow-cherry"
                 >
-                  <div className="absolute -right-8 -top-8 h-[120px] w-[120px] rounded-full bg-white/10" />
+                  <div className="absolute -right-8 -top-8 h-30 w-30 rounded-full bg-white/10" />
                   <div className="relative">
-                    {z.Icon && <z.Icon className="text-[30px] text-white" />}
-                    <h3 className="mt-3 font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h3>
-                    <div className="mt-1 font-sans text-[13px] font-semibold text-white/70">{t(`zones.items.${z.key}.sub`)}</div>
-                    <p className="mt-[10px] border-t border-white/20 pt-[10px] font-sans text-[14.5px] leading-[1.5] text-white/90">
+                    {z.Icon && <z.Icon className="size-8 text-white" />}
+                    <h3 className="mt-3 font-condensed text-title-sm font-bold">{t(`zones.items.${z.key}.t`)}</h3>
+                    <div className="mt-1 font-sans text-small font-semibold text-on-dark-2">{t(`zones.items.${z.key}.sub`)}</div>
+                    <p className="mt-2 border-t border-white/20 pt-2 font-sans text-small text-white">
                       {t(`zones.items.${z.key}.d`)}
                     </p>
                   </div>
@@ -142,9 +141,9 @@ export default async function WifiZone() {
               ) : (
                 <div
                   key={z.key}
-                  className="overflow-hidden rounded-2xl border border-navy/[0.07] bg-white transition-all hover:-translate-y-[5px] hover:shadow-[0_26px_50px_-34px_rgba(16,27,40,.5)]"
+                  className="overflow-hidden rounded-2xl border border-line bg-white transition-all hover:-translate-y-1 hover:shadow-card"
                 >
-                  <div className="relative h-[110px]">
+                  <div className="relative h-28">
                     <Image
                       src={z.img!}
                       alt={t(`zones.items.${z.key}.alt`)}
@@ -153,10 +152,10 @@ export default async function WifiZone() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="px-[22px] pb-6 pt-5">
-                    <h3 className="font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h3>
-                    <div className="mt-1 font-sans text-[13px] font-semibold text-ink-3">{t(`zones.items.${z.key}.sub`)}</div>
-                    <p className="mt-[10px] border-t border-navy/[0.08] pt-[10px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.66]">
+                  <div className="px-6 pb-6 pt-5">
+                    <h3 className="font-condensed text-title-sm font-bold">{t(`zones.items.${z.key}.t`)}</h3>
+                    <div className="mt-1 font-sans text-small font-semibold text-ink-2">{t(`zones.items.${z.key}.sub`)}</div>
+                    <p className="mt-2 border-t border-line pt-2 font-sans text-small text-ink-2">
                       {t(`zones.items.${z.key}.d`)}
                     </p>
                   </div>
@@ -164,8 +163,8 @@ export default async function WifiZone() {
               ),
             )}
           </Reveal>
-          <Reveal className="mx-auto mt-9 max-w-[620px] text-center" delay={0.1}>
-            <p className="font-sans text-[18px] font-medium leading-[1.5] text-navy">
+          <Reveal className="mx-auto mt-9 max-w-xl text-center" delay={0.1}>
+            <p className="font-sans text-lead font-medium text-navy">
               {t.rich("zones.ambition", { em: (c) => <span className="text-cherry">{c}</span> })}
             </p>
           </Reveal>
@@ -173,37 +172,32 @@ export default async function WifiZone() {
       </section>
 
       {/* NOTRE MÉTHODE */}
-      <section className="bg-navy py-[104px] text-white">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-[58px] max-w-[720px] text-center">
-            <div className="mb-[14px] inline-flex items-center gap-[9px]">
-              <span className="inline-block h-[2px] w-[26px] bg-accent-on-dark" />
-              <span className="font-condensed text-[13px] font-semibold tracking-[2px] text-accent-on-dark">{t("method.eyebrow")}</span>
-              <span className="inline-block h-[2px] w-[26px] bg-accent-on-dark" />
-            </div>
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px] text-white">
+      <section className="bg-navy py-20 md:py-28 text-white">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight text-white">
               {t.rich("method.title", rich)}
             </h2>
           </Reveal>
-          <Reveal className="mx-auto flex max-w-[1000px] flex-col gap-[14px]" delay={0.05}>
+          <Reveal className="mx-auto flex max-w-5xl flex-col gap-3" delay={0.05}>
             {method.map((m) => (
-              <div key={m.key} className="grid grid-cols-1 items-center gap-[22px] rounded-[14px] border border-white/[0.12] px-[26px] py-[22px] md:grid-cols-[64px_1.2fr_1fr]">
-                <div className="flex h-[52px] w-[52px] items-center justify-center rounded-[13px] bg-cherry text-[24px] text-white">
+              <div key={m.key} className="grid grid-cols-1 items-center gap-6 rounded-2xl border border-white/10 px-6 py-6 md:grid-cols-12">
+                <div className="flex h-13 w-13 items-center justify-center rounded-xl bg-cherry text-title-sm text-white md:col-span-1">
                   <m.Icon />
                 </div>
-                <div>
-                  <div className="font-condensed text-[13px] font-bold tracking-[1px] text-accent-on-dark">{t(`method.steps.${m.key}.step`)}</div>
-                  <p className="mt-1 font-sans text-[15.5px] leading-[1.5] text-white/80">{t(`method.steps.${m.key}.d`)}</p>
+                <div className="md:col-span-6">
+                  <div className="font-condensed text-caption font-bold uppercase text-accent-on-dark">{t(`method.steps.${m.key}.step`)}</div>
+                  <p className="mt-1 font-sans text-body text-on-dark-2">{t(`method.steps.${m.key}.d`)}</p>
                 </div>
-                <div className="border-white/[0.12] md:border-l md:pl-[22px]">
-                  <div className="font-condensed text-[12px] font-semibold tracking-[1px] text-on-dark-2">{t("method.obtain")}</div>
-                  <p className="mt-[3px] font-sans text-[15.5px] font-semibold leading-[1.4] text-white">{t(`method.steps.${m.key}.obtain`)}</p>
+                <div className="border-white/10 md:col-span-5 md:border-l md:pl-6">
+                  <div className="font-condensed text-caption font-semibold uppercase text-on-dark-2">{t("method.obtain")}</div>
+                  <p className="mt-1 font-sans text-body font-semibold text-white">{t(`method.steps.${m.key}.obtain`)}</p>
                 </div>
               </div>
             ))}
           </Reveal>
           <Reveal className="mt-11 text-center" delay={0.1}>
-            <p className="mx-auto mb-6 max-w-[620px] font-sans text-[17px] leading-[1.6] text-white/[0.72]">
+            <p className="mx-auto mb-6 max-w-[65ch] font-sans text-lead text-on-dark-2">
               {t.rich("method.partner", { strong: (c) => <strong className="font-semibold text-white">{c}</strong> })}
             </p>
             <Link href={localize(lang, QUOTE.wifi)} className={btnPrimary}>
@@ -214,33 +208,29 @@ export default async function WifiZone() {
       </section>
 
       {/* POURQUOI CHERRYZ POUR WIFI */}
-      <section className="bg-white pb-24 pt-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[720px] text-center">
-            <SectionEyebrow label={t("why.eyebrow")} centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">
               {t.rich("why.title", rich)}
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" delay={0.05}>
-            <div className="flex flex-wrap items-center gap-6 rounded-2xl border border-navy/[0.07] bg-surface px-8 py-[30px] sm:col-span-2 lg:col-span-3">
-              <div className="flex h-14 w-14 flex-none items-center justify-center rounded-[14px] bg-cherry">
-                <Dollar className="text-[26px] text-white" />
+            {/* Highlighted card, first of six: the grid stays full on 2 and 3 columns. */}
+            <div className="rounded-2xl border border-cherry/20 bg-cherry-tint px-6 py-6">
+              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-cherry">
+                <Dollar className="size-6 text-white" />
               </div>
-              <div className="min-w-0 basis-full sm:min-w-[280px] sm:flex-1 sm:basis-0">
-                <h3 className="m-0 font-condensed text-[24px] font-bold">{t("why.bandwidthTitle")}</h3>
-                <p className="mt-[6px] font-sans text-[15.5px] leading-[1.55] text-navy/[0.66]">
-                  {t("why.bandwidthBody")}
-                </p>
-              </div>
+              <h3 className="m-0 font-condensed text-title-sm font-bold">{t("why.bandwidthTitle")}</h3>
+              <p className="mt-2 font-sans text-small text-ink-2">{t("why.bandwidthBody")}</p>
             </div>
             {diffs.map((f) => (
               <div key={f.key} className={featureCard}>
-                <div className="mb-[14px] flex h-11 w-11 items-center justify-center rounded-[11px] bg-cherry/[0.08]">
-                  <f.Icon className="text-[22px] text-cherry" />
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-cherry/10">
+                  <f.Icon className="size-6 text-cherry" />
                 </div>
-                <h3 className="m-0 font-condensed text-[21px] font-bold">{t(`why.diffs.${f.key}.t`)}</h3>
-                <p className="mt-[6px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.64]">{t(`why.diffs.${f.key}.d`)}</p>
+                <h3 className="m-0 font-condensed text-title-sm font-bold">{t(`why.diffs.${f.key}.t`)}</h3>
+                <p className="mt-2 font-sans text-small text-ink-2">{t(`why.diffs.${f.key}.d`)}</p>
               </div>
             ))}
           </Reveal>
@@ -248,18 +238,17 @@ export default async function WifiZone() {
       </section>
 
       {/* CAS D'USAGE */}
-      <section id="cas" className="scroll-mt-20 bg-surface py-[104px]">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <Reveal className="mx-auto mb-14 max-w-[640px] text-center">
-            <SectionEyebrow label={t("cases.eyebrow")} centered />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+      <section id="cas" className="scroll-mt-20 bg-surface py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+            <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">
               {t("cases.title")}
             </h2>
           </Reveal>
           <Reveal className="grid grid-cols-1 gap-6 md:grid-cols-3" delay={0.05}>
             {cases.map((c) => (
-              <div key={c.key} className="overflow-hidden rounded-[18px] border border-navy/[0.07] bg-white shadow-[0_24px_50px_-36px_rgba(16,27,40,.45)]">
-                <div className="relative h-[180px]">
+              <div key={c.key} className="overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+                <div className="relative h-45">
                   <Image
                     src={c.img}
                     alt={t(`cases.items.${c.key}.alt`)}
@@ -267,22 +256,22 @@ export default async function WifiZone() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                   />
-                  <div className="absolute left-[14px] top-[14px] inline-flex items-center gap-[6px] rounded-full bg-navy/75 px-3 py-[6px] font-condensed text-[13px] font-semibold tracking-[0.5px] text-white">
-                    <c.Icon className="align-[-0.14em]" /> {t(`cases.items.${c.key}.badge`)}
+                  <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-navy/75 px-3 py-2 font-condensed text-small font-semibold tracking-wide text-white">
+                    <c.Icon className="icon-inline" /> {t(`cases.items.${c.key}.badge`)}
                   </div>
                 </div>
-                <div className="px-6 pb-[26px] pt-6">
-                  <div className="font-sans text-[14px] font-semibold text-ink-3">{t(`cases.items.${c.key}.place`)}</div>
-                  <p className="mt-2 font-sans text-[15px] leading-[1.5] text-navy/70">{t(`cases.items.${c.key}.desc`)}</p>
-                  <div className="mt-4 border-t border-navy/[0.08] pt-4 font-condensed text-[24px] font-bold text-cherry">
+                <div className="px-6 pb-6 pt-6">
+                  <div className="font-sans text-small font-semibold text-ink-3">{t(`cases.items.${c.key}.place`)}</div>
+                  <p className="mt-2 font-sans text-body text-ink-2">{t(`cases.items.${c.key}.desc`)}</p>
+                  <div className="mt-4 border-t border-line pt-4 font-condensed text-title-sm font-bold text-cherry">
                     {t(`cases.items.${c.key}.stat`)}
-                    <span className="text-[15px] font-semibold text-ink-3">{t(`cases.items.${c.key}.suffix`)}</span>
+                    <span className="text-body font-semibold text-ink-3">{t(`cases.items.${c.key}.suffix`)}</span>
                   </div>
                 </div>
               </div>
             ))}
           </Reveal>
-          <p className="mt-6 text-center font-sans text-[13px] text-ink-2">
+          <p className="mt-6 text-center font-sans text-caption tracking-normal text-ink-2">
             {t("cases.note")}
           </p>
         </div>
