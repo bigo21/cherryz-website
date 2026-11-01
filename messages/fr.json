@@ -54,7 +54,8 @@
       "ip": "IP dédiée & sécurisée",
       "test": "Test avant engagement"
     },
-    "testNote": "*Contrat signé devant notaire requis avant le lancement du test."
+    "testNote": "*Contrat signé devant notaire requis avant le lancement du test.",
+    "newTab": "(nouvel onglet)"
   },
   "Home": {
     "meta": {
@@ -1042,14 +1043,158 @@
       "meta": {
         "title": "Mentions légales | Cherryz",
         "description": "Identification de l'éditeur du site cherryz.tech, hébergement, propriété intellectuelle et droit applicable."
+      },
+      "title": "Mentions légales",
+      "sections": {
+        "publisher": {
+          "title": "Éditeur du site",
+          "p1": "Le site www.cherryz.tech est édité par <strong>Cherryz</strong>, <legalForm></legalForm> au capital de <capital></capital> XAF.",
+          "list": {
+            "office": "Siège social : <address></address>, Cameroun",
+            "rccm": "Registre du commerce (RCCM) : <rccm></rccm>",
+            "niu": "Numéro d’identifiant unique (NIU) : <niu></niu>",
+            "phone": "Téléphone : <phone></phone>",
+            "email": "Email : <email></email>"
+          }
+        },
+        "director": {
+          "title": "Directeur de la publication",
+          "p1": "<director></director>."
+        },
+        "regulated": {
+          "title": "Activité réglementée",
+          "p1": "Cherryz exerce une activité d’installation et de revente de services de communications électroniques. Elle est titulaire de l’agrément <artLicence></artLicence> délivré par l’Agence de Régulation des Télécommunications (ART), sous le numéro <artNumber></artNumber>."
+        },
+        "hosting": {
+          "title": "Hébergement",
+          "p1": "Le site est hébergé par Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis (<vercel>vercel.com</vercel>)."
+        },
+        "ip": {
+          "title": "Propriété intellectuelle",
+          "p1": "La marque Cherryz, son logo, les textes, photographies et éléments graphiques du site sont la propriété de Cherryz ou utilisés avec l’autorisation de leurs titulaires. Toute reproduction sans autorisation écrite préalable est interdite.",
+          "p2": "Les logos des opérateurs partenaires et des clients restent la propriété de leurs titulaires respectifs. Ils sont affichés avec leur accord, à titre de référence."
+        },
+        "commercial": {
+          "title": "Informations commerciales",
+          "p1": "Les prix indiqués sur le site (par exemple « de 45 000 à 70 000 XAF/Mbps/mois ») sont donnés à titre indicatif. Seul le devis remis après étude du besoin engage Cherryz.",
+          "p2": "Les exemples de revenus présentés sur la page WiFi Zone sont des simulations basées sur des projets types. Ils ne constituent pas une garantie de résultat."
+        },
+        "liability": {
+          "title": "Responsabilité",
+          "p1": "Cherryz s’efforce de fournir des informations exactes et à jour, sans pouvoir garantir l’absence d’erreur. Les liens vers des sites tiers (Cal.com, WhatsApp, LinkedIn, Facebook) sont fournis pour faciliter le contact : Cherryz n’est pas responsable de leur contenu."
+        },
+        "law": {
+          "title": "Droit applicable",
+          "p1": "Le site et ces mentions sont régis par le droit camerounais, notamment la loi n° 2010/021 du 21 décembre 2010 régissant le commerce électronique au Cameroun. Tout litige relève des juridictions compétentes de Yaoundé, sauf disposition légale contraire."
+        }
       }
     },
     "privacy": {
       "meta": {
         "title": "Politique de confidentialité | Cherryz",
         "description": "Quelles données Cherryz collecte via ses formulaires, pourquoi, avec qui elles sont partagées, combien de temps elles sont conservées et comment exercer vos droits."
+      },
+      "title": "Politique de confidentialité",
+      "lead": "Cherryz ne collecte que les informations que vous saisissez dans nos formulaires, uniquement pour répondre à votre demande. Le site n’utilise ni cookie publicitaire, ni outil de mesure d’audience.",
+      "sections": {
+        "controller": {
+          "title": "Responsable du traitement",
+          "p1": "Cherryz, <address></address>, Cameroun. Contact : <email></email>, <phone></phone>.",
+          "p2": "Cette politique s’inscrit dans le cadre de la loi n° 2024/017 du 23 décembre 2024 relative à la protection des données à caractère personnel au Cameroun."
+        },
+        "data": {
+          "title": "Les données que nous collectons",
+          "table": {
+            "head": {
+              "where": "Où",
+              "data": "Données",
+              "required": "Obligatoire"
+            },
+            "rows": {
+              "contact": {
+                "where": "Formulaire de contact",
+                "data": "Nom, email, besoin, téléphone ou WhatsApp, entreprise, message",
+                "required": "Nom, email et besoin"
+              },
+              "ip": {
+                "where": "Questionnaire Internet B2B",
+                "data": "Connexion actuelle et besoins, localisation (ville, quartier, et position GPS si vous l’autorisez), nom, poste, entreprise, secteur d’activité, téléphone ou WhatsApp, email, message facultatif",
+                "required": "Les questions marquées d’un astérisque"
+              },
+              "wifi": {
+                "where": "Questionnaire WiFi Zone",
+                "data": "Avancement et budget du projet, lieu de déploiement, connexion et équipements en place, localisation (ville, quartier, et position GPS si vous l’autorisez), nom, entreprise, téléphone ou WhatsApp, email, message facultatif",
+                "required": "Les questions marquées d’un astérisque"
+              },
+              "technical": {
+                "where": "Informations techniques jointes à l’envoi",
+                "data": "Page d’origine, date d’envoi, site d’où vous venez, paramètres de campagne (utm) le cas échéant, langue et type de navigateur",
+                "required": "Collectées automatiquement"
+              }
+            }
+          }
+        },
+        "purposes": {
+          "title": "Pourquoi nous les utilisons",
+          "list": {
+            "callback": "Vous appeler une première fois sous 24h, puis préparer votre devis sous 48h, ou après la descente sur site.",
+            "confirm": "Vous envoyer un email de confirmation de votre demande.",
+            "source": "Savoir d’où viennent les demandes (site d’origine, campagne), pour améliorer notre communication."
+          },
+          "p1": "Le questionnaire de devis vous demande votre accord explicite avant envoi. Vos données ne sont ni vendues, ni louées, ni utilisées pour de la prospection sans votre accord."
+        },
+        "access": {
+          "title": "Qui y a accès",
+          "p1": "Seule l’équipe commerciale et technique de Cherryz consulte vos demandes. Pour faire fonctionner le site, nous faisons appel à trois prestataires techniques :",
+          "table": {
+            "head": {
+              "where": "Prestataire",
+              "data": "Rôle",
+              "required": "Localisation des serveurs"
+            },
+            "rows": {
+              "vercel": {
+                "where": "Vercel",
+                "data": "Hébergement du site",
+                "required": "<vercelRegion></vercelRegion>"
+              },
+              "supabase": {
+                "where": "Supabase",
+                "data": "Stockage de vos demandes",
+                "required": "<supabaseRegion></supabaseRegion>"
+              },
+              "resend": {
+                "where": "Resend",
+                "data": "Envoi des emails de confirmation et de notification",
+                "required": "<resendRegion></resendRegion>"
+              }
+            }
+          },
+          "p2": "Ces prestataires peuvent être situés hors du Cameroun. <transfers></transfers>",
+          "p3": "Si vous cliquez sur un lien WhatsApp, Cal.com, LinkedIn ou Facebook, vous quittez notre site : la politique de confidentialité de ce service s’applique alors."
+        },
+        "retention": {
+          "title": "Combien de temps nous les gardons",
+          "p1": "<retention></retention>"
+        },
+        "browser": {
+          "title": "Données stockées dans votre navigateur",
+          "p1": "Pendant que vous remplissez un questionnaire de devis, vos réponses sont gardées dans votre navigateur (sessionStorage) pour ne pas les perdre si vous rechargez la page. Elles ne quittent pas votre appareil avant l’envoi et sont effacées à la fermeture de l’onglet."
+        },
+        "security": {
+          "title": "Sécurité",
+          "p1": "Les échanges avec le site sont chiffrés (HTTPS). Les demandes sont enregistrées côté serveur, dans une base dont l’accès public est limité à l’ajout de nouvelles demandes : personne ne peut les lire depuis le site."
+        },
+        "rights": {
+          "title": "Vos droits",
+          "p1": "Vous pouvez à tout moment demander l’accès à vos données, leur rectification, leur effacement, ou vous opposer à leur utilisation. Écrivez à <email></email> en précisant votre demande ; nous répondons sous <rightsDelay></rightsDelay> jours.",
+          "p2": "Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir l’Autorité de protection des données à caractère personnel."
+        }
       }
-    }
+    },
+    "en": "",
+    "toVerify": "à vérifier",
+    "transfers": "à valider par le juriste : conditions applicables aux transferts de données hors du Cameroun"
   },
   "Email": {
     "hi": "Merci {name} !",

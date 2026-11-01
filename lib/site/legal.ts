@@ -1,26 +1,30 @@
-// Company identification used by the legal pages (mentions légales, confidentialité).
-// Every value set to TODO must be filled in by Cherryz before these pages go live:
-// they are legal statements and must not be guessed.
-export const TODO = "à compléter";
+// Company facts shown on the legal pages (mentions légales, confidentialité).
+// They are legal statements and must not be guessed: until Cherryz provides one,
+// it stays a marker that the page shows as « [à compléter] », « [à vérifier] »
+// or « [à valider par le juriste…] ». Facts that are sentences (retention period)
+// go into messages/*.json instead, in both languages, once known.
+export const TODO = "todo";
+export const VERIFY = "toVerify";
+export const COUNSEL = "transfers";
+export type Marker = typeof TODO | typeof VERIFY | typeof COUNSEL;
 
 export const LEGAL = {
-  companyName: TODO, // raison sociale exacte, ex. « CHERRYZ SARL »
   legalForm: TODO, // forme juridique (SARL, SA, SAS…)
   capital: TODO, // capital social, en XAF
   rccm: TODO, // numéro RCCM
   niu: TODO, // numéro d'identifiant unique (NIU)
-  address: TODO, // adresse précise du siège, Yaoundé
+  address: "Quartier Fouda, Yaoundé", // siège social
   publicationDirector: TODO, // nom et fonction du directeur de la publication
-  artLicence: TODO, // référence de l'agrément / autorisation ART
-  retention: TODO, // durée de conservation des demandes (ex. « 3 ans après le dernier contact »)
-  updatedAt: "2026-10-30", // ISO date, formatted per locale on the page
+  artLicence: TODO, // intitulé exact de l'agrément ART
+  artNumber: TODO, // numéro de l'agrément ART
+  retention: TODO, // durée de conservation des demandes
+  rightsDelay: TODO, // délai de réponse aux demandes d'accès, en jours
+  vercelRegion: VERIFY, // région Vercel choisie
+  supabaseRegion: VERIFY, // région du projet Supabase
+  resendRegion: VERIFY, // région Resend
+  transfers: COUNSEL, // formalités des transferts hors du Cameroun (loi n° 2024/017)
+  updatedAt: "2026-11-01", // ISO date, formatted per locale on the page
 } as const;
 
-export const HOST = {
-  name: "Vercel Inc.",
-  address: "440 N Barranca Ave #4133, Covina, CA 91723, États-Unis",
-  site: "https://vercel.com",
-} as const;
-
-/** Whether every company field has been filled in. */
-export const legalComplete = Object.values(LEGAL).every((v) => v !== TODO);
+export const isMarker = (value: string): value is Marker =>
+  value === TODO || value === VERIFY || value === COUNSEL;

@@ -54,7 +54,8 @@
       "ip": "Dedicated, secure IP",
       "test": "Test before you commit"
     },
-    "testNote": "*A contract signed before a notary is required before the test starts."
+    "testNote": "*A contract signed before a notary is required before the test starts.",
+    "newTab": "(opens in a new tab)"
   },
   "Home": {
     "meta": {
@@ -1042,14 +1043,158 @@
       "meta": {
         "title": "Legal notice | Cherryz",
         "description": "Identification of the publisher of cherryz.tech, hosting, intellectual property and governing law."
+      },
+      "title": "Legal notice",
+      "sections": {
+        "publisher": {
+          "title": "Publisher",
+          "p1": "The website www.cherryz.tech is published by <strong>Cherryz</strong>, <legalForm></legalForm> with a share capital of <capital></capital> XAF.",
+          "list": {
+            "office": "Registered office: <address></address>, Cameroon",
+            "rccm": "Trade register (RCCM): <rccm></rccm>",
+            "niu": "Taxpayer number (NIU): <niu></niu>",
+            "phone": "Phone: <phone></phone>",
+            "email": "Email: <email></email>"
+          }
+        },
+        "director": {
+          "title": "Publication director",
+          "p1": "<director></director>."
+        },
+        "regulated": {
+          "title": "Regulated activity",
+          "p1": "Cherryz installs and resells electronic communications services. It holds the <artLicence></artLicence> licence issued by the Telecommunications Regulatory Agency (ART), under number <artNumber></artNumber>."
+        },
+        "hosting": {
+          "title": "Hosting",
+          "p1": "The website is hosted by Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, United States (<vercel>vercel.com</vercel>)."
+        },
+        "ip": {
+          "title": "Intellectual property",
+          "p1": "The Cherryz brand, its logo, and the texts, photographs and graphics of the website belong to Cherryz or are used with their owners’ permission. Any reproduction without prior written permission is prohibited.",
+          "p2": "The logos of partner operators and clients remain the property of their respective owners. They are shown with their consent, as references."
+        },
+        "commercial": {
+          "title": "Commercial information",
+          "p1": "The prices shown on the website (for example “45,000 to 70,000 XAF/Mbps/month”) are indicative. Only the quote issued after studying your needs binds Cherryz.",
+          "p2": "The revenue examples on the WiFi Zone page are simulations based on typical projects. They are not a guarantee of results."
+        },
+        "liability": {
+          "title": "Liability",
+          "p1": "Cherryz strives to provide accurate, up-to-date information but cannot guarantee it is error-free. Links to third-party sites (Cal.com, WhatsApp, LinkedIn, Facebook) are there to make contact easier: Cherryz is not responsible for their content."
+        },
+        "law": {
+          "title": "Governing law",
+          "p1": "The website and this notice are governed by Cameroonian law, in particular Law No. 2010/021 of 21 December 2010 governing electronic commerce in Cameroon. Any dispute falls under the competent courts of Yaoundé, unless the law provides otherwise."
+        }
       }
     },
     "privacy": {
       "meta": {
         "title": "Privacy policy | Cherryz",
         "description": "What data Cherryz collects through its forms, why, who it is shared with, how long it is kept and how to exercise your rights."
+      },
+      "title": "Privacy policy",
+      "lead": "Cherryz only collects the information you enter in our forms, solely to answer your request. The website uses neither advertising cookies nor audience measurement tools.",
+      "sections": {
+        "controller": {
+          "title": "Data controller",
+          "p1": "Cherryz, <address></address>, Cameroon. Contact: <email></email>, <phone></phone>.",
+          "p2": "This policy falls within Law No. 2024/017 of 23 December 2024 on the protection of personal data in Cameroon."
+        },
+        "data": {
+          "title": "The data we collect",
+          "table": {
+            "head": {
+              "where": "Where",
+              "data": "Data",
+              "required": "Required"
+            },
+            "rows": {
+              "contact": {
+                "where": "Contact form",
+                "data": "Name, email, need, phone or WhatsApp, company, message",
+                "required": "Name, email and need"
+              },
+              "ip": {
+                "where": "Business Internet questionnaire",
+                "data": "Current connection and needs, location (city, neighbourhood, and GPS position if you allow it), name, job title, company, sector, phone or WhatsApp, email, optional message",
+                "required": "The questions marked with an asterisk"
+              },
+              "wifi": {
+                "where": "WiFi Zone questionnaire",
+                "data": "Project stage and budget, deployment site, existing connection and equipment, location (city, neighbourhood, and GPS position if you allow it), name, company, phone or WhatsApp, email, optional message",
+                "required": "The questions marked with an asterisk"
+              },
+              "technical": {
+                "where": "Technical information sent with a request",
+                "data": "Originating page, date sent, the site you came from, campaign parameters (utm) if any, language and browser type",
+                "required": "Collected automatically"
+              }
+            }
+          }
+        },
+        "purposes": {
+          "title": "Why we use it",
+          "list": {
+            "callback": "Call you a first time within 24 hours, then prepare your quote within 48 hours, or after the site visit.",
+            "confirm": "Send you an email confirming your request.",
+            "source": "Know where requests come from (originating site, campaign), to improve our communication."
+          },
+          "p1": "The quote questionnaire asks for your explicit consent before sending. Your data is never sold, rented or used for marketing without your consent."
+        },
+        "access": {
+          "title": "Who has access to it",
+          "p1": "Only Cherryz’s sales and technical team reads your requests. To run the website, we use three technical providers:",
+          "table": {
+            "head": {
+              "where": "Provider",
+              "data": "Role",
+              "required": "Server location"
+            },
+            "rows": {
+              "vercel": {
+                "where": "Vercel",
+                "data": "Website hosting",
+                "required": "<vercelRegion></vercelRegion>"
+              },
+              "supabase": {
+                "where": "Supabase",
+                "data": "Storage of your requests",
+                "required": "<supabaseRegion></supabaseRegion>"
+              },
+              "resend": {
+                "where": "Resend",
+                "data": "Sending confirmation and notification emails",
+                "required": "<resendRegion></resendRegion>"
+              }
+            }
+          },
+          "p2": "These providers may be located outside Cameroon. <transfers></transfers>",
+          "p3": "If you follow a WhatsApp, Cal.com, LinkedIn or Facebook link, you leave our website: that service’s privacy policy then applies."
+        },
+        "retention": {
+          "title": "How long we keep it",
+          "p1": "<retention></retention>"
+        },
+        "browser": {
+          "title": "Data stored in your browser",
+          "p1": "While you fill in a quote questionnaire, your answers are kept in your browser (sessionStorage) so you don’t lose them if you reload the page. They don’t leave your device before you send them and are erased when you close the tab."
+        },
+        "security": {
+          "title": "Security",
+          "p1": "Exchanges with the website are encrypted (HTTPS). Requests are stored server-side, in a database whose public access is limited to adding new requests: nobody can read them from the website."
+        },
+        "rights": {
+          "title": "Your rights",
+          "p1": "You may at any time ask to access, correct or erase your data, or object to its use. Write to <email></email> stating your request; we reply within <rightsDelay></rightsDelay> days.",
+          "p2": "If you believe your rights are not respected, you may refer the matter to the Personal Data Protection Authority."
+        }
       }
-    }
+    },
+    "en": "This English translation is provided for information; the French version prevails.",
+    "toVerify": "to be checked",
+    "transfers": "to be confirmed by counsel: rules for transfers of data outside Cameroon"
   },
   "Email": {
     "hi": "Thank you, {name}!",
