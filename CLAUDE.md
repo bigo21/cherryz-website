@@ -113,10 +113,6 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 - Photos génériques de bureau ; emojis ; dégradés violets ; illustrations 3D.
 - Logo en PNG lourd : SVG, ou PNG à 2× de moins de 10 Ko.
 
-## Réservé à l'utilisateur (exercice de formation)
-
-Ne pas toucher sans demande explicite : le survol du menu (style inline dans `SiteNav`), le passage des h4 en h3, les contrastes de la page WiFi Zone.
-
 ## Vérifications avant chaque commit
 
 - `npm run lint`, `npm run i18n:check` et `npm run build` passent.
