@@ -372,3 +372,16 @@ Le texte ne change pas, seuls les signes indiqués changent. Les espaces inséca
 
 - Flèches tapées « → », « ← », « ↓ » remplacées par une icône SVG (`ArrowRightIcon`, `ArrowLeftIcon`, `ArrowDownIcon`, aria-hidden) dans 24 libellés de liens et de boutons.
 - Adresse du pied de page et de la page Contact liée à une carte (`CONTACT.mapHref`, recherche Google Maps « Quartier Fouda, Yaoundé »), ouverte dans un nouvel onglet annoncé.
+
+## 5. Correctifs après l’audit (nombres et pourcentages, français seulement)
+
+Aucun mot ne change : seuls les espaces et le signe moins changent. L’anglais n’est pas touché (« 45,000 », « 50% »).
+
+- Séparateur de milliers : espace fine insécable (U+202F) au lieu d’une espace normale, dans 24 textes : `Home.why.priceValue`, `Home.why.priceInstead`, `Home.why.p1`, `Home.compare.rows.price.alone`, `Home.compare.rows.price.cherry`, `InternetB2B.meta.description`, `InternetB2B.brings.priceValue`, `InternetB2B.final.title`, `WifiZone.cases.items.building.stat`, `Questionnaire.ip.questions.q6.options.0` à `.4`, `Questionnaire.wifi.questions.q2.options.0` à `.2`, `Legal.notice.sections.commercial.p1`. Un nombre ne se coupe plus en fin de ligne (« De 45 000 à 70 » / « 000 »).
+- `Site.og.lead` (image de partage) garde l’espace insécable U+00A0 : le moteur de l’image n’a pas le glyphe U+202F.
+- Pourcentages : espace insécable avant « % » et vrai signe moins.
+  - `Chrome.reassurance.discount` : Jusqu’à -50% → Jusqu’à −50 %
+  - `Home.meta.description`, `Home.hero.subtitle` : 50% moins chère → 50 % moins chère
+  - `WifiZone.why.diffs.legal.t` : 100% légal → 100 % légal
+  - `WifiZone.cases.items.hotel.stat` : +40% → +40 %
+- Les valeurs enregistrées des questionnaires (`lib/quote/schemas.ts`) ne changent pas : le catalogue ne sert qu’à l’affichage.

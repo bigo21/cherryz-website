@@ -50,7 +50,7 @@
     "reassurance": {
       "art": "Régulée ART",
       "partners": "Partenaire Camtel · Orange · MTN",
-      "discount": "Jusqu’à -50%",
+      "discount": "Jusqu’à −50 %",
       "ip": "IP dédiée & sécurisée",
       "test": "Test avant engagement"
     },
@@ -60,23 +60,23 @@
   "Home": {
     "meta": {
       "title": "Cherryz | L’Internet professionnel au meilleur prix, partout au Cameroun",
-      "description": "Cherryz agrège les solutions des grands opérateurs (Camtel, Orange, MTN) pour une connexion dédiée, stable et jusqu’à 50% moins chère. Internet B2B avec IP publique et WiFi Zone monétisable."
+      "description": "Cherryz agrège les solutions des grands opérateurs (Camtel, Orange, MTN) pour une connexion dédiée, stable et jusqu’à 50 % moins chère. Internet B2B avec IP publique et WiFi Zone monétisable."
     },
     "hero": {
       "eyebrow": "AGRÉGATEUR DE CONNECTIVITÉ · CAMEROUN",
       "imageAlt": "Cherryz, réseau connecté",
       "title": "L’Internet professionnel au <accent>meilleur prix.</accent><br></br>Partout au Cameroun.",
-      "subtitle": "Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d’autres) pour vous offrir une connexion dédiée, stable et jusqu’à 50% moins chère. Sans travaux. Sans coupure.",
+      "subtitle": "Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d’autres) pour vous offrir une connexion dédiée, stable et jusqu’à 50 % moins chère. Sans travaux. Sans coupure.",
       "wifi": "Découvrir la WiFi Zone"
     },
     "why": {
       "eyebrow": "POURQUOI CHERRYZ",
       "imageAlt": "Technicien Cherryz sur site",
-      "priceValue": "Dès 45 000",
+      "priceValue": "Dès 45 000",
       "priceUnit": "XAF/Mbps",
-      "priceInstead": "au lieu de 90 000 – 180 000",
+      "priceInstead": "au lieu de 90 000 – 180 000",
       "title": "Un seul interlocuteur.<br></br>Les meilleurs réseaux.<br></br>Le juste prix.",
-      "p1": "Les entreprises camerounaises paient entre 90 000 et 180 000 XAF/Mbps/mois en allant directement chez un opérateur. Cherryz négocie pour vous auprès de plusieurs fournisseurs et vous propose la meilleure solution, de 45 000 à 70 000 XAF/Mbps/mois.",
+      "p1": "Les entreprises camerounaises paient entre 90 000 et 180 000 XAF/Mbps/mois en allant directement chez un opérateur. Cherryz négocie pour vous auprès de plusieurs fournisseurs et vous propose la meilleure solution, de 45 000 à 70 000 XAF/Mbps/mois.",
       "p2": "Nous ne sommes pas un opérateur de plus. Nous sommes votre <strong>courtier en connectivité</strong> : nous analysons votre besoin, comparons les options, et vous livrons la solution la plus adaptée, techniquement et financièrement."
     },
     "compare": {
@@ -88,8 +88,8 @@
       "rows": {
         "price": {
           "label": "Prix / Mbps / mois",
-          "alone": "90 000 – 180 000 XAF",
-          "cherry": "De 45 000 à 70 000 XAF"
+          "alone": "90 000 – 180 000 XAF",
+          "cherry": "De 45 000 à 70 000 XAF"
         },
         "install": {
           "label": "Installation",
@@ -192,7 +192,7 @@
   "InternetB2B": {
     "meta": {
       "title": "Internet B2B avec IP publique dédiée | Cherryz",
-      "description": "Internet professionnel dédié avec IP fixe, de 45 000 à 70 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement."
+      "description": "Internet professionnel dédié avec IP fixe, de 45 000 à 70 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement."
     },
     "hero": {
       "eyebrow": "CONNEXION IP PUBLIQUE · B2B",
@@ -239,7 +239,7 @@
       "eyebrow": "CE QUE CHERRYZ VOUS APPORTE",
       "title": "Une connexion pro, sans<br></br>les contraintes d’un opérateur",
       "priceLabel": "PRIX NÉGOCIÉ",
-      "priceValue": "De 45 000 à 70 000",
+      "priceValue": "De 45 000 à 70 000",
       "priceUnit": "XAF/Mbps/mois",
       "priceNote": "Grâce à notre pouvoir d’agrégation auprès des opérateurs.",
       "features": {
@@ -283,7 +283,7 @@
       "cta": "Commencer ma demande"
     },
     "final": {
-      "title": "Un Internet pro, dédié,<br></br>dès 45 000 XAF/Mbps."
+      "title": "Un Internet pro, dédié,<br></br>dès 45 000 XAF/Mbps."
     }
   },
   "WifiZone": {
@@ -407,7 +407,7 @@
           "d": "On ne vous laisse pas avec du matériel, on vous livre un business modèle clé en main."
         },
         "legal": {
-          "t": "100% légal",
+          "t": "100 % légal",
           "d": "Agrément installeur et revendeur ART : zéro risque juridique."
         },
         "scalable": {
@@ -428,7 +428,7 @@
           "badge": "Propriétaire d’immeuble",
           "place": "24 appartements, Yaoundé",
           "desc": "WiFi par étage + vouchers mensuels.",
-          "stat": "+150 000 XAF",
+          "stat": "+150 000 XAF",
           "suffix": " /mois de revenu passif",
           "alt": "Immeuble à Yaoundé"
         },
@@ -444,7 +444,7 @@
           "badge": "Gérant d’hôtel",
           "place": "Hôtel 30 chambres",
           "desc": "WiFi premium inclus dans le tarif chambre.",
-          "stat": "+40%",
+          "stat": "+40 %",
           "suffix": " satisfaction client",
           "alt": "Hôtel connecté"
         }
@@ -692,11 +692,11 @@
         "q6": {
           "label": "Combien payez-vous par mois pour votre connexion ?",
           "options": {
-            "0": "Moins de 500 000 XAF",
-            "1": "500 000 – 1 000 000 XAF",
-            "2": "1 000 000 – 2 000 000 XAF",
-            "3": "2 000 000 – 3 000 000 XAF",
-            "4": "Plus de 3 000 000 XAF",
+            "0": "Moins de 500 000 XAF",
+            "1": "500 000 – 1 000 000 XAF",
+            "2": "1 000 000 – 2 000 000 XAF",
+            "3": "2 000 000 – 3 000 000 XAF",
+            "4": "Plus de 3 000 000 XAF",
             "5": "Je préfère ne pas répondre"
           }
         },
@@ -872,9 +872,9 @@
         "q2": {
           "label": "Quel est votre budget de démarrage estimé ?",
           "options": {
-            "0": "Moins de 1 000 000 XAF",
-            "1": "1 000 000 – 2 000 000 XAF",
-            "2": "2 000 000 – 3 000 000 XAF",
+            "0": "Moins de 1 000 000 XAF",
+            "1": "1 000 000 – 2 000 000 XAF",
+            "2": "2 000 000 – 3 000 000 XAF",
             "3": "À définir avec l’équipe Cherryz"
           }
         },
@@ -1080,7 +1080,7 @@
         },
         "commercial": {
           "title": "Informations commerciales",
-          "p1": "Les prix indiqués sur le site (par exemple « de 45 000 à 70 000 XAF/Mbps/mois ») sont donnés à titre indicatif. Seul le devis remis après étude du besoin engage Cherryz.",
+          "p1": "Les prix indiqués sur le site (par exemple « de 45 000 à 70 000 XAF/Mbps/mois ») sont donnés à titre indicatif. Seul le devis remis après étude du besoin engage Cherryz.",
           "p2": "Les exemples de revenus présentés sur la page WiFi Zone sont des simulations basées sur des projets types. Ils ne constituent pas une garantie de résultat."
         },
         "liability": {
