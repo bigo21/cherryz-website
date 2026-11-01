@@ -154,7 +154,7 @@ export default async function WifiZone() {
                   </div>
                   <div className="px-[22px] pb-6 pt-5">
                     <h3 className="font-condensed text-[21px] font-bold">{t(`zones.items.${z.key}.t`)}</h3>
-                    <div className="mt-1 font-sans text-[13px] font-semibold text-navy/50">{t(`zones.items.${z.key}.sub`)}</div>
+                    <div className="mt-1 font-sans text-[13px] font-semibold text-ink-3">{t(`zones.items.${z.key}.sub`)}</div>
                     <p className="mt-[10px] border-t border-navy/[0.08] pt-[10px] font-sans text-[14.5px] leading-[1.5] text-navy/[0.66]">
                       {t(`zones.items.${z.key}.d`)}
                     </p>
@@ -186,7 +186,7 @@ export default async function WifiZone() {
           </Reveal>
           <Reveal className="mx-auto flex max-w-[1000px] flex-col gap-[14px]" delay={0.05}>
             {method.map((m) => (
-              <div key={m.key} className="grid grid-cols-1 items-center gap-[22px] rounded-[14px] border border-white/[0.08] bg-white/[0.04] px-[26px] py-[22px] md:grid-cols-[64px_1.2fr_1fr]">
+              <div key={m.key} className="grid grid-cols-1 items-center gap-[22px] rounded-[14px] border border-white/[0.12] px-[26px] py-[22px] md:grid-cols-[64px_1.2fr_1fr]">
                 <div className="flex h-[52px] w-[52px] items-center justify-center rounded-[13px] bg-cherry text-[24px] text-white">
                   <m.Icon />
                 </div>
@@ -195,7 +195,7 @@ export default async function WifiZone() {
                   <p className="mt-1 font-sans text-[15.5px] leading-[1.5] text-white/80">{t(`method.steps.${m.key}.d`)}</p>
                 </div>
                 <div className="border-white/[0.12] md:border-l md:pl-[22px]">
-                  <div className="font-condensed text-[12px] font-semibold tracking-[1px] text-white/45">{t("method.obtain")}</div>
+                  <div className="font-condensed text-[12px] font-semibold tracking-[1px] text-on-dark-2">{t("method.obtain")}</div>
                   <p className="mt-[3px] font-sans text-[15.5px] font-semibold leading-[1.4] text-white">{t(`method.steps.${m.key}.obtain`)}</p>
                 </div>
               </div>
@@ -271,17 +271,17 @@ export default async function WifiZone() {
                   </div>
                 </div>
                 <div className="px-6 pb-[26px] pt-6">
-                  <div className="font-sans text-[14px] font-semibold text-navy/55">{t(`cases.items.${c.key}.place`)}</div>
+                  <div className="font-sans text-[14px] font-semibold text-ink-3">{t(`cases.items.${c.key}.place`)}</div>
                   <p className="mt-2 font-sans text-[15px] leading-[1.5] text-navy/70">{t(`cases.items.${c.key}.desc`)}</p>
                   <div className="mt-4 border-t border-navy/[0.08] pt-4 font-condensed text-[24px] font-bold text-cherry">
                     {t(`cases.items.${c.key}.stat`)}
-                    <span className="text-[15px] font-semibold text-navy/50">{t(`cases.items.${c.key}.suffix`)}</span>
+                    <span className="text-[15px] font-semibold text-ink-3">{t(`cases.items.${c.key}.suffix`)}</span>
                   </div>
                 </div>
               </div>
             ))}
           </Reveal>
-          <p className="mt-6 text-center font-sans text-[13px] text-navy/50">
+          <p className="mt-6 text-center font-sans text-[13px] text-ink-2">
             {t("cases.note")}
           </p>
         </div>

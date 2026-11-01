@@ -109,7 +109,7 @@ export default async function SiteFooter() {
             </Link>
             <LangSwitch long className="inline-flex min-h-11 items-center font-sans text-[14px] text-white/55 hover:text-white" />
           </div>
-          <div className="font-sans text-[14px] text-white/45">
+          <div className="font-sans text-[14px] text-on-dark-2">
             {t("footer.rights")}
           </div>
         </div>
