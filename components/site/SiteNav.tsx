@@ -85,7 +85,7 @@ export default function SiteNav() {
           <LangSwitch className="font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/72 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" />
           <Link
             href={quoteHref}
-            className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
+            className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-cherry-dark"
           >
             {t("quoteLabel")} →
           </Link>

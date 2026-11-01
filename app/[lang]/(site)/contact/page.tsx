@@ -33,7 +33,7 @@ export default async function Contact() {
         />
         <div className="relative z-[1] mx-auto max-w-[1280px] px-6 md:px-12">
           <div className="mb-[22px] inline-flex items-center gap-[9px] rounded-full border border-white/[0.22] bg-white/[0.04] px-[15px] py-2">
-            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_#e11d63]" />
+            <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_var(--color-accent-on-dark)]" />
             <span className="font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-white/90">{t("hero.eyebrow")}</span>
           </div>
           <h1 className="m-0 font-condensed text-[clamp(42px,6vw,66px)] font-bold leading-[0.98] tracking-[-0.4px] text-white">
@@ -66,7 +66,7 @@ export default async function Contact() {
                 <Link
                   key={q.href}
                   href={localize(lang, q.href)}
-                  className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-[#c0093a]"
+                  className="rounded-full bg-cherry px-[22px] py-3 font-condensed text-[16px] font-semibold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
                 >
                   {q.label} →
                 </Link>

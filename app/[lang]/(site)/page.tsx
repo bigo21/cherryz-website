@@ -246,7 +246,7 @@ export default async function Home() {
             </p>
             <Link
               href={localize(lang, QUOTE.hub)}
-              className="inline-block rounded-full bg-cherry px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-[#c0093a]"
+              className="inline-block rounded-full bg-cherry px-7 py-4 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white shadow-[0_16px_34px_-16px_rgba(160,4,45,.8)] transition-transform hover:-translate-y-[2px] hover:bg-cherry-dark"
             >
               {t("approach.cta")} →
             </Link>

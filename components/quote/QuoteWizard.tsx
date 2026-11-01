@@ -35,14 +35,14 @@ interface SavedState {
 }
 
 const inputClass =
-  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
+  "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy transition-colors placeholder:text-ink-3 focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
 
 function chipClass(selected: boolean): string {
   return [
     "cursor-pointer font-sans text-[15px] px-[17px] py-[11px] rounded-full transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
     selected
       ? "border-cherry bg-cherry/[0.07] text-cherry font-semibold"
-      : "border-[rgba(16,27,43,0.18)] bg-white text-[#374151] font-medium",
+      : "border-[rgba(16,27,43,0.18)] bg-white text-ink-2 font-medium",
   ].join(" ");
 }
 
@@ -51,7 +51,7 @@ function scaleChipClass(selected: boolean): string {
     "cursor-pointer w-[46px] h-[46px] rounded-[12px] font-condensed font-bold text-[18px] transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
     selected
       ? "border-cherry bg-cherry text-white"
-      : "border-[rgba(16,27,43,0.18)] bg-white text-[#374151]",
+      : "border-[rgba(16,27,43,0.18)] bg-white text-ink-2",
   ].join(" ");
 }
 
@@ -256,7 +256,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         >
           {prospectName ? t("thanks", { name: prospectName }) : t("thanksAnonymous")}
         </h2>
-        <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-[#4b5563]">
+        <p className="mx-auto mt-[14px] max-w-[440px] font-sans text-[17px] leading-[1.55] text-ink-2">
           {t("received")}
         </p>
         <ol className="mx-auto mt-7 max-w-[400px] space-y-3 text-left font-sans text-[15.5px] leading-[1.45] text-navy">
@@ -306,7 +306,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
               {t("stepOf", { step, total })}
             </span>
             {step < total && (
-              <span className="min-w-0 truncate text-right font-sans text-[13px] font-medium text-[#6b7280]">
+              <span className="min-w-0 truncate text-right font-sans text-[13px] font-medium text-ink-3">
                 {t("next")} {copy.steps[step].title}
               </span>
             )}
@@ -334,7 +334,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
         >
           {copy.steps[step - 1].title}
         </h2>
-        <p className="mb-[22px] font-sans text-[15.5px] text-[#6B7280]">
+        <p className="mb-[22px] font-sans text-[15.5px] text-ink-3">
           {copy.steps[step - 1].subtitle}
         </p>
 
@@ -371,7 +371,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                 </label>
               )}
               {q.type !== "consent" && (
-                <div className="mb-[11px] font-sans text-[13px] font-medium text-[#6b7280]">
+                <div className="mb-[11px] font-sans text-[13px] font-medium text-ink-3">
                   {q.required ? <span className="sr-only">{t("required")}</span> : t("optional")}
                 </div>
               )}
@@ -416,7 +416,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                       </button>
                     ))}
                   </div>
-                  <div aria-hidden className="mt-2 flex max-w-[270px] justify-between font-sans text-[13px] font-medium text-[#6b7280]">
+                  <div aria-hidden className="mt-2 flex max-w-[270px] justify-between font-sans text-[13px] font-medium text-ink-3">
                     <span>{t("scaleLow")}</span>
                     <span>{t("scaleHigh")}</span>
                   </div>
@@ -506,7 +506,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                 </label>
               )}
               {q.type === "consent" && (
-                <p className="mb-0 mt-2 font-sans text-[13.5px] text-[#4b5563]">
+                <p className="mb-0 mt-2 font-sans text-[13.5px] text-ink-2">
                   {t("consentDetails")}{" "}
                   <Link href={localize(lang, "/confidentialite")} target="_blank" className="font-semibold text-navy underline underline-offset-4">
                     {t("consentLink")}
@@ -541,7 +541,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
             type="button"
             onClick={prev}
             disabled={submitting}
-            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
+            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-ink-2 transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
           >
             {step <= 1 ? t("cancel") : `← ${t("prev")}`}
           </button>
@@ -639,7 +639,7 @@ function GeoField({
         disabled={locating}
         className={[
           "inline-flex cursor-pointer items-center gap-2 rounded-[11px] border-[1.5px] px-5 py-[13px] font-sans text-[15px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:cursor-wait disabled:opacity-70",
-          ok ? "border-cherry bg-cherry/[0.07] text-cherry" : "border-[rgba(16,27,43,0.2)] bg-white text-[#374151]",
+          ok ? "border-cherry bg-cherry/[0.07] text-cherry" : "border-[rgba(16,27,43,0.2)] bg-white text-ink-2",
         ].join(" ")}
       >
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -649,7 +649,7 @@ function GeoField({
         {locating ? t("locating") : ok ? t("found") : t("use")}
         {ok && !locating ? <CheckMark /> : null}
       </button>
-      <div aria-live="polite" className="my-[10px] font-sans text-[13.5px] font-medium text-[#4b5563]">
+      <div aria-live="polite" className="my-[10px] font-sans text-[13.5px] font-medium text-ink-2">
         {hint}
       </div>
       <input

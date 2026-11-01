@@ -59,7 +59,7 @@ export default function PageHero({
               : "border-white/[0.22] bg-white/[0.04]",
           ].join(" ")}
         >
-          <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_#e11d63]" />
+          <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-on-dark shadow-[0_0_10px_1px_var(--color-accent-on-dark)]" />
           <span
             className={`font-condensed text-[12.5px] font-semibold tracking-[1.6px] ${emphasis ? "text-white/95" : "text-white/90"}`}
           >
@@ -91,7 +91,7 @@ export default function PageHero({
 
 // Shared hero/CTA button styles.
 export const btnPrimary =
-  "inline-block rounded-full bg-cherry px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_18px_40px_-16px_rgba(160,4,45,.95)] transition-transform hover:-translate-y-[2px] hover:bg-[#c0093a]";
+  "inline-block rounded-full bg-cherry px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white shadow-[0_18px_40px_-16px_rgba(160,4,45,.95)] transition-transform hover:-translate-y-[2px] hover:bg-cherry-dark";
 export const btnGhost =
   "inline-block rounded-full border-[1.5px] border-white/[0.28] bg-white/[0.06] px-[30px] py-[17px] font-condensed text-[18px] font-semibold tracking-[0.6px] text-white transition-colors hover:bg-white/[0.14]";
 /** Slightly stronger contrast, used over the Accueil hero photo. */
