@@ -245,7 +245,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     return (
       <div className="rounded-[20px] bg-white px-6 py-[52px] text-center shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-pop sm:px-10">
         <div className="mx-auto mb-6 flex h-[82px] w-[82px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_36px_-16px_rgba(162,3,45,0.85)]">
-          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+          <svg aria-hidden width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 13l4 4L19 7" />
           </svg>
         </div>

@@ -101,7 +101,7 @@ export default async function MaintenanceScreen() {
                 className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent-on-dark hover:bg-white/[0.11]"
               >
                 <span className="inline-flex text-whatsapp">
-                  <svg viewBox="0 0 24 24" width="27" height="27" fill="currentColor">
+                  <svg aria-hidden viewBox="0 0 24 24" width="27" height="27" fill="currentColor">
                     <path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.94-.27-.1-.46-.15-.65.15-.19.29-.75.94-.92 1.13-.17.19-.34.21-.63.07-.29-.15-1.23-.45-2.34-1.44-.86-.77-1.45-1.72-1.62-2.01-.17-.29-.02-.45.13-.59.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.65-1.57-.89-2.15-.23-.56-.47-.48-.65-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38 0 1.4 1.02 2.76 1.17 2.95.15.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34z" />
                     <path d="M12 2a10 10 0 0 0-8.53 15.26L2 22l4.85-1.27A10 10 0 1 0 12 2zm0 18.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3.1.81.83-3.02-.2-.31A8.2 8.2 0 1 1 12 20.2z" />
                   </svg>
@@ -121,6 +121,7 @@ export default async function MaintenanceScreen() {
               >
                 <span className="inline-flex text-accent-on-dark">
                   <svg
+                    aria-hidden
                     viewBox="0 0 24 24"
                     width="27"
                     height="27"

@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const l = (p: SVGProps<SVGSVGElement>) => ({
-  viewBox: "0 0 24 24", width: "1em", height: "1em", fill: "none",
+  "aria-hidden": true, viewBox: "0 0 24 24", width: "1em", height: "1em", fill: "none",
   stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const, ...p,
 });

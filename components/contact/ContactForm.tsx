@@ -110,7 +110,7 @@ export default function ContactForm() {
       <div className="rounded-[20px] border border-navy/[0.08] bg-white p-10 shadow-[0_30px_60px_-44px_rgba(16,27,40,.5)]">
         <div className="py-10 text-center animate-pop">
           <div className="mx-auto mb-[22px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_34px_-16px_rgba(160,4,45,.8)]">
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <svg aria-hidden width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 13l4 4L19 7" />
             </svg>
           </div>
