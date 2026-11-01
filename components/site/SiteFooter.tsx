@@ -17,8 +17,9 @@ import {
 
 const colTitle =
   "mb-4 font-condensed text-[15px] font-bold uppercase tracking-[1.4px] text-white/50";
+// min-h-11: every footer link is a 44px touch target.
 const linkCls =
-  "font-sans text-[15.5px] text-white/[0.78] transition-colors hover:text-white";
+  "inline-flex min-h-11 items-center font-sans text-[15.5px] text-white/[0.78] transition-colors hover:text-white";
 
 export default async function SiteFooter() {
   const lang = await getLocale();
@@ -46,7 +47,7 @@ export default async function SiteFooter() {
 
           <div>
             <div className={colTitle}>{t("footer.navTitle")}</div>
-            <div className="flex flex-col gap-[11px]">
+            <div className="flex flex-col">
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={localize(lang, l.href)} className={linkCls}>
                   {t(`nav.${l.key}`)}
@@ -57,7 +58,7 @@ export default async function SiteFooter() {
 
           <div>
             <div className={colTitle}>{t("footer.quotesTitle")}</div>
-            <div className="flex flex-col gap-[11px]">
+            <div className="flex flex-col">
               <Link href={localize(lang, QUOTE.ip)} className={linkCls}>
                 <ClipboardIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.quoteIp")}
               </Link>
@@ -75,8 +76,8 @@ export default async function SiteFooter() {
 
           <div>
             <div className={colTitle}>{t("footer.contactTitle")}</div>
-            <div className="flex flex-col gap-[11px] font-sans text-[15px] leading-[1.4] text-white/[0.78]">
-              <span>
+            <div className="flex flex-col font-sans text-[15px] leading-[1.4] text-white/[0.78]">
+              <span className="inline-flex min-h-11 items-center">
                 <PinIcon className="mr-1 inline-block align-[-0.14em]" /> {t("footer.address")}
               </span>
               <a href={CONTACT.phoneHref} className={linkCls}>
@@ -90,11 +91,11 @@ export default async function SiteFooter() {
                 <GlobeIcon className="mr-1 inline-block align-[-0.14em]" /> {CONTACT.site}
               </a>
             </div>
-            <div className="mt-4 flex gap-[14px]">
-              <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/70 transition-colors hover:text-white">
+            <div className="-ml-3 mt-2 flex gap-1">
+              <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white">
                 <LinkedInIcon />
               </a>
-              <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white/70 transition-colors hover:text-white">
+              <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="inline-flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white">
                 <FacebookIcon />
               </a>
             </div>
@@ -103,13 +104,13 @@ export default async function SiteFooter() {
 
         <div className="flex flex-wrap items-center justify-between gap-4 pt-6">
           <div className="flex flex-wrap gap-5">
-            <Link href={localize(lang, "/mentions-legales")} className="font-sans text-[14px] text-white/55 hover:text-white">
+            <Link href={localize(lang, "/mentions-legales")} className="inline-flex min-h-11 items-center font-sans text-[14px] text-white/55 hover:text-white">
               {t("footer.legal")}
             </Link>
-            <Link href={localize(lang, "/confidentialite")} className="font-sans text-[14px] text-white/55 hover:text-white">
+            <Link href={localize(lang, "/confidentialite")} className="inline-flex min-h-11 items-center font-sans text-[14px] text-white/55 hover:text-white">
               {t("footer.privacy")}
             </Link>
-            <LangSwitch long className="font-sans text-[14px] text-white/55 hover:text-white" />
+            <LangSwitch long className="inline-flex min-h-11 items-center font-sans text-[14px] text-white/55 hover:text-white" />
           </div>
           <div className="font-sans text-[14px] text-white/45">
             {t("footer.rights")}

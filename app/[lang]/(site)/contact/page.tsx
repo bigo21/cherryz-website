@@ -88,16 +88,18 @@ export default async function Contact() {
                       <span className="text-[19px] leading-[1.3] text-white/80">
                         <c.Icon className="align-[-0.14em]" />
                       </span>
-                      <div>
-                        <div className="font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</div>
-                        {c.href ? (
-                          <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="font-sans text-[15.5px] text-white transition-colors hover:text-accent-on-dark">
-                            {c.v}
-                          </a>
-                        ) : (
+                      {/* A link wraps its label too: one touch target of at least 44px. */}
+                      {c.href ? (
+                        <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="group block min-h-11">
+                          <span className="block font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</span>
+                          <span className="block font-sans text-[15.5px] text-white transition-colors group-hover:text-accent-on-dark">{c.v}</span>
+                        </a>
+                      ) : (
+                        <div>
+                          <div className="font-condensed text-[13px] font-semibold tracking-[0.8px] text-white/50">{c.k}</div>
                           <div className="font-sans text-[15.5px] text-white">{c.v}</div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
