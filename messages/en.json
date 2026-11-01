@@ -507,13 +507,16 @@
       },
       "message": "Message",
       "messagePh": "Describe your project, your location, your needs…",
-      "errMissing": "Please enter your name, a valid email and what you need.",
       "errSend": "Something went wrong. Please try again or write to us at support@cherryz.tech.",
       "sending": "Sending…",
       "send": "Send my message",
       "sentTitle": "Message sent!",
       "sentBody": "Thank you {name}. Our team will get back to you within 24 hours. To speed things up, book a slot directly alongside.",
-      "again": "Send another message"
+      "again": "Send another message",
+      "errors": {
+        "name": "Please enter your name.",
+        "need": "Please choose what you need."
+      }
     }
   },
   "Quote": {

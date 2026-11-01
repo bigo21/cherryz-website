@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import FieldError from "@/components/site/FieldError";
 import { useLocale, useTranslations } from "next-intl";
 import { submitContactMessage } from "@/app/actions/contact";
 
@@ -10,6 +11,19 @@ const fieldCls =
   "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+// Required fields, in page order (the first invalid one gets the focus), with
+// the input id and the message keys: Validation.* for email, Contact.form.errors.* otherwise.
+type Required = "full_name" | "email" | "besoin";
+const FIELD_IDS: Record<Required, string> = { full_name: "c-name", email: "c-email", besoin: "c-besoin" };
+type ErrorKey = "name" | "need" | "email" | "emailFormat";
+
+function check(k: Required, value: string): ErrorKey | null {
+  if (k === "full_name") return value.trim() ? null : "name";
+  if (k === "besoin") return value ? null : "need";
+  if (!value.trim()) return "email";
+  return EMAIL_RE.test(value.trim()) ? null : "emailFormat";
+}
 
 // Stored values of the "need" select (as the team reads them), with their catalog keys.
 const NEEDS = [
@@ -21,6 +35,7 @@ const NEEDS = [
 export default function ContactForm() {
   const lang = useLocale();
   const t = useTranslations("Contact.form");
+  const tv = useTranslations("Validation");
   const [form, setForm] = useState({
     full_name: "",
     email: "",
@@ -32,15 +47,36 @@ export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Partial<Record<Required, ErrorKey>>>({});
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const value = e.target.value;
+    setForm((f) => ({ ...f, [k]: value }));
+    // An error shown under a field goes away as soon as the field is fixed.
+    if (k in errors) setErrors((errs) => ({ ...errs, [k]: check(k as Required, value) ?? undefined }));
+  };
+
+  const message = (key: ErrorKey) => (key === "email" || key === "emailFormat" ? tv(key) : t(`errors.${key}`));
+  /** Accessibility props of a required field, and its error under it. */
+  const field = (k: Required) => {
+    const err = errors[k];
+    const errId = `${FIELD_IDS[k]}-err`;
+    return {
+      props: { "aria-required": true, "aria-invalid": err ? true : undefined, "aria-describedby": err ? errId : undefined },
+      error: err ? <FieldError id={errId} message={message(err)} /> : null,
+    };
+  };
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (!form.full_name.trim() || !EMAIL_RE.test(form.email) || !form.besoin) {
-      setError(t("errMissing"));
+    const found = Object.fromEntries(
+      (Object.keys(FIELD_IDS) as Required[]).map((k) => [k, check(k, form[k]) ?? undefined]),
+    ) as Partial<Record<Required, ErrorKey>>;
+    setErrors(found);
+    const first = (Object.keys(FIELD_IDS) as Required[]).find((k) => found[k]);
+    if (first) {
+      document.getElementById(FIELD_IDS[first])?.focus();
       return;
     }
     setSubmitting(true);
@@ -63,6 +99,7 @@ export default function ContactForm() {
     setForm({ full_name: "", email: "", phone: "", company: "", besoin: "", message: "" });
     setSubmitted(false);
     setError(null);
+    setErrors({});
   }
 
   const firstName = form.full_name.trim().split(" ")[0];
@@ -102,11 +139,13 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2">
           <div>
             <label htmlFor="c-name" className={labelCls}>{t("name")}</label>
-            <input id="c-name" autoComplete="name" type="text" required value={form.full_name} onChange={set("full_name")} placeholder={t("namePh")} className={fieldCls} />
+            <input id="c-name" autoComplete="name" type="text" {...field("full_name").props} value={form.full_name} onChange={set("full_name")} placeholder={t("namePh")} className={fieldCls} />
+            {field("full_name").error}
           </div>
           <div>
             <label htmlFor="c-email" className={labelCls}>{t("email")}</label>
-            <input id="c-email" autoComplete="email" type="email" required value={form.email} onChange={set("email")} placeholder={t("emailPh")} className={fieldCls} />
+            <input id="c-email" autoComplete="email" type="email" {...field("email").props} value={form.email} onChange={set("email")} placeholder={t("emailPh")} className={fieldCls} />
+            {field("email").error}
           </div>
           <div>
             <label htmlFor="c-phone" className={labelCls}>{t("phone")}</label>
@@ -119,12 +158,13 @@ export default function ContactForm() {
         </div>
         <div className="mt-[18px]">
           <label htmlFor="c-besoin" className={labelCls}>{t("need")}</label>
-          <select id="c-besoin" required value={form.besoin} onChange={set("besoin")} className={fieldCls}>
+          <select id="c-besoin" {...field("besoin").props} value={form.besoin} onChange={set("besoin")} className={fieldCls}>
             <option value="">{t("needPh")}</option>
             {NEEDS.map(({ key, value }) => (
               <option key={key} value={value}>{t(`needs.${key}`)}</option>
             ))}
           </select>
+          {field("besoin").error}
         </div>
         <div className="mt-[18px]">
           <label htmlFor="c-message" className={labelCls}>{t("message")}</label>

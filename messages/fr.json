@@ -507,13 +507,16 @@
       },
       "message": "Message",
       "messagePh": "Décrivez votre projet, votre localisation, vos besoins…",
-      "errMissing": "Merci de renseigner votre nom, un email valide et votre besoin.",
       "errSend": "Une erreur est survenue. Merci de réessayer ou de nous écrire à support@cherryz.tech.",
       "sending": "Envoi en cours…",
       "send": "Envoyer mon message",
       "sentTitle": "Message envoyé !",
       "sentBody": "Merci {name}. Notre équipe vous recontacte sous 24h. Pour aller plus vite, réservez directement un créneau ci-contre.",
-      "again": "Envoyer un autre message"
+      "again": "Envoyer un autre message",
+      "errors": {
+        "name": "Indiquez votre nom.",
+        "need": "Choisissez votre besoin."
+      }
     }
   },
   "Quote": {
