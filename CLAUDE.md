@@ -72,6 +72,7 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 - Proximité : l'espace dans un groupe est toujours plus petit que l'espace entre deux groupes.
 - Boutons et badges `rounded-full`, cartes `rounded-2xl`, champs `rounded-xl`. Les grands aplats décoratifs (diagonale cerise) gardent des angles vifs.
 - Ombres : `shadow-card` et `shadow-cherry`, rien d'autre.
+- Surfaces décoratives déclarées dans `app/globals.css` : `diagonal-cherry` (aplat cerise en biais), `glow-cherry` (halo), `dash-cherry` (ligne pointillée), `scrim-hero` et `scrim-bottom` (voiles marine sur photo). Autres utilitaires : `icon-inline` (icône dans une ligne de texte), `grid-cols-label` (liste libellé / valeur), `text-vertical`, `pb-safe`, variantes `aria-current-page:` et `aria-invalid:`. Un besoin nouveau s'ajoute là, jamais en valeur entre crochets.
 
 ## Motion
 
@@ -107,7 +108,7 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 
 ## Interdits
 
-- Valeurs entre crochets pour une taille, un espacement, une couleur, une ombre ou une durée. Exceptions : `max-w-[65ch]`, `active:scale-[0.97]`, `sm:min-w-[280px]` (cartes de la page WiFi Zone).
+- Valeurs entre crochets pour une taille, un espacement, une couleur, une ombre ou une durée. Exceptions : `max-w-[65ch]`, `active:scale-[0.97]`.
 - Styles inline, sauf une variable CSS pour une valeur calculée.
 - Couleur hexadécimale dans un composant.
 - Badge pilule au-dessus d'un h1, mot coloré dans un titre, surtitre dans chaque section (deux par page au plus).
