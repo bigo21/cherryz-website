@@ -51,7 +51,7 @@ export default async function MaintenanceScreen() {
           alt="Cherryz"
           width={102}
           height={36}
-          priority
+          loading="eager"
           unoptimized
           className="block h-9 w-auto"
         />

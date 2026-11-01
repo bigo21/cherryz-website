@@ -60,7 +60,7 @@ export default function SiteNav() {
             alt="Cherryz"
             width={91}
             height={32}
-            priority
+            loading="eager"
             unoptimized
             className="block h-8 w-auto"
           />

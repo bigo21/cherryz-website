@@ -305,6 +305,8 @@ export default async function Home() {
                 <img
                   key={o.src}
                   src={o.src}
+                  loading="lazy"
+                  decoding="async"
                   alt={o.alt}
                   style={{ height: o.h }}
                   className="w-auto object-contain"

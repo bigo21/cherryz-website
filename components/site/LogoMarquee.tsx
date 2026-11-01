@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 // Logos are already optimised (≤15 KB each), so plain <img> keeps the intrinsic
-// aspect ratio without needing per-file dimensions.
+// aspect ratio without needing per-file dimensions. Lazy: they sit far below the
+// fold and must not compete with the hero (LCP) for bandwidth.
 
 export interface Logo {
   src: string;
@@ -23,6 +24,8 @@ export default function LogoMarquee({
       {logos.map((l) => (
         <img
           key={`${labelled ? "a" : "b"}-${l.src}`}
+          loading="lazy"
+          decoding="async"
           src={l.src}
           alt={labelled ? l.alt : ""}
           aria-hidden={labelled ? undefined : true}

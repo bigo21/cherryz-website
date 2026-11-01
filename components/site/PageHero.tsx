@@ -35,7 +35,8 @@ export default function PageHero({
         src={image}
         alt={imageAlt}
         fill
-        priority
+        preload
+        quality={50}
         sizes="100vw"
         className="object-cover opacity-40"
       />

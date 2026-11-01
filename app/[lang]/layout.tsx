@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { locales } from "@/lib/i18n/config";
+import { clientMessages } from "@/lib/i18n/client-messages";
 import { SITE_URL } from "@/lib/site/site";
 import { fontVariables } from "@/lib/fonts";
 import "../globals.css";
@@ -20,7 +21,8 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   return (
     <html lang={locale} className={fontVariables}>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {/* Client components of the chrome (nav, mobile bar, language switch) only need Chrome. */}
+        <NextIntlClientProvider messages={await clientMessages("Chrome")}>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

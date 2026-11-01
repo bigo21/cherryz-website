@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 import ContactForm from "@/components/contact/ContactForm";
+import { clientMessages } from "@/lib/i18n/client-messages";
 import { CalendarIcon, ClipboardIcon, ExternalIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/site/icons";
 import ExternalLink from "@/components/site/ExternalLink";
 import { CAL_IP, CAL_WIFI, CONTACT, QUOTE } from "@/lib/site/site";
@@ -75,7 +77,9 @@ export default async function Contact() {
           </div>
         </div>
         <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-10 px-6 md:px-12 lg:grid-cols-[1.35fr_1fr]">
-          <ContactForm />
+          <NextIntlClientProvider messages={await clientMessages("Chrome", "Contact.form", "Validation")}>
+            <ContactForm />
+          </NextIntlClientProvider>
 
           <div className="flex flex-col gap-[18px]">
             <div className="relative overflow-hidden rounded-[20px] bg-navy px-[30px] py-8 text-white">

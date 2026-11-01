@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 import QuoteWizard from "@/components/quote/QuoteWizard";
+import { clientMessages } from "@/lib/i18n/client-messages";
 import { GlobeIcon } from "@/components/site/icons";
 import { QUOTE } from "@/lib/site/site";
 import { localize } from "@/lib/i18n/config";
@@ -46,7 +48,9 @@ export default async function DemandeInternetB2B() {
 
       <section className="pb-[100px] pt-[50px]">
         <div className="mx-auto -mt-10 max-w-[700px] px-6">
-          <QuoteWizard type="ip" />
+          <NextIntlClientProvider messages={await clientMessages("Chrome", "Quote.wizard", "Questionnaire.ip", "Validation")}>
+            <QuoteWizard type="ip" />
+          </NextIntlClientProvider>
         </div>
       </section>
     </>
