@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,7 +11,9 @@ import LangSwitch from "./LangSwitch";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  // The menu remembers the page it was opened on, so navigating closes it.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const lang = useLocale();
   const t = useTranslations("Chrome");
@@ -24,8 +26,19 @@ export default function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the mobile menu on route change.
-  useEffect(() => setOpen(false), [pathname]);
+  const open = openOn === pathname;
+
+  // Escape closes the mobile menu and gives the focus back to its button.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenOn(null);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   const solid = scrolled || open;
   const quoteHref = localize(lang, quoteHrefFor(path));
@@ -61,6 +74,7 @@ export default function SiteNav() {
               <Link
                 key={l.href}
                 href={localize(lang, l.href)}
+                aria-current={active ? "page" : undefined}
                 className="font-condensed text-[15px] font-semibold tracking-[0.6px] transition-colors"
                 style={{ color: active ? "#fff" : "rgba(255,255,255,.72)" }}
               >
@@ -79,11 +93,13 @@ export default function SiteNav() {
 
         {/* Mobile toggle */}
         <button
+          ref={toggleRef}
           type="button"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setOpenOn(open ? null : pathname)}
           aria-label={open ? t("menuClose") : t("menuOpen")}
           aria-expanded={open}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
+          aria-controls="menu-mobile"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"
         >
           <span
             className="block h-[2px] w-6 bg-white transition-transform"
@@ -102,12 +118,13 @@ export default function SiteNav() {
 
       {/* Mobile panel */}
       {open && (
-        <div className="border-t border-white/10 bg-navy px-6 pb-6 pt-2 md:hidden">
+        <div id="menu-mobile" className="border-t border-white/10 bg-navy px-6 pb-6 pt-2 md:hidden">
           <div className="flex flex-col">
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={localize(lang, l.href)}
+                aria-current={l.href === path ? "page" : undefined}
                 className="border-b border-white/5 py-3 font-condensed text-[17px] font-semibold tracking-[0.6px] text-white/85"
               >
                 {t(`nav.${l.key}`)}
