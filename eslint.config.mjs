@@ -12,7 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local design handoff (git-ignored), not project code.
+    "design_handoff_site_cherryz/**",
   ]),
+  // Node scripts run as CommonJS.
+  { files: ["scripts/**/*.js"], rules: { "@typescript-eslint/no-require-imports": "off" } },
 ]);
 
 export default eslintConfig;
