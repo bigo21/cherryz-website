@@ -49,15 +49,18 @@
   --shadow-card: 0 24px 50px -34px rgba(16, 27, 40, 0.4);
   --shadow-cherry: 0 18px 40px -16px rgba(160, 4, 45, 0.95);
 
-  /* Motion: one curve for the whole site. */
+  /* Motion: one curve for the whole site. Hover and press: 150 ms (the default
+     transition). Small elements entering: 200 ms, 8px. Panels: 300 ms, 12px. */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: var(--ease-out-quint);
 
-  /* Animations */
-  --animate-fade: chzFade 0.8s both;
-  --animate-ripple: chzRipple 3.2s ease-out infinite;
-  --animate-float: chzFloat 6s ease-in-out infinite;
-  --animate-step: chzStep 0.3s both;
-  --animate-pop: chzPop 0.4s both;
+  /* Animations. The only infinite ones: logo waves and the client logo band. */
+  --animate-fade: chzFade 300ms var(--ease-out-quint) both;
+  --animate-ripple: chzRipple 3.2s var(--ease-out-quint) infinite;
+  --animate-ripple-late: chzRipple 3.2s var(--ease-out-quint) 1.6s infinite;
+  --animate-step: chzStep 200ms var(--ease-out-quint) both;
+  --animate-pop: chzPop 300ms var(--ease-out-quint) both;
   --animate-marquee-l: chzMarqueeL 32s linear infinite;
   --animate-marquee-r: chzMarqueeR 32s linear infinite;
 }
@@ -83,7 +86,7 @@
 @keyframes chzFade {
   from {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -105,20 +108,10 @@
   }
 }
 
-@keyframes chzFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
 @keyframes chzStep {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -129,11 +122,11 @@
 @keyframes chzPop {
   0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(12px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 }
 
@@ -162,33 +155,81 @@ body {
 }
 
 /*
- * Reveal on scroll (components/site/Reveal.tsx), pure CSS. Content is visible by
- * default — without JavaScript, on a slow connection, or in browsers without
- * scroll-driven animations — and only animates in where the browser supports it
- * and the visitor has not asked for reduced motion.
+ * Reveal on scroll (components/site/Reveal.tsx): 400 ms, 12px. Content is visible
+ * by default; it is hidden only once the small inline script of the root layout
+ * has run (html.reveal-on) and until it enters the viewport ([data-shown]).
  */
-@keyframes chzReveal {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on .reveal {
+    transition:
+      opacity 400ms var(--ease-out-quint),
+      transform 400ms var(--ease-out-quint);
+    transition-delay: calc(var(--reveal-delay, 0) * 1s);
   }
-  to {
-    opacity: 1;
-    transform: none;
+
+  .reveal-on .reveal:not([data-shown]) {
+    opacity: 0;
+    transform: translateY(12px);
   }
 }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: chzReveal linear both;
-      animation-timing-function: cubic-bezier(0.16, 0.7, 0.3, 1);
-      animation-timeline: view();
-      animation-range: entry calc(var(--reveal-delay, 0) * 100%)
-        entry calc(45% + var(--reveal-delay, 0) * 100%);
-    }
-  }
+/* Client logo band: stops on hover and while a logo has keyboard focus. */
+.marquee:hover *,
+.marquee:focus-within * {
+  animation-play-state: paused;
 }
+
+/*
+ * Decorative surfaces, built from the palette only. The cherry diagonal is a flat
+ * band with sharp corners; halos and scrims fade a palette colour to transparent.
+ */
+@utility diagonal-cherry {
+  background: var(--color-cherry);
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 14% 100%);
+}
+
+@utility glow-cherry {
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-cherry) 40%, transparent), transparent 68%);
+}
+
+@utility dash-cherry {
+  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-cherry) 35%, transparent) 0 8px, transparent 8px 16px);
+}
+
+/* Navy veil over a hero photo, darker at the top (nav) and the bottom. */
+@utility scrim-hero {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-navy) 72%, transparent), color-mix(in srgb, var(--color-navy) 58%, transparent) 45%, color-mix(in srgb, var(--color-navy) 80%, transparent));
+}
+
+/* Navy veil at the bottom of a photo card, under its caption. */
+@utility scrim-bottom {
+  background: linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--color-navy) 72%, transparent));
+}
+
+/* Icons set inline with text: aligned on the text's x-height. */
+@utility icon-inline {
+  display: inline-block;
+  vertical-align: -0.14em;
+}
+
+/* Vertical label read bottom to top (service card ribbons). */
+@utility text-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Two-column definition list: labels as wide as their content. */
+@utility grid-cols-label {
+  grid-template-columns: auto 1fr;
+}
+
+/* Bottom padding that clears the iPhone home indicator. */
+@utility pb-safe {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+@custom-variant aria-current-page (&[aria-current="page"]);
+@custom-variant aria-invalid (&[aria-invalid="true"]);
 
 @media (prefers-reduced-motion: reduce) {
   *,

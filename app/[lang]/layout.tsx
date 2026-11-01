@@ -5,6 +5,7 @@ import { locales } from "@/lib/i18n/config";
 import { clientMessages } from "@/lib/i18n/client-messages";
 import { SITE_URL } from "@/lib/site/site";
 import { fontVariables } from "@/lib/fonts";
+import RevealObserver from "@/components/site/RevealObserver";
 import "../globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,6 +24,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
       <body>
         {/* Client components of the chrome (nav, mobile bar, language switch) only need Chrome. */}
         <NextIntlClientProvider messages={await clientMessages("Chrome")}>{children}</NextIntlClientProvider>
+        <RevealObserver />
       </body>
     </html>
   );

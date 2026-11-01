@@ -1,9 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 
 /**
- * Reveal-on-scroll wrapper. The animation is pure CSS (`.reveal` in globals.css,
- * scroll-driven), so the content is server-rendered visible and never waits for
- * JavaScript. `delay` (seconds in the original prototypes) offsets the entry range.
+ * Reveal-on-scroll wrapper: 400 ms, 12px (`.reveal` in globals.css, driven by
+ * RevealObserver). The content is server-rendered visible. `delay` is in seconds.
  */
 export default function Reveal({
   children,
