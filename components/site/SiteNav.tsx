@@ -75,8 +75,7 @@ export default function SiteNav() {
                 key={l.href}
                 href={localize(lang, l.href)}
                 aria-current={active ? "page" : undefined}
-                className="font-condensed text-[15px] font-semibold tracking-[0.6px] transition-colors"
-                style={{ color: active ? "#fff" : "rgba(255,255,255,.72)" }}
+                className="font-condensed text-[15px] font-semibold tracking-[0.6px] text-white/70 decoration-accent-on-dark decoration-2 underline-offset-8 transition-colors duration-150 hover:text-white aria-[current=page]:text-white aria-[current=page]:underline"
               >
                 {t(`nav.${l.key}`)}
               </Link>
