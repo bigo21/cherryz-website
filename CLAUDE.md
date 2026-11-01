@@ -101,6 +101,8 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 - Le processus de l'accueil (général) et ceux de chaque offre (spécifiques) restent différents volontairement.
 - Typographie française : apostrophe ’, espace insécable avant ? ! : ; et dans « », majuscule au premier mot d'un titre seulement, « WiFi ».
 - Pas de flèche « → » tapée : icône SVG avec `aria-hidden`.
+- Nombres en français : espace fine insécable (U+202F) pour les milliers (« 45 000 »), espace insécable avant « % » (« 50 % »), vrai signe moins U+2212 (« −50 % »). Exception : l’image de partage (`opengraph-image.tsx`, rendue par Satori) n’a pas le glyphe U+202F, ses textes gardent U+00A0.
+- Toute icône décorative (dans un lien ou un bouton qui a déjà un texte ou un `aria-label`) porte `aria-hidden`. Les icônes de `components/site/icons.tsx` l’ont par défaut ; une icône SVG écrite ailleurs l’ajoute elle-même.
 - Ne modifie jamais un texte de contenu sans le signaler.
 
 ## Interdits
