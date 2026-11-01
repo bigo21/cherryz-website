@@ -225,7 +225,7 @@ export default async function WifiZone() {
               <div className="flex h-14 w-14 flex-none items-center justify-center rounded-[14px] bg-cherry">
                 <Dollar className="text-[26px] text-white" />
               </div>
-              <div className="min-w-[280px] flex-1">
+              <div className="min-w-0 basis-full sm:min-w-[280px] sm:flex-1 sm:basis-0">
                 <h4 className="m-0 font-condensed text-[24px] font-bold">{t("why.bandwidthTitle")}</h4>
                 <p className="mt-[6px] font-sans text-[15.5px] leading-[1.55] text-navy/[0.66]">
                   {t("why.bandwidthBody")}
