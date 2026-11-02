@@ -76,7 +76,7 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 - Proximité : l'espace dans un groupe est toujours plus petit que l'espace entre deux groupes.
 - Boutons et badges `rounded-full`, cartes `rounded-2xl`, champs `rounded-xl`. Les grands aplats décoratifs (diagonale cerise) gardent des angles vifs.
 - Ombres : `shadow-card` et `shadow-cherry`, rien d'autre.
-- Surfaces décoratives déclarées dans `app/globals.css` : `diagonal-cherry` (aplat cerise en biais à partir de md, triangle dans le coin supérieur droit en dessous, jamais sous du texte), `glow-cherry` (halo), `dash-cherry` (ligne pointillée), `scrim-hero` et `scrim-bottom` (voiles marine sur photo). Autres utilitaires : `icon-inline` (icône dans une ligne de texte), `grid-cols-label` (liste libellé / valeur), `text-vertical`, `pb-safe`, variantes `aria-current-page:` et `aria-invalid:`. Un besoin nouveau s'ajoute là, jamais en valeur entre crochets.
+- Surfaces décoratives déclarées dans `app/globals.css` : `diagonal-cherry` (aplat cerise en biais à partir de md, triangle dans le coin supérieur droit en dessous, jamais sous du texte), `glow-cherry` (halo), `dash-cherry` (ligne pointillée), `scrim-hero-side` (voile marine du hero, de gauche à droite à partir de md) et `scrim-bottom` (voile marine en bas d’une photo), `wave-ring` (onde d’une ville de la carte, décalée par `--wave-delay`). Autres utilitaires : `icon-inline` (icône dans une ligne de texte), `grid-cols-label` (liste libellé / valeur), `text-vertical`, `pb-safe`, variantes `aria-current-page:` et `aria-invalid:`. Un besoin nouveau s'ajoute là, jamais en valeur entre crochets.
 
 ## Motion
 
@@ -109,6 +109,7 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 - Nombres en français : espace fine insécable (U+202F) pour les milliers (« 45 000 »), espace insécable avant « % » (« 50 % »), vrai signe moins U+2212 (« −50 % »). Exception : l’image de partage (`opengraph-image.tsx`, rendue par Satori) n’a pas le glyphe U+202F, ses textes gardent U+00A0.
 - Toute icône décorative (dans un lien ou un bouton qui a déjà un texte ou un `aria-label`) porte `aria-hidden`. Les icônes de `components/site/icons.tsx` l’ont par défaut ; une icône SVG écrite ailleurs l’ajoute elle-même.
 - Ne modifie jamais un texte de contenu sans le signaler.
+- Contenu provisoire (photo, chiffre, ville, témoignage en attendant ceux de Cherryz) : toujours avec une étiquette `PlaceholderTag` visible et une entrée dans `lib/site/placeholders.ts` ou `docs/lot-5-contenus-provisoires.md`. Une photo sous licence libre garde son crédit dans l’étiquette.
 
 ## Interdits
 

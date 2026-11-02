@@ -64,8 +64,8 @@
     },
     "hero": {
       "eyebrow": "AGRÉGATEUR DE CONNECTIVITÉ · CAMEROUN",
-      "imageAlt": "Cherryz, réseau connecté",
-      "title": "L’Internet professionnel au meilleur prix.<br></br>Partout au Cameroun.",
+      "imageAlt": "Technicien télécom qui raccorde un câble en haut d’un poteau",
+      "title": "L’Internet professionnel au meilleur prix.",
       "subtitle": "Cherryz agrège les solutions des plus grands opérateurs (Camtel, Orange, MTN et bien d’autres) pour vous offrir une connexion dédiée, stable et jusqu’à 50 % moins chère. Sans travaux. Sans coupure.",
       "wifi": "Découvrir la WiFi Zone"
     },
@@ -185,6 +185,46 @@
     },
     "final": {
       "title": "Prêt à payer moins pour<br></br>un Internet meilleur ?"
+    },
+    "proof": {
+      "label": "Cherryz en chiffres",
+      "price": {
+        "value": "Dès 45 000",
+        "label": "XAF/Mbps/mois"
+      },
+      "operators": {
+        "value": "5",
+        "label": "opérateurs partenaires"
+      },
+      "clients": {
+        "value": "120",
+        "label": "entreprises clientes"
+      },
+      "cities": {
+        "value": "12",
+        "label": "villes couvertes"
+      }
+    },
+    "testimonials": {
+      "title": "Ce que nos clients ont obtenu",
+      "savings": {
+        "result": "40 % d’économie sur notre connexion",
+        "quote": "Nous payions 120 000 XAF/Mbps chez notre opérateur. Cherryz a trouvé une liaison équivalente à 72 000 et l’a testée chez nous avant que nous signions.",
+        "name": "Serge N.",
+        "role": "Responsable informatique, cabinet comptable, Yaoundé"
+      },
+      "install": {
+        "result": "Une IP fixe installée en 5 jours",
+        "quote": "Il nous fallait une IP publique pour nos caméras et notre logiciel de réservation. Le technicien est venu le lendemain de notre appel, et tout était en place à la fin de la semaine.",
+        "name": "Clarisse M.",
+        "role": "Directrice, hôtel, Kribi"
+      },
+      "wifi": {
+        "result": "150 000 XAF par mois avec notre WiFi Zone",
+        "quote": "Nos clients achètent un accès WiFi pendant qu’ils attendent leur commande. Cherryz a installé les bornes et configuré le paiement mobile : nous n’avons rien à gérer.",
+        "name": "Aïcha B.",
+        "role": "Gérante, restaurant, Garoua"
+      }
     }
   },
   "InternetB2B": {
@@ -194,7 +234,7 @@
     },
     "hero": {
       "eyebrow": "CONNEXION IP PUBLIQUE · B2B",
-      "imageAlt": "Datacenter Cherryz",
+      "imageAlt": "Professionnels au travail sur ordinateur dans un espace de Douala",
       "title": "Internet dédié, IP fixe.<br></br>Le meilleur du réseau camerounais, au meilleur prix.",
       "subtitle": "Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption.",
       "how": "Comment ça marche"
@@ -289,7 +329,7 @@
     },
     "hero": {
       "eyebrow": "WIFI ZONE · BUSINESS CLÉ EN MAIN",
-      "imageAlt": "Quartier camerounais connecté",
+      "imageAlt": "Clients attablés dans un restaurant de Douala",
       "title": "Lancez votre business WiFi.<br></br>On s’occupe de tout.",
       "subtitle": "Bâtiment, quartier, résidence, campus, marché, hôtel : quel que soit votre espace, Cherryz vous accompagne de l’idée à la rentabilité. On diagnostique, on dimensionne, on déploie, et on automatise l’infrastructure réseau de votre business.",
       "cases": "Découvrir nos réalisations"
@@ -1239,5 +1279,17 @@
       }
     },
     "metaTitle": "Page introuvable | Cherryz"
+  },
+  "Placeholder": {
+    "photo": "Photo provisoire, à remplacer",
+    "figures": "Chiffres d’exemple, à remplacer",
+    "cities": "Villes et opérateurs d’exemple, à remplacer",
+    "testimonials": "Témoignages d’exemple, à remplacer"
+  },
+  "Coverage": {
+    "title": "Partout au Cameroun",
+    "lead": "{count} villes couvertes. Dans chacune, nous comparons les opérateurs présents et choisissons le réseau le plus fiable pour votre adresse.",
+    "cityList": "Nos équipes interviennent à : {cities}.",
+    "operators": "Opérateurs :"
   }
 }

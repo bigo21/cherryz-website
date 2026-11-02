@@ -1,17 +1,20 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import type { PlaceholderPhoto } from "@/lib/site/placeholders";
+import PlaceholderTag from "./PlaceholderTag";
 
 /**
- * Dark, centered hero with a full-bleed photo background. The h1 and the
- * paragraph render without animation (LCP). `emphasis` (Accueil) sets the
- * paragraph in white for more contrast over the photo.
+ * Dark hero with a full-bleed field photo: text on the left half, the photo
+ * visible on the right half (left-to-right navy veil). The photo is the LCP
+ * element, so it loads first; the h1 and the paragraph render without
+ * animation. `emphasis` (Accueil) sets the paragraph in white.
  */
 export default function PageHero({
   eyebrow,
   title,
   subtitle,
   actions,
-  image,
+  photo,
   imageAlt,
   emphasis = false,
 }: {
@@ -19,38 +22,39 @@ export default function PageHero({
   title: ReactNode;
   subtitle: string;
   actions: ReactNode;
-  image: string;
+  photo: PlaceholderPhoto;
   imageAlt: string;
   emphasis?: boolean;
 }) {
   return (
-    <header
-      className="relative flex min-h-180 items-center justify-center overflow-hidden bg-navy text-center"
-    >
+    <header className="relative flex min-h-180 items-center overflow-hidden bg-navy">
       <Image
-        src={image}
+        src={photo.src}
         alt={imageAlt}
         fill
         preload
+        fetchPriority="high"
         quality={50}
         sizes="100vw"
-        className="object-cover opacity-40"
+        className="object-cover object-right"
       />
-      <div className="pointer-events-none absolute inset-0 z-1 scrim-hero" />
+      <div className="pointer-events-none absolute inset-0 z-1 scrim-hero-side" />
 
-      <div
-        className="pointer-events-none relative z-2 mx-auto flex w-full max-w-4xl flex-col items-center px-6 pb-24 pt-36 md:px-12"
-      >
-        <p className="mb-6 font-condensed text-caption font-semibold uppercase text-on-dark-2">{eyebrow}</p>
+      <div className="relative z-2 mx-auto w-full max-w-7xl px-6 pb-24 pt-36 md:px-12">
+        <div className="max-w-xl lg:max-w-2xl">
+          <p className="mb-6 font-condensed text-caption font-semibold uppercase text-on-dark-2">{eyebrow}</p>
 
-        <h1 className="m-0 font-condensed text-display font-bold tracking-tight text-balance text-white">{title}</h1>
+          <h1 className="m-0 font-condensed text-display font-bold tracking-tight text-balance text-white">{title}</h1>
 
-        <p className={`mt-6 max-w-[65ch] font-sans text-lead ${emphasis ? "text-white" : "text-on-dark-2"}`}>{subtitle}</p>
+          <p className={`mt-6 max-w-[65ch] font-sans text-lead ${emphasis ? "text-white" : "text-on-dark-2"}`}>{subtitle}</p>
 
-        <div className="pointer-events-auto mt-10 flex flex-wrap justify-center gap-4 animate-fade">
-          {actions}
+          <div className="mt-10 flex flex-wrap gap-4 animate-fade">
+            {actions}
+          </div>
         </div>
       </div>
+
+      <PlaceholderTag kind="photo" photo={photo} className="absolute inset-x-4 bottom-4 z-2 ml-auto w-fit" />
     </header>
   );
 }

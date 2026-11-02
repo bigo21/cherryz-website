@@ -7,6 +7,8 @@ import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import ReassuranceBar from "@/components/site/ReassuranceBar";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
+import CoverageSection from "@/components/site/CoverageSection";
+import { PLACEHOLDER_PHOTOS } from "@/lib/site/placeholders";
 import Reveal from "@/components/site/Reveal";
 import ExternalLink from "@/components/site/ExternalLink";
 import { ArrowDownIcon, ArrowRightIcon, ClipboardIcon, GlobeIcon, PhoneIcon, PinIcon } from "@/components/site/icons";
@@ -67,7 +69,7 @@ export default async function InternetB2B() {
     <>
       <PageHero
         eyebrow={t("hero.eyebrow")}
-        image="/photos/b2b-hero.jpg"
+        photo={PLACEHOLDER_PHOTOS.b2b}
         imageAlt={t("hero.imageAlt")}
         title={t.rich("hero.title", rich)}
         subtitle={t("hero.subtitle")}
@@ -172,6 +174,8 @@ export default async function InternetB2B() {
           </p>
         </div>
       </section>
+
+      <CoverageSection compact />
 
       {/* COMMENT ÇA MARCHE */}
       <section id="comment" className="scroll-mt-20 bg-white py-20 md:py-28">

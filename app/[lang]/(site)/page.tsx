@@ -4,12 +4,15 @@ import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import Reveal from "@/components/site/Reveal";
 import PageHero, { btnPrimary, btnGhostStrong, btnGhost } from "@/components/site/PageHero";
-import ReassuranceBar from "@/components/site/ReassuranceBar";
+import ProofBand from "@/components/site/ProofBand";
+import CoverageSection from "@/components/site/CoverageSection";
+import Testimonials from "@/components/site/Testimonials";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import LogoMarquee, { type Logo } from "@/components/site/LogoMarquee";
 import { ArrowRightIcon, CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
 import { QUOTE } from "@/lib/site/site";
+import { PLACEHOLDER_PHOTOS } from "@/lib/site/placeholders";
 import { localize } from "@/lib/i18n/config";
 import { rich } from "@/lib/i18n/rich";
 import { pageMetadata } from "@/lib/i18n/server";
@@ -75,7 +78,7 @@ export default async function Home() {
     <>
       <PageHero
         eyebrow={t("hero.eyebrow")}
-        image="/photos/accueil-hero.jpg"
+        photo={PLACEHOLDER_PHOTOS.home}
         imageAlt={t("hero.imageAlt")}
         emphasis
         title={t.rich("hero.title", rich)}
@@ -91,7 +94,7 @@ export default async function Home() {
           </>
         }
       />
-      <ReassuranceBar />
+      <ProofBand />
 
       {/* POURQUOI CHERRYZ */}
       <section id="pourquoi" className="bg-white py-20 md:py-28">
@@ -202,6 +205,8 @@ export default async function Home() {
         </div>
       </section>
 
+      <CoverageSection />
+
       {/* NOTRE APPROCHE */}
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
@@ -216,7 +221,7 @@ export default async function Home() {
                 key={s.n}
                 className="overflow-hidden rounded-2xl border border-line bg-white transition-all hover:-translate-y-1 hover:shadow-card"
               >
-                <div className="relative h-38">
+                <div className="relative hidden h-38 sm:block">
                   <Image
                     src={s.img}
                     alt={t(`approach.steps.${s.key}.alt`)}
@@ -225,7 +230,7 @@ export default async function Home() {
                     className="object-cover"
                   />
                 </div>
-                <div className="px-6 pb-6 pt-6">
+                <div className="p-5 sm:p-6">
                   <div className="font-condensed text-title-md font-bold leading-none tabular-nums text-accent">
                     {s.n}
                   </div>
@@ -284,8 +289,10 @@ export default async function Home() {
         </div>
       </section>
 
+      <Testimonials />
+
       {/* ILS NOUS FONT CONFIANCE */}
-      <section className="bg-surface py-20 md:py-28">
+      <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
           <Reveal className="mb-11 text-center">
             <h2 className="m-0 font-condensed text-title-lg font-bold tracking-tight">

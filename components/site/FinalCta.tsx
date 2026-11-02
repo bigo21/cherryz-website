@@ -26,7 +26,7 @@ export default function FinalCta({
           </p>
           <div className="mt-8 flex flex-wrap gap-4">{actions}</div>
         </div>
-        <div className="relative hidden h-60 w-60 flex-none items-center justify-center lg:flex">
+        <div className="waves relative hidden h-60 w-60 flex-none items-center justify-center lg:flex">
           <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple" />
           <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple-late" />
           {/* Lazy-loaded: the block is hidden below lg, so mobile never fetches it. */}

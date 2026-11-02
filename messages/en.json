@@ -64,8 +64,8 @@
     },
     "hero": {
       "eyebrow": "CONNECTIVITY AGGREGATOR · CAMEROON",
-      "imageAlt": "Cherryz, a connected network",
-      "title": "Business Internet at the best price.<br></br>Everywhere in Cameroon.",
+      "imageAlt": "Telecom technician connecting a cable at the top of a pole",
+      "title": "Business Internet at the best price.",
       "subtitle": "Cherryz brings together the offers of the largest operators (Camtel, Orange, MTN and many more) to give you a dedicated, stable connection at up to 50% less. No works. No downtime.",
       "wifi": "Discover the WiFi Zone"
     },
@@ -185,6 +185,46 @@
     },
     "final": {
       "title": "Ready to pay less for<br></br>better Internet?"
+    },
+    "proof": {
+      "label": "Cherryz in figures",
+      "price": {
+        "value": "From 45,000",
+        "label": "XAF/Mbps/month"
+      },
+      "operators": {
+        "value": "5",
+        "label": "partner operators"
+      },
+      "clients": {
+        "value": "120",
+        "label": "business clients"
+      },
+      "cities": {
+        "value": "12",
+        "label": "cities covered"
+      }
+    },
+    "testimonials": {
+      "title": "What our clients got",
+      "savings": {
+        "result": "40% savings on our connection",
+        "quote": "We were paying 120,000 XAF/Mbps to our operator. Cherryz found an equivalent link at 72,000 and tested it on our premises before we signed.",
+        "name": "Serge N.",
+        "role": "IT manager, accounting firm, Yaoundé"
+      },
+      "install": {
+        "result": "A static IP installed in 5 days",
+        "quote": "We needed a public IP for our cameras and booking software. The technician came the day after our call, and everything was in place by the end of the week.",
+        "name": "Clarisse M.",
+        "role": "Manager, hotel, Kribi"
+      },
+      "wifi": {
+        "result": "150,000 XAF a month from our WiFi Zone",
+        "quote": "Our customers buy WiFi access while they wait for their order. Cherryz installed the access points and set up mobile payment: we have nothing to manage.",
+        "name": "Aïcha B.",
+        "role": "Manager, restaurant, Garoua"
+      }
     }
   },
   "InternetB2B": {
@@ -194,7 +234,7 @@
     },
     "hero": {
       "eyebrow": "PUBLIC IP CONNECTION · B2B",
-      "imageAlt": "Cherryz datacenter",
+      "imageAlt": "Professionals working on laptops in a Douala workspace",
       "title": "Dedicated Internet, fixed IP.<br></br>The best of Cameroon’s networks, at the best price.",
       "subtitle": "Cherryz picks the best infrastructure among our partner operators (Camtel, Orange, MTN) and delivers a business connection with a dedicated IP, with no works and no downtime.",
       "how": "How it works"
@@ -289,7 +329,7 @@
     },
     "hero": {
       "eyebrow": "WIFI ZONE · TURNKEY BUSINESS",
-      "imageAlt": "A connected Cameroonian neighbourhood",
+      "imageAlt": "Customers seated in a Douala restaurant",
       "title": "Launch your WiFi business.<br></br>We take care of everything.",
       "subtitle": "Building, neighbourhood, residence, campus, market, hotel: whatever your space, Cherryz supports you from idea to profitability. We survey, size, deploy and automate your business’s network infrastructure.",
       "cases": "See our projects"
@@ -1239,5 +1279,17 @@
       }
     },
     "metaTitle": "Page not found | Cherryz"
+  },
+  "Placeholder": {
+    "photo": "Placeholder photo, to be replaced",
+    "figures": "Example figures, to be replaced",
+    "cities": "Example cities and operators, to be replaced",
+    "testimonials": "Example testimonials, to be replaced"
+  },
+  "Coverage": {
+    "title": "All across Cameroon",
+    "lead": "{count} cities covered. In each one, we compare the operators on the ground and pick the most reliable network for your address.",
+    "cityList": "Our teams work in {cities}.",
+    "operators": "Operators:"
   }
 }

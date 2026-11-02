@@ -3,7 +3,7 @@ import { CheckBadgeIcon } from "./icons";
 
 const items = ["art", "partners", "discount", "ip", "test"] as const;
 
-// Dark reassurance strip shown under the hero on Accueil and Internet B2B.
+// Dark reassurance strip shown under the Internet B2B hero.
 export default async function ReassuranceBar() {
   const t = await getTranslations("Chrome.reassurance");
   return (

@@ -4,6 +4,8 @@ import Link from "next/link";
 import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
+import CoverageSection from "@/components/site/CoverageSection";
+import { PLACEHOLDER_PHOTOS } from "@/lib/site/placeholders";
 import Reveal from "@/components/site/Reveal";
 import { ArrowDownIcon, ArrowRightIcon } from "@/components/site/icons";
 import ExternalLink from "@/components/site/ExternalLink";
@@ -98,7 +100,7 @@ export default async function WifiZone() {
     <>
       <PageHero
         eyebrow={t("hero.eyebrow")}
-        image="/photos/wifi-hero.jpg"
+        photo={PLACEHOLDER_PHOTOS.wifi}
         imageAlt={t("hero.imageAlt")}
         title={t.rich("hero.title", rich)}
         subtitle={t("hero.subtitle")}
@@ -236,6 +238,8 @@ export default async function WifiZone() {
           </Reveal>
         </div>
       </section>
+
+      <CoverageSection compact />
 
       {/* CAS D'USAGE */}
       <section id="cas" className="scroll-mt-20 bg-surface py-20 md:py-28">

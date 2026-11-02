@@ -6,6 +6,7 @@ import { clientMessages } from "@/lib/i18n/client-messages";
 import { SITE_URL } from "@/lib/site/site";
 import { fontVariables } from "@/lib/fonts";
 import RevealObserver from "@/components/site/RevealObserver";
+import WavesObserver from "@/components/site/WavesObserver";
 import "../globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
         {/* Client components of the chrome (nav, mobile bar, language switch) only need Chrome. */}
         <NextIntlClientProvider messages={await clientMessages("Chrome")}>{children}</NextIntlClientProvider>
         <RevealObserver />
+        <WavesObserver />
       </body>
     </html>
   );
