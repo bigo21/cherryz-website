@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 
-// Dark final CTA band with diagonal red wedge + rippling pictogram.
+// Dark final CTA band with diagonal red wedge + rippling pictogram. The pictogram
+// sits on the cherry wedge, so it uses the white monochrome version of the charte.
 export default function FinalCta({
   title,
   subtitle,
@@ -13,7 +14,7 @@ export default function FinalCta({
 }) {
   return (
     <section className="relative overflow-hidden bg-navy py-20 md:py-28">
-      <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 diagonal-cherry" />
+      <div className="absolute right-0 top-0 z-0 size-16 md:bottom-0 md:h-auto md:w-2/5 diagonal-cherry" />
       <div className="absolute -bottom-30 -left-30 z-0 h-90 w-90 rounded-full opacity-70 glow-cherry" />
       <div className="relative z-1 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-10 px-6 md:px-12">
         <div className="max-w-2xl">
@@ -28,14 +29,14 @@ export default function FinalCta({
         <div className="relative hidden h-60 w-60 flex-none items-center justify-center lg:flex">
           <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple" />
           <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple-late" />
-          {/* Optimised and lazy-loaded: the block is hidden below lg, so mobile never fetches it. */}
+          {/* Lazy-loaded: the block is hidden below lg, so mobile never fetches it. */}
           <Image
-            src="/brand/pictogram.png"
+            src="/brand/pictogram-white@2x.png"
             alt=""
-            width={130}
-            height={114}
-            sizes="130px"
-            className="relative h-auto w-32"
+            width={80}
+            height={105}
+            unoptimized
+            className="relative h-auto w-20"
           />
         </div>
       </div>

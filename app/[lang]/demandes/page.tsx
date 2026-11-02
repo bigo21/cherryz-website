@@ -25,7 +25,7 @@ export default async function Demandes() {
     <>
       {/* HEADER */}
       <header className="relative overflow-hidden bg-navy pb-22 pt-38">
-        <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 diagonal-cherry" />
+        <div className="absolute right-0 top-0 z-0 size-16 md:bottom-0 md:h-auto md:w-2/5 diagonal-cherry" />
         <div className="relative z-1 mx-auto max-w-7xl px-6 md:px-12">
           <p className="mb-6 font-condensed text-caption font-semibold uppercase text-on-dark-2">{t("eyebrow")}</p>
           <h1 className="m-0 max-w-3xl font-condensed text-title-lg font-bold tracking-tight text-balance text-white">

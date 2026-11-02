@@ -35,14 +35,14 @@ interface SavedState {
 }
 
 const inputClass =
-  "w-full rounded-xl border border-line bg-white px-4 py-3 text-body text-navy transition-colors placeholder:text-ink-3 focus:border-cherry aria-invalid:border-cherry";
+  "w-full rounded-xl border border-field bg-white px-4 py-3 text-body text-navy transition-colors placeholder:text-ink-3 focus:border-cherry aria-invalid:border-cherry";
 
 function chipClass(selected: boolean): string {
   return [
     "cursor-pointer font-sans text-body px-4 py-3 rounded-full transition border active:scale-[0.97]",
     selected
       ? "border-cherry bg-cherry/5 text-cherry font-semibold"
-      : "border-line bg-white text-ink-2 font-medium",
+      : "border-field bg-white text-ink-2 font-medium",
   ].join(" ");
 }
 
@@ -51,7 +51,7 @@ function scaleChipClass(selected: boolean): string {
     "cursor-pointer w-12 h-12 rounded-full font-condensed font-bold text-lead tabular-nums transition border active:scale-[0.97]",
     selected
       ? "border-cherry bg-cherry text-white"
-      : "border-line bg-white text-ink-2",
+      : "border-field bg-white text-ink-2",
   ].join(" ");
 }
 
@@ -494,7 +494,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                     aria-hidden
                     className={[
                       "flex h-6 w-6 flex-none items-center justify-center rounded-md border text-white",
-                      v === true ? "border-cherry bg-cherry" : "border-line bg-white",
+                      v === true ? "border-cherry bg-cherry" : "border-field bg-white",
                     ].join(" ")}
                   >
                     {v === true ? <CheckMark /> : null}
@@ -649,7 +649,7 @@ function GeoField({
         disabled={locating}
         className={[
           "inline-flex cursor-pointer items-center gap-2 rounded-full border px-5 py-3 font-sans text-body font-semibold transition active:scale-[0.97] disabled:cursor-wait disabled:opacity-60",
-          ok ? "border-cherry bg-cherry/5 text-cherry" : "border-line bg-white text-ink-2",
+          ok ? "border-cherry bg-cherry/5 text-cherry" : "border-field bg-white text-ink-2",
         ].join(" ")}
       >
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

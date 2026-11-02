@@ -16,6 +16,8 @@
   --color-ink-3: #70767e;
   --color-on-dark-2: #cfd1d4;
   --color-line: #e2e3e5;
+  /* Borders of form fields and questionnaire options (4.6:1 on white, WCAG 1.4.11). */
+  --color-field: #70767e;
   --color-surface: #f6f5f3;
   --color-cherry-tint: #f4e1e6;
 
@@ -181,11 +183,15 @@ body {
 
 /*
  * Decorative surfaces, built from the palette only. The cherry diagonal is a flat
- * band with sharp corners; halos and scrims fade a palette colour to transparent.
+ * band with sharp corners: a corner triangle below md (no text over it), a slanted
+ * band from md. Halos and scrims fade a palette colour to transparent.
  */
 @utility diagonal-cherry {
   background: var(--color-cherry);
-  clip-path: polygon(42% 0, 100% 0, 100% 100%, 14% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  @variant md {
+    clip-path: polygon(42% 0, 100% 0, 100% 100%, 14% 100%);
+  }
 }
 
 @utility glow-cherry {

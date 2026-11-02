@@ -9,7 +9,7 @@ import { ArrowRightIcon } from "@/components/site/icons";
 const labelCls =
   "mb-2 block font-condensed text-small font-semibold uppercase tracking-wide text-navy";
 const fieldCls =
-  "w-full rounded-xl border border-line bg-white px-4 py-3 text-body text-navy transition-colors placeholder:text-ink-3 focus:border-cherry";
+  "w-full rounded-xl border border-field bg-white px-4 py-3 text-body text-navy transition-colors placeholder:text-ink-3 focus:border-cherry";
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 

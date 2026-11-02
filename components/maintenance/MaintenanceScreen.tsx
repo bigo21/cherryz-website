@@ -17,7 +17,7 @@ export default async function MaintenanceScreen() {
       {/* Decorative halos + diagonal band */}
       <div className="absolute -right-35 -top-45 z-0 h-155 w-155 rounded-full opacity-80 glow-cherry" />
       <div className="absolute -bottom-55 -left-40 z-0 h-140 w-140 rounded-full opacity-40 glow-cherry" />
-      <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 opacity-15 diagonal-cherry" />
+      <div className="absolute right-0 top-0 z-0 size-16 md:bottom-0 md:h-auto md:w-2/5 opacity-15 diagonal-cherry" />
 
       {/* Illustration : calque d'arrière-plan, anchored right, does not affect the text width */}
       <div className="pointer-events-none absolute inset-y-0 -right-10 z-1 hidden items-center lg:flex">

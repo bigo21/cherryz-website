@@ -20,7 +20,7 @@ export default async function DemandeWifiZone() {
   return (
     <>
       <header className="relative overflow-hidden bg-navy pb-15 pt-35">
-        <div className="absolute bottom-0 right-0 top-0 z-0 w-2/5 diagonal-cherry" />
+        <div className="absolute right-0 top-0 z-0 size-16 md:bottom-0 md:h-auto md:w-2/5 diagonal-cherry" />
         <div className="relative z-1 mx-auto max-w-4xl px-6">
           <Link
             href={localize(lang, QUOTE.hub)}

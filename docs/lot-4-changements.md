@@ -6,7 +6,7 @@ Branche `design/lot-4`, à partir de `design/lot-3`. Ce document liste ce qui ch
 
 - `grep -rn "\-\[" app components` ne trouve que `max-w-[65ch]` et `active:scale-[0.97]`.
 - `grep -rn "style=" app components` ne trouve que des variables CSS (`--progress`, `--reveal-delay`, couleurs de l’illustration de maintenance). Seule l’image de partage (`opengraph-image.tsx`) garde des styles inline : son moteur (Satori) n’accepte que ceux-là.
-- Plus aucune couleur hexadécimale dans les composants, sauf le teint de peau de l’illustration de maintenance (`#B87B52`), seule couleur hors palette, laissé en attendant une décision.
+- Plus aucune couleur hexadécimale dans les composants, sauf le teint de peau de l’illustration de maintenance (`#B87B52`), seule couleur hors palette, gardé comme exception documentée.
 
 ## Système
 
@@ -22,7 +22,7 @@ Branche `design/lot-4`, à partir de `design/lot-3`. Ce document liste ce qui ch
   - Les textes `navy/xx` deviennent `ink-2`, et les textes `white/xx` deviennent `on-dark-2`.
   - La phrase « Vous préférez nous parler directement ? » de /demandes passe en `text-ink-2`.
   - Les numéros 01 à 06 de « Notre approche » passent de `cherry` à 30 % (moins de 3:1) à `accent`.
-  - Les bordures des champs restent en `line`, voir la question 2 plus bas.
+  - Les bordures des champs passent en `field`, voir les retours de l’audit plus bas.
 
 ## États et motion
 
@@ -59,7 +59,14 @@ Les mots des textes restants ne changent pas. Ces changements viennent des inter
    - `Maintenance.emailLabel` : E-mail / Email (avant : « EMAIL » écrit dans le composant)
    - `Home.trust.marqueeLabel` : « Logos de nos clients (défilement en pause au survol ou au focus) » / “Our clients’ logos (scrolling pauses on hover or focus)”, lu par les lecteurs d’écran seulement
 
-## Questions pour l’audit
+## Retours de l’audit
+
+1. **Pictogramme des appels finaux** : sur l’aplat cerise, le pictogramme en couleur n’avait plus que 1.3:1 de contraste. Il passe en version monochrome blanche (`public/brand/pictogram-white@2x.png`, 256 px de large, 5 Ko), tirée du pictogramme de la charte.
+2. **Teint de peau** (`#B87B52`) : gardé, documenté comme exception dans CLAUDE.md.
+3. **Bordures de champ** : nouveau token `field` (#70767e, 4.6:1 sur blanc). Il s’applique aux champs du formulaire de contact et du questionnaire, aux options du questionnaire (choix, échelle 1 à 5, case de consentement) et au bouton de géolocalisation. `line` reste pour les cartes et les séparateurs. Le bouton « Précédent » garde `line`, comme les autres boutons secondaires.
+4. **Diagonale sur mobile** : sous md, elle devient un triangle de 64 px dans le coin supérieur droit, sans texte dessus. Le changement est dans l’utilitaire `diagonal-cherry`, donc il vaut pour tous les en-têtes qui l’utilisent : Contact, appels finaux, /demandes et ses deux questionnaires, page de maintenance.
+
+## Questions pour l’audit (répondues)
 
 1. Le teint de peau de l’illustration de maintenance (`#B87B52`) est hors palette. Faut-il le garder comme exception, le remplacer par un gris de la palette, ou changer d’illustration ?
 2. Les bordures des champs sont en `line` (#e2e3e5, 1.3:1 sur blanc). Pour atteindre 3:1 (WCAG 1.4.11), il faudrait `ink-3`, ce qui détourne un token de texte. Faut-il un token de bordure de champ ?

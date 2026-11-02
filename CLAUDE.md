@@ -31,11 +31,14 @@ Ces règles viennent du brief de design du 31 octobre 2026. Elles s'appliquent �
 | `ink-2` | #404953 | Texte secondaire sur fond clair |
 | `ink-3` | #70767e | Texte tertiaire, sur blanc pur uniquement |
 | `on-dark-2` | #cfd1d4 | Texte secondaire sur marine |
-| `line` | #e2e3e5 | Bordures, séparateurs |
+| `line` | #e2e3e5 | Bordures de carte, séparateurs |
+| `field` | #70767e | Bordures de champ (input, select, textarea) et des options du questionnaire (4.6:1 sur blanc) |
 | `surface` | #f6f5f3 | Fond clair secondaire |
 | `cherry-tint` | #f4e1e6 | Fond léger d'un élément mis en avant |
 
 Couleurs de fonction autorisées : vert de confirmation #1f8a5b, vert WhatsApp pour le seul bouton WhatsApp.
+
+Exception documentée : le teint de peau #B87B52 de l’illustration de maintenance (`components/maintenance/MaintenanceIllustration.tsx`), déclaré en variable CSS. Une illustration de personne n’utilise pas la palette.
 
 À supprimer partout : #a2032d, #101b2b, #e11d63, #ff254f, #c0093a, #6b7280, #4b5563, #374151.
 
@@ -43,6 +46,7 @@ Règles :
 
 - Jamais de texte `cherry` ou `accent` sur fond `navy` (contraste 2.1:1 et 2.9:1). Sur marine : blanc, `on-dark-2` ou `accent-on-dark`.
 - L'accent colore des chiffres et des détails, jamais un mot dans un titre.
+- Sur l’aplat `cherry`, le pictogramme est en version monochrome blanche (`public/brand/pictogram-white@2x.png`), jamais en couleur.
 
 ## Typographie
 
@@ -72,7 +76,7 @@ Correspondances pour migrer l'existant : 15, 15.5, 16.5 px → `text-body` ; 13.
 - Proximité : l'espace dans un groupe est toujours plus petit que l'espace entre deux groupes.
 - Boutons et badges `rounded-full`, cartes `rounded-2xl`, champs `rounded-xl`. Les grands aplats décoratifs (diagonale cerise) gardent des angles vifs.
 - Ombres : `shadow-card` et `shadow-cherry`, rien d'autre.
-- Surfaces décoratives déclarées dans `app/globals.css` : `diagonal-cherry` (aplat cerise en biais), `glow-cherry` (halo), `dash-cherry` (ligne pointillée), `scrim-hero` et `scrim-bottom` (voiles marine sur photo). Autres utilitaires : `icon-inline` (icône dans une ligne de texte), `grid-cols-label` (liste libellé / valeur), `text-vertical`, `pb-safe`, variantes `aria-current-page:` et `aria-invalid:`. Un besoin nouveau s'ajoute là, jamais en valeur entre crochets.
+- Surfaces décoratives déclarées dans `app/globals.css` : `diagonal-cherry` (aplat cerise en biais à partir de md, triangle dans le coin supérieur droit en dessous, jamais sous du texte), `glow-cherry` (halo), `dash-cherry` (ligne pointillée), `scrim-hero` et `scrim-bottom` (voiles marine sur photo). Autres utilitaires : `icon-inline` (icône dans une ligne de texte), `grid-cols-label` (liste libellé / valeur), `text-vertical`, `pb-safe`, variantes `aria-current-page:` et `aria-invalid:`. Un besoin nouveau s'ajoute là, jamais en valeur entre crochets.
 
 ## Motion
 
