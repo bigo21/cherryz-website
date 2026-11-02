@@ -29,9 +29,9 @@ export default async function MaintenanceScreen() {
       {/* Header */}
       <header className="relative z-2 flex flex-wrap items-center gap-4 px-6 md:px-12 pt-8">
         <Image
-          src="/brand/logo-white@2x.png"
+          src="/brand/cherryz-logo-blanc.svg"
           alt="Cherryz"
-          width={102}
+          width={100}
           height={36}
           loading="eager"
           unoptimized

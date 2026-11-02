@@ -30,9 +30,9 @@ export default async function SiteFooter() {
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-11 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Image
-              src="/brand/logo-white@2x.png"
+              src="/brand/cherryz-logo-blanc.svg"
               alt="Cherryz"
-              width={91}
+              width={89}
               height={32}
               unoptimized
               className="mb-4 block h-8 w-auto"

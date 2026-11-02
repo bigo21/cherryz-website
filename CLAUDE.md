@@ -46,7 +46,7 @@ Règles :
 
 - Jamais de texte `cherry` ou `accent` sur fond `navy` (contraste 2.1:1 et 2.9:1). Sur marine : blanc, `on-dark-2` ou `accent-on-dark`.
 - L'accent colore des chiffres et des détails, jamais un mot dans un titre.
-- Sur l’aplat `cherry`, le pictogramme est en version monochrome blanche (`public/brand/pictogram-white@2x.png`), jamais en couleur.
+- Logos en SVG dans `public/brand/` (vectorisés depuis les PNG, en attendant les fichiers du designer) : `cherryz-logo-blanc.svg` sur fond sombre, `cherryz-logo-couleur.svg` sur fond clair, `cherryz-pictogramme-blanc.svg` sur l’aplat `cherry` (jamais le pictogramme en couleur), `cherryz-pictogramme.svg` réservé au futur favicon SVG. Dans un lien qui a son propre `aria-label`, l’image du logo porte `alt=""` et `aria-hidden`.
 
 ## Typographie
 

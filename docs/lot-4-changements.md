@@ -61,7 +61,8 @@ Les mots des textes restants ne changent pas. Ces changements viennent des inter
 
 ## Retours de l’audit
 
-1. **Pictogramme des appels finaux** : sur l’aplat cerise, le pictogramme en couleur n’avait plus que 1.3:1 de contraste. Il passe en version monochrome blanche (`public/brand/pictogram-white@2x.png`, 256 px de large, 5 Ko), tirée du pictogramme de la charte.
+1. **Pictogramme des appels finaux** : sur l’aplat cerise, le pictogramme en couleur n’avait plus que 1.3:1 de contraste. Il passe en version monochrome blanche, `public/brand/cherryz-pictogramme-blanc.svg`.
+5. **Logos en SVG** : `cherryz-logo-blanc.svg` remplace `logo-white@2x.png` dans le menu, le pied de page, la page de maintenance, l’en-tête des questionnaires et l’image de partage. Dans le menu et l’en-tête des questionnaires, le lien porte déjà son `aria-label` : le logo y est `aria-hidden`, avec `alt=""`. Les PNG inutilisés sont supprimés (`logo-color.png`, `logo-white.png`, `logo-white@2x.png`, `pictogram.png`, `pictogram-white@2x.png`). `cherryz-logo-couleur.svg` n’a pas encore d’usage : aucun logo n’est affiché sur fond clair aujourd’hui. `cherryz-pictogramme.svg` est gardé pour le futur favicon.
 2. **Teint de peau** (`#B87B52`) : gardé, documenté comme exception dans CLAUDE.md.
 3. **Bordures de champ** : nouveau token `field` (#70767e, 4.6:1 sur blanc). Il s’applique aux champs du formulaire de contact et du questionnaire, aux options du questionnaire (choix, échelle 1 à 5, case de consentement) et au bouton de géolocalisation. `line` reste pour les cartes et les séparateurs. Le bouton « Précédent » garde `line`, comme les autres boutons secondaires.
 4. **Diagonale sur mobile** : sous md, elle devient un triangle de 64 px dans le coin supérieur droit, sans texte dessus. Le changement est dans l’utilitaire `diagonal-cherry`, donc il vaut pour tous les en-têtes qui l’utilisent : Contact, appels finaux, /demandes et ses deux questionnaires, page de maintenance.

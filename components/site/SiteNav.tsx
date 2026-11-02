@@ -52,9 +52,10 @@ export default function SiteNav() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
         <Link href={localize(lang, "/")} className="flex min-h-11 items-center" aria-label={t("homeLabel")}>
           <Image
-            src="/brand/logo-white@2x.png"
-            alt="Cherryz"
-            width={91}
+            src="/brand/cherryz-logo-blanc.svg"
+            alt=""
+            aria-hidden
+            width={89}
             height={32}
             loading="eager"
             unoptimized

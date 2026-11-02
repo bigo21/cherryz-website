@@ -31,10 +31,10 @@ export default function FinalCta({
           <span className="absolute h-30 w-30 rounded-full border-2 border-white/45 animate-ripple-late" />
           {/* Lazy-loaded: the block is hidden below lg, so mobile never fetches it. */}
           <Image
-            src="/brand/pictogram-white@2x.png"
+            src="/brand/cherryz-pictogramme-blanc.svg"
             alt=""
             width={80}
-            height={105}
+            height={104}
             unoptimized
             className="relative h-auto w-20"
           />

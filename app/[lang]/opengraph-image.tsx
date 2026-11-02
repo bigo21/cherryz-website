@@ -21,7 +21,7 @@ export default async function Image({ params }: { params: Promise<{ lang: string
   const [bold, regular, logo] = await Promise.all([
     readFile(join(process.cwd(), "assets/fonts/BarlowCondensed-Bold.ttf")),
     readFile(join(process.cwd(), "assets/fonts/Barlow-Regular.ttf")),
-    readFile(join(process.cwd(), "public/brand/logo-white@2x.png")),
+    readFile(join(process.cwd(), "public/brand/cherryz-logo-blanc.svg")),
   ]);
 
   return new ImageResponse(
@@ -39,7 +39,7 @@ export default async function Image({ params }: { params: Promise<{ lang: string
           }}
         />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "72px 80px", width: 860 }}>
-          <img src={`data:image/png;base64,${logo.toString("base64")}`} alt="" width={158} height={56} />
+          <img src={`data:image/svg+xml;base64,${logo.toString("base64")}`} alt="" width={155} height={56} />
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div style={{ fontFamily: "Barlow Condensed", fontSize: 76, lineHeight: 0.98, color: "#fff" }}>{t("title")}</div>
             <div style={{ fontFamily: "Barlow", fontSize: 30, lineHeight: 1.4, color: PALETTE.onDark2 }}>{t("lead")}</div>
