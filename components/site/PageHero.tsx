@@ -5,7 +5,8 @@ import PlaceholderTag from "./PlaceholderTag";
 
 /**
  * Dark hero with a full-bleed field photo: text on the left half, the photo
- * visible on the right half (left-to-right navy veil). The photo is the LCP
+ * visible on the right half from lg (left-to-right navy veil; the paragraph
+ * stays within the opaque half). The photo is the LCP
  * element, so it loads first; the h1 and the paragraph render without
  * animation. `emphasis` (Accueil) sets the paragraph in white.
  */
@@ -46,7 +47,7 @@ export default function PageHero({
 
           <h1 className="m-0 font-condensed text-display font-bold tracking-tight text-balance text-white">{title}</h1>
 
-          <p className={`mt-6 max-w-[65ch] font-sans text-lead ${emphasis ? "text-white" : "text-on-dark-2"}`}>{subtitle}</p>
+          <p className={`mt-6 max-w-xl font-sans text-lead ${emphasis ? "text-white" : "text-on-dark-2"}`}>{subtitle}</p>
 
           <div className="mt-10 flex flex-wrap gap-4 animate-fade">
             {actions}

@@ -49,7 +49,7 @@ export default function SiteNav() {
       data-surface="dark"
       className={`fixed inset-x-0 top-0 z-100 border-b transition duration-300 ${solid ? "border-white/10 bg-navy shadow-card" : "border-transparent bg-transparent"}`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 lg:px-12">
         <Link href={localize(lang, "/")} className="flex min-h-11 items-center" aria-label={t("homeLabel")}>
           <Image
             src="/brand/cherryz-logo-blanc.svg"
@@ -64,7 +64,7 @@ export default function SiteNav() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 md:flex lg:gap-8">
           {NAV_LINKS.map((l) => {
             const active = l.href === path;
             return (

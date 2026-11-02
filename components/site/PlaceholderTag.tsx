@@ -1,21 +1,24 @@
 import { useTranslations } from "next-intl";
-import type { PlaceholderPhoto } from "@/lib/site/placeholders";
+import { IS_PRODUCTION, type PlaceholderKind, type PlaceholderPhoto } from "@/lib/site/placeholders";
 import ExternalLink from "./ExternalLink";
 
 /**
- * Visible "à remplacer" tag on provisional content (lib/site/placeholders.ts).
- * A photo's tag also carries its credit, as its free licence requires.
+ * Visible "à remplacer" tag on provisional content (lib/site/placeholders.ts),
+ * shown in previews only. A photo's tag also carries its credit, as its free
+ * licence requires. Rendering one in production throws, so the build fails
+ * while a placeholder remains.
  */
 export default function PlaceholderTag({
   kind,
   photo,
   className = "",
 }: {
-  kind: "photo" | "figures" | "cities" | "testimonials";
+  kind: PlaceholderKind;
   photo?: PlaceholderPhoto;
   className?: string;
 }) {
   const t = useTranslations("Placeholder");
+  if (IS_PRODUCTION) throw new Error(`Contenu provisoire en production (${kind}${photo ? ` : ${photo.src}` : ""}) : voir docs/lot-5-contenus-provisoires.md`);
   return (
     <p
       data-placeholder={kind}

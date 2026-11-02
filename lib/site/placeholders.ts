@@ -1,10 +1,33 @@
 /**
- * Provisional content, shown with a visible "à remplacer" tag (PlaceholderTag) and
- * marked `data-placeholder` in the HTML. Everything listed here must be replaced by
- * Cherryz's own material before going live; see docs/lot-5-contenus-provisoires.md.
+ * Registry of provisional content. Each item shows a "à remplacer" tag
+ * (PlaceholderTag, marked `data-placeholder`) in previews, and blocks the
+ * production build until it is replaced by Cherryz's own material: next.config.ts
+ * fails while this registry is not empty, PlaceholderTag throws when rendered in
+ * production. See docs/lot-5-contenus-provisoires.md.
  *
  * Photos: free licence (Wikimedia Commons, CC BY-SA 4.0), credited in their tag.
  */
+
+/** Provisional copy and data, by tag kind. Remove an entry once it is replaced. */
+export const PLACEHOLDER_CONTENT = {
+  figures: "Home.proof (messages/*.json)",
+  cities: "CITIES (lib/site/coverage.ts)",
+  testimonials: "Home.testimonials (messages/*.json)",
+} as const;
+
+export type PlaceholderKind = "photo" | keyof typeof PLACEHOLDER_CONTENT;
+
+/** True on Vercel's production deployments, where no placeholder may remain. */
+export const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
+
+/** Everything still provisional, for the production build guard. */
+export function remainingPlaceholders(): string[] {
+  return [
+    ...Object.values(PLACEHOLDER_PHOTOS).map((p) => p.src),
+    ...Object.values(PLACEHOLDER_CONTENT),
+  ];
+}
+
 export type PlaceholderPhoto = {
   src: string;
   author: string;

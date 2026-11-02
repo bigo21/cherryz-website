@@ -1,5 +1,11 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { IS_PRODUCTION, remainingPlaceholders } from "./lib/site/placeholders";
+
+// No provisional content in production (lib/site/placeholders.ts, docs/lot-5-contenus-provisoires.md).
+if (IS_PRODUCTION && remainingPlaceholders().length > 0) {
+  throw new Error(`Contenus provisoires restants, build de production refusé :\n- ${remainingPlaceholders().join("\n- ")}`);
+}
 
 const nextConfig: NextConfig = {
   // app/global-not-found.tsx: the root layout is the dynamic app/[lang], so the

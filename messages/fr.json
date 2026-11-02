@@ -193,7 +193,7 @@
         "label": "XAF/Mbps/mois"
       },
       "operators": {
-        "value": "5",
+        "value": "3",
         "label": "opérateurs partenaires"
       },
       "clients": {
@@ -235,7 +235,7 @@
     "hero": {
       "eyebrow": "CONNEXION IP PUBLIQUE · B2B",
       "imageAlt": "Professionnels au travail sur ordinateur dans un espace de Douala",
-      "title": "Internet dédié, IP fixe.<br></br>Le meilleur du réseau camerounais, au meilleur prix.",
+      "title": "Internet dédié, IP fixe, au meilleur prix.",
       "subtitle": "Cherryz sélectionne pour vous la meilleure infrastructure parmi nos partenaires opérateurs (Camtel, Orange, MTN) et vous livre une connexion professionnelle avec IP dédiée, sans travaux et sans interruption.",
       "how": "Comment ça marche"
     },

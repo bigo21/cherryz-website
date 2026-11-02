@@ -209,16 +209,16 @@ body {
 }
 
 /*
- * Navy veil of the hero: over the whole photo below md (text on top of it), then
- * a left-to-right fade that leaves the right half of the photo visible, with a
- * darker top under the transparent nav.
+ * Navy veil of the hero: over the whole photo below lg (text on top of it), then
+ * a left-to-right fade that leaves the right half of the photo visible: opaque
+ * under the text (left half), with a darker top under the transparent nav.
  */
 @utility scrim-hero-side {
   background: linear-gradient(180deg, color-mix(in srgb, var(--color-navy) 80%, transparent), color-mix(in srgb, var(--color-navy) 72%, transparent) 50%, color-mix(in srgb, var(--color-navy) 88%, transparent));
-  @variant md {
+  @variant lg {
     background:
       linear-gradient(180deg, color-mix(in srgb, var(--color-navy) 80%, transparent), transparent 160px),
-      linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 94%, transparent), color-mix(in srgb, var(--color-navy) 86%, transparent) 42%, color-mix(in srgb, var(--color-navy) 20%, transparent) 72%, transparent);
+      linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 92%, transparent) 50%, transparent 85%);
   }
 }
 

@@ -5,24 +5,24 @@
  * The outline is Natural Earth 1:10m (public domain), simplified and projected
  * (equirectangular, x scaled by cos 7.4°); `project` places cities in the same space.
  */
-export const OPERATORS = ["Orange", "MTN", "Camtel", "Nexttel", "YooMee"] as const;
+export const OPERATORS = ["Orange", "MTN", "Camtel"] as const;
 export type Operator = (typeof OPERATORS)[number];
 
 export type City = { name: string; lat: number; lon: number; operators: readonly Operator[] };
 
 export const CITIES: readonly City[] = [
-  { name: "Yaoundé", lat: 3.848, lon: 11.502, operators: ["Orange", "MTN", "Camtel", "Nexttel", "YooMee"] },
-  { name: "Douala", lat: 4.051, lon: 9.768, operators: ["Orange", "MTN", "Camtel", "Nexttel", "YooMee"] },
-  { name: "Bafoussam", lat: 5.478, lon: 10.418, operators: ["Orange", "MTN", "Camtel", "Nexttel"] },
-  { name: "Bamenda", lat: 5.96, lon: 10.146, operators: ["Orange", "MTN", "Camtel"] },
-  { name: "Buea", lat: 4.155, lon: 9.243, operators: ["Orange", "MTN", "Camtel", "Nexttel"] },
-  { name: "Kribi", lat: 2.94, lon: 9.91, operators: ["Orange", "MTN", "Camtel"] },
-  { name: "Ebolowa", lat: 2.915, lon: 11.154, operators: ["Orange", "MTN", "Camtel"] },
-  { name: "Bertoua", lat: 4.577, lon: 13.685, operators: ["Orange", "MTN", "Camtel"] },
-  { name: "Ngaoundéré", lat: 7.327, lon: 13.584, operators: ["Orange", "MTN", "Camtel", "Nexttel"] },
-  { name: "Garoua", lat: 9.301, lon: 13.397, operators: ["Orange", "MTN", "Camtel", "Nexttel"] },
-  { name: "Maroua", lat: 10.591, lon: 14.316, operators: ["Orange", "MTN", "Camtel"] },
-  { name: "Nkongsamba", lat: 4.954, lon: 9.94, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Yaoundé", lat: 3.848, lon: 11.502, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Douala", lat: 4.051, lon: 9.768, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Bafoussam", lat: 5.478, lon: 10.418, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Bamenda", lat: 5.96, lon: 10.146, operators: ["Orange", "MTN"] },
+  { name: "Buea", lat: 4.155, lon: 9.243, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Kribi", lat: 2.94, lon: 9.91, operators: ["Orange", "Camtel"] },
+  { name: "Ebolowa", lat: 2.915, lon: 11.154, operators: ["MTN", "Camtel"] },
+  { name: "Bertoua", lat: 4.577, lon: 13.685, operators: ["Orange", "Camtel"] },
+  { name: "Ngaoundéré", lat: 7.327, lon: 13.584, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Garoua", lat: 9.301, lon: 13.397, operators: ["Orange", "MTN", "Camtel"] },
+  { name: "Maroua", lat: 10.591, lon: 14.316, operators: ["Orange", "MTN"] },
+  { name: "Nkongsamba", lat: 4.954, lon: 9.94, operators: ["MTN", "Camtel"] },
 ];
 
 export const MAP_WIDTH = 318;
