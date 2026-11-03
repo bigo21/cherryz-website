@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import type { Answers, QuoteType } from "@/lib/quote/schemas";
 import { quoteTypeLabel, summarizeAnswers } from "@/lib/quote/summary";
+import { BIZLINK, CONTACT } from "@/lib/site/site";
 
 export interface Contact {
   full_name: string | null;
@@ -73,6 +74,14 @@ function teamEmailHtml(
 
 function prospectEmailHtml(firstName: string, type: QuoteType): string {
   const hi = firstName ? `Merci ${esc(firstName)} !` : "Merci !";
+  const intro =
+    type === "bizlink"
+      ? `Votre demande pour la <strong>promo BizLink à 75 000 FCFA / mois TTC</strong> a bien été reçue. Notre équipe va vérifier l'éligibilité de votre structure et vous recontactera pour l'étude de faisabilité.`
+      : `Votre demande de cotation <strong>${esc(quoteTypeLabel(type))}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.`;
+  const wa =
+    type === "bizlink"
+      ? { href: BIZLINK.whatsapp, display: BIZLINK.whatsappDisplay }
+      : { href: CONTACT.whatsapp, display: CONTACT.phoneDisplay };
   return `
   <div style="font-family:Arial,Helvetica,sans-serif;background:#f6f5f3;padding:24px">
     <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -18px rgba(16,27,40,.4)">
@@ -80,10 +89,10 @@ function prospectEmailHtml(firstName: string, type: QuoteType): string {
         <h1 style="margin:0;color:#fff;font-size:24px">${hi}</h1>
       </div>
       <div style="padding:26px;color:${NAVY};font-size:15px;line-height:1.6">
-        <p style="margin:0 0 16px">Votre demande de cotation <strong>${esc(quoteTypeLabel(type))}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.</p>
+        <p style="margin:0 0 16px">${intro}</p>
         <p style="margin:0 0 16px">En attendant, vous pouvez nous joindre directement :</p>
         <ul style="margin:0 0 20px;padding-left:18px;color:#4b5563">
-          <li>WhatsApp : <a href="https://wa.me/237242014664" style="color:${CHERRY}">+237 242 01 46 64</a></li>
+          <li>WhatsApp : <a href="${wa.href}" style="color:${CHERRY}">${wa.display}</a></li>
           <li>Email : <a href="mailto:support@cherryz.tech" style="color:${CHERRY}">support@cherryz.tech</a></li>
         </ul>
         <p style="margin:24px 0 0;font-weight:700;color:${CHERRY}">Cherryz — Vous connecte !</p>

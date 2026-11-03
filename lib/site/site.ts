@@ -13,8 +13,18 @@ export const QUOTE = {
 
 export const QUOTE_LABEL = "Obtenir mon devis";
 
+/** Promo BizLink: a sub-page of Internet B2B, with its own form and WhatsApp line. */
+export const BIZLINK = {
+  href: "/internet-b2b/bizlink",
+  formHref: "/internet-b2b/bizlink#formulaire",
+  cta: "Profiter de la promo",
+  whatsappDisplay: "+237 658 60 20 54",
+  whatsapp: "https://wa.me/237658602054",
+} as const;
+
 /** The questionnaire matching the page the visitor is on (the choice page otherwise). */
 export function quoteHrefFor(pathname: string | null): string {
+  if (pathname?.startsWith(BIZLINK.href)) return BIZLINK.formHref;
   if (pathname?.startsWith("/internet-b2b")) return QUOTE.ip;
   if (pathname?.startsWith("/wifi-zone")) return QUOTE.wifi;
   return QUOTE.hub;

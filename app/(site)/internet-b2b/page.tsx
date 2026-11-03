@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero, { btnPrimary, btnGhost } from "@/components/site/PageHero";
 import ReassuranceBar from "@/components/site/ReassuranceBar";
+import BizlinkBanner from "@/components/site/BizlinkBanner";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import Reveal from "@/components/site/Reveal";
@@ -80,6 +81,7 @@ export default function InternetB2B() {
         }
       />
       <ReassuranceBar />
+      <BizlinkBanner />
 
       {/* QU'EST-CE QU'UNE IP DÉDIÉE */}
       <section className="bg-white pb-24 pt-[104px]">

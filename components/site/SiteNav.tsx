@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
+import { BIZLINK, NAV_LINKS, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
 
 export default function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,6 +23,7 @@ export default function SiteNav() {
 
   const solid = scrolled || open;
   const quoteHref = quoteHrefFor(pathname);
+  const quoteLabel = pathname?.startsWith(BIZLINK.href) ? BIZLINK.cta : QUOTE_LABEL;
 
   return (
     <nav
@@ -48,7 +49,8 @@ export default function SiteNav() {
         {/* Desktop links */}
         <div className="hidden items-center gap-[34px] md:flex">
           {NAV_LINKS.map((l) => {
-            const active = l.href === pathname;
+            // A sub-page (Internet B2B › BizLink) keeps its parent link active.
+            const active = l.href === "/" ? pathname === "/" : !!pathname?.startsWith(l.href);
             return (
               <Link
                 key={l.href}
@@ -64,7 +66,7 @@ export default function SiteNav() {
             href={quoteHref}
             className="rounded-full bg-cherry-alt px-[22px] py-3 font-condensed text-[15px] font-semibold tracking-[0.6px] text-white shadow-[0_12px_28px_-14px_rgba(160,4,45,.9)] transition-transform hover:-translate-y-px hover:bg-[#c0093a]"
           >
-            {QUOTE_LABEL} →
+            {quoteLabel} →
           </Link>
         </div>
 
@@ -108,7 +110,7 @@ export default function SiteNav() {
               href={quoteHref}
               className="mt-4 rounded-full bg-cherry-alt px-6 py-3 text-center font-condensed text-[16px] font-semibold tracking-[0.6px] text-white"
             >
-              {QUOTE_LABEL} →
+              {quoteLabel} →
             </Link>
           </div>
         </div>

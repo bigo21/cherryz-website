@@ -2,7 +2,7 @@
 // (DCLogic.schemaIP / schemaWifi). The conditional logic (`cond`) must also be
 // enforced server-side before persisting.
 
-export type QuoteType = "ip" | "wifi";
+export type QuoteType = "ip" | "wifi" | "bizlink";
 
 export type FieldType =
   | "single"
@@ -151,9 +151,34 @@ export const schemaWifi: Step[] = [
   },
 ];
 
+// Promo BizLink 75 000 FCFA (landing /internet-b2b/bizlink): a short form, fields
+// from the Trello card (structure, type, ville, contact, besoin en débit).
+export const schemaBizlink: Step[] = [
+  {
+    title: "Votre structure",
+    subtitle: "Pour vérifier votre éligibilité à la promo.",
+    questions: [
+      { id: "q1", label: "Quel type de structure êtes-vous ?", type: "single", required: true, options: ["École", "Hôtel 1 étoile", "Hôtel 2 étoiles", "Microfinance"] },
+      { id: "q2", label: "Nom de votre structure", type: "text", required: true, placeholder: "Nom de la structure" },
+      { id: "q3", label: "Ville et quartier", type: "text", required: true, placeholder: "Ex. Douala, Akwa" },
+      { id: "q4", label: "De quel débit avez-vous besoin ?", type: "single", required: true, options: ["Moins de 50 Mbps", "50 – 100 Mbps", "100 – 250 Mbps", "Je ne sais pas encore"] },
+    ],
+  },
+  {
+    title: "Vos coordonnées",
+    subtitle: "Pour que notre équipe puisse vous recontacter.",
+    questions: [
+      { id: "q16", label: "Votre prénom et nom complet", type: "text", required: true, placeholder: "Prénom Nom" },
+      { id: "q17", label: "Numéro WhatsApp / Téléphone", type: "tel", required: true, placeholder: "+237 6 00 00 00 00" },
+      { id: "q18", label: "Adresse email", type: "email", required: true, placeholder: "vous@structure.com" },
+      { id: "q19", label: "On reste en contact ?", type: "consent", required: true },
+    ],
+  },
+];
+
 export function getSchema(type: QuoteType): Step[] {
+  if (type === "bizlink") return schemaBizlink;
   return type === "wifi" ? schemaWifi : schemaIP;
 }
 
-export const sessionKey = (type: QuoteType) =>
-  type === "ip" ? "chz_form_ip_v2" : "chz_form_wifi_v2";
+export const sessionKey = (type: QuoteType) => `chz_form_${type}_v2`;

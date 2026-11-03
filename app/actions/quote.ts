@@ -30,6 +30,14 @@ function extractContact(type: QuoteType, a: Answers) {
       company: str("q18"),
     };
   }
+  if (type === "bizlink") {
+    return {
+      full_name: str("q16"),
+      email: str("q18"),
+      phone: str("q17"),
+      company: str("q2"),
+    };
+  }
   // wifi
   return {
     full_name: str("q16"),
@@ -48,7 +56,7 @@ export async function submitQuoteRequest(
 ): Promise<SubmitResult> {
   const { type, answers, tracking } = payload ?? ({} as SubmitPayload);
 
-  if (type !== "ip" && type !== "wifi") {
+  if (type !== "ip" && type !== "wifi" && type !== "bizlink") {
     return { ok: false, error: "invalid_type" };
   }
 

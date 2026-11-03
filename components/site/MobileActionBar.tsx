@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CONTACT, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
+import { BIZLINK, CONTACT, QUOTE_LABEL, quoteHrefFor } from "@/lib/site/site";
 import { WhatsAppIcon } from "./icons";
 
 /**
@@ -13,6 +13,7 @@ import { WhatsAppIcon } from "./icons";
 export default function MobileActionBar() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
+  const bizlink = pathname?.startsWith(BIZLINK.href) ?? false;
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 420);
@@ -34,10 +35,10 @@ export default function MobileActionBar() {
             href={quoteHrefFor(pathname)}
             className="flex-1 rounded-full bg-cherry-alt px-5 py-[13px] text-center font-condensed text-[16px] font-semibold tracking-[0.5px] text-white"
           >
-            {QUOTE_LABEL} →
+            {bizlink ? BIZLINK.cta : QUOTE_LABEL} →
           </Link>
           <a
-            href={CONTACT.whatsapp}
+            href={bizlink ? BIZLINK.whatsapp : CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nous écrire sur WhatsApp"

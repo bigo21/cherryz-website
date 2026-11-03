@@ -4,6 +4,7 @@ import Link from "next/link";
 import Reveal from "@/components/site/Reveal";
 import PageHero, { btnPrimary, btnGhostStrong, btnGhost } from "@/components/site/PageHero";
 import ReassuranceBar from "@/components/site/ReassuranceBar";
+import BizlinkBanner from "@/components/site/BizlinkBanner";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
 import LogoMarquee, { type Logo } from "@/components/site/LogoMarquee";
@@ -94,6 +95,7 @@ export default function Home() {
         }
       />
       <ReassuranceBar />
+      <BizlinkBanner />
 
       {/* POURQUOI CHERRYZ */}
       <section id="pourquoi" className="bg-white pb-24 pt-[110px]">
