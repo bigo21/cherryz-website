@@ -6,8 +6,8 @@ import Reveal from "@/components/site/Reveal";
 import Countdown from "@/components/bizlink/Countdown";
 import BizlinkForm from "@/components/bizlink/BizlinkForm";
 import { CAMEROON, MAP_VIEWBOX, RELAYS } from "@/components/bizlink/cameroon";
-import { CheckLineIcon, ClipboardIcon, MailIcon, PhoneIcon, WhatsAppIcon, WifiIcon, GlobeIcon } from "@/components/site/icons";
-import { BIZLINK, CONTACT } from "@/lib/site/site";
+import { CheckLineIcon, ClipboardIcon, PhoneIcon, WifiIcon } from "@/components/site/icons";
+import { BIZLINK } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "BizLink : l'Internet professionnel par onde radio | Cherryz",
@@ -470,20 +470,6 @@ export default function Bizlink() {
                 <p className="m-0 max-w-[760px] pb-4 font-sans text-[16px] leading-[1.55] text-navy/70">{f.a}</p>
               </details>
             ))}
-          </div>
-          <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 font-sans text-[16px] text-navy">
-            <a href={BIZLINK.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold hover:text-cherry-alt">
-              <WhatsAppIcon className="h-[18px] w-[18px] text-whatsapp" />
-              WhatsApp {BIZLINK.whatsappDisplay}
-            </a>
-            <a href={CONTACT.emailHref} className="inline-flex items-center gap-2 font-semibold hover:text-cherry-alt">
-              <MailIcon className="text-cherry-alt" />
-              {CONTACT.email}
-            </a>
-            <a href={CONTACT.siteHref} className="inline-flex items-center gap-2 font-semibold hover:text-cherry-alt">
-              <GlobeIcon className="text-cherry-alt" />
-              {CONTACT.site}
-            </a>
           </div>
         </div>
       </section>

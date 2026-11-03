@@ -19,6 +19,7 @@ export const BIZLINK = {
   formHref: "/bizlink#formulaire",
   cta: "Demandez notre étude",
   whatsappDisplay: "+237 658 60 20 54",
+  phoneHref: "tel:+237658602054",
   whatsapp: "https://wa.me/237658602054",
 } as const;
 

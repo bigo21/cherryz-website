@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CAL_IP, CAL_WIFI, CONTACT, NAV_LINKS, QUOTE } from "@/lib/site/site";
+import FooterPhone from "./FooterPhone";
 import {
   CalendarIcon,
   ClipboardIcon,
@@ -8,7 +9,6 @@ import {
   GlobeIcon,
   LinkedInIcon,
   MailIcon,
-  PhoneIcon,
   PinIcon,
 } from "./icons";
 
@@ -77,10 +77,7 @@ export default function SiteFooter() {
               <span>
                 <PinIcon className="mr-1 inline-block align-[-0.14em]" /> {CONTACT.address}
               </span>
-              <a href={CONTACT.phoneHref} className={linkCls}>
-                <PhoneIcon className="mr-1 inline-block align-[-0.14em]" />{" "}
-                {CONTACT.phoneDisplay}
-              </a>
+              <FooterPhone className={linkCls} />
               <a href={CONTACT.emailHref} className={linkCls}>
                 <MailIcon className="mr-1 inline-block align-[-0.14em]" /> {CONTACT.email}
               </a>
