@@ -13,11 +13,11 @@ export const QUOTE = {
 
 export const QUOTE_LABEL = "Obtenir mon devis";
 
-/** Promo BizLink: a sub-page of Internet B2B, with its own form and WhatsApp line. */
+/** BizLink, Internet by radio link: its own page, form and WhatsApp line. */
 export const BIZLINK = {
-  href: "/internet-b2b/bizlink",
-  formHref: "/internet-b2b/bizlink#formulaire",
-  cta: "Profiter de la promo",
+  href: "/bizlink",
+  formHref: "/bizlink#formulaire",
+  cta: "Demandez notre étude",
   whatsappDisplay: "+237 658 60 20 54",
   whatsapp: "https://wa.me/237658602054",
 } as const;

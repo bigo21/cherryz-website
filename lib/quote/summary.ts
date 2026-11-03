@@ -60,4 +60,4 @@ export function summarizeAnswers(
 }
 
 export const quoteTypeLabel = (type: QuoteType) =>
-  ({ ip: "IP Publique Dédiée", wifi: "WiFi Zone", bizlink: "Promo BizLink 75 000 FCFA" })[type];
+  ({ ip: "IP Publique Dédiée", wifi: "WiFi Zone", bizlink: "BizLink" })[type];

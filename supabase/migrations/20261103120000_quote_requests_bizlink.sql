@@ -1,4 +1,4 @@
--- Promo BizLink 75 000 FCFA: its form (on /internet-b2b/bizlink) stores its requests
+-- BizLink: its form (on /bizlink) stores its requests
 -- in cherryz.quote_requests with type 'bizlink'.
 
 alter table cherryz.quote_requests

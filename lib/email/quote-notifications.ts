@@ -76,7 +76,7 @@ function prospectEmailHtml(firstName: string, type: QuoteType): string {
   const hi = firstName ? `Merci ${esc(firstName)} !` : "Merci !";
   const intro =
     type === "bizlink"
-      ? `Votre demande pour la <strong>promo BizLink à 75 000 FCFA / mois TTC</strong> a bien été reçue. Notre équipe va vérifier l'éligibilité de votre structure et vous recontactera pour l'étude de faisabilité.`
+      ? `Votre demande d'étude <strong>BizLink</strong> a bien été reçue. Un conseiller Cherryz vous appelle sous 24 h pour vous expliquer l'offre et organiser votre étude de faisabilité gratuite.`
       : `Votre demande de cotation <strong>${esc(quoteTypeLabel(type))}</strong> a bien été reçue. Notre équipe va l'étudier et vous recontactera <strong>sous 48h</strong>.`;
   const wa =
     type === "bizlink"

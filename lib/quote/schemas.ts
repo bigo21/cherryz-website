@@ -151,27 +151,21 @@ export const schemaWifi: Step[] = [
   },
 ];
 
-// Promo BizLink 75 000 FCFA (landing /internet-b2b/bizlink): a short form, fields
-// from the Trello card (structure, type, ville, contact, besoin en débit).
+// BizLink (/bizlink): a one-step form, embedded in the page as a single grid.
+export const BIZLINK_OTHER = "Autre";
+
 export const schemaBizlink: Step[] = [
   {
-    title: "Votre structure",
-    subtitle: "Pour vérifier votre éligibilité à la promo.",
+    title: "Étude gratuite",
+    subtitle: "",
     questions: [
-      { id: "q1", label: "Quel type de structure êtes-vous ?", type: "single", required: true, options: ["École", "Hôtel 1 étoile", "Hôtel 2 étoiles", "Microfinance"] },
-      { id: "q2", label: "Nom de votre structure", type: "text", required: true, placeholder: "Nom de la structure" },
-      { id: "q3", label: "Ville et quartier", type: "text", required: true, placeholder: "Ex. Douala, Akwa" },
-      { id: "q4", label: "De quel débit avez-vous besoin ?", type: "single", required: true, options: ["Moins de 50 Mbps", "50 – 100 Mbps", "100 – 250 Mbps", "Je ne sais pas encore"] },
-    ],
-  },
-  {
-    title: "Vos coordonnées",
-    subtitle: "Pour que notre équipe puisse vous recontacter.",
-    questions: [
-      { id: "q16", label: "Votre prénom et nom complet", type: "text", required: true, placeholder: "Prénom Nom" },
-      { id: "q17", label: "Numéro WhatsApp / Téléphone", type: "tel", required: true, placeholder: "+237 6 00 00 00 00" },
-      { id: "q18", label: "Adresse email", type: "email", required: true, placeholder: "vous@structure.com" },
-      { id: "q19", label: "On reste en contact ?", type: "consent", required: true },
+      { id: "q1", label: "Nom du responsable", type: "text", required: true, placeholder: "Nom et prénom" },
+      { id: "q2", label: "Poste", type: "text", required: true, placeholder: "Directeur, gérant..." },
+      { id: "q3", label: "Entreprise", type: "text", required: true, placeholder: "Nom de l'entreprise" },
+      { id: "q4", label: "Ville", type: "text", required: true, placeholder: "Douala, Yaoundé..." },
+      { id: "q5", label: "Téléphone (WhatsApp de préférence)", type: "tel", required: true, placeholder: "+237 6XX XX XX XX" },
+      { id: "q6", label: "E-mail", type: "email", required: true, placeholder: "nom@entreprise.com" },
+      { id: "q7", label: "Catégorie", type: "single", required: true, options: ["École", "Microfinance", "Hôtel 1 à 2 étoiles", BIZLINK_OTHER] },
     ],
   },
 ];

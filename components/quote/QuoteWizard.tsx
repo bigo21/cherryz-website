@@ -12,7 +12,7 @@ import {
 } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
 import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
-import { BIZLINK, CONTACT } from "@/lib/site/site";
+import { CONTACT } from "@/lib/site/site";
 
 interface SavedState {
   step: number;
@@ -20,10 +20,10 @@ interface SavedState {
   done: boolean;
 }
 
-const inputClass =
+export const inputClass =
   "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[14px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)] aria-[invalid=true]:border-cherry";
 
-function chipClass(selected: boolean): string {
+export function chipClass(selected: boolean): string {
   return [
     "cursor-pointer font-sans text-[15px] px-[17px] py-[11px] rounded-full transition-all duration-150 border-[1.5px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry",
     selected
@@ -41,26 +41,8 @@ function scaleChipClass(selected: boolean): string {
   ].join(" ");
 }
 
-const storageKey = (type: QuoteType) => `chz_demande_${type}_v1`;
-
-// What happens next, shown once the request is sent.
-const NEXT_STEPS: Record<QuoteType, string[]> = {
-  ip: [
-    "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
-    "Nous vous recontactons sous 48h pour affiner votre besoin.",
-    "Si besoin, un technicien se déplace gratuitement sur votre site.",
-  ],
-  wifi: [
-    "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
-    "Nous vous recontactons sous 48h pour affiner votre besoin.",
-    "Si besoin, un technicien se déplace gratuitement sur votre site.",
-  ],
-  bizlink: [
-    "Nous vérifions l'éligibilité de votre structure à la promo.",
-    "Nous vous recontactons pour l'étude de faisabilité.",
-    "Si vous êtes éligible, vous testez BizLink gratuitement.",
-  ],
-};
+const storageKey = (type: QuoteType) =>
+  type === "ip" ? "chz_demande_ip_v1" : "chz_demande_wifi_v1";
 
 function loadSaved(type: QuoteType): SavedState | null {
   if (typeof window === "undefined") return null;
@@ -74,7 +56,7 @@ function loadSaved(type: QuoteType): SavedState | null {
   }
 }
 
-function collectTracking() {
+export function collectTracking() {
   if (typeof window === "undefined") return {};
   const params = new URLSearchParams(window.location.search);
   const utm: Record<string, string> = {};
@@ -91,19 +73,8 @@ function collectTracking() {
   };
 }
 
-/**
- * `embedded`: the form sits inside a landing page (BizLink) instead of its own
- * /demandes page, so step changes scroll to the form and there is no "Annuler".
- */
-export default function QuoteWizard({
-  type,
-  embedded = false,
-}: {
-  type: QuoteType;
-  embedded?: boolean;
-}) {
+export default function QuoteWizard({ type }: { type: QuoteType }) {
   const router = useRouter();
-  const whatsapp = type === "bizlink" ? BIZLINK.whatsapp : CONTACT.whatsapp;
   const schema = getSchema(type);
   const total = schema.length;
 
@@ -118,7 +89,6 @@ export default function QuoteWizard({
   const hydrated = useRef(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
-  const rootRef = useRef<HTMLDivElement>(null);
 
   // Persist progress to sessionStorage (skip the very first render).
   useEffect(() => {
@@ -179,9 +149,7 @@ export default function QuoteWizard({
   }
 
   const scrollTop = () => {
-    if (typeof window === "undefined") return;
-    if (embedded) rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    else window.scrollTo({ top: 0, behavior: "smooth" });
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   async function submit() {
@@ -257,7 +225,7 @@ export default function QuoteWizard({
 
   if (done) {
     return (
-      <div ref={rootRef} className="scroll-mt-28 rounded-[20px] bg-white px-6 py-[52px] text-center shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-pop sm:px-10">
+      <div className="rounded-[20px] bg-white px-6 py-[52px] text-center shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-pop sm:px-10">
         <div className="mx-auto mb-6 flex h-[82px] w-[82px] items-center justify-center rounded-full bg-cherry shadow-[0_18px_36px_-16px_rgba(162,3,45,0.85)]">
           <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 13l4 4L19 7" />
@@ -275,7 +243,11 @@ export default function QuoteWizard({
           être envoyé.
         </p>
         <ol className="mx-auto mt-7 max-w-[400px] space-y-3 text-left font-sans text-[15.5px] leading-[1.45] text-navy-alt">
-          {NEXT_STEPS[type].map((t, i) => (
+          {[
+            "Nous étudions vos réponses et comparons les offres de nos opérateurs partenaires.",
+            "Nous vous recontactons sous 48h pour affiner votre besoin.",
+            "Si besoin, un technicien se déplace gratuitement sur votre site.",
+          ].map((t, i) => (
             <li key={t} className="flex gap-3">
               <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-cherry/[0.09] font-condensed text-[14px] font-bold text-cherry">
                 {i + 1}
@@ -286,7 +258,7 @@ export default function QuoteWizard({
         </ol>
         <div className="mt-[30px] flex flex-wrap justify-center gap-3">
           <a
-            href={whatsapp}
+            href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-[9px] rounded-full bg-cherry px-[26px] py-[14px] font-condensed text-[16px] font-bold tracking-[0.5px] text-white transition-colors hover:bg-cherry-dark"
@@ -314,7 +286,7 @@ export default function QuoteWizard({
 
   return (
     <>
-      <div ref={rootRef} className="scroll-mt-28 rounded-[20px] bg-white px-5 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade sm:px-9">
+      <div className="rounded-[20px] bg-white px-5 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade sm:px-9">
         {/* Progress */}
         <div className="mb-[26px]">
           <div className="mb-[9px] flex items-baseline justify-between gap-3">
@@ -532,7 +504,7 @@ export default function QuoteWizard({
           <div role="alert" className="mt-2 rounded-[12px] border border-cherry/25 bg-cherry/[0.05] px-4 py-3">
             <FieldError message={submitError} />
             <a
-              href={whatsapp}
+              href={CONTACT.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-2 font-sans text-[14.5px] font-semibold text-navy-alt underline underline-offset-4"
@@ -544,18 +516,14 @@ export default function QuoteWizard({
         )}
 
         <div className="mt-7 flex items-center justify-between gap-3 border-t border-[rgba(16,27,43,0.08)] pt-[22px]">
-          {embedded && step <= 1 ? (
-            <span />
-          ) : (
-            <button
-              type="button"
-              onClick={prev}
-              disabled={submitting}
-              className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy-alt hover:text-navy-alt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
-            >
-              {step <= 1 ? "Annuler" : "← Précédent"}
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={prev}
+            disabled={submitting}
+            className="cursor-pointer whitespace-nowrap rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-4 py-[14px] font-condensed text-[16px] font-semibold tracking-[0.5px] text-[#4b5563] transition-colors hover:border-navy-alt hover:text-navy-alt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-50 sm:px-6"
+          >
+            {step <= 1 ? "Annuler" : "← Précédent"}
+          </button>
           <button
             type="button"
             onClick={next}
@@ -674,7 +642,7 @@ function GeoField({
   );
 }
 
-function FieldError({ id, message }: { id?: string; message: string }) {
+export function FieldError({ id, message }: { id?: string; message: string }) {
   return (
     <div id={id} className="mt-2 flex items-center gap-[6px] font-sans text-[13.5px] font-medium text-cherry">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="flex-none" aria-hidden>

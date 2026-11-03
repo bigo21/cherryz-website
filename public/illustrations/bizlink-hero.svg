@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- BizLink hero: a city at dusk, a relay mast beaming by radio to a business rooftop antenna. -->
+  <style>
+    .pulse{animation:pulse 2.4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.6)}}
+    @media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+  </style>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b131d"/>
+      <stop offset=".42" stop-color="#2a0b1f"/>
+      <stop offset=".74" stop-color="#6e0320"/>
+      <stop offset="1" stop-color="#c50c4f"/>
+    </linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ff254f" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#ff254f" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="win" width="16" height="22" patternUnits="userSpaceOnUse">
+      <rect x="4" y="5" width="7" height="10" fill="#ffffff"/>
+    </pattern>
+    <g id="skyb">
+      <rect x="0" y="610" width="110" height="290"/><rect x="120" y="560" width="90" height="340"/>
+      <rect x="220" y="640" width="130" height="260"/><rect x="560" y="600" width="100" height="300"/>
+      <rect x="670" y="540" width="80" height="360"/><rect x="760" y="630" width="140" height="270"/>
+      <rect x="910" y="580" width="90" height="320"/>
+    </g>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <g fill="#ffffff" opacity=".55">
+    <circle cx="140" cy="90" r="1.6"/><circle cx="420" cy="150" r="1.4"/><circle cx="760" cy="70" r="1.8"/>
+    <circle cx="1010" cy="130" r="1.4"/><circle cx="1330" cy="80" r="1.6"/><circle cx="1500" cy="200" r="1.3"/>
+    <circle cx="280" cy="260" r="1.2"/>
+  </g>
+  <circle cx="560" cy="690" r="300" fill="url(#sun)"/>
+  <use href="#skyb" fill="#101b28"/>
+  <use href="#skyb" fill="url(#win)" opacity=".18"/>
+  <path d="M0 770 Q 260 690 560 748 T 1010 810 L1010 900 L0 900 Z" fill="#0b131d"/>
+  <g stroke="#cfd3d9" stroke-width="3" fill="none">
+    <path d="M338 725 L360 520 L382 725"/>
+    <path d="M346 668 L374 668 M351 618 L369 618 M355 575 L365 575"/>
+    <path d="M346 668 L369 618 M374 668 L351 618"/>
+  </g>
+  <rect x="352" y="548" width="16" height="30" rx="3" fill="#e2e3e5"/>
+  <circle class="pulse" cx="360" cy="512" r="5" fill="#ff254f"/>
+  <path d="M1206 500 Q 800 450 380 548" fill="none" stroke="#ff254f" stroke-width="2" stroke-dasharray="3 11" opacity=".8"/>
+  <rect x="1010" y="646" width="560" height="254" fill="#0b131d"/>
+  <rect x="1010" y="646" width="560" height="254" fill="url(#win)" opacity=".12"/>
+  <rect x="1000" y="630" width="580" height="16" fill="#101b28"/>
+  <line x1="1236" y1="630" x2="1236" y2="474" stroke="#cfd3d9" stroke-width="6"/>
+  <rect x="1222" y="446" width="28" height="66" rx="5" fill="#e2e3e5"/>
+  <circle cx="1236" cy="470" r="4" fill="#a0042d"/>
+  <g fill="none" stroke="#ff254f" stroke-width="3" stroke-linecap="round">
+    <path d="M1179 444 A70 70 0 0 0 1179 524" opacity=".95"/>
+    <path d="M1129 410 A130 130 0 0 0 1129 558" opacity=".75"/>
+    <path d="M1080 376 A190 190 0 0 0 1080 592" opacity=".55"/>
+    <path d="M1031 341 A250 250 0 0 0 1031 627" opacity=".38"/>
+    <path d="M982 307 A310 310 0 0 0 982 661" opacity=".24"/>
+    <path d="M933 273 A370 370 0 0 0 933 695" opacity=".12"/>
+  </g>
+</svg>

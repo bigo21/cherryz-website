@@ -49,7 +49,7 @@ export default function SiteNav() {
         {/* Desktop links */}
         <div className="hidden items-center gap-[34px] md:flex">
           {NAV_LINKS.map((l) => {
-            // A sub-page (Internet B2B › BizLink) keeps its parent link active.
+            // A sub-page keeps its parent link active.
             const active = l.href === "/" ? pathname === "/" : !!pathname?.startsWith(l.href);
             return (
               <Link

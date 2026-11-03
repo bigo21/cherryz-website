@@ -32,10 +32,10 @@ function extractContact(type: QuoteType, a: Answers) {
   }
   if (type === "bizlink") {
     return {
-      full_name: str("q16"),
-      email: str("q18"),
-      phone: str("q17"),
-      company: str("q2"),
+      full_name: str("q1"),
+      email: str("q6"),
+      phone: str("q5"),
+      company: str("q3"),
     };
   }
   // wifi

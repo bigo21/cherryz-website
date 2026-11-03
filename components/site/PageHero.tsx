@@ -4,6 +4,8 @@ import Image from "next/image";
 /**
  * Dark, centered hero with a full-bleed photo background.
  * `emphasis` applies the stronger Accueil treatment (navy badge + text shadows).
+ * `beforeActions` / `afterActions` add page-specific content around the buttons.
+ * `imageOpacity` lets an illustration show through more than a photo does.
  */
 export default function PageHero({
   eyebrow,
@@ -15,6 +17,9 @@ export default function PageHero({
   minHeight = 720,
   contentMaxWidth = 900,
   emphasis = false,
+  beforeActions,
+  afterActions,
+  imageOpacity = "opacity-40",
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -25,6 +30,9 @@ export default function PageHero({
   minHeight?: number;
   contentMaxWidth?: number;
   emphasis?: boolean;
+  beforeActions?: ReactNode;
+  afterActions?: ReactNode;
+  imageOpacity?: string;
 }) {
   return (
     <header
@@ -37,7 +45,7 @@ export default function PageHero({
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-40"
+        className={`object-cover ${imageOpacity}`}
       />
       <div
         className="pointer-events-none absolute inset-0 z-[1]"
@@ -81,9 +89,17 @@ export default function PageHero({
           {subtitle}
         </p>
 
+        {beforeActions && (
+          <div className="pointer-events-auto animate-fade [animation-delay:0.27s]">{beforeActions}</div>
+        )}
+
         <div className="pointer-events-auto mt-[38px] flex flex-wrap justify-center gap-[15px] animate-fade [animation-delay:0.32s]">
           {actions}
         </div>
+
+        {afterActions && (
+          <div className="pointer-events-auto animate-fade [animation-delay:0.4s]">{afterActions}</div>
+        )}
       </div>
     </header>
   );
