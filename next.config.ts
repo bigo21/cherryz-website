@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
     // under a veil (hero backgrounds), 75 is Next's default.
     formats: ["image/avif", "image/webp"],
     qualities: [50, 75],
+    // Next's defaults, plus 1280 and 1440 for full-width heroes on laptops, without
+    // 3840: no source photo is wider than 1920px.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1280, 1440, 1920, 2048],
   },
 };
 

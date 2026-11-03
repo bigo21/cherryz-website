@@ -150,7 +150,7 @@ export default async function WifiZone() {
                       src={z.img!}
                       alt={t(`zones.items.${z.key}.alt`)}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 767px) calc((100vw - 64px) / 2), (max-width: 1023px) calc((100vw - 112px) / 2), (max-width: 1279px) calc((100vw - 144px) / 4), 284px"
                       className="object-cover"
                     />
                   </div>
@@ -257,7 +257,7 @@ export default async function WifiZone() {
                     src={c.img}
                     alt={t(`cases.items.${c.key}.alt`)}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1279px) calc((100vw - 144px) / 3), 378px"
                     className="object-cover"
                   />
                   <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-navy/75 px-3 py-2 font-condensed text-small font-semibold tracking-wide text-white">

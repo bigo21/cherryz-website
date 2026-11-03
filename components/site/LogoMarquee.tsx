@@ -1,16 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
-// Logos are already optimised (≤15 KB each), so plain <img> keeps the intrinsic
-// aspect ratio without needing per-file dimensions. Lazy: they sit far below the
-// fold and must not compete with the hero (LCP) for bandwidth.
-
-export interface Logo {
-  src: string;
-  alt: string;
-}
+import Image from "next/image";
+import type { Logo } from "@/lib/site/logos";
 
 /**
  * Infinite auto-scrolling logo strip. The set is rendered twice so the
- * translateX(-50%) loop is seamless.
+ * translateX(-50%) loop is seamless. Logos come cropped, with their balanced
+ * display size (lib/site/logos.ts); next/image loads them lazily, so they never
+ * compete with the hero (LCP).
  */
 export default function LogoMarquee({
   logos,
@@ -20,16 +15,16 @@ export default function LogoMarquee({
   direction?: "left" | "right";
 }) {
   const row = (labelled: boolean) => (
-    <div className="flex flex-none items-center gap-14">
+    <div className="flex h-16 flex-none items-center gap-14">
       {logos.map((l) => (
-        <img
+        <Image
           key={`${labelled ? "a" : "b"}-${l.src}`}
-          loading="lazy"
-          decoding="async"
           src={l.src}
           alt={labelled ? l.alt : ""}
           aria-hidden={labelled ? undefined : true}
-          className="h-30 w-auto object-contain opacity-90 grayscale"
+          width={l.width}
+          height={l.height}
+          className="opacity-90 grayscale"
         />
       ))}
     </div>

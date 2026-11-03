@@ -114,7 +114,7 @@ export default async function InternetB2B() {
             {usages.map(({ key, img }) => (
               <div key={key} className="flex items-start gap-4 rounded-2xl border border-line bg-surface px-6 py-5 transition-all hover:border-cherry/30">
                 <div className="relative h-12 w-12 flex-none overflow-hidden rounded-xl">
-                  <Image src={img} alt={t(`basics.usages.${key}.alt`)} fill sizes="46px" className="object-cover" />
+                  <Image src={img} alt={t(`basics.usages.${key}.alt`)} fill sizes="48px" className="object-cover" />
                 </div>
                 <div>
                   <h3 className="m-0 font-condensed text-title-sm font-bold">{t(`basics.usages.${key}.t`)}</h3>

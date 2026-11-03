@@ -9,7 +9,8 @@ import CoverageSection from "@/components/site/CoverageSection";
 import Testimonials from "@/components/site/Testimonials";
 import SectionEyebrow from "@/components/site/SectionEyebrow";
 import FinalCta from "@/components/site/FinalCta";
-import LogoMarquee, { type Logo } from "@/components/site/LogoMarquee";
+import LogoMarquee from "@/components/site/LogoMarquee";
+import { CLIENT_LOGOS_ROW1, CLIENT_LOGOS_ROW2, OPERATOR_LOGOS } from "@/lib/site/logos";
 import { ArrowRightIcon, CheckLineIcon, GlobeIcon, WifiIcon } from "@/components/site/icons";
 import { QUOTE } from "@/lib/site/site";
 import { PLACEHOLDER_PHOTOS } from "@/lib/site/placeholders";
@@ -40,35 +41,6 @@ const approche = [
   { n: "05", key: "deploy", img: "/photos/approche-05-deploiement.jpg" },
   { n: "06", key: "followup", img: "/photos/approche-06-suivi.jpg" },
 ] as const;
-
-const operators = [
-  { src: "/logos/orange.png", alt: "Orange Cameroun", h: "h-38" },
-  { src: "/logos/mtn.png", alt: "MTN Cameroon", h: "h-38" },
-  { src: "/logos/camtel.png", alt: "Camtel", h: "h-40" },
-];
-
-const clientsRow1: Logo[] = [
-  { src: "/logos/afriland-first-bank.png", alt: "Afriland First Bank" },
-  { src: "/logos/belgocam.png", alt: "Belgocam S.A." },
-  { src: "/logos/sudcam.png", alt: "Sud Cameroun Hevea (SUDCAM)" },
-  { src: "/logos/hotel-mansel.png", alt: "Hotel Mansel" },
-  { src: "/logos/vallee-des-princes-hotel.png", alt: "Vallée des Princes Hotel" },
-  { src: "/logos/jouvence-international-hotel.png", alt: "Jouvence International Hotel" },
-  { src: "/logos/star-land-hotel.png", alt: "Star Land Hotel" },
-  { src: "/logos/kny-groupe.png", alt: "KNY Groupe" },
-  { src: "/logos/inoni-tech.png", alt: "Inoni Tech" },
-];
-
-const clientsRow2: Logo[] = [
-  { src: "/logos/cinetpay.png", alt: "CinetPay" },
-  { src: "/logos/kalitas.png", alt: "Kalitas" },
-  { src: "/logos/socokem.png", alt: "Socokem" },
-  { src: "/logos/carlcare.png", alt: "Carlcare" },
-  { src: "/logos/best-dental.png", alt: "Best Dental" },
-  { src: "/logos/dpg-kennel.png", alt: "DPG Kennel" },
-  { src: "/logos/aaltelsolutions.png", alt: "AALTELSOLUTIONS" },
-  { src: "/logos/1xbet.png", alt: "1xBet" },
-];
 
 export default async function Home() {
   const lang = await getLocale();
@@ -108,7 +80,7 @@ export default async function Home() {
                   src="/photos/pourquoi-cherryz.jpg"
                   alt={t("why.imageAlt")}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 96px), (max-width: 1279px) calc((100vw - 156px) / 2), 562px"
                   className="object-cover"
                 />
               </div>
@@ -226,7 +198,7 @@ export default async function Home() {
                     src={s.img}
                     alt={t(`approach.steps.${s.key}.alt`)}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 767px) calc((100vw - 68px) / 2), (max-width: 1023px) calc((100vw - 116px) / 2), (max-width: 1279px) calc((100vw - 136px) / 3), 381px"
                     className="object-cover"
                   />
                 </div>
@@ -302,22 +274,14 @@ export default async function Home() {
           <Reveal delay={0.05}>
             {/* Opérateurs partenaires */}
             <div className="mb-12 flex flex-wrap items-center justify-center gap-14">
-              {operators.map((o) => (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  key={o.src}
-                  src={o.src}
-                  loading="lazy"
-                  decoding="async"
-                  alt={o.alt}
-                  className={`${o.h} w-auto object-contain`}
-                />
+              {OPERATOR_LOGOS.map((o) => (
+                <Image key={o.src} src={o.src} alt={o.alt} width={o.width} height={o.height} />
               ))}
             </div>
             {/* Références clients : bandeaux défilants */}
             <div className="marquee flex flex-col gap-6" tabIndex={0} role="group" aria-label={t("trust.marqueeLabel")}>
-              <LogoMarquee logos={clientsRow1} direction="left" />
-              <LogoMarquee logos={clientsRow2} direction="right" />
+              <LogoMarquee logos={CLIENT_LOGOS_ROW1} direction="left" />
+              <LogoMarquee logos={CLIENT_LOGOS_ROW2} direction="right" />
             </div>
           </Reveal>
         </div>
@@ -363,7 +327,7 @@ function ServiceCard({
   return (
     <div className="relative overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all hover:-translate-y-1">
       <div className="relative h-62">
-        <Image src={image} alt={imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+        <Image src={image} alt={imageAlt} fill sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 96px), (max-width: 1279px) calc((100vw - 124px) / 2), 578px" className="object-cover" />
         <div className="pointer-events-none absolute inset-0 scrim-bottom" />
         <div className="absolute left-0 top-5 rounded-r-md bg-cherry px-2 py-3 font-condensed text-caption font-semibold uppercase text-white text-vertical">
           {badge}
