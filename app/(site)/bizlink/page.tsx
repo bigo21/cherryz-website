@@ -23,7 +23,7 @@ const l = (p: SVGProps<SVGSVGElement>) => ({
 const Mast = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 21V9M8 21h8M12 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6.5 11a8 8 0 0 1 0-8M17.5 11a8 8 0 0 0 0-8" /></svg>);
 
 const stats = [
-  { v: "99 %+", t: "de disponibilité" },
+  { v: "+ de 99 %", t: "de disponibilité" },
   { v: "10 à 250", t: "Mbps selon le forfait" },
   { v: "IP publique", t: "pour contrôler votre réseau" },
   { v: "0 câble", t: "à tirer : tout passe par onde radio" },
@@ -156,7 +156,7 @@ export default function Bizlink() {
         actions={
           <>
             <a href="#formulaire" className={btnPrimary}>
-              Demandez une étude →
+              {BIZLINK.cta} →
             </a>
             <a href="#forfaits" className={btnGhost}>
               Voir toutes les offres ↓
@@ -195,7 +195,7 @@ export default function Bizlink() {
               Une connexion pour les entreprises exigeantes.
             </h2>
             <p className="mt-[18px] max-w-[620px] font-sans text-[18px] leading-[1.6] text-navy/[0.68]">
-              Call centers, hôtels, microfinances, écoles : BizLink est faite pour
+              Call centers, hôtels, microfinances, écoles : BizLink est fait pour
               les usages où chaque coupure coûte de l&apos;argent.
             </p>
           </Reveal>

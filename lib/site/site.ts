@@ -17,7 +17,7 @@ export const QUOTE_LABEL = "Obtenir mon devis";
 export const BIZLINK = {
   href: "/bizlink",
   formHref: "/bizlink#formulaire",
-  cta: "Demandez notre étude",
+  cta: "Demandez une étude",
   whatsappDisplay: "+237 658 60 20 54",
   whatsapp: "https://wa.me/237658602054",
 } as const;
