@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const comparatif: { label: string; alone: string; cherry: string; check?: boolean }[] = [
-  { label: "Prix / Mbps / mois", alone: "90 000 – 180 000 XAF", cherry: "45 000 – 70 000 XAF" },
+  { label: "Prix / Mbps / mois", alone: "90 000 – 180 000 XAF", cherry: "50 000 – 70 000 XAF" },
   { label: "Installation", alone: "Travaux lourds, délais longs", cherry: "Rapide, sans génie civil" },
   { label: "Choix technologique", alone: "Limité à 1 opérateur", cherry: "Multi-opérateurs, meilleure option" },
   { label: "Support", alone: "Standard, file d'attente", cherry: "Dédié, réactif, de proximité" },
@@ -115,7 +115,7 @@ export default function Home() {
               </div>
               <div className="absolute -left-[18px] bottom-[34px] z-[2] rounded-[14px] bg-navy px-5 py-4 text-white shadow-[0_22px_46px_-20px_rgba(16,27,40,.6)] animate-float">
                 <div className="font-condensed text-[32px] font-bold leading-none text-accent-vivid">
-                  45 000
+                  50 000
                   <span className="text-[15px] text-white/60"> XAF/Mbps</span>
                 </div>
                 <div className="mt-[2px] font-sans text-[13px] font-medium text-white/65">
@@ -136,7 +136,7 @@ export default function Home() {
                 Les entreprises camerounaises paient entre 90 000 et 180 000
                 XAF/Mbps/mois en allant directement chez un opérateur. Cherryz
                 négocie pour vous auprès de plusieurs fournisseurs et vous
-                propose la meilleure solution, à partir de 45 000 XAF/Mbps/mois.
+                propose la meilleure solution, à partir de 50 000 XAF/Mbps/mois.
               </p>
               <p className="mt-[14px] max-w-[560px] font-sans text-[16.5px] leading-[1.6] text-navy/[0.68]">
                 Nous ne sommes pas un opérateur de plus. Nous sommes votre{" "}

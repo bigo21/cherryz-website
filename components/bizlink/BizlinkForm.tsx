@@ -21,8 +21,7 @@ const autoComplete: Record<string, string> = {
 
 /**
  * One-step BizLink request form (/bizlink#formulaire). Same fields and look as the
- * quote questionnaire, laid out as a single grid. Visiting #devis (the "Je demande
- * un devis" button under the plans) preselects the "Autre" category.
+ * quote questionnaire, laid out as a single grid.
  */
 export default function BizlinkForm() {
   const [answers, setAnswers] = useState<Answers>({ pays: BIZLINK_INDICATIFS[0].pays });
@@ -33,17 +32,6 @@ export default function BizlinkForm() {
   const [sent, setSent] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const thanksRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const onHash = () => {
-      if (window.location.hash !== "#devis") return;
-      setAnswers((a) => ({ ...a, [CATEGORY]: BIZLINK_OTHER }));
-      rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    onHash();
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, []);
 
   useEffect(() => {
     if (sent) thanksRef.current?.focus();

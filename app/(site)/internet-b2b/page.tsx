@@ -14,7 +14,7 @@ import { CAL_IP, QUOTE, QUOTE_LABEL } from "@/lib/site/site";
 export const metadata: Metadata = {
   title: "Internet B2B avec IP publique dédiée | Cherryz",
   description:
-    "Internet professionnel dédié avec IP fixe, à partir de 45 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement.",
+    "Internet professionnel dédié avec IP fixe, à partir de 50 000 XAF/Mbps/mois. Multi-opérateurs (Camtel, Orange, MTN), installation rapide sans génie civil, IP dédiée incluse, test avant engagement.",
 };
 
 const l = (p: SVGProps<SVGSVGElement>) => ({
@@ -223,7 +223,7 @@ export default function InternetB2B() {
         title={
           <>
             Un Internet pro, dédié,
-            <br />à partir de 45 000 XAF/Mbps.
+            <br />à partir de 50 000 XAF/Mbps.
           </>
         }
         subtitle="Notre équipe se déplace gratuitement pour étudier votre situation, partout au Cameroun."

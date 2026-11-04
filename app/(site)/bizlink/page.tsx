@@ -7,7 +7,8 @@ import Countdown from "@/components/bizlink/Countdown";
 import BizlinkForm from "@/components/bizlink/BizlinkForm";
 import { CAMEROON, MAP_VIEWBOX, RELAYS } from "@/components/bizlink/cameroon";
 import { CheckLineIcon, ClipboardIcon, PhoneIcon, WifiIcon } from "@/components/site/icons";
-import { BIZLINK } from "@/lib/site/site";
+import Link from "next/link";
+import { BIZLINK, QUOTE } from "@/lib/site/site";
 
 export const metadata: Metadata = {
   title: "BizLink : l'Internet professionnel par onde radio | Cherryz",
@@ -436,16 +437,17 @@ export default function Bizlink() {
             Équipement de 200 000 XAF payable en 4 fois. Engagement de 3 ans. Tarifs TTC.
           </p>
           <div className="mt-[26px] rounded-2xl border-[1.5px] border-dashed border-navy/20 px-[26px] py-[22px]">
-            <p className="m-0 max-w-[720px] font-sans text-[16px] leading-[1.55] text-navy/80">
+            <p className="m-0 text-pretty font-sans text-[16px] leading-[1.55] text-navy/80">
               <strong className="text-navy">Besoin d&apos;une bande passante dédiée ?</strong>{" "}
               Elle est disponible à partir de 50 000 XAF par Mbps et par mois à
               Douala. Dans les autres villes, le prix est établi après étude.
             </p>
           </div>
           <div className="mt-8">
-            <a href="#devis" className={btnPrimary}>
+            {/* Dedicated bandwidth is the Internet B2B offer: its own questionnaire. */}
+            <Link href={QUOTE.ip} className={btnPrimary}>
               Je demande un devis →
-            </a>
+            </Link>
           </div>
         </div>
       </section>
