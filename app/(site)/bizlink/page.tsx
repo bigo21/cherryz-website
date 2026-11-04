@@ -156,7 +156,7 @@ export default function Bizlink() {
         actions={
           <>
             <a href="#formulaire" className={btnPrimary}>
-              Demandez votre étude →
+              Demandez une étude →
             </a>
             <a href="#forfaits" className={btnGhost}>
               Voir toutes les offres ↓
