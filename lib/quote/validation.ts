@@ -1,5 +1,5 @@
 import type { Answers, Question, Step } from "./schemas";
-import { getSchema, type QuoteType } from "./schemas";
+import { BIZLINK_INDICATIFS, getSchema, type QuoteType } from "./schemas";
 
 export interface GeoValue {
   ok: boolean;
@@ -78,6 +78,12 @@ export function validateQuestions(
         : digits.replace(/^(00)?237/, "").length === 9;
       if (!ok) errs[q.id] = "Numéro incomplet : 9 chiffres attendus, par ex. 6 77 12 34 56.";
     }
+    // A single choice must be one of the offered options: the server action
+    // is reachable by direct POST, so the client's chips are no guarantee.
+    if (q.type === "single" && q.options && raw && !q.options.includes(raw)) {
+      errs[q.id] = requiredMessage(q);
+      continue;
+    }
     if (
       q.hasOther &&
       otherSelected(q, answers) &&
@@ -89,11 +95,32 @@ export function validateQuestions(
   return errs;
 }
 
+/**
+ * BizLink phone: the dial code must be one we offer, and the number typed
+ * after it valid for that country. Returns the E.164 number, or an error.
+ */
+export function bizlinkPhone(answers: Answers): { e164: string; pays: string } | { error: string } {
+  const code = BIZLINK_INDICATIFS.find((c) => c.pays === answers.pays);
+  if (!code) return { error: "Choisissez l'indicatif du pays." };
+  // Accept the number with or without the code typed again (237…, +237…, 00237…).
+  const prefix = code.indicatif.slice(1);
+  const digits = String(answers.q5 ?? "").replace(/\D/g, "").replace(new RegExp(`^(00)?${prefix}`), "");
+  if (!code.national.test(digits)) {
+    return { error: `Numéro du ${code.nom} attendu : 9 chiffres, par ex. 6 77 12 34 56.` };
+  }
+  return { e164: `${code.indicatif}${digits}`, pays: code.pays };
+}
+
 /** Server-side: validate every visible question across the whole schema. */
 export function validateSubmission(
   type: QuoteType,
   answers: Answers,
 ): Record<string, string> {
   const all = getSchema(type).flatMap((step) => visibleQuestions(step, answers));
-  return validateQuestions(all, answers);
+  const errs = validateQuestions(all, answers);
+  if (type === "bizlink" && !errs.q5) {
+    const phone = bizlinkPhone(answers);
+    if ("error" in phone) errs.q5 = phone.error;
+  }
+  return errs;
 }

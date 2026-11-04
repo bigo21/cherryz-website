@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { BIZLINK_OTHER, schemaBizlink, type Answers } from "@/lib/quote/schemas";
-import { validateQuestions } from "@/lib/quote/validation";
+import { BIZLINK_INDICATIFS, BIZLINK_OTHER, schemaBizlink, type Answers } from "@/lib/quote/schemas";
+import { bizlinkPhone, validateQuestions } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
 import { chipClass, collectTracking, FieldError, inputClass } from "@/components/quote/QuoteWizard";
 import { CheckLineIcon, WhatsAppIcon } from "@/components/site/icons";
@@ -15,7 +15,7 @@ const autoComplete: Record<string, string> = {
   q1: "name",
   q3: "organization",
   q4: "address-level2",
-  q5: "tel",
+  q5: "tel-national",
   q6: "email",
 };
 
@@ -25,7 +25,7 @@ const autoComplete: Record<string, string> = {
  * un devis" button under the plans) preselects the "Autre" category.
  */
 export default function BizlinkForm() {
-  const [answers, setAnswers] = useState<Answers>({});
+  const [answers, setAnswers] = useState<Answers>({ pays: BIZLINK_INDICATIFS[0].pays });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showErrors, setShowErrors] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -54,6 +54,10 @@ export default function BizlinkForm() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const errs = validateQuestions(questions, answers);
+    if (!errs.q5) {
+      const phone = bizlinkPhone(answers);
+      if ("error" in phone) errs.q5 = phone.error;
+    }
     const invalid = questions.find((q) => errs[q.id]);
     if (invalid) {
       setErrors(errs);
@@ -147,23 +151,47 @@ export default function BizlinkForm() {
             );
           }
           return (
-            <div key={q.id} id={`q-${q.id}`} className="min-w-0">
+            // Phone and e-mail each take a full row, the e-mail under the phone.
+            <div key={q.id} id={`q-${q.id}`} className={`min-w-0 ${q.id === "q5" || q.id === "q6" ? "sm:col-span-2" : ""}`}>
               <label htmlFor={`f-${q.id}`} className="mb-[7px] block font-sans text-[15px] font-semibold text-navy-alt">
                 {label}
               </label>
-              <input
-                id={`f-${q.id}`}
-                type={q.type === "text" ? "text" : q.type}
-                inputMode={q.type === "tel" ? "tel" : undefined}
-                autoComplete={autoComplete[q.id]}
-                value={String(answers[q.id] ?? "")}
-                onChange={(e) => setAns(q.id, e.target.value)}
-                placeholder={q.placeholder}
-                aria-invalid={err ? true : undefined}
-                aria-describedby={errId}
-                aria-required
-                className={inputClass}
-              />
+              {(() => {
+                const input = (
+                  <input
+                    id={`f-${q.id}`}
+                    type={q.type === "text" ? "text" : q.type}
+                    inputMode={q.type === "tel" ? "tel" : undefined}
+                    autoComplete={autoComplete[q.id]}
+                    value={String(answers[q.id] ?? "")}
+                    onChange={(e) => setAns(q.id, e.target.value)}
+                    placeholder={q.placeholder}
+                    aria-invalid={err ? true : undefined}
+                    aria-describedby={errId}
+                    aria-required
+                    className={inputClass}
+                  />
+                );
+                if (q.id !== "q5") return input;
+                // The phone's country: its dial code, picked just before the number.
+                return (
+                  <div className="flex gap-2">
+                    <select
+                      aria-label="Indicatif pays"
+                      value={String(answers.pays ?? "")}
+                      onChange={(e) => setAns("pays", e.target.value)}
+                      className={`${inputClass.replace("w-full", "")} w-auto flex-none cursor-pointer`}
+                    >
+                      {BIZLINK_INDICATIFS.map((c) => (
+                        <option key={c.pays} value={c.pays}>
+                          {c.drapeau} {c.indicatif}
+                        </option>
+                      ))}
+                    </select>
+                    {input}
+                  </div>
+                );
+              })()}
               {err && <FieldError id={errId} message={err} />}
             </div>
           );

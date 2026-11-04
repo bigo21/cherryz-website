@@ -1,7 +1,7 @@
 "use server";
 
 import type { Answers, QuoteType } from "@/lib/quote/schemas";
-import { validateSubmission } from "@/lib/quote/validation";
+import { bizlinkPhone, validateSubmission } from "@/lib/quote/validation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendQuoteEmails } from "@/lib/email/quote-notifications";
 
@@ -54,13 +54,14 @@ function extractContact(type: QuoteType, a: Answers) {
 export async function submitQuoteRequest(
   payload: SubmitPayload,
 ): Promise<SubmitResult> {
-  const { type, answers, tracking } = payload ?? ({} as SubmitPayload);
+  const { type, tracking } = payload ?? ({} as SubmitPayload);
+  let answers = payload?.answers ?? {};
 
   if (type !== "ip" && type !== "wifi" && type !== "bizlink") {
     return { ok: false, error: "invalid_type" };
   }
 
-  const errors = validateSubmission(type, answers ?? {});
+  const errors = validateSubmission(type, answers);
   if (Object.keys(errors).length > 0) {
     return { ok: false, error: "validation" };
   }
@@ -71,6 +72,12 @@ export async function submitQuoteRequest(
       "[quote] Supabase not configured (missing SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY): submission not persisted.",
     );
     return { ok: false, error: "not_configured" };
+  }
+
+  // BizLink: store the phone in E.164 (dial code + number) and its country.
+  if (type === "bizlink") {
+    const phone = bizlinkPhone(answers);
+    if ("e164" in phone) answers = { ...answers, q5: phone.e164, pays: phone.pays };
   }
 
   const contact = extractContact(type, answers);

@@ -154,6 +154,15 @@ export const schemaWifi: Step[] = [
 // BizLink (/bizlink): a one-step form, embedded in the page as a single grid.
 export const BIZLINK_OTHER = "Autre";
 
+/**
+ * Dial codes offered before the BizLink phone field. BizLink is only sold in
+ * Cameroon, so there is one; the choice is stored as `answers.pays`.
+ * `national` checks the number typed after the code.
+ */
+export const BIZLINK_INDICATIFS = [
+  { pays: "CM", nom: "Cameroun", drapeau: "🇨🇲", indicatif: "+237", national: /^[26]\d{8}$/ },
+] as const;
+
 export const schemaBizlink: Step[] = [
   {
     title: "Étude gratuite",
@@ -163,7 +172,8 @@ export const schemaBizlink: Step[] = [
       { id: "q2", label: "Poste", type: "text", required: true, placeholder: "Directeur, gérant..." },
       { id: "q3", label: "Entreprise", type: "text", required: true, placeholder: "Nom de l'entreprise" },
       { id: "q4", label: "Ville", type: "text", required: true, placeholder: "Douala, Yaoundé..." },
-      { id: "q5", label: "Téléphone (WhatsApp de préférence)", type: "tel", required: true, placeholder: "+237 6XX XX XX XX" },
+      // Preceded by the dial-code picker (BIZLINK_INDICATIFS); stored in E.164.
+      { id: "q5", label: "Téléphone (WhatsApp de préférence)", type: "tel", required: true, placeholder: "6XX XX XX XX" },
       { id: "q6", label: "E-mail", type: "email", required: true, placeholder: "nom@entreprise.com" },
       { id: "q7", label: "Catégorie", type: "single", required: true, options: ["École", "Microfinance", "Hôtel 1 à 2 étoiles", BIZLINK_OTHER] },
     ],
