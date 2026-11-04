@@ -4,16 +4,22 @@ import { useEffect, useState } from "react";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/** Seconds left until Sunday 23:59:59 (local time) of the current week. */
+// Cameroon time (UTC+1, no daylight saving): the deadline is the same for every visitor.
+const DOUALA_OFFSET = 3600 * 1000;
+
+/** Seconds left until Sunday 23:59:59, Cameroon time, of the current week. */
 function secondsLeft(now: Date): number {
-  const add = (7 - now.getDay()) % 7;
-  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add, 23, 59, 59);
-  return Math.max(0, Math.floor((end.getTime() - now.getTime()) / 1000));
+  const local = new Date(now.getTime() + DOUALA_OFFSET);
+  const add = (7 - local.getUTCDay()) % 7;
+  const end =
+    Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate() + add, 23, 59, 59) -
+    DOUALA_OFFSET;
+  return Math.max(0, Math.floor((end - now.getTime()) / 1000));
 }
 
 /**
- * "L'offre se termine dans" countdown of the BizLink launch offer. Rendered empty
- * on the server (the time is the visitor's), filled in once mounted.
+ * "L'offre se termine dans" countdown of the BizLink launch offer. The page is
+ * static, so it stays hidden (space kept) until mounted rather than showing "--".
  * `tone`: "dark" over the navy hero, "cherry" over the cherry offer band.
  */
 export default function Countdown({ tone = "dark" }: { tone?: "dark" | "cherry" }) {
@@ -38,7 +44,7 @@ export default function Countdown({ tone = "dark" }: { tone?: "dark" | "cherry" 
   const labels = ["jours", "heures", "min", "sec"];
 
   return (
-    <div>
+    <div className={left === null ? "invisible" : undefined}>
       <p
         className={`m-0 font-condensed text-[16px] font-semibold tracking-[0.5px] ${tone === "cherry" ? "text-white/90" : "text-white"}`}
       >

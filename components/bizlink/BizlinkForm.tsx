@@ -61,7 +61,7 @@ export default function BizlinkForm() {
       requestAnimationFrame(() => {
         const block = document.getElementById(`q-${invalid.id}`);
         block?.scrollIntoView({ behavior: "smooth", block: "center" });
-        block?.querySelector<HTMLElement>("input, button")?.focus({ preventScroll: true });
+        block?.querySelector<HTMLElement>("input")?.focus({ preventScroll: true });
       });
       return;
     }
@@ -126,15 +126,20 @@ export default function BizlinkForm() {
                 <legend className="mb-[9px] p-0 font-sans text-[15px] font-semibold text-navy-alt">{label}</legend>
                 <div className="flex flex-wrap gap-[9px]">
                   {q.options?.map((opt) => (
-                    <button
+                    <label
                       key={opt}
-                      type="button"
-                      aria-pressed={answers[q.id] === opt}
-                      onClick={() => setAns(q.id, opt)}
-                      className={chipClass(answers[q.id] === opt)}
+                      className={`${chipClass(answers[q.id] === opt)} has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-cherry`}
                     >
+                      <input
+                        type="radio"
+                        name={q.id}
+                        value={opt}
+                        checked={answers[q.id] === opt}
+                        onChange={() => setAns(q.id, opt)}
+                        className="sr-only"
+                      />
                       {opt}
-                    </button>
+                    </label>
                   ))}
                 </div>
                 {err && <FieldError id={errId} message={err} />}

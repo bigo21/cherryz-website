@@ -69,14 +69,14 @@ export default function PageHero({
         >
           <span className="inline-block h-[7px] w-[7px] rounded-full bg-accent-pink shadow-[0_0_10px_1px_#e11d63]" />
           <span
-            className={`font-condensed text-[12.5px] font-semibold tracking-[1.6px] ${emphasis ? "text-white/95" : "text-white/90"}`}
+            className={`font-condensed text-[12.5px] font-semibold tracking-[1.6px] text-balance ${emphasis ? "text-white/95" : "text-white/90"}`}
           >
             {eyebrow}
           </span>
         </div>
 
         <h1
-          className="m-0 font-condensed text-[clamp(46px,6.6vw,82px)] font-bold leading-[0.95] tracking-[-0.5px] text-white animate-fade [animation-delay:0.12s]"
+          className="m-0 font-condensed text-[clamp(46px,6.6vw,82px)] font-bold leading-[0.95] tracking-[-0.5px] text-balance text-white animate-fade [animation-delay:0.12s]"
           style={emphasis ? { textShadow: "0 4px 24px rgba(0,0,0,.5)" } : undefined}
         >
           {title}

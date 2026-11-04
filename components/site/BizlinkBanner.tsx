@@ -16,7 +16,7 @@ export default function BizlinkBanner() {
               BIZLINK · OFFRE DE LANCEMENT
             </div>
             <p className="mt-1 font-condensed text-[28px] font-bold leading-[1.1]">
-              L&apos;Internet professionnel par onde radio, 75 000 XAF par mois
+              L&apos;Internet professionnel par onde radio, 75 000 XAF par mois
             </p>
             <p className="mt-[6px] font-sans text-[15.5px] leading-[1.5] text-white/85">
               Jusqu&apos;à 250 Mbps · Écoles, microfinances et hôtels 1 à 2 étoiles

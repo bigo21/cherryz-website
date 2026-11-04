@@ -12,7 +12,7 @@ import { BIZLINK } from "@/lib/site/site";
 export const metadata: Metadata = {
   title: "BizLink : l'Internet professionnel par onde radio | Cherryz",
   description:
-    "BizLink : jusqu'à 250 Mbps par onde radio, plus de 99 % de disponibilité et une adresse IP publique. Offre de lancement à 75 000 XAF par mois pour les écoles, microfinances et hôtels 1 à 2 étoiles. Étude de faisabilité gratuite.",
+    "BizLink : jusqu'à 250 Mbps par onde radio, plus de 99 % de disponibilité et une adresse IP publique. Offre de lancement à 75 000 XAF par mois pour les écoles, microfinances et hôtels 1 à 2 étoiles. Étude de faisabilité gratuite.",
 };
 
 const l = (p: SVGProps<SVGSVGElement>) => ({
@@ -23,7 +23,7 @@ const l = (p: SVGProps<SVGSVGElement>) => ({
 const Mast = (p: SVGProps<SVGSVGElement>) => (<svg {...l(p)}><path d="M12 21V9M8 21h8M12 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6.5 11a8 8 0 0 1 0-8M17.5 11a8 8 0 0 0 0-8" /></svg>);
 
 const stats = [
-  { v: "99 %+", t: "de disponibilité" },
+  { v: "99 %+", t: "de disponibilité" },
   { v: "10 à 250", t: "Mbps selon le forfait" },
   { v: "IP publique", t: "pour contrôler votre réseau" },
   { v: "0 câble", t: "à tirer : tout passe par onde radio" },
@@ -31,22 +31,22 @@ const stats = [
 
 const offerItems: ReactNode[] = [
   "De 10 à 250 Mbps, par onde radio",
-  "Plus de 99 % de disponibilité",
+  "Plus de 99 % de disponibilité",
   "Adresse IP publique incluse",
   "Installation après une étude de faisabilité gratuite",
   <strong key="engagement">Engagement de 3 ans</strong>,
 ];
 
 const equipment = [
-  { k: "Tout de suite", d: "275 000 XAF au départ (75 000 + 200 000), puis 75 000 par mois, sur 3 ans." },
-  { k: "En 4 fois", d: "75 000 + 50 000 par mois pendant 4 mois, puis 75 000 par mois, sur 3 ans." },
-  { k: "Pas payé", d: "75 000 par mois seulement. En cas de résiliation, les 200 000 XAF de matériel sont dus." },
+  { k: "Tout de suite", d: "275 000 XAF au départ (75 000 + 200 000), puis 75 000 par mois, sur 3 ans." },
+  { k: "En 4 fois", d: "75 000 + 50 000 par mois pendant 4 mois, puis 75 000 par mois, sur 3 ans." },
+  { k: "Pas payé", d: "75 000 par mois seulement. En cas de résiliation, les 200 000 XAF de matériel sont dus." },
 ];
 
 const compare = [
   { k: "Chez certains fournisseurs", v: "Plusieurs millions", w: "w-full", cls: "bg-navy-deep/75 text-white" },
-  { k: "BizLink hors promo", v: "150 000 à 1 500 000", w: "w-[46%]", cls: "bg-navy text-white" },
-  { k: "BizLink Promo", v: "75 000", w: "w-[24%]", cls: "bg-white text-cherry-deep", strong: true },
+  { k: "BizLink hors promo", v: "150 000 à 1 500 000", w: "w-[46%]", cls: "bg-navy text-white" },
+  { k: "BizLink Promo", v: "75 000", w: "w-[24%]", cls: "bg-white text-cherry-deep", strong: true },
 ];
 
 const steps = [
@@ -57,16 +57,16 @@ const steps = [
 ];
 
 const plans = [
-  { name: "Start", price: "150 000", debit: "2 à 40 Mbps" },
-  { name: "Pro", price: "450 000", debit: "7 à 150 Mbps" },
-  { name: "Premium", price: "750 000", debit: "10 à 250 Mbps", featured: true },
-  { name: "Elite", price: "1 500 000", debit: "25 à 450 Mbps" },
+  { name: "Start", price: "150 000", debit: "2 à 40 Mbps" },
+  { name: "Pro", price: "450 000", debit: "7 à 150 Mbps" },
+  { name: "Premium", price: "750 000", debit: "10 à 250 Mbps", featured: true },
+  { name: "Elite", price: "1 500 000", debit: "25 à 450 Mbps" },
 ];
 
 const faq = [
   { q: "L'étude est-elle vraiment gratuite ?", a: "Oui. Nous venons sur place, sans frais, et vous saurez si votre site est éligible." },
   { q: "Mon site sera-t-il couvert ?", a: "Nous avons des points relais partout au Cameroun. L'étude gratuite confirme votre éligibilité." },
-  { q: "Combien coûte le matériel ?", a: "200 000 XAF : payables tout de suite, en 4 fois, ou dus en cas de résiliation si non payés." },
+  { q: "Combien coûte le matériel ?", a: "200 000 XAF : payables tout de suite, en 4 fois, ou dus en cas de résiliation si non payés." },
   { q: "Y a-t-il un engagement ?", a: "Oui, 3 ans, en promo comme hors promo." },
   { q: "À quoi sert l'adresse IP publique ?", a: "Caméras, accès à distance, serveurs, VPN : un meilleur contrôle de votre réseau." },
 ];
@@ -92,7 +92,7 @@ function RadioArt() {
       <path d="M0 420 Q 160 360 330 410 T 640 430 L800 430 L800 500 L0 500Z" fill="#0b131d" />
       <g stroke="#cfd3d9" strokeWidth="3" fill="none"><path d="M96 440 L112 300 L128 440" /><path d="M101 400 L123 400 M105 355 L119 355" /><path d="M101 400 L119 355 M123 400 L105 355" /></g>
       <circle cx="112" cy="292" r="5" fill="#ff254f" />
-      <text x="112" y="474" fill="#cfd3d9" fontFamily="var(--font-barlow), sans-serif" fontSize="16" textAnchor="middle">Point relais</text>
+      <text x="132" y="478" fill="#cfd3d9" fontFamily="var(--font-barlow), sans-serif" fontSize="26" textAnchor="middle">Point relais</text>
       <rect x="470" y="330" width="290" height="140" fill="#0b131d" />
       <rect x="470" y="330" width="290" height="140" fill="url(#bz-win2)" opacity=".12" />
       <rect x="462" y="320" width="306" height="12" fill="#101b28" />
@@ -102,7 +102,7 @@ function RadioArt() {
         <path d="M570 232 A46 46 0 0 0 570 278" opacity=".95" /><path d="M536 212 A90 90 0 0 0 536 298" opacity=".7" /><path d="M500 190 A140 140 0 0 0 500 318" opacity=".45" /><path d="M462 170 A190 190 0 0 0 462 340" opacity=".25" />
       </g>
       <path d="M590 236 Q 360 210 124 296" fill="none" stroke="#ff254f" strokeWidth="2" strokeDasharray="3 10" opacity=".8" />
-      <text x="615" y="494" fill="#cfd3d9" fontFamily="var(--font-barlow), sans-serif" fontSize="16" textAnchor="middle">Votre entreprise</text>
+      <text x="615" y="490" fill="#cfd3d9" fontFamily="var(--font-barlow), sans-serif" fontSize="26" textAnchor="middle">Votre entreprise</text>
     </svg>
   );
 }
@@ -140,10 +140,10 @@ export default function Bizlink() {
           <>
             L&apos;Internet professionnel ultra haut débit
             <br />
-            <span className="text-accent-vivid">75 000 XAF par mois.</span>
+            <span className="text-accent-vivid">75 000 XAF par mois.</span>
           </>
         }
-        subtitle="BizLink c'est jusqu'à 250 Mbps à votre entreprise par onde radio, avec plus de 99 % de disponibilité et une adresse IP publique. Offre réservée aux écoles, microfinances et hôtels 1 à 2 étoiles."
+        subtitle="BizLink c'est jusqu'à 250 Mbps à votre entreprise par onde radio, avec plus de 99 % de disponibilité et une adresse IP publique. Offre réservée aux écoles, microfinances et hôtels 1 à 2 étoiles."
         beforeActions={
           <div className="mt-[30px]">
             <Countdown />
@@ -191,7 +191,7 @@ export default function Bizlink() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="max-w-[760px]">
             <SectionEyebrow label="BIZLINK" />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+            <h2 className="m-0 text-balance font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
               Une connexion pour les entreprises exigeantes.
             </h2>
             <p className="mt-[18px] max-w-[620px] font-sans text-[18px] leading-[1.6] text-navy/[0.68]">
@@ -206,7 +206,7 @@ export default function Bizlink() {
             </Reveal>
             <Reveal delay={0.08}>
               <SectionEyebrow label="PAR ONDE RADIO" />
-              <h3 className="m-0 font-condensed text-[clamp(28px,3vw,38px)] font-bold leading-[1.08]">
+              <h3 className="m-0 text-balance font-condensed text-[clamp(28px,3vw,38px)] font-bold leading-[1.08]">
                 Pas de câble à tirer, pas de câble qui se coupe.
               </h3>
               <p className="mt-4 font-sans text-[17px] leading-[1.6] text-navy/[0.68]">
@@ -228,7 +228,7 @@ export default function Bizlink() {
             </Reveal>
             <Reveal delay={0.08}>
               <SectionEyebrow label="COUVERTURE" />
-              <h3 className="m-0 font-condensed text-[clamp(28px,3vw,38px)] font-bold leading-[1.08]">
+              <h3 className="m-0 text-balance font-condensed text-[clamp(28px,3vw,38px)] font-bold leading-[1.08]">
                 Des points relais partout au Cameroun.
               </h3>
               <p className="mt-4 font-sans text-[17px] leading-[1.6] text-navy/[0.68]">
@@ -251,7 +251,7 @@ export default function Bizlink() {
                   ))}
                 </div>
               </div>
-              <h3 className="m-0 font-condensed text-[24px] font-bold leading-[1.15]">Plus de 99 % de disponibilité</h3>
+              <h3 className="m-0 font-condensed text-[24px] font-bold leading-[1.15]">Plus de 99 % de disponibilité</h3>
               <p className="m-0 font-sans text-[15.5px] leading-[1.55] text-navy/[0.62]">
                 Votre connexion reste en ligne quand votre activité en a besoin :
                 appels, paiements, réservations, logiciels en ligne.
@@ -299,7 +299,7 @@ export default function Bizlink() {
               <span className="inline-block h-[2px] w-[26px] bg-white/80" />
               <span className="font-condensed text-[13px] font-semibold tracking-[2px] text-white/90">OFFRE DE LANCEMENT</span>
             </div>
-            <h2 className="m-0 font-condensed text-[clamp(34px,4vw,52px)] font-bold leading-[1.04] tracking-[-0.3px]">
+            <h2 className="m-0 text-balance font-condensed text-[clamp(34px,4vw,52px)] font-bold leading-[1.04] tracking-[-0.3px]">
               Ailleurs, plusieurs millions par mois. Ici, l&apos;offre de lancement.
             </h2>
             <p className="mt-[18px] max-w-[560px] font-sans text-[18px] leading-[1.6] text-white/85">
@@ -309,7 +309,7 @@ export default function Bizlink() {
             </p>
             <div
               role="img"
-              aria-label="Comparaison de prix par mois : plusieurs millions chez certains fournisseurs, 150 000 à 1 500 000 hors promo, 75 000 en promo"
+              aria-label="Comparaison de prix par mois : plusieurs millions chez certains fournisseurs, 150 000 à 1 500 000 hors promo, 75 000 en promo"
               className="mt-[34px] grid gap-[14px]"
             >
               {compare.map((c) => (
@@ -322,7 +322,7 @@ export default function Bizlink() {
                   </div>
                 </div>
               ))}
-              <p className="m-0 font-sans text-[13px] text-white/75">Prix en XAF par mois. Échelle indicative.</p>
+              <p className="m-0 font-sans text-[13px] text-white/90">Prix en XAF par mois. Échelle indicative.</p>
             </div>
             <div className="mt-9">
               <Countdown tone="cherry" />
@@ -330,11 +330,11 @@ export default function Bizlink() {
           </div>
 
           <div className="rounded-2xl bg-navy-deep p-[30px] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.7)] sm:p-9">
-            <span className="inline-block rounded-full bg-white/[0.08] px-[14px] py-[6px] font-condensed text-[14px] font-semibold tracking-[1px] text-accent-vivid">
+            <span className="inline-block rounded-full bg-cherry-alt px-[14px] py-[6px] font-condensed text-[14px] font-semibold tracking-[1px] text-white">
               BizLink Promo
             </span>
-            <p className="m-0 mt-4 font-condensed text-[64px] font-bold leading-none tabular-nums">
-              75 000 <span className="whitespace-nowrap text-[22px] font-semibold text-white/70">XAF / mois</span>
+            <p className="m-0 mt-4 font-condensed text-[52px] font-bold leading-none tabular-nums sm:text-[64px]">
+              75 000 <span className="whitespace-nowrap text-[22px] font-semibold text-white/70">XAF / mois</span>
             </p>
             <p className="mt-2 font-sans text-[15px] text-white/70">
               Réservé aux écoles, microfinances et hôtels 1 à 2 étoiles.
@@ -346,7 +346,7 @@ export default function Bizlink() {
             </ul>
             <div className="mt-6 border-t border-white/[0.12] pt-5">
               <h3 className="m-0 mb-3 font-condensed text-[19px] font-bold leading-[1.25]">
-                Le matériel coûte 200 000 XAF. Vous le payez comme vous voulez.
+                Le matériel coûte 200 000 XAF. Vous le payez comme vous voulez.
               </h3>
               <dl className="m-0">
                 {equipment.map((e) => (
@@ -373,7 +373,7 @@ export default function Bizlink() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <div className="max-w-[760px]">
             <SectionEyebrow label="ÉTUDE GRATUITE" />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+            <h2 className="m-0 text-balance font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
               Faites votre étude gratuite avant la fin de l&apos;offre.
             </h2>
             <p className="mt-[18px] max-w-[620px] font-sans text-[18px] leading-[1.6] text-navy/[0.68]">
@@ -406,7 +406,7 @@ export default function Bizlink() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="max-w-[760px]">
             <SectionEyebrow label="HORS PROMO" />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+            <h2 className="m-0 text-balance font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
               Non éligible à la promo ? Découvrez nos autres forfaits.
             </h2>
             <p className="mt-[18px] max-w-[620px] font-sans text-[18px] leading-[1.6] text-navy/[0.68]">
@@ -422,7 +422,7 @@ export default function Bizlink() {
                 <h3 className="m-0 font-condensed text-[24px] font-bold">{p.name}</h3>
                 <p className="m-0 font-condensed text-[34px] font-bold leading-[1.1] tabular-nums">
                   {p.price} XAF
-                  <small className="block font-sans text-[14px] font-medium text-navy/60">par mois, TTC</small>
+                  <small className="block font-sans text-[14px] font-medium text-navy/70">par mois, TTC</small>
                 </p>
                 <p className="m-0 font-condensed text-[18px] font-bold text-cherry-alt">{p.debit}</p>
                 <ul className="mt-2 grid list-none gap-2 p-0 font-sans text-[14.5px] text-navy/70">
@@ -433,12 +433,12 @@ export default function Bizlink() {
             ))}
           </Reveal>
           <p className="mt-[22px] font-sans text-[15px] text-navy/60">
-            Équipement de 200 000 XAF payable en 4 fois. Engagement de 3 ans. Tarifs TTC.
+            Équipement de 200 000 XAF payable en 4 fois. Engagement de 3 ans. Tarifs TTC.
           </p>
           <div className="mt-[26px] rounded-2xl border-[1.5px] border-dashed border-navy/20 px-[26px] py-[22px]">
             <p className="m-0 max-w-[720px] font-sans text-[16px] leading-[1.55] text-navy/80">
               <strong className="text-navy">Besoin d&apos;une bande passante dédiée ?</strong>{" "}
-              Elle est disponible à partir de 50 000 XAF par Mbps et par mois à
+              Elle est disponible à partir de 50 000 XAF par Mbps et par mois à
               Douala. Dans les autres villes, le prix est établi après étude.
             </p>
           </div>
@@ -455,7 +455,7 @@ export default function Bizlink() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <Reveal className="max-w-[760px]">
             <SectionEyebrow label="QUESTIONS FRÉQUENTES" />
-            <h2 className="m-0 font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
+            <h2 className="m-0 text-balance font-condensed text-[46px] font-bold leading-[1.02] tracking-[-0.3px]">
               Vous avez encore des questions ?
             </h2>
           </Reveal>

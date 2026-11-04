@@ -9,6 +9,8 @@ import { WhatsAppIcon } from "./icons";
 /**
  * Mobile-only bottom bar: the quote questionnaire for the current page + WhatsApp.
  * Slides in once the visitor has scrolled past the hero (whose own CTA covers the top).
+ * On BizLink, whose hero CTA sits below the fold on phones, it shows from the start
+ * and steps aside while the form (which has its own submit button) is on screen.
  */
 export default function MobileActionBar() {
   const pathname = usePathname();
@@ -16,11 +18,17 @@ export default function MobileActionBar() {
   const bizlink = pathname?.startsWith(BIZLINK.href) ?? false;
 
   useEffect(() => {
+    const form = bizlink ? document.getElementById("formulaire") : null;
+    if (form) {
+      const io = new IntersectionObserver(([e]) => setVisible(!e.isIntersecting));
+      io.observe(form);
+      return () => io.disconnect();
+    }
     const onScroll = () => setVisible(window.scrollY > 420);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [bizlink]);
 
   return (
     <>
