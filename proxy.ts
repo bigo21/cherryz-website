@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
 // Public gate (Next.js 16 Proxy, ex-Middleware).
 //
@@ -8,8 +9,42 @@ import { NextResponse, type NextRequest } from "next/server";
 // → the preview domain shows the full work-in-progress site). See .env.example.
 const PREVIEW_COOKIE = "chz_preview";
 
-export function proxy(req: NextRequest) {
+/**
+ * Team dashboard (/admin): refreshes the Supabase session cookies before the
+ * page renders (Server Components cannot write cookies). Access itself is
+ * decided by the pages and by the database's RLS, never here.
+ */
+async function refreshAdminSession(req: NextRequest) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+  let res = NextResponse.next({ request: req });
+  if (!url || !key) return res;
+
+  const supabase = createServerClient(url, key, {
+    cookies: {
+      getAll: () => req.cookies.getAll(),
+      setAll: (list) => {
+        for (const { name, value } of list) req.cookies.set(name, value);
+        res = NextResponse.next({ request: req });
+        for (const { name, value, options } of list) res.cookies.set(name, value, options);
+      },
+    },
+  });
+  // getUser() validates the token with Supabase Auth and refreshes it if needed.
+  await supabase.auth.getUser();
+  // Never cached, never indexed.
+  res.headers.set("Cache-Control", "private, no-store");
+  res.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return res;
+}
+
+export async function proxy(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;
+
+  // The team dashboard stays reachable during maintenance.
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+    return refreshAdminSession(req);
+  }
 
   // Always reachable, even during maintenance: the maintenance page, the quote
   // request flow (/demandes), and directly-served brand assets.
