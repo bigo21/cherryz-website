@@ -13,13 +13,26 @@ export const QUOTE = {
 
 export const QUOTE_LABEL = "Obtenir mon devis";
 
-/** BizLink, Internet by radio link: its own page, form and WhatsApp line. */
+export const CONTACT = {
+  address: "Yaoundé, Cameroun",
+  phoneDisplay: "+237 658 60 20 54",
+  phoneHref: "tel:+237658602054",
+  whatsapp: "https://wa.me/237658602054",
+  email: "support@cherryz.tech",
+  emailHref: "mailto:support@cherryz.tech",
+  site: "www.cherryz.tech",
+  siteHref: "https://www.cherryz.tech",
+  linkedin: "https://linkedin.com/company/cherryztech",
+  facebook: "https://facebook.com/cherryz.tech",
+} as const;
+
+/** BizLink, Internet by radio link: its own page and form; same WhatsApp line as the site. */
 export const BIZLINK = {
   href: "/bizlink",
   formHref: "/bizlink#formulaire",
   cta: "Demandez une étude",
-  whatsappDisplay: "+237 658 60 20 54",
-  whatsapp: "https://wa.me/237658602054",
+  whatsappDisplay: CONTACT.phoneDisplay,
+  whatsapp: CONTACT.whatsapp,
 } as const;
 
 /** The questionnaire matching the page the visitor is on (the choice page otherwise). */
@@ -30,18 +43,6 @@ export function quoteHrefFor(pathname: string | null): string {
   return QUOTE.hub;
 }
 
-export const CONTACT = {
-  address: "Yaoundé, Cameroun",
-  phoneDisplay: "+237 242 01 46 64",
-  phoneHref: "tel:+237242014664",
-  whatsapp: "https://wa.me/237242014664",
-  email: "support@cherryz.tech",
-  emailHref: "mailto:support@cherryz.tech",
-  site: "www.cherryz.tech",
-  siteHref: "https://www.cherryz.tech",
-  linkedin: "https://linkedin.com/company/cherryztech",
-  facebook: "https://facebook.com/cherryz.tech",
-} as const;
 
 export const NAV_LINKS = [
   { label: "Accueil", href: "/" },

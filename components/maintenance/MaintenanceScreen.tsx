@@ -87,7 +87,7 @@ export default function MaintenanceScreen() {
             </p>
             <div className="flex flex-wrap gap-[14px]">
               <a
-                href="https://wa.me/237242014664"
+                href="https://wa.me/237658602054"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-[13px] rounded-[10px] border border-white/[0.16] bg-white/[0.06] px-[22px] py-[14px] text-white transition-colors hover:border-accent hover:bg-white/[0.11]"
@@ -103,7 +103,7 @@ export default function MaintenanceScreen() {
                     WHATSAPP
                   </span>
                   <span className="font-sans text-[16px] font-semibold">
-                    +237 242 01 46 64
+                    +237 658 60 20 54
                   </span>
                 </span>
               </a>
