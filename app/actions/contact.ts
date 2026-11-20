@@ -2,6 +2,9 @@
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendContactEmails } from "@/lib/email/contact-notifications";
+import { looksLikeRobot } from "@/lib/forms/checks";
+import { cleanContact, validateContact, type ContactErrors } from "@/lib/forms/contact";
+import { DOMAINE_INVALIDE, emailDomainAcceptsMail } from "@/lib/forms/email-domain";
 
 export interface ContactInput {
   full_name: string;
@@ -11,34 +14,42 @@ export interface ContactInput {
   besoin?: string;
   message?: string;
   tracking?: Record<string, unknown>;
+  /** Honeypot field (hidden; only robots fill it) and time spent on the form, in ms. */
+  trap?: string;
+  elapsedMs?: number;
 }
 
 export interface SubmitResult {
   ok: boolean;
   error?: string;
+  /** Field-level reasons when the server refuses a value. */
+  fields?: ContactErrors;
 }
-
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export async function submitContactMessage(
   input: ContactInput,
 ): Promise<SubmitResult> {
-  const full_name = (input?.full_name ?? "").trim();
-  const email = (input?.email ?? "").trim();
-  const besoin = (input?.besoin ?? "").trim();
+  // A robot is answered as if all went well; nothing is stored or sent.
+  if (looksLikeRobot(input?.trap, input?.elapsedMs)) {
+    console.warn("[contact] submission dropped as automated.");
+    return { ok: true };
+  }
 
   // Server-side validation (Server Actions are reachable via direct POST).
-  if (!full_name) return { ok: false, error: "validation" };
-  if (!EMAIL_RE.test(email)) return { ok: false, error: "validation" };
-  if (!besoin) return { ok: false, error: "validation" };
+  const f = cleanContact(input ?? {});
+  const fields = validateContact(f);
+  if (Object.keys(fields).length > 0) return { ok: false, error: "validation", fields };
+  if (!(await emailDomainAcceptsMail(f.email))) {
+    return { ok: false, error: "validation", fields: { email: DOMAINE_INVALIDE } };
+  }
 
   const record = {
-    full_name,
-    email,
-    phone: input.phone?.trim() || null,
-    company: input.company?.trim() || null,
-    besoin,
-    message: input.message?.trim() || null,
+    full_name: f.full_name,
+    email: f.email,
+    phone: f.phone || null,
+    company: f.company || null,
+    besoin: f.besoin,
+    message: f.message || null,
   };
 
   const supabase = createSupabaseServerClient();

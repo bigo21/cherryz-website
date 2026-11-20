@@ -2,13 +2,20 @@
 
 import { useState } from "react";
 import { submitContactMessage } from "@/app/actions/contact";
+import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
+import { FieldError } from "@/components/quote/QuoteWizard";
+import { BESOINS, cleanContact, validateContact, type ContactErrors } from "@/lib/forms/contact";
 
 const labelCls =
   "mb-[7px] block font-condensed text-[14px] font-semibold tracking-[0.6px] text-navy";
 const fieldCls =
   "w-full rounded-[11px] border-[1.5px] border-[rgba(16,27,43,0.16)] bg-white px-[15px] py-[13px] text-[16px] text-navy-alt transition-colors placeholder:text-[#6b7280] focus:border-cherry-alt focus:outline-none focus:shadow-[0_0_0_3px_rgba(162,3,45,0.22)]";
 
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+/** Field order, to focus the first one in error. */
+const ORDER = ["full_name", "email", "phone", "company", "besoin", "message"] as const;
+const IDS: Record<(typeof ORDER)[number], string> = {
+  full_name: "c-name", email: "c-email", phone: "c-phone", company: "c-company", besoin: "c-besoin", message: "c-message",
+};
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -22,6 +29,25 @@ export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<ContactErrors>({});
+  const guard = useAntiRobot();
+
+  function showErrors(errs: ContactErrors) {
+    setFieldErrors(errs);
+    const first = ORDER.find((k) => errs[k]);
+    if (!first) return false;
+    requestAnimationFrame(() => document.getElementById(IDS[first])?.focus());
+    return true;
+  }
+
+  /** aria wiring and message of one field. */
+  const errorOf = (k: (typeof ORDER)[number]) => {
+    const message = fieldErrors[k];
+    return {
+      props: { "aria-invalid": message ? true : undefined, "aria-describedby": message ? `${IDS[k]}-err` : undefined },
+      node: message ? <FieldError id={`${IDS[k]}-err`} message={message} /> : null,
+    };
+  };
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -29,17 +55,16 @@ export default function ContactForm() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (!form.full_name.trim() || !EMAIL_RE.test(form.email) || !form.besoin) {
-      setError("Merci de renseigner votre nom, un email valide et votre besoin.");
-      return;
-    }
+    if (showErrors(validateContact(cleanContact(form)))) return;
     setSubmitting(true);
     try {
       const tracking =
         typeof window !== "undefined"
           ? { referrer: document.referrer || null, page: window.location.pathname, submittedAt: new Date().toISOString() }
           : {};
-      const res = await submitContactMessage({ ...form, tracking });
+      const res = await submitContactMessage({ ...form, tracking, ...guard.read() });
+      // The server refused a value (e.g. an e-mail domain that receives no mail).
+      if (!res.ok && res.fields && showErrors(res.fields)) return;
       if (!res.ok) throw new Error(res.error);
       setSubmitted(true);
     } catch {
@@ -53,6 +78,7 @@ export default function ContactForm() {
     setForm({ full_name: "", email: "", phone: "", company: "", besoin: "", message: "" });
     setSubmitted(false);
     setError(null);
+    setFieldErrors({});
   }
 
   const firstName = form.full_name.trim().split(" ")[0];
@@ -89,37 +115,45 @@ export default function ContactForm() {
       <p className="mb-[26px] font-sans text-[15.5px] text-navy/60">
         Les champs marqués d&apos;un * sont obligatoires.
       </p>
-      <form onSubmit={onSubmit} noValidate>
+      <form onSubmit={onSubmit} noValidate className="relative">
+        {guard.field}
         <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2">
           <div>
             <label htmlFor="c-name" className={labelCls}>NOM COMPLET *</label>
-            <input id="c-name" autoComplete="name" type="text" required value={form.full_name} onChange={set("full_name")} placeholder="Votre nom" className={fieldCls} />
+            <input id="c-name" autoComplete="name" type="text" required maxLength={80} value={form.full_name} onChange={set("full_name")} placeholder="Votre nom" className={fieldCls} {...errorOf("full_name").props} />
+            {errorOf("full_name").node}
           </div>
           <div>
             <label htmlFor="c-email" className={labelCls}>EMAIL PROFESSIONNEL *</label>
-            <input id="c-email" autoComplete="email" type="email" required value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" className={fieldCls} />
+            <input id="c-email" autoComplete="email" type="email" required maxLength={254} value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" className={fieldCls} {...errorOf("email").props} />
+            <EmailSuggestion value={form.email} onApply={(email) => setForm((f) => ({ ...f, email }))} />
+            {errorOf("email").node}
           </div>
           <div>
             <label htmlFor="c-phone" className={labelCls}>TÉLÉPHONE / WHATSAPP</label>
-            <input id="c-phone" autoComplete="tel" type="tel" value={form.phone} onChange={set("phone")} placeholder="+237 6 00 00 00 00" className={fieldCls} />
+            <input id="c-phone" autoComplete="tel" type="tel" inputMode="tel" maxLength={25} value={form.phone} onChange={set("phone")} placeholder="+237 6 00 00 00 00" className={fieldCls} {...errorOf("phone").props} />
+            {errorOf("phone").node}
           </div>
           <div>
             <label htmlFor="c-company" className={labelCls}>ENTREPRISE / ORGANISATION</label>
-            <input id="c-company" autoComplete="organization" type="text" value={form.company} onChange={set("company")} placeholder="Nom de votre structure" className={fieldCls} />
+            <input id="c-company" autoComplete="organization" type="text" maxLength={120} value={form.company} onChange={set("company")} placeholder="Nom de votre structure" className={fieldCls} {...errorOf("company").props} />
+            {errorOf("company").node}
           </div>
         </div>
         <div className="mt-[18px]">
           <label htmlFor="c-besoin" className={labelCls}>VOTRE BESOIN *</label>
-          <select id="c-besoin" required value={form.besoin} onChange={set("besoin")} className={fieldCls}>
+          <select id="c-besoin" required value={form.besoin} onChange={set("besoin")} className={fieldCls} {...errorOf("besoin").props}>
             <option value="">Sélectionnez…</option>
-            <option value="Internet B2B">Internet B2B</option>
-            <option value="WiFi Zone">WiFi Zone</option>
-            <option value="Autre">Autre</option>
+            {BESOINS.map((b) => (
+              <option key={b} value={b}>{b}</option>
+            ))}
           </select>
+          {errorOf("besoin").node}
         </div>
         <div className="mt-[18px]">
           <label htmlFor="c-message" className={labelCls}>MESSAGE</label>
-          <textarea id="c-message" rows={4} value={form.message} onChange={set("message")} placeholder="Décrivez votre projet, votre localisation, vos besoins…" className={`${fieldCls} resize-y`} />
+          <textarea id="c-message" rows={4} maxLength={2000} value={form.message} onChange={set("message")} placeholder="Décrivez votre projet, votre localisation, vos besoins…" className={`${fieldCls} resize-y`} {...errorOf("message").props} />
+          {errorOf("message").node}
         </div>
 
         {error && (

@@ -5,6 +5,7 @@ import { BIZLINK_INDICATIFS, BIZLINK_OTHER, schemaBizlink, type Answers } from "
 import { bizlinkPhone, validateQuestions } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
 import { chipClass, collectTracking, FieldError, inputClass } from "@/components/quote/QuoteWizard";
+import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
 import { CheckLineIcon, WhatsAppIcon } from "@/components/site/icons";
 import { BIZLINK } from "@/lib/site/site";
 
@@ -31,6 +32,7 @@ export default function BizlinkForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const guard = useAntiRobot();
   const thanksRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -46,6 +48,10 @@ export default function BizlinkForm() {
       const phone = bizlinkPhone(answers);
       if ("error" in phone) errs.q5 = phone.error;
     }
+    if (!showInvalid(errs)) await send();
+  }
+
+  function showInvalid(errs: Record<string, string>) {
     const invalid = questions.find((q) => errs[q.id]);
     if (invalid) {
       setErrors(errs);
@@ -55,12 +61,18 @@ export default function BizlinkForm() {
         block?.scrollIntoView({ behavior: "smooth", block: "center" });
         block?.querySelector<HTMLElement>("input")?.focus({ preventScroll: true });
       });
-      return;
+      return true;
     }
+    return false;
+  }
+
+  async function send() {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const res = await submitQuoteRequest({ type: "bizlink", answers, tracking: collectTracking() });
+      const res = await submitQuoteRequest({ type: "bizlink", answers, tracking: collectTracking(), ...guard.read() });
+      // The server refused a value (e.g. an e-mail domain that receives no mail).
+      if (!res.ok && res.fields && showInvalid(res.fields)) return;
       if (!res.ok) throw new Error(res.error ?? "unknown");
       setSent(true);
       rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -101,8 +113,9 @@ export default function BizlinkForm() {
       <form
         noValidate
         onSubmit={submit}
-        className="grid grid-cols-1 gap-x-[18px] gap-y-[20px] rounded-[20px] bg-white px-5 py-[30px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] sm:grid-cols-2 sm:px-8"
+        className="relative grid grid-cols-1 gap-x-[18px] gap-y-[20px] rounded-[20px] bg-white px-5 py-[30px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] sm:grid-cols-2 sm:px-8"
       >
+        {guard.field}
         {questions.map((q) => {
           const err = showErrors ? errors[q.id] : undefined;
           const errId = err ? `e-${q.id}` : undefined;
@@ -160,6 +173,14 @@ export default function BizlinkForm() {
                     className={inputClass}
                   />
                 );
+                if (q.type === "email") {
+                  return (
+                    <>
+                      {input}
+                      <EmailSuggestion value={String(answers[q.id] ?? "")} onApply={(email) => setAns(q.id, email)} />
+                    </>
+                  );
+                }
                 if (q.id !== "q5") return input;
                 // The phone's country: its dial code, picked just before the number.
                 return (

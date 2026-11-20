@@ -1,7 +1,9 @@
 "use server";
 
-import type { Answers, QuoteType } from "@/lib/quote/schemas";
-import { bizlinkPhone, validateSubmission } from "@/lib/quote/validation";
+import { getSchema, type Answers, type QuoteType } from "@/lib/quote/schemas";
+import { bizlinkPhone, cleanAnswers, validateSubmission } from "@/lib/quote/validation";
+import { looksLikeRobot } from "@/lib/forms/checks";
+import { DOMAINE_INVALIDE, emailDomainAcceptsMail } from "@/lib/forms/email-domain";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendQuoteEmails } from "@/lib/email/quote-notifications";
 
@@ -9,11 +11,16 @@ export interface SubmitPayload {
   type: QuoteType;
   answers: Answers;
   tracking?: Record<string, unknown>;
+  /** Honeypot field (hidden; only robots fill it) and time spent on the form, in ms. */
+  trap?: string;
+  elapsedMs?: number;
 }
 
 export interface SubmitResult {
   ok: boolean;
   error?: string;
+  /** Field-level reasons, keyed by question id, when the server refuses a value. */
+  fields?: Record<string, string>;
 }
 
 /** Pull the key contact fields out of the answers, for easy querying/indexing. */
@@ -55,15 +62,27 @@ export async function submitQuoteRequest(
   payload: SubmitPayload,
 ): Promise<SubmitResult> {
   const { type, tracking } = payload ?? ({} as SubmitPayload);
-  let answers = payload?.answers ?? {};
-
   if (type !== "ip" && type !== "wifi" && type !== "bizlink") {
     return { ok: false, error: "invalid_type" };
   }
 
+  // A robot is answered as if all went well, so it learns nothing, and
+  // nothing is stored or sent.
+  if (looksLikeRobot(payload?.trap, payload?.elapsedMs)) {
+    console.warn(`[quote] ${type}: submission dropped as automated.`);
+    return { ok: true };
+  }
+
+  let answers = cleanAnswers(type, payload?.answers ?? {});
   const errors = validateSubmission(type, answers);
   if (Object.keys(errors).length > 0) {
-    return { ok: false, error: "validation" };
+    return { ok: false, error: "validation", fields: errors };
+  }
+
+  // The e-mail's domain must receive mail (DNS; accepted when it cannot tell).
+  const emailQ = getSchema(type).flatMap((s) => s.questions).find((q) => q.type === "email");
+  if (emailQ && answers[emailQ.id] && !(await emailDomainAcceptsMail(String(answers[emailQ.id])))) {
+    return { ok: false, error: "validation", fields: { [emailQ.id]: DOMAINE_INVALIDE } };
   }
 
   const supabase = createSupabaseServerClient();

@@ -25,6 +25,8 @@ export interface Question {
   hasOther?: boolean;
   options?: string[];
   placeholder?: string;
+  /** What a free-text answer holds, for its checks (lib/forms/checks.ts). Defaults to "short". */
+  kind?: "name" | "company" | "city" | "short";
   /** When present, the question is only shown/validated if this returns true. */
   cond?: (a: Answers) => boolean;
 }
@@ -72,7 +74,7 @@ export const schemaIP: Step[] = [
     title: "Localisation",
     subtitle: "Où se trouve votre entreprise ?",
     questions: [
-      { id: "q13", label: "Ville et quartier où se trouve votre entreprise", type: "text", required: true, placeholder: "Ex. Yaoundé, Bastos" },
+      { id: "q13", label: "Ville et quartier où se trouve votre entreprise", type: "text", kind: "city", required: true, placeholder: "Ex. Yaoundé, Bastos" },
       { id: "q14", label: "Région", type: "single", required: true, options: ["Centre", "Littoral", "Ouest", "Nord-Ouest", "Sud-Ouest", "Sud", "Est", "Adamaoua", "Nord", "Extrême-Nord"] },
       { id: "q15", label: "Localisation précise", type: "geo", required: true },
     ],
@@ -81,9 +83,9 @@ export const schemaIP: Step[] = [
     title: "Vos coordonnées",
     subtitle: "Pour que notre équipe puisse vous recontacter.",
     questions: [
-      { id: "q16", label: "Votre prénom et nom complet", type: "text", required: true, placeholder: "Prénom Nom" },
+      { id: "q16", label: "Votre prénom et nom complet", type: "text", kind: "name", required: true, placeholder: "Prénom Nom" },
       { id: "q17", label: "Votre poste / fonction", type: "single", required: true, hasOther: true, options: ["Directeur Général (DG) / PDG", "Directeur Informatique (DSI)", "Responsable Système d'Information (RSI)", "Directeur Administratif et Financier (DAF)", "Responsable Achats / Logistique", "Gérant / Propriétaire", "Autre"] },
-      { id: "q18", label: "Nom de votre entreprise ou organisation", type: "text", required: true, placeholder: "Nom de la structure" },
+      { id: "q18", label: "Nom de votre entreprise ou organisation", type: "text", kind: "company", required: true, placeholder: "Nom de la structure" },
       { id: "q19", label: "Secteur d'activité", type: "single", required: true, hasOther: true, options: ["Banque / Assurance", "Microfinance (EMF)", "Call Center / Centre d'appels", "Hôtel / Restauration / Tourisme", "Clinique / Santé / Pharmacie", "Université / École / Formation", "ONG / Organisation Internationale", "Industrie / Production", "PME / Commerce / Distribution", "Administration publique / Parapublic", "Autre"] },
       { id: "q20", label: "Numéro WhatsApp / Téléphone", type: "tel", required: true, placeholder: "+237 6 00 00 00 00" },
       { id: "q21", label: "Adresse email professionnelle", type: "email", required: true, placeholder: "vous@entreprise.com" },
@@ -128,7 +130,7 @@ export const schemaWifi: Step[] = [
     title: "Localisation",
     subtitle: "Où se trouve votre projet ?",
     questions: [
-      { id: "q13", label: "Ville et quartier où se trouve votre projet", type: "text", required: true, placeholder: "Ex. Douala, Bonaberi" },
+      { id: "q13", label: "Ville et quartier où se trouve votre projet", type: "text", kind: "city", required: true, placeholder: "Ex. Douala, Bonaberi" },
       { id: "q14", label: "Région", type: "single", required: true, options: ["Centre", "Littoral", "Ouest", "Nord-Ouest", "Sud-Ouest", "Sud", "Est", "Adamaoua", "Nord", "Extrême-Nord"] },
       { id: "q15", label: "Localisation précise", type: "geo", required: true },
     ],
@@ -137,10 +139,10 @@ export const schemaWifi: Step[] = [
     title: "Vos coordonnées",
     subtitle: "Pour que notre équipe puisse vous recontacter.",
     questions: [
-      { id: "q16", label: "Votre prénom et nom complet", type: "text", required: true, placeholder: "Prénom Nom" },
+      { id: "q16", label: "Votre prénom et nom complet", type: "text", kind: "name", required: true, placeholder: "Prénom Nom" },
       { id: "q17", label: "Numéro WhatsApp / Téléphone", type: "tel", required: true, placeholder: "+237 6 00 00 00 00" },
       { id: "q18", label: "Adresse email professionnelle", type: "email", required: true, placeholder: "vous@email.com" },
-      { id: "q19", label: "Nom de votre entreprise ou organisation", type: "text", required: false, placeholder: "Facultatif, laissez vide si vous êtes un particulier" },
+      { id: "q19", label: "Nom de votre entreprise ou organisation", type: "text", kind: "company", required: false, placeholder: "Facultatif, laissez vide si vous êtes un particulier" },
       { id: "q5", label: "Un message ou une question pour notre équipe ?", type: "textarea", required: false, placeholder: "Votre message (facultatif)" },
     ],
   },
@@ -168,10 +170,10 @@ export const schemaBizlink: Step[] = [
     title: "Étude gratuite",
     subtitle: "",
     questions: [
-      { id: "q1", label: "Nom du responsable", type: "text", required: true, placeholder: "Nom et prénom" },
+      { id: "q1", label: "Nom du responsable", type: "text", kind: "name", required: true, placeholder: "Nom et prénom" },
       { id: "q2", label: "Poste", type: "text", required: true, placeholder: "Directeur, gérant..." },
-      { id: "q3", label: "Entreprise", type: "text", required: true, placeholder: "Nom de l'entreprise" },
-      { id: "q4", label: "Ville", type: "text", required: true, placeholder: "Douala, Yaoundé..." },
+      { id: "q3", label: "Entreprise", type: "text", kind: "company", required: true, placeholder: "Nom de l'entreprise" },
+      { id: "q4", label: "Ville", type: "text", kind: "city", required: true, placeholder: "Douala, Yaoundé..." },
       // Preceded by the dial-code picker (BIZLINK_INDICATIFS); stored in E.164.
       { id: "q5", label: "Téléphone (WhatsApp de préférence)", type: "tel", required: true, placeholder: "6XX XX XX XX" },
       { id: "q6", label: "E-mail", type: "email", required: true, placeholder: "nom@entreprise.com" },

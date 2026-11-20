@@ -11,6 +11,8 @@ import {
   type GeoValue,
 } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
+import { checkEmailAddress } from "@/app/actions/email";
+import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
 import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CONTACT } from "@/lib/site/site";
 
@@ -87,6 +89,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
   const hydrated = useRef(false);
+  const guard = useAntiRobot();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
 
@@ -156,7 +159,18 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const res = await submitQuoteRequest({ type, answers, tracking: collectTracking() });
+      const res = await submitQuoteRequest({ type, answers, tracking: collectTracking(), ...guard.read() });
+      if (!res.ok && res.fields && Object.keys(res.fields).length) {
+        // The server refused an answer: back to the step that holds it.
+        const fields = res.fields;
+        const at = schema.findIndex((s) => s.questions.some((q) => fields[q.id]));
+        moved.current = true;
+        setStep(at >= 0 ? at + 1 : step);
+        setErrors(fields);
+        setShowErrors(true);
+        scrollTop();
+        return;
+      }
       if (!res.ok) throw new Error(res.error ?? "unknown");
       moved.current = true;
       setDone(true);
@@ -170,19 +184,29 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     }
   }
 
-  function next() {
-    const errs = validateQuestions(visible, answers);
+  function showInvalid(errs: Record<string, string>) {
     const invalid = visible.find((q) => errs[q.id]);
-    if (invalid) {
-      setErrors(errs);
-      setShowErrors(true);
-      // Bring the first problem into view and put the keyboard on it.
-      requestAnimationFrame(() => {
-        const block = document.getElementById(`q-${invalid.id}`);
-        block?.scrollIntoView({ behavior: "smooth", block: "center" });
-        block?.querySelector<HTMLElement>("input, textarea, button")?.focus({ preventScroll: true });
-      });
-      return;
+    if (!invalid) return false;
+    setErrors(errs);
+    setShowErrors(true);
+    // Bring the first problem into view and put the keyboard on it.
+    requestAnimationFrame(() => {
+      const block = document.getElementById(`q-${invalid.id}`);
+      block?.scrollIntoView({ behavior: "smooth", block: "center" });
+      block?.querySelector<HTMLElement>("input, textarea, button")?.focus({ preventScroll: true });
+    });
+    return true;
+  }
+
+  async function next() {
+    if (showInvalid(validateQuestions(visible, answers))) return;
+    // Leaving the step that asks for the e-mail: does its domain receive mail?
+    const emailQ = visible.find((q) => q.type === "email" && String(answers[q.id] ?? "").trim());
+    if (emailQ) {
+      setSubmitting(true);
+      const check = await checkEmailAddress(String(answers[emailQ.id])).catch(() => ({ error: undefined }));
+      setSubmitting(false);
+      if (check.error && showInvalid({ [emailQ.id]: check.error })) return;
     }
     if (step >= total) {
       void submit();
@@ -286,7 +310,8 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
 
   return (
     <>
-      <div className="rounded-[20px] bg-white px-5 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade sm:px-9">
+      <div className="relative rounded-[20px] bg-white px-5 pb-[30px] pt-[34px] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] animate-fade sm:px-9">
+        {guard.field}
         {/* Progress */}
         <div className="mb-[26px]">
           <div className="mb-[9px] flex items-baseline justify-between gap-3">
@@ -436,6 +461,9 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
                   aria-required={q.required || undefined}
                   className={inputClass}
                 />
+              )}
+              {q.type === "email" && (
+                <EmailSuggestion value={String(v ?? "")} onApply={(email) => setAns(q.id, email)} />
               )}
 
               {q.type === "textarea" && (
