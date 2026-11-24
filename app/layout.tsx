@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
+import CampaignMemory from "@/components/forms/CampaignMemory";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -32,7 +33,10 @@ export default function RootLayout({
       lang="fr"
       className={`${barlow.variable} ${barlowCondensed.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <CampaignMemory />
+        {children}
+      </body>
     </html>
   );
 }

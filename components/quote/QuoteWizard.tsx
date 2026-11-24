@@ -13,6 +13,7 @@ import {
 import { submitQuoteRequest } from "@/app/actions/quote";
 import { checkEmailAddress } from "@/app/actions/email";
 import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
+import { campaignUtm } from "@/lib/forms/campaign";
 import { CONNEXION_PERDUE, submitErrorMessage } from "@/lib/forms/submit-errors";
 import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CONTACT } from "@/lib/site/site";
@@ -61,14 +62,8 @@ function loadSaved(type: QuoteType): SavedState | null {
 
 export function collectTracking() {
   if (typeof window === "undefined") return {};
-  const params = new URLSearchParams(window.location.search);
-  const utm: Record<string, string> = {};
-  for (const k of ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]) {
-    const v = params.get(k);
-    if (v) utm[k] = v;
-  }
   return {
-    utm,
+    utm: campaignUtm(),
     referrer: document.referrer || null,
     page: window.location.pathname,
     userAgent: navigator.userAgent,

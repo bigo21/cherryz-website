@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { submitContactMessage } from "@/app/actions/contact";
 import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
+import { campaignUtm } from "@/lib/forms/campaign";
 import { CONNEXION_PERDUE, submitErrorMessage } from "@/lib/forms/submit-errors";
 import { FieldError } from "@/components/quote/QuoteWizard";
 import { BESOINS, cleanContact, validateContact, type ContactErrors } from "@/lib/forms/contact";
@@ -63,7 +64,7 @@ export default function ContactForm() {
     try {
       const tracking =
         typeof window !== "undefined"
-          ? { referrer: document.referrer || null, page: window.location.pathname, submittedAt: new Date().toISOString() }
+          ? { utm: campaignUtm(), referrer: document.referrer || null, page: window.location.pathname, submittedAt: new Date().toISOString() }
           : {};
       const res = await submitContactMessage({ ...form, tracking, ...(await guard.read()) });
       // The server refused a value (e.g. an e-mail domain that receives no mail).
