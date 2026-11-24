@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { submitContactMessage } from "@/app/actions/contact";
 import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
+import { CONNEXION_PERDUE, submitErrorMessage } from "@/lib/forms/submit-errors";
 import { FieldError } from "@/components/quote/QuoteWizard";
 import { BESOINS, cleanContact, validateContact, type ContactErrors } from "@/lib/forms/contact";
 
@@ -49,8 +50,10 @@ export default function ContactForm() {
     };
   };
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [k]: e.target.value }));
+    setFieldErrors((errs) => ({ ...errs, [k]: undefined }));
+  };
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -62,13 +65,16 @@ export default function ContactForm() {
         typeof window !== "undefined"
           ? { referrer: document.referrer || null, page: window.location.pathname, submittedAt: new Date().toISOString() }
           : {};
-      const res = await submitContactMessage({ ...form, tracking, ...guard.read() });
+      const res = await submitContactMessage({ ...form, tracking, ...(await guard.read()) });
       // The server refused a value (e.g. an e-mail domain that receives no mail).
       if (!res.ok && res.fields && showErrors(res.fields)) return;
-      if (!res.ok) throw new Error(res.error);
+      if (!res.ok) {
+        setError(submitErrorMessage(res.error));
+        return;
+      }
       setSubmitted(true);
     } catch {
-      setError("Une erreur est survenue. Merci de réessayer ou de nous écrire à support@cherryz.tech.");
+      setError(CONNEXION_PERDUE);
     } finally {
       setSubmitting(false);
     }
@@ -126,7 +132,10 @@ export default function ContactForm() {
           <div>
             <label htmlFor="c-email" className={labelCls}>EMAIL PROFESSIONNEL *</label>
             <input id="c-email" autoComplete="email" type="email" required maxLength={254} value={form.email} onChange={set("email")} placeholder="vous@entreprise.com" className={fieldCls} {...errorOf("email").props} />
-            <EmailSuggestion value={form.email} onApply={(email) => setForm((f) => ({ ...f, email }))} />
+            <EmailSuggestion value={form.email} onApply={(email) => {
+              setForm((f) => ({ ...f, email }));
+              setFieldErrors((errs) => ({ ...errs, email: undefined }));
+            }} />
             {errorOf("email").node}
           </div>
           <div>

@@ -40,13 +40,16 @@ function requiredMessage(q: Question): string {
     case "consent":
       return "Cochez la case pour que nous puissions vous recontacter.";
     case "email":
-      return "Indiquez votre adresse email.";
+      return "Indiquez votre adresse e-mail.";
     case "tel":
       return "Indiquez un numéro de téléphone.";
     case "geo":
       return "Indiquez où se trouve le site (position ou description).";
     default:
-      return "Ce champ est obligatoire.";
+      if (q.kind === "name") return "Indiquez votre nom.";
+      if (q.kind === "company") return "Indiquez le nom de votre entreprise.";
+      if (q.kind === "city") return "Indiquez la ville.";
+      return `Ce champ est obligatoire : « ${q.label} ».`;
   }
 }
 
@@ -125,7 +128,7 @@ export function bizlinkPhone(answers: Answers): { e164: string; pays: string } |
   const prefix = code.indicatif.slice(1);
   const digits = String(answers.q5 ?? "").replace(/\D/g, "").replace(new RegExp(`^(00)?${prefix}`), "");
   if (!code.national.test(digits)) {
-    return { error: `Numéro du ${code.nom} attendu : 9 chiffres, par ex. 6 77 12 34 56.` };
+    return { error: `Numéro du ${code.nom} attendu : 9 chiffres commençant par 6 ou 2, par ex. 6 77 12 34 56.` };
   }
   return { e164: `${code.indicatif}${digits}`, pays: code.pays };
 }
@@ -152,7 +155,8 @@ export function validateSubmission(
 ): Record<string, string> {
   const all = getSchema(type).flatMap((step) => visibleQuestions(step, answers));
   const errs = validateQuestions(all, answers);
-  if (type === "bizlink" && !errs.q5) {
+  // Its own message wins: the general one offers foreign numbers, BizLink does not.
+  if (type === "bizlink" && clean(answers.q5)) {
     const phone = bizlinkPhone(answers);
     if ("error" in phone) errs.q5 = phone.error;
   }

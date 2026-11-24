@@ -6,6 +6,7 @@ import { bizlinkPhone, validateQuestions } from "@/lib/quote/validation";
 import { submitQuoteRequest } from "@/app/actions/quote";
 import { chipClass, collectTracking, FieldError, inputClass } from "@/components/quote/QuoteWizard";
 import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
+import { CONNEXION_PERDUE, submitErrorMessage } from "@/lib/forms/submit-errors";
 import { CheckLineIcon, WhatsAppIcon } from "@/components/site/icons";
 import { BIZLINK } from "@/lib/site/site";
 
@@ -39,12 +40,18 @@ export default function BizlinkForm() {
     if (sent) thanksRef.current?.focus();
   }, [sent]);
 
-  const setAns = (id: string, val: unknown) => setAnswers((prev) => ({ ...prev, [id]: val }));
+  const setAns = (id: string, val: unknown) => {
+    setAnswers((prev) => ({ ...prev, [id]: val }));
+    // The message goes as soon as its answer changes (the dial code belongs to the phone).
+    const key = id === "pays" ? "q5" : id;
+    setErrors((errs) => Object.fromEntries(Object.entries(errs).filter(([k]) => k !== key)));
+  };
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const errs = validateQuestions(questions, answers);
-    if (!errs.q5) {
+    // Its own message wins: the general one offers foreign numbers, BizLink does not.
+    if (String(answers.q5 ?? "").trim()) {
       const phone = bizlinkPhone(answers);
       if ("error" in phone) errs.q5 = phone.error;
     }
@@ -70,16 +77,17 @@ export default function BizlinkForm() {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const res = await submitQuoteRequest({ type: "bizlink", answers, tracking: collectTracking(), ...guard.read() });
+      const res = await submitQuoteRequest({ type: "bizlink", answers, tracking: collectTracking(), ...(await guard.read()) });
       // The server refused a value (e.g. an e-mail domain that receives no mail).
       if (!res.ok && res.fields && showInvalid(res.fields)) return;
-      if (!res.ok) throw new Error(res.error ?? "unknown");
+      if (!res.ok) {
+        setSubmitError(submitErrorMessage(res.error));
+        return;
+      }
       setSent(true);
       rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch {
-      setSubmitError(
-        "Votre demande n'a pas pu être envoyée. Vos réponses sont conservées : réessayez dans un instant, ou écrivez-nous sur WhatsApp.",
-      );
+      setSubmitError(CONNEXION_PERDUE);
     } finally {
       setSubmitting(false);
     }

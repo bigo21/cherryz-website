@@ -13,6 +13,7 @@ import {
 import { submitQuoteRequest } from "@/app/actions/quote";
 import { checkEmailAddress } from "@/app/actions/email";
 import { EmailSuggestion, useAntiRobot } from "@/components/forms/FormGuards";
+import { CONNEXION_PERDUE, submitErrorMessage } from "@/lib/forms/submit-errors";
 import { LockIcon, WhatsAppIcon } from "@/components/site/icons";
 import { CONTACT } from "@/lib/site/site";
 
@@ -86,6 +87,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showErrors, setShowErrors] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [checking, setChecking] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
   const hydrated = useRef(false);
@@ -116,8 +118,12 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
   const currentStep = schema[step - 1];
   const visible = visibleQuestions(currentStep, answers);
 
-  const setAns = (id: string, val: unknown) =>
+  const setAns = (id: string, val: unknown) => {
     setAnswers((prev) => ({ ...prev, [id]: val }));
+    // The message goes as soon as its answer (or its "Autre" detail) changes.
+    const key = id.split("__")[0];
+    setErrors((errs) => Object.fromEntries(Object.entries(errs).filter(([k]) => k !== key)));
+  };
 
   function toggleMulti(id: string, val: string) {
     setAnswers((prev) => {
@@ -159,26 +165,30 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const res = await submitQuoteRequest({ type, answers, tracking: collectTracking(), ...guard.read() });
+      const res = await submitQuoteRequest({ type, answers, tracking: collectTracking(), ...(await guard.read()) });
       if (!res.ok && res.fields && Object.keys(res.fields).length) {
         // The server refused an answer: back to the step that holds it.
         const fields = res.fields;
         const at = schema.findIndex((s) => s.questions.some((q) => fields[q.id]));
-        moved.current = true;
-        setStep(at >= 0 ? at + 1 : step);
-        setErrors(fields);
-        setShowErrors(true);
-        scrollTop();
+        if (at >= 0) {
+          moved.current = true;
+          setStep(at + 1);
+          setErrors(fields);
+          setShowErrors(true);
+          setSubmitError("Votre demande n'est pas encore envoyée : corrigez la réponse signalée sur cette étape, puis continuez.");
+          scrollTop();
+          return;
+        }
+      }
+      if (!res.ok) {
+        setSubmitError(submitErrorMessage(res.error));
         return;
       }
-      if (!res.ok) throw new Error(res.error ?? "unknown");
       moved.current = true;
       setDone(true);
       scrollTop();
     } catch {
-      setSubmitError(
-        "Votre demande n'a pas pu être envoyée. Vos réponses sont conservées : réessayez dans un instant, ou écrivez-nous sur WhatsApp.",
-      );
+      setSubmitError(CONNEXION_PERDUE);
     } finally {
       setSubmitting(false);
     }
@@ -203,9 +213,9 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     // Leaving the step that asks for the e-mail: does its domain receive mail?
     const emailQ = visible.find((q) => q.type === "email" && String(answers[q.id] ?? "").trim());
     if (emailQ) {
-      setSubmitting(true);
+      setChecking(true);
       const check = await checkEmailAddress(String(answers[emailQ.id])).catch(() => ({ error: undefined }));
-      setSubmitting(false);
+      setChecking(false);
       if (check.error && showInvalid({ [emailQ.id]: check.error })) return;
     }
     if (step >= total) {
@@ -216,6 +226,7 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
     setStep((s) => s + 1);
     setErrors({});
     setShowErrors(false);
+    setSubmitError(null);
     scrollTop();
   }
 
@@ -555,11 +566,11 @@ export default function QuoteWizard({ type }: { type: QuoteType }) {
           <button
             type="button"
             onClick={next}
-            disabled={submitting}
-            aria-busy={submitting || undefined}
+            disabled={submitting || checking}
+            aria-busy={submitting || checking || undefined}
             className="cursor-pointer whitespace-nowrap rounded-[11px] border-none bg-cherry px-5 py-[14px] font-condensed text-[17px] font-bold tracking-[0.5px] text-white shadow-[0_14px_30px_-16px_rgba(162,3,45,0.85)] transition-colors hover:bg-cherry-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cherry disabled:opacity-70 sm:px-[30px]"
           >
-            {submitting ? "Envoi en cours…" : step >= total ? "Envoyer ma demande →" : "Suivant →"}
+            {checking ? "Vérification…" : submitting ? "Envoi en cours…" : step >= total ? "Envoyer ma demande →" : "Suivant →"}
           </button>
         </div>
       </div>

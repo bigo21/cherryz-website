@@ -2,7 +2,8 @@
 
 import { getSchema, type Answers, type QuoteType } from "@/lib/quote/schemas";
 import { bizlinkPhone, cleanAnswers, validateSubmission } from "@/lib/quote/validation";
-import { looksLikeRobot } from "@/lib/forms/checks";
+import { EMAIL_INVALIDE, looksLikeRobot, sentTooFast } from "@/lib/forms/checks";
+import { insertError, type SubmitError } from "@/lib/forms/submit-errors";
 import { DOMAINE_INVALIDE, emailDomainAcceptsMail } from "@/lib/forms/email-domain";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sendQuoteEmails } from "@/lib/email/quote-notifications";
@@ -18,7 +19,7 @@ export interface SubmitPayload {
 
 export interface SubmitResult {
   ok: boolean;
-  error?: string;
+  error?: SubmitError;
   /** Field-level reasons, keyed by question id, when the server refuses a value. */
   fields?: Record<string, string>;
 }
@@ -68,10 +69,11 @@ export async function submitQuoteRequest(
 
   // A robot is answered as if all went well, so it learns nothing, and
   // nothing is stored or sent.
-  if (looksLikeRobot(payload?.trap, payload?.elapsedMs)) {
+  if (looksLikeRobot(payload?.trap)) {
     console.warn(`[quote] ${type}: submission dropped as automated.`);
     return { ok: true };
   }
+  if (sentTooFast(payload?.elapsedMs)) return { ok: false, error: "too_fast" };
 
   let answers = cleanAnswers(type, payload?.answers ?? {});
   const errors = validateSubmission(type, answers);
@@ -90,7 +92,7 @@ export async function submitQuoteRequest(
     console.warn(
       "[quote] Supabase not configured (missing SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY): submission not persisted.",
     );
-    return { ok: false, error: "not_configured" };
+    return { ok: false, error: "unavailable" };
   }
 
   // BizLink: store the phone in E.164 (dial code + number) and its country.
@@ -109,8 +111,12 @@ export async function submitQuoteRequest(
   });
 
   if (error) {
-    console.error("[quote] insert failed:", error.message);
-    return { ok: false, error: "db" };
+    console.error(`[quote] insert failed (${error.code}):`, error.message);
+    const cause = insertError(error);
+    if (cause.rule === "email_format" && emailQ) {
+      return { ok: false, error: "rejected", fields: { [emailQ.id]: EMAIL_INVALIDE } };
+    }
+    return { ok: false, error: cause.error };
   }
 
   // Best-effort emails: never fail the submission if sending errors out.

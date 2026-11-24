@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { HONEYPOT, suggestEmail } from "@/lib/forms/checks";
+import { HONEYPOT, MIN_FILL_MS, suggestEmail } from "@/lib/forms/checks";
 
 /**
  * Anti-robot guard of a form: a field hidden from people and from assistive
  * technology (robots fill every field), and the time since the form appeared.
- * Both go with the submission; the server drops it when the field is filled
- * or the form was sent faster than a person could.
+ * Both go with the submission. `read` waits out the minimal time itself, so a
+ * visitor who is quick (saved answers, autofill) is never refused for it.
  */
 export function useAntiRobot() {
   const trap = useRef<HTMLInputElement>(null);
@@ -19,15 +19,16 @@ export function useAntiRobot() {
   const field = (
     <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
       <label>
-        Site web (laissez ce champ vide)
+        Ne pas remplir
         <input ref={trap} type="text" name={HONEYPOT} tabIndex={-1} autoComplete="off" defaultValue="" />
       </label>
     </div>
   );
-  const read = () => ({
-    trap: trap.current?.value ?? "",
-    elapsedMs: startedAt.current ? Date.now() - startedAt.current : 0,
-  });
+  const read = async () => {
+    const wait = startedAt.current + MIN_FILL_MS + 100 - Date.now();
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    return { trap: trap.current?.value ?? "", elapsedMs: Date.now() - startedAt.current };
+  };
   return { field, read };
 }
 
