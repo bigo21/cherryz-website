@@ -92,7 +92,6 @@ export async function submitQuoteRequest(
     console.warn(
       "[quote] Supabase not configured (missing SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY): submission not persisted.",
     );
-    return { ok: false, error: "unavailable" };
   }
 
   // BizLink: store the phone in E.164 (dial code + number) and its country.
@@ -103,12 +102,16 @@ export async function submitQuoteRequest(
 
   const contact = extractContact(type, answers);
   // La table quote_requests vit dans le schéma dédié "cherryz" (et non "public").
-  const { error } = await supabase.schema("cherryz").from("quote_requests").insert({
-    type,
-    answers,
-    tracking: tracking ?? {},
-    ...contact,
-  });
+  const error = supabase
+    ? (
+        await supabase.schema("cherryz").from("quote_requests").insert({
+          type,
+          answers,
+          tracking: tracking ?? {},
+          ...contact,
+        })
+      ).error
+    : { code: "not_configured", message: "Supabase not configured" };
 
   if (error) {
     console.error(`[quote] insert failed (${error.code}):`, error.message);
@@ -116,6 +119,14 @@ export async function submitQuoteRequest(
     if (cause.rule === "email_format" && emailQ) {
       return { ok: false, error: "rejected", fields: { [emailQ.id]: EMAIL_INVALIDE } };
     }
+    // Backup copy: the team still receives the request, which then counts as
+    // received. An address the database refuses is left to the visitor to correct.
+    const saved = await sendQuoteEmails({ type, contact, answers, tracking: tracking ?? {}, notStored: error.code || "base injoignable" });
+    if (saved) {
+      console.error("[quote] not stored: backup copy e-mailed to the team.");
+      return { ok: true };
+    }
+    console.error("[quote] not stored and no backup copy: request lost.");
     return { ok: false, error: cause.error };
   }
 

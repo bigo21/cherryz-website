@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { notStoredBanner, sendEmail } from "./send";
 
 export interface ContactPayload {
   full_name: string;
@@ -18,7 +19,7 @@ function esc(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function teamHtml(p: ContactPayload): string {
+function teamHtml(p: ContactPayload, notStored?: string): string {
   const row = (k: string, v: string | null | undefined) =>
     v ? `<tr><td style="padding:9px 14px;border-bottom:1px solid #eceef1;font-size:13px;color:#6b7280;width:38%">${esc(k)}</td><td style="padding:9px 14px;border-bottom:1px solid #eceef1;font-size:14px;color:${NAVY};font-weight:600">${esc(v)}</td></tr>` : "";
   return `
@@ -27,7 +28,7 @@ function teamHtml(p: ContactPayload): string {
       <div style="background:${NAVY};padding:20px 24px">
         <span style="display:inline-block;background:${CHERRY};color:#fff;font-size:12px;letter-spacing:1px;font-weight:700;padding:5px 12px;border-radius:100px">NOUVEAU MESSAGE</span>
         <h1 style="margin:10px 0 0;color:#fff;font-size:20px">Contact : ${esc(p.besoin ?? "Général")}</h1>
-      </div>
+      </div>${notStored ? notStoredBanner(notStored) : ""}
       <div style="padding:20px 24px">
         <table style="width:100%;border-collapse:collapse">
           ${row("Nom", p.full_name)}${row("Email", p.email)}${row("Téléphone", p.phone)}${row("Entreprise", p.company)}${row("Besoin", p.besoin)}
@@ -52,35 +53,34 @@ function prospectHtml(firstName: string): string {
   </div>`;
 }
 
-/** Best-effort: never fail the submission on an email error. */
-export async function sendContactEmails(p: ContactPayload): Promise<void> {
+/**
+ * Best-effort: never fail the submission on an email error. `notStored`: why the
+ * database did not store the message, the team's e-mail being then its backup
+ * copy. Returns whether the team's e-mail was accepted.
+ */
+export async function sendContactEmails(p: ContactPayload, notStored?: string): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn("[contact] RESEND_API_KEY not set: skipping emails.");
-    return;
+    return false;
   }
   const resend = new Resend(apiKey);
   const firstName = (p.full_name ?? "").trim().split(" ")[0] ?? "";
 
-  try {
-    await resend.emails.send({
-      from: FROM,
-      to: NOTIFY_TO,
-      replyTo: p.email,
-      subject: `Nouveau message contact : ${p.besoin ?? "Général"} (${p.full_name})`,
-      html: teamHtml(p),
-    });
-  } catch (e) {
-    console.error("[contact] team email failed:", e);
-  }
-  try {
-    await resend.emails.send({
+  const received = await sendEmail(resend, "[contact] team", {
+    from: FROM,
+    to: NOTIFY_TO,
+    replyTo: p.email,
+    subject: `${notStored ? "[NON ENREGISTRÉ] " : ""}Nouveau message contact : ${p.besoin ?? "Général"} (${p.full_name})`,
+    html: teamHtml(p, notStored),
+  });
+  if (received || !notStored) {
+    await sendEmail(resend, "[contact] prospect", {
       from: FROM,
       to: p.email,
       subject: "Nous avons bien reçu votre message | Cherryz",
       html: prospectHtml(firstName),
     });
-  } catch (e) {
-    console.error("[contact] prospect email failed:", e);
   }
+  return received;
 }

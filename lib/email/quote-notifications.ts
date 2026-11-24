@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import type { Answers, QuoteType } from "@/lib/quote/schemas";
 import { quoteTypeLabel, summarizeAnswers } from "@/lib/quote/summary";
 import { BIZLINK, CONTACT } from "@/lib/site/site";
+import { notStoredBanner, sendEmail } from "./send";
 
 export interface Contact {
   full_name: string | null;
@@ -41,6 +42,7 @@ function teamEmailHtml(
   contact: Contact,
   answers: Answers,
   tracking: Record<string, unknown>,
+  notStored?: string,
 ): string {
   const items = summarizeAnswers(type, answers);
   const contactRows = rowsHtml(
@@ -59,7 +61,7 @@ function teamEmailHtml(
       <div style="background:${NAVY};padding:22px 26px">
         <span style="display:inline-block;background:${CHERRY};color:#fff;font-size:12px;letter-spacing:1px;font-weight:700;padding:5px 12px;border-radius:100px">NOUVELLE DEMANDE</span>
         <h1 style="margin:12px 0 0;color:#fff;font-size:22px">Cotation ${esc(quoteTypeLabel(type))}</h1>
-      </div>
+      </div>${notStored ? notStoredBanner(notStored) : ""}
       <div style="padding:24px 26px">
         <h2 style="font-size:15px;color:${CHERRY};margin:0 0 8px">Contact</h2>
         <table style="width:100%;border-collapse:collapse;margin-bottom:22px">${contactRows}</table>
@@ -104,47 +106,45 @@ function prospectEmailHtml(firstName: string, type: QuoteType): string {
 /**
  * Fire the team notification + prospect confirmation. Best-effort: failures are
  * logged and swallowed so a persisted submission is never lost to an email error.
+ * Returns whether the team's e-mail was accepted: with `notStored`, that is what
+ * decides whether the request is saved at all.
  */
 export async function sendQuoteEmails(params: {
   type: QuoteType;
   contact: Contact;
   answers: Answers;
   tracking: Record<string, unknown>;
-}): Promise<void> {
+  /** Why the database did not store the request: the team's e-mail is then its backup copy. */
+  notStored?: string;
+}): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn("[quote] RESEND_API_KEY not set: skipping emails.");
-    return;
+    return false;
   }
 
   const resend = new Resend(apiKey);
-  const { type, contact, answers, tracking } = params;
+  const { type, contact, answers, tracking, notStored } = params;
   const firstName = (contact.full_name ?? "").trim().split(" ")[0] ?? "";
 
   // Team notification
-  try {
-    await resend.emails.send({
-      from: FROM,
-      to: NOTIFY_TO,
-      replyTo: contact.email ?? undefined,
-      subject: `Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
-      html: teamEmailHtml(type, contact, answers, tracking),
-    });
-  } catch (e) {
-    console.error("[quote] team email failed:", e);
-  }
+  const received = await sendEmail(resend, "[quote] team", {
+    from: FROM,
+    to: NOTIFY_TO,
+    replyTo: contact.email ?? undefined,
+    subject: `${notStored ? "[NON ENREGISTRÉE] " : ""}Nouvelle demande : ${quoteTypeLabel(type)} (${contact.full_name ?? "Prospect"})`,
+    html: teamEmailHtml(type, contact, answers, tracking, notStored),
+  });
 
-  // Prospect confirmation (only if we have an email)
-  if (contact.email) {
-    try {
-      await resend.emails.send({
-        from: FROM,
-        to: contact.email,
-        subject: "Votre demande Cherryz a bien été reçue",
-        html: prospectEmailHtml(firstName, type),
-      });
-    } catch (e) {
-      console.error("[quote] prospect email failed:", e);
-    }
+  // Prospect confirmation (only if we have an email, and if the request reached
+  // us: stored in the database, or at least received by the team).
+  if (contact.email && (received || !notStored)) {
+    await sendEmail(resend, "[quote] prospect", {
+      from: FROM,
+      to: contact.email,
+      subject: "Votre demande Cherryz a bien été reçue",
+      html: prospectEmailHtml(firstName, type),
+    });
   }
+  return received;
 }

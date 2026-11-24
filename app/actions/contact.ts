@@ -57,19 +57,30 @@ export async function submitContactMessage(
   const supabase = createSupabaseServerClient();
   if (!supabase) {
     console.warn("[contact] Supabase not configured: message not persisted.");
-    return { ok: false, error: "unavailable" };
   }
 
   // La table contact_messages vit dans le schéma dédié "cherryz" (et non "public").
-  const { error } = await supabase.schema("cherryz").from("contact_messages").insert({
-    ...record,
-    tracking: input.tracking ?? {},
-  });
+  const error = supabase
+    ? (
+        await supabase.schema("cherryz").from("contact_messages").insert({
+          ...record,
+          tracking: input.tracking ?? {},
+        })
+      ).error
+    : { code: "not_configured", message: "Supabase not configured" };
   if (error) {
     console.error(`[contact] insert failed (${error.code}):`, error.message);
     const cause = insertError(error);
     if (cause.rule === "email_format") return { ok: false, error: "rejected", fields: { email: EMAIL_INVALIDE } };
     if (cause.rule === "besoin") return { ok: false, error: "rejected", fields: { besoin: "Choisissez votre besoin dans la liste." } };
+    // Backup copy: the team still receives the message, which then counts as
+    // received. An address the database refuses is left to the visitor to correct.
+    const saved = await sendContactEmails(record, error.code || "base injoignable");
+    if (saved) {
+      console.error("[contact] not stored: backup copy e-mailed to the team.");
+      return { ok: true };
+    }
+    console.error("[contact] not stored and no backup copy: message lost.");
     return { ok: false, error: cause.error };
   }
 
